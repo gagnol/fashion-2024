@@ -23,7 +23,10 @@ interface Product {
   quantity: number,
   discountPrice: number
   countryData: [any],
-  shipping:number
+  shipping:number,
+  colorPiked:string,
+  sizePiked:string,
+  
 }
 
 interface countryData {
@@ -52,6 +55,8 @@ interface State {
   allProducts: any[];
   userInfo: userInfo[] | null;
   countryData: any[] | undefined;
+  colorPiked:string|undefined;
+  sizePiked:string|undefined;
 }
 
 const initialState: State = {
@@ -60,6 +65,8 @@ const initialState: State = {
   allProducts: [],
   userInfo: [],
   countryData: [5, "USA", 0, 0],
+  colorPiked:"",
+  sizePiked:""
 };
 
 export const nextSlice = createSlice({
@@ -134,6 +141,12 @@ export const nextSlice = createSlice({
     addCountry: (state, action: PayloadAction<any[]>) => {
       state.countryData = action.payload;
     },
+    selectedColor: (state, action: PayloadAction<string>) => {
+      state.colorPiked = action.payload;
+    },
+    selectedSize: (state, action: PayloadAction<string>) => {
+      state.sizePiked = action.payload;
+    }
   },
 });
 
@@ -149,6 +162,8 @@ export const {
   removeUser,
   setAllProducts,
   addCountry,
+ selectedColor,
+ selectedSize
 } = nextSlice.actions;
 
 export default nextSlice.reducer;

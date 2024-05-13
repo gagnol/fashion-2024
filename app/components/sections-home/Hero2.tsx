@@ -14,9 +14,7 @@ const Hero2 = () => {
                             <div className="left-content">
                                 <div className="thumb">
                                     <div className="absolute bg-[#ebe6e2] top-48 left-[510px] text-center w-[240px]">
-                                     <Text size="6" className='text-black' >
-                                      Top-tier quality at the best prices.
-                                      </Text>
+                                     
                                         </div>
     <Image src="/cow13.jpg" width={327} height={327} alt="banner13"
     priority

@@ -29,7 +29,7 @@ const Footer = () => {
         <>
             <footer>
                 <div className="footer_back" onClick={ScrollToTop}>
-                    <a>Inicio de Página</a>
+                    <a>Back to Top</a>
                     
                 </div>
                 <div className="footer_middle ">
@@ -38,15 +38,15 @@ const Footer = () => {
                     <FooterColumnMiddle title={footerLinks[2].title} links={footerLinks[2].links} />
                     <FooterColumnMiddle title={footerLinks[3].title} links={footerLinks[3].links} />
                 </div>
-                <div className='block'>
+                <div className='block bg-[#141726]'>
                     <div className='flex w-full items-center justify-center pt-2 text-center border-t' >
                         <Link href="/" >
                             <Image
                                 alt='logo'
-                                width={200}
+                                width={100}
                                 height={100}
-                                style={{ width: 200, height: "auto" }}
-                                src='/logo2.png'
+                                style={{ width: 100, height: "auto" }}
+                                src='/logo1.jpg'
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 loading='lazy'
                             />
@@ -70,17 +70,17 @@ const Footer = () => {
                     <div className='footer_copyright text-white pt-1 mx-auto'>
                        
                     <div className="flex gap-10 mx-auto justify-center">
-                            <p className='text-[14px] relative hover:underline cursor-pointer'>Términos y condiciones</p>
+                            <p className='text-[14px] relative hover:underline cursor-pointer'>Terms and Conditions</p>
                             <Link href="/aviso">
-                            <p className='text-[14px] relative hover:underline cursor-pointer'>Privacidad</p>
+                            <p className='text-[14px] relative hover:underline cursor-pointer'>Privacy</p>
                             </Link>
                             <Link href="/cookies">
                             <p className='text-[14px] relative hover:underline cursor-pointer'>
-                                Política de cookies</p>
+                               Cookies Policy</p>
                             </Link>
                         </div>
-                         <p className='text-center pt-5'> &copy; 2023-{new Date().getFullYear()},
-                          Milproveedores, Todos los derechos reservados.</p>
+                         <p className='text-center pt-5'>Copyrigth &copy; 2023-{new Date().getFullYear()},
+                          Legendary, all rigths reserved.</p>
                         <br/>
                     </div>
                 </div>

@@ -22,15 +22,16 @@ const Newstock = ({products}:any) => {
                         Features Products  2024
                         </Heading>
                         <Button variant="classic" size="3" color="amber"
-                        className=" mx-3 xl:mx-16 my-6 cursor-pointer">
+                        className=" mx-20 xl:mx-36 my-6 cursor-pointer">
                         View more
                         </Button>
                         </div>
                     </div>
                     <div className="lg:w-1/2 justify-start ">
-                        <div className='w-full mx-auto'> 
-                        <Slider products={products}/>
-                        </div>
+                    <Image width={700} height={700} src="/ban1.png" alt="banner" 
+                        className='overflow-hidden w-full max-h-[550px]' 
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                         
+                        />
                     </div>
                 </div>
             </div>

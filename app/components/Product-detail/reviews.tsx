@@ -27,7 +27,7 @@ function Reviews({ item }:any) {
         <h4 ><b>&nbsp; {item.subject}</b></h4>
       </li>
       <li >
-        <h4 className="text-primary" >Calificado el día
+        <h4 className="text-primary" >Reviewed on
           &nbsp;
           {new Date(item.createdAt.substring(0, 10)).toLocaleDateString(
             'en-US',

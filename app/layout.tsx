@@ -6,11 +6,13 @@ import Footer from '@/app/components/Footer'
 import Navbar from './components/Header-navigation/Navbar'
 import BottomHeader from './components/Header-navigation/BottomHeader'
 import Session from './components/session'
+import { Theme } from '@radix-ui/themes';
+import '@radix-ui/themes/styles.css';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Mil proveedores',
+  title: 'Legendary',
   description: 'Generated Guille',
 }
 
@@ -22,14 +24,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} >
-       
+       <Theme appearance='dark' accentColor='indigo'>
             <Session>
               <Navbar />
               <BottomHeader />
               {children}
               <Footer />
             </Session>
-        
+        </Theme>
       </body>
     </html>
   )

@@ -2,11 +2,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
-import { FaCaretDown } from 'react-icons/fa'
+import * as Popover from '@radix-ui/react-popover';
+import { MixerHorizontalIcon, Cross2Icon } from '@radix-ui/react-icons';
 import { addUser, removeUser } from "@/store/nextSlice"
 import { signOut, useSession } from "next-auth/react";
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
+import { Avatar, Button } from '@radix-ui/themes'
 
 function SigninTool() {
     const { data: session } = useSession();
@@ -40,26 +42,26 @@ function SigninTool() {
         <>
             {session?.user ? (
                 <>
-                    <div
-                        className="group text-xs text-gray-100 hidden xl:flex flex-col justify-center 
-                    px-2 border border-transparent hover:border-white cursor-pointer
-                    overflow-x-hidden
-                    duration-300 h-[70%]">
-                        <p > Hola,&nbsp;{session.user.name?.substring(0, 10)}</p>
-                        <p className="text-white font-bold flex items-center">
-                             Tu Cuenta 
-                            <i aria-hidden="true">
-                                <FaCaretDown />
-                            </i>
-                        </p>
-                        <span className="a_tooltip group-hover:block ">
+                    <div>
+                    <Popover.Root>
+                        <Popover.Trigger >
+                    <Avatar
+                    size="4"
+                    src={session?.user?.image || undefined }
+                    fallback="A"
+                    />    
+                        </Popover.Trigger>
+                        <Popover.Portal>
+                        <Popover.Content >
+                            <div className='bg-[#141726] w-[360px] h-[320px]'>
                             <div className="a_tooltip-header ">
-
-                                <Image src={session?.user?.image || ''} alt="" width={100} height={100}
-                                    className="w-11 h-11 rounded-full object-cover"
+                                <Image src={session?.user?.image || ''} alt="" 
+                                width={100} height={100}
+                                className="w-11 h-11 rounded-full object-cover"
                                 />
                                 <div className="text-xs text-gray-600 flex flex-col pl-5 pt-2">
-                                    <p className="text-black font-bold text-[18px]">{session.user.name}</p>
+                                    <p className="text-black font-bold text-[18px]">
+                                        {session.user.name}</p>
                                     <p>{session?.user?.email}</p>
                                 </div>
                             </div>
@@ -68,11 +70,11 @@ function SigninTool() {
                                     {session?.user?.email === "admin@example.com"}
                                     <ul className='m-0 p-0'>
                                         <h4 className='text-[16px] font-bold pb-2 text-white'>
-                                            Tu Lista de Favoritos </h4>
+                                            Your List </h4>
                                         
                                         <Link href="/main">
                                             {session?.user?.email === "admin@example.com" ?
-                                                (<li className="nav_text font-bold">Panel Administrador</li>) : (<></>)
+                            (<li className="nav_text font-bold">Dashboard</li>) : (<></>)
                                             }
                                         </Link>
                                     </ul>
@@ -81,67 +83,53 @@ function SigninTool() {
                                 <div className='flex-1 flex flex-row max-w-[50%] relative mx-4 my-0 '>
                                     <ul>
                                         <h4 className='text-[16px] font-bold pb-2 text-white '>
-                                            Tu Cuenta
-                                        </h4>
+                                            Your Account
+                                       </h4>
                                         <li className="nav_text">
                                             <Link href="/profile">
-                                                Cuenta
+                                                Account
                                             </Link>
                                         </li>
-                                        <li className="nav_text">Compras</li>
-                                        <li className="nav_text">Recomendaciones</li>
+                                        <li className="nav_text">Orders</li>
+                                        <li className="nav_text">Recommendations</li>
                                         
                                         <li className="nav_text"> 
-                                         <Link href="/customer">Servicio al Cliente </Link>
+                                         <Link href="/customer">Customer Services </Link>
                                         </li>
 
                                         <li className="nav_text" onClick={handleSignOutClick}>
-                                            Cerrar Sesion
+                                            Signout
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                        </span>
+                            </div>
+                            <Popover.Close
+          className="rounded-full h-[25px] w-[25px] inline-flex 
+          items-center justify-center text-violet11 absolute top-[5px] 
+          right-[5px] hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 
+          outline-none cursor-default"
+          aria-label="Close"
+        >
+          <Cross2Icon />
+        </Popover.Close>
+        <Popover.Arrow className="fill-white" />
+                        </Popover.Content>
+                      </Popover.Portal>
+                        </Popover.Root>
                     </div>
                 </>
             ) : (
                 <>
-                    <div className="group hidden xl:flex items-center px-2 border border-transparent
-                    hover:border-white cursor-pointer duration-300 h-[70%] " >
+                    <div>
                         <div className='block'>
-                            <p className='text-[12px]'>Hola,&nbsp;Identificate </p>
-                            <p className="text-white font-bold items-center text-[14px] flex" >
-                                Tu Cuenta
-                                <i aria-hidden="true">
-                                    <FaCaretDown color='grey' />
-                                </i>
-                            </p>
-                        </div>
-                        <span className="a_tooltip group-hover:block ">
-
-
-                            <div className="text-center text-[14px] my-[19px] px-5 mx-auto" >
-                                <div className=" my-2 block justify-center" >
-                                    <Link href="/signin" >
-                                        <button className="h-[29px] w-[220px] 
-                                        px-5 py-1 text-[#111] font-medium
-                         border-[#a88734] rounded-sm bg-gradient-to-b from-[#f7dfa5]
-                          to-[#f0c14b] hover:cursor-pointer hover:opacity-75" >
-                                            Identificate
-                                        </button>
-                                    </Link>
-                                </div>
-                                <div >
-                                    <p className='text-white'>¿Eres un cliente nuevo?&nbsp;</p>
-                                    <Link href="/register" >
-                                        <span className="text-primary">
-                                        Empieza aquí.
-                                        </span>
-                                    </Link>
-                                </div>
-                            </div>
-                        </span>
-                    </div>
+                        <Button  variant='classic' size="3" color='gray' >
+                        <Link href="/signin" >
+                        Signin
+                        </Link>
+                        </Button>
+                      </div>
+                   </div>
                 </>)}
         </>
     )

@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { checkoutOrder, createOrder } from '@/lib/order-actions';
 import { useEffect } from "react";
-import Link from "next/link";
+import { Button } from "@radix-ui/themes";
 
 interface CartItem {
   discountPrice: number;
@@ -95,17 +95,8 @@ const onCheckout = async () => {
 }
 
   return (
-    <div className="flex flex-wrap flex-col gap-3 min-w-full bg-neutral">
-      <div className="rounded-md border mt-5 p-2 text-white">      
-      <h1>Dirección de entrega</h1>
-      <h2>Dirección:&nbsp;{userInfo?.user.address}</h2>
-      <h2>Ciudad:&nbsp;{userInfo?.user.city}</h2>
-      <h2>Código Postal:&nbsp;{userInfo?.user.postal}</h2>
+    <div className="flex flex-wrap flex-col gap-3 min-w-full bg-[#141726]">
       
-      <Link href="/profile">
-        <p className="text-primary cursor hover:text-secondary">Actualizá tu dirección de envío</p>
-      </Link>
-      </div>
       <p className="flex items-center justify-between px-1 font-semibold text-white">
         SubTotal: {" "}(
         {Math.ceil(
@@ -116,7 +107,7 @@ const onCheckout = async () => {
       </p>
       
       <p className="text-white">
-        Costos de envio:<span className="float-right pr-1">€{shipping}</span>
+        Shipping:<span className="float-right pr-1">€{shipping}</span>
       </p>
       <p className="flex items-center justify-between px-1 font-semibold border-t text-white">
         Total:{" "}
@@ -124,12 +115,9 @@ const onCheckout = async () => {
       </p>
       <div className="flex flex-col items-center">
       <form action={onCheckout} >
-        <button
-          type="submit"
-          className="btn btn-primary btn-outline w-full"
-        >
-          Comprar ahora
-        </button>
+        <Button variant="classic" size="3" color="amber"  type="submit"  >
+          Order Now
+        </Button>
         </form>
       </div>
     </div>

@@ -14,7 +14,7 @@ import Link from "next/link";
 const CartProduct = ({ item }:any) => {
   const dispatch = useDispatch();
   return (
-    <div className=" bg-neutral rounded-lg flex text-white ">
+    <div className=" bg-[#141726] rounded-lg flex text-white ">
       <Link href={`/product/${item.slug}`}>
         <Image
           width={150}
@@ -30,12 +30,23 @@ const CartProduct = ({ item }:any) => {
             {item.name}
           </p>
           <p className=" text-base">
-            Precio de Lista{" "}
-            <span className="font-semibold text-white line-through">
+            Price{" "}
+            <span className="font-semibold text-white ">
              € {item.price.toFixed(2)}
             </span>
           </p>
-          
+          <p className=" text-base">
+            Color:{" "}
+            <span className="font-semibold text-white ">
+              {item.colorPiked}
+            </span>
+          </p>
+          <p className=" text-base">
+            Size:{" "}
+            <span className="font-semibold text-white ">
+              {item.sizePiked}
+            </span>
+          </p>
           <div className="flex items-center gap-6 justify-center">
             <div className="flex items-center mt-1 justify-between border
              border-gray-300 px-4 py-1 rounded-full w-28 shadow-lg shadow-gray-300">
@@ -61,10 +72,12 @@ const CartProduct = ({ item }:any) => {
                       topDeal: "",
                       bestSeller: "",
                       colors: [""],
-                      countryData:[""],
-                      discountPrice:item.discountPrice,
+                      countryData: [""],
+                      discountPrice: item.discountPrice,
                       quantity: 1,
-                      shipping:item.shipping
+                      shipping: item.shipping,
+                      colorPiked: "",
+                      sizePiked: ""
                     })
                   )
                 }
@@ -100,7 +113,9 @@ const CartProduct = ({ item }:any) => {
                       countryData:[""],
                       discountPrice:item.discountPrice,
                       quantity: 1,
-                      shipping:item.shipping
+                      shipping:item.shipping,
+                      colorPiked: "",
+                      sizePiked: ""
                     })
                   )
                 }
@@ -115,13 +130,11 @@ const CartProduct = ({ item }:any) => {
               className="flex items-center text-sm font-medium text-white
                hover:text-red-600 cursor-pointer duration-300"
             >
-              <IoMdClose className="mt-[2px]" /> <p>Eliminar</p>
+              <IoMdClose className="mt-[2px]" /> <p>Delete</p>
             </div>
           </div>
         </div>
-        <div className=" justify-center min-w-[180px] text-lg font-semibold text-white">
-          € {(item.discountPrice * item.quantity).toFixed(2)}
-        </div>
+      
       </div>
     </div>
   );

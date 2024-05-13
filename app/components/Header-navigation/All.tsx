@@ -1,4 +1,5 @@
 "use client"
+import { Button, DropdownMenu } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import useSWR from 'swr';
@@ -8,26 +9,29 @@ const All = () => {
 // SUB-CATEGORIES 
 const router = useRouter();
 const onSelectChange = (e:any) => {
-  const subcategory = e.target.value;
-  router.push(`/search?subcategory=${subcategory}`)
+  const category = e.target.value;
+  router.push(`/search?category=${category}`)
 }
-const { data, error } = useSWR('/api/products/subcategories', fetcher)
+const { data, error } = useSWR('/api/products/categories', fetcher)
 
 
 
     return (
-
-        <select id='select' name='select'
-            className="w-fit h-full bg-gray-200 text-black text-[13px]
-            flex items-center justify-center right-0 rounded-tl-md 
-            rounded-bl-md hover:cursor-pointer" onChange={onSelectChange}>
-            <option value='all'>Categorias</option>
+<DropdownMenu.Root >
+  <DropdownMenu.Trigger >
+    <Button variant="soft" size="3" onChange={onSelectChange}>
+      Categories
+      <DropdownMenu.TriggerIcon />
+    </Button>
+  </DropdownMenu.Trigger>
+  <DropdownMenu.Content>
             {data
-                ? data.subcategories.map((item:any) => {
-                    return <option key={item}>{item}</option>;
+                ? data.categories.map((item:any) => {
+                    return <DropdownMenu.Item key={item}>{item}</DropdownMenu.Item>;
                 })
                 : null}
-        </select>
+    </DropdownMenu.Content>
+    </DropdownMenu.Root>
 
     )
 }

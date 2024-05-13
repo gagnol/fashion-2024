@@ -24,7 +24,7 @@ const AddToFavorite: React.FC<AddToFavoriteProps> = ({product}) => {
                     )
                     
                     } >
-                  Agregar a mis Favoritos
+                  Add to Favorite List
                 </button>
     </>
   )

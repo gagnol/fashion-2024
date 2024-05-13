@@ -1,4 +1,4 @@
-import ProductItem from '@/app/components/Cards/ProductItem'
+import ProductItem from '@/app/components/sections-home/Card'
 import Rating from '@/app/components/rating'
 import productServices from '@/lib/productService'
 import Link from 'next/link'
@@ -10,24 +10,24 @@ const prices = [
     value: '1-50',
   },
   {
-    name: '$51 to $200',
-    value: '51-200',
+    name: '$51 to $100',
+    value: '51-100',
   },
   {
-    name: '$201 to $500',
-    value: '201-500',
+    name: '$101 to $500',
+    value: '101-500',
   },
 ]
 
 const ratings = [5, 4, 3, 2, 1]
 
 export async function generateMetadata({
-  searchParams: { q = 'all', category = 'all', price = 'all', rating = 'all', subcategory = "all" },
+  searchParams: { q = 'all', category = 'all', price = 'all', rating = 'all', department = "all" },
 }: {
   searchParams: {
     q: string
     category: string
-    subcategory: string
+    department: string
     price: string
     rating: string
     sort: string
@@ -37,14 +37,14 @@ export async function generateMetadata({
   if (
     (q !== 'all' && q !== '') ||
     category !== 'all' ||
-    subcategory != " 'all" ||
+    department != " 'all" ||
     rating !== 'all' ||
     price !== 'all'
   ) {
     return {
       title: `Search ${q !== 'all' ? q : ''}
           ${category !== 'all' ? ` : Category ${category}` : ''}
-          ${subcategory !== 'all' ? ` : SubCategory ${subcategory}` : ''}
+          ${department !== 'all' ? ` : department ${department}` : ''}
           ${price !== 'all' ? ` : Price ${price}` : ''}
           ${rating !== 'all' ? ` : Rating ${rating}` : ''}`,
     }
@@ -59,7 +59,7 @@ export default async function SearchPage({
   searchParams: {
     q = 'all',
     category = 'all',
-    subcategory = 'all',
+    department = 'all',
     price = 'all',
     rating = 'all',
     sort = 'newest',
@@ -69,7 +69,7 @@ export default async function SearchPage({
   searchParams: {
     q: string
     category: string
-    subcategory: string
+    department: string
     price: string
     rating: string
     sort: string
@@ -91,9 +91,9 @@ export default async function SearchPage({
     r?: string
     pg?: string
   }) => {
-    const params = { q, category, price, rating, sort, page, subcategory }
+    const params = { q, category, price, rating, sort, page, department }
     if (c) params.category = c
-    if (sub) params.subcategory = sub
+    if (sub) params.department = sub
     if (p) params.price = p
     if (r) params.rating = r
     if (pg) params.page = pg
@@ -102,11 +102,11 @@ export default async function SearchPage({
   }
   const categories = await productServices.getCategories()
 
-  const subcategories =await productServices.getSubcategories()
+  const departments =await productServices.getdepartments()
   
   const { countProducts, products, pages } = await productServices.getByQuery({
     category,
-    subcategory,
+    department,
     q,
     price,
     rating,
@@ -174,17 +174,17 @@ export default async function SearchPage({
             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
               <li>
                 <Link
-                  className={`link link-hover ${'all' === subcategory && 'link-primary'
+                  className={`link link-hover ${'all' === department && 'link-primary'
                    }`}
                   href={getFilterUrl({ sub: 'all' })}
                 >
                   Any
                 </Link>
               </li>
-              {subcategories?.map((sub: string) => (
+              {departments?.map((sub: string) => (
                 <li key={sub}>
                   <Link
-                    className={`link link-hover ${sub === subcategory && 'link-primary'
+                    className={`link link-hover ${sub === department && 'link-primary'
                       }`}
                     href={getFilterUrl({ sub })}
                   >
@@ -227,13 +227,13 @@ export default async function SearchPage({
             {products.length === 0 ? 'No' : countProducts} Results
             {q !== 'all' && q !== '' && ' : ' + q}
             {category !== 'all' && ' : ' + category}
-            {subcategory !== 'all' && ' : ' + subcategory}
+            {department !== 'all' && ' : ' + department}
             {price !== 'all' && ' : Price ' + price}
             {rating !== 'all' && ' : Rating ' + rating + ' & up'}
             &nbsp;
             {(q !== 'all' && q !== '') ||
               category !== 'all' ||
-              subcategory !== 'all' ||
+              department !== 'all' ||
               rating !== 'all' ||
               price !== 'all' ? (
               <Link className="btn btn-sm btn-error btn-outline" href="/search">

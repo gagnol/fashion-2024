@@ -26,7 +26,8 @@ const SideBar = () => {
             <button onClick={() => setOpen(true)}>
                 <p className="flex items-center gap-1 h-8 px-2 border border-transparent
                 text-white  hover:border-white cursor-pointer duration-300" >
-                    <LuMenu className="text-xl text-white font-extrabold" /> <span className='font-bold'>Todo</span>
+                    <LuMenu className="text-xl text-white font-extrabold" /> 
+                    <span className='font-bold'>All</span>
                 </p>
             </button>
             <div className='py-3 top-0 left-0 right-0 shadow-md z-30 text-white'>
@@ -63,14 +64,16 @@ const SideBar = () => {
                             <div className="flex bg-black text-white text-[22px] justify-between p-5">
                                 <i> <FaUserCircle /></i>
                                 <Link href='/signin'>
-                                    <h2>Hola, <span>Identificate</span></h2>
+                                    <h2>Hello, <span>Signin</span></h2>
                                 </Link>
                                 <button aria-label="close" onClick={() => setOpen(false)}>
                                     <FaTimes color='#fff' />
                                 </button>
                             </div>)}
                         <div className="p-5 text-neutral-content">
-                            <h2 className='text-[18px] font-semibold mb-2 text-white'>Comprar por Departamento</h2>
+                            <h2 className='text-[18px] font-semibold mb-2 text-white'>
+                                Shop by Department
+                                </h2>
                             <ul>
                                 {data?.categories.map((category: string) => (
                                     <Link key={category} href={`/search?category=${category}`}>
@@ -84,7 +87,7 @@ const SideBar = () => {
                                 {!show &&
                                     <div className="flex py-2 leading-3 text-primary
                                     hover:text-orange-400 cursor-pointer">
-                                        <li onClick={() => setShow(true)}>Ver Mas</li>
+                                        <li onClick={() => setShow(true)}>See more</li>
                                         <FaChevronDown />
                                     </div>
                                 }
@@ -93,15 +96,17 @@ const SideBar = () => {
                                 <ul >
                                     {data?.categories.map((category: string) => (
                                         <Link key={category} href={`/search?category=${category}`}>
-                                            <li className='py-2 hover:bg-[#babebe] text-white  hover:text-black cursor-pointer'
-                                                key={category} value={category} onClick={() => setOpen(false)}>
+                                            <li className='py-2 hover:bg-[#babebe] text-white
+                                              hover:text-black cursor-pointer'
+                                                key={category} value={category} 
+                                                onClick={() => setOpen(false)}>
                                                 <p>{category}</p>
                                             </li>
                                         </Link>
                                     )).slice(3, 10)}
                                     <div className='flex py-2 leading-3 text-primary
                                      hover:text-orange-400 cursor-pointer'>
-                                        <li onClick={() => setShow(false)} >Ver Menos</li>
+                                        <li onClick={() => setShow(false)} >See less</li>
                                         <FaChevronUp />
                                     </div>
                                 </ul>
@@ -109,14 +114,26 @@ const SideBar = () => {
                         </div>
                        
                         <div className="p-5 text-neutral-content border-t-2 border-gray-400">
-                            <h2 className='text-[18px] font-semibold mb-2 text-white'>Tu cuenta</h2>
-                            <p className='py-2 hover:bg-[#babebe] text-white hover:text-black cursor-pointer'>Cuenta</p>
-                            <p className='py-2 hover:bg-[#babebe] text-white hover:text-black cursor-pointer'><Link href="/customer">Servicio al cliente</Link></p>
+                            <h2 className='text-[18px] font-semibold mb-2 text-white'>
+                                Your account
+                            </h2>
+                            <p className='py-2 hover:bg-[#babebe] text-white hover:text-black cursor-pointer'>
+                                Account
+                            </p>
+                            <p className='py-2 hover:bg-[#babebe] text-white hover:text-black cursor-pointer'>
+                            <Link href="/customer">
+                                Customer Services
+                            </Link></p>
                             {session?.user ? (  
-                                <p className='py-2 hover:bg-[#babebe] text-white hover:text-black cursor-pointer' onClick={handleSignOutClick}> Cerrar sessión </p>
+                                <p className='py-2 hover:bg-[#babebe] text-white hover:text-black cursor-pointer'
+                                 onClick={handleSignOutClick}> 
+                                 Signout 
+                                 </p>
                             ):(
                             <>
-                                <p className='py-2 hover:bg-[#babebe] text-white  hover:text-black cursor-pointer'>  <Link href="/signin">Identificate </Link></p>
+                                <p className='py-2 hover:bg-[#babebe] text-white  hover:text-black cursor-pointer'>
+                              <Link href="/signin">Signin </Link>
+                              </p>
                             
                             </>
                             )}

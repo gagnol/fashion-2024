@@ -16,6 +16,10 @@ import CountryTaxes from "@/app/components/Product-detail/countryTaxes";
 import ReviewForm from "@/app/components/Product-detail/reviewForm";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import SizePicker from "@/app/components/Product-detail/sizePicker";
+import ColorPicker from "@/app/components/Product-detail/colorPicker";
+import Topimage from "@/app/components/Product-detail/topImage";
+import Middleimage from "@/app/components/Product-detail/middleImage";
 
 export default async function ProductDetail({ params }: { params: { slug: string } }) {
 
@@ -25,8 +29,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const productDocs = (await ProductModel.findOne({ slug }))
   const product = JSON.parse(JSON.stringify(productDocs));
 
-
-  const similarProductsDocs = (await ProductModel.find({ subcategory: product.subcategory }, "-reviews"))
+  const similarProductsDocs = (await ProductModel.find({ category: product.category }, "-reviews"))
   const similarProducts = JSON.parse(JSON.stringify(similarProductsDocs));
 
   const questionProductsDocs = (await TaskModel.find({ product: product._id }, "-reviews"))
@@ -64,22 +67,21 @@ export default async function ProductDetail({ params }: { params: { slug: string
 
   return (
     <Loading >
-      <div className="flex flex-wrap sm:justify-center lg:justify-start mt-10 ml-10 text-white">
+      <div className="flex flex-wrap sm:justify-center lg:justify-start ml-10 text-white">
+        <Topimage product={product}/>
         <div >
           <ImageGallery product={product} />
           <div className="w-[483px] h-[240px] bg-base-200 mt-5 text-center p-2 " >
             <div className="w-[80%] mx-auto">
-              <p><strong>Aviso</strong></p>
+              <p><strong>We want you to know</strong></p>
             </div>
             <div className="w-[80%] mx-auto">
               <div className="text-[14px]"><p></p>
-                <p>To benefit from Wi-Fi 6, you&amp;
-                  ll need a Wi-Fi 6-compatible router (like the eero 6),
-                  but Fire TV Stick 4K Max is also compatible with earlier wifi routers.
-                  For Alexa Home Theater audio, you&amp;ll need to pair the Fire TV Stick
-                  4K Max with compatible Echo speakers.
+                <p>  Discover the legendary range of colors and sizes available at our store! 
+                Explore endless possibilities to express your style. 
+                Visit us today and unleash your creativity!
                   <br />
-                  <a className="text-yellow-50">Learn more about device compatibility.</a>
+                  <span >Learn more about availability.</span>
                 </p>
                 <br />
               </div>
@@ -88,7 +90,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
         </div>
         <div className="w-[40%] ml-5">
           <h4 className="text-[24px] text-white">{product.name}</h4>
-          <h4>Vendedor: <a className="text-primary">{product.brand}</a></h4>
+          <h4>Seller: <a className="text-primary">{product.brand}</a></h4>
           <div className="flex flex-wrap items-center space-x-2 mb-2  border-b-2 ">
             <div className="my-2">
               <div className="flex">
@@ -97,8 +99,8 @@ export default async function ProductDetail({ params }: { params: { slug: string
                 <Rating value={product.rating} />
               </div>
             </div>
-            <span className="ml-1">{product.numReviews} ratings |</span>
-            <h4>{countAnswer} preguntas de compradores</h4>
+            <span className="ml-1">{product.numReviews} ratings </span>
+            
           </div>
           <div className='mb-4 '>
             {product.bestSeller === "true" ?
@@ -122,32 +124,32 @@ export default async function ProductDetail({ params }: { params: { slug: string
                 </h4>
               </div>
               <div className="flex">
-                <h6>Precio de lista :</h6>
+                <h6>List price :</h6>
                 &nbsp;   &nbsp;<h6 className="line-through"> €{product.price}</h6>
               </div>
             </>
             :
             <div className="flex text-center">
               <h4 className="text-[28px] ">
-                <span className=" text-[14px] font-bold mr-5">Precio: </span>
+                <span className=" text-[14px] font-bold mr-5">Price: </span>
                 <span className="text-[13px] align-middle"> €</span>
                 {product.price}
               </h4>
             </div>
           }
           <div className="flex text-center">
-            <h4 className="text-[14px] font-bold mr-5">Departamento</h4>
-            <h5 className="text-[14px] font-normal">{product.category}</h5>
+            <h4 className="text-[14px] font-bold mr-5">Department</h4>
+            <h5 className="text-[14px] font-normal">{product.department}</h5>
           </div>
           <div className="flex text-center">
-            <h4 className="text-[14px] font-bold mr-5" >Categoría</h4>
-            <h5 className="text-[14px] font-normal">&nbsp;{product.subcategory}</h5>
+            <h4 className="text-[14px] font-bold mr-5" >Category</h4>
+            <h5 className="text-[14px] font-normal">&nbsp;{product.category}</h5>
           </div>
           {/* COLOR SELECTION */}
-          
-
+          <SizePicker product={product}/>
+          <ColorPicker product={product}/>
           <div className="mt-5">
-            <h4 className="text-[16px] font-bold mt-2" >Sobre este producto</h4>
+            <h4 className="text-[16px] font-bold mt-2" >About this product</h4>
             <h5 className="text-[14px] font-normal text-neutral-content" >
               {product.description}
             </h5>
@@ -159,7 +161,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
             <>
               <div className="flex align-middle">
                 <h4 className="text-[28px] pl-2">
-                  <span className=" text-[18px] align-middle">Precio: </span>
+                  <span className=" text-[18px] align-middle">Price: </span>
                   <span className="text-[13px] align-middle"> €</span>
                   {Math.ceil(discountPrice)}
                 </h4>
@@ -168,7 +170,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
             :
             <div className="flex align-middle">
               <h4 className="text-[28px] pl-2">
-                <span className=" text-[18px] align-middle">Precio: </span>
+                <span className=" text-[18px] align-middle">Price: </span>
                 <span className="text-[13px] align-middle">€</span>
                 {product.price}
               </h4>
@@ -179,21 +181,21 @@ export default async function ProductDetail({ params }: { params: { slug: string
 
           {product.countInStock > 0 ? <>
             <h4 className="text-[18px] text-[#007600] font-normal my-2">
-              Disponible
+              In Stock
             </h4><br />
             <AddToCart product={product} discountPrice={discountPrice} />
              </>
             : <h4 className="text-[18px] text-[#B12704] font-normal my-2">
-              Temporalmente sin stock.</h4>}
+              Temporarily out of stock.</h4>}
           <h4 className="flex text-[14px] text-primary my-1">
             <FaLock color='#949494' fontSize={16} />
-            &nbsp; Transacción segura</h4>
+            &nbsp; Secure transaction</h4>
           <div className="flex my-0 ">
-            <h4 className="text-neutral-content text-[14px] my-2">Enviado por</h4>
+            <h4 className="text-neutral-content text-[14px] my-2">Sipping from</h4>
             <h5 className="font-normal text-[14px] my-2">&nbsp;{product.brand}</h5>
           </div>
           <div className="flex my-0 ">
-            <h4 className="text-neutral-content text-[14px] my-2">Vendedor</h4>
+            <h4 className="text-neutral-content text-[14px] my-2">Seller</h4>
             <h5 className="font-normal text-[14px] my-2">&nbsp;{product.brand}</h5>
           </div>
           <div className="flex my-2">
@@ -203,14 +205,13 @@ export default async function ProductDetail({ params }: { params: { slug: string
        bg-light-white relative py-[14px] px-[18px]">
 
             <Image
-              src="https://m.media-amazon.com/images/G/01/marketing/prime/new_prime_logo_RGB_blue._CB426090081_.png"
-              alt="Amazon prime logo"
+              src="/logo1.jpg"
+              alt=" logo"
               width={50} height={31} />
-
-            
+           
             <br />
             <span >
-              <h4 >Try Prime	and start saving today with
+              <h4 >Try Legendary and start saving today with
                 <span className="text-[14px] text-neutral-content font-normal mt-2 pl-1">
                   <strong>Fast, FREE Delivery</strong>
                 </span>
@@ -230,15 +231,15 @@ export default async function ProductDetail({ params }: { params: { slug: string
         <br />
         <div className="relative max-w-screen-2xl  px-4 py-4 md:py-4">
           <h2 className="text-[21px] font-semibold px-10 pt-1 mb-2 text-white">
-            Productos relacionados 
+          Popular products based on this item
           </h2>
-          <Slider products={similarProducts} />
+          <Slider product={product} />
         </div >
-        {/****************** QUESTIONS & ANSWERS ****************/}
-        
+        {/******************Sizes ****************/}
+        <Middleimage product={product}/>
         {/****************** CUSTOMER REVIEWS ****************/}
         <h2 className="text-[21px] pl-4 font-semibold mx-10 pt-2 border-t-2 text-white">
-          Calificaciones de este producto
+        Customer reviews
         </h2>
         <div className="grid grid-cols-2 px-10">
           <div className=" grid-cols-1 block mx-5 ">
@@ -246,7 +247,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
               <Rating value={product.rating} />
               <h1 className="px-2">{product.rating ? product.rating + ' out of 5' : 'Rating not available'}</h1>
             </div>
-            <h2>{product.numReviews} Total de ratings</h2>
+            <h2>{product.numReviews} Total Ratings</h2>
             <div className="border-white border-[1px] rounded p-2 my-5">
               {product.reviews && product.reviews.length > 0 ? (
                 reviewsPercentage
@@ -257,7 +258,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
                     </div>
                   ))
               ) : (
-                <p>No hay revisiones sobre este producto.</p>
+                <p>No reviews for this product.</p>
               )}
             </div>
 
@@ -267,13 +268,13 @@ export default async function ProductDetail({ params }: { params: { slug: string
               </>
             ) : (
               <div className='block '>
-                <p >Califica este producto</p>
+                <p >Review this product</p>
                 <p className='text-neutral-400 text-[14px] my-2'>
-                 Compartí tus experiencias con otros usuarios
+                Share your thoughts with other customers
                 </p>
                 <Link href={`/signin?redirect=/product/${product.slug}`} >
                   <button className="my-[15px] p-1 w-[50%] btn btn-primary btn-outline" >
-                    Tu calificación
+                  Write a customer review
                   </button>
                 </Link>
               </div>

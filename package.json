@@ -1,5 +1,5 @@
 {
-  "name": "milproveedores-2024",
+  "name": "legendary",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-popover": "^1.0.7",
+    "@radix-ui/themes": "^3.0.3",
     "@reduxjs/toolkit": "^2.0.1",
     "@sendgrid/mail": "^8.1.0",
     "@stripe/stripe-js": "^2.2.1",

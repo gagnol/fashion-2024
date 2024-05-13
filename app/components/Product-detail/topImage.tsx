@@ -5,7 +5,7 @@ import React from 'react'
 const Topimage = ({product}:any) => {
     
     return (
-<div className="container w-full mx-auto ">
+<div className="container w-full mx-auto mb-5">
 {product.department ==="Men"?
 (<>
 <Image alt='men' width={1500} height={400}

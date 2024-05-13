@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { useSelector } from 'react-redux';
+import { BsFillCartFill } from "react-icons/bs";
+import { Badge } from '@radix-ui/themes';
 
 const CartTool = () => {
 
@@ -11,22 +13,17 @@ const CartTool = () => {
       );
   return (
     <>
+
        <Link
           href={"/cart"}
-          className="flex items-center px-2 border border-transparent
+          className="flex items-center px-2 border border-transparent xl:mx-10
            hover:border-white cursor-pointer duration-300 h-[70%] relative"
         >
-          <Image
-            className="w-auto object-cover h-8"
-            src="/cartIcon.png"
-            alt="cartImg"
-            width={100}
-            height={50}
-          />
-          <p className="text-xs text-white font-bold mt-3">Carrito</p>
-          <span className="absolute text-white text-sm top-2 left-[29px] font-semibold">
+          <BsFillCartFill className='text-[30px]' />
+          <p className="text-xs text-white font-bold mt-3">Cart</p>
+          <p className="absolute left-[18px] text-[16px] text-black font-semibold">
             {productData ? productData.length : 0}
-          </span>
+          </p>
         </Link>
     </>
   )

@@ -11,8 +11,7 @@ const SuccessPage = async () => {
     {
       redirect("/")
     }
-  
-  
+    
   return (
     <>
       <div className='a_page'>

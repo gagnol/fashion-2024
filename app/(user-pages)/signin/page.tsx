@@ -100,18 +100,10 @@ export default function Signin() {
                         </p>
                     </Link>
                 </div>
-                <button
-            className="btn btn-primary btn-outline w-full"
-            onClick={() => {
-              signIn("google");
-            }}
-          >
-            <FcGoogle />
-            Sign In with Google
-          </button>
-            <div className='a_divider'>__________ New to Milproveedores? __________</div>   
+         
+            <div className='a_divider'> New Customer</div>   
                 <Link href="/register" >
-                <button className='a_regbtn'>Create your Milproveedores account </button>
+                <button className='a_regbtn'>Create your account </button>
                 </Link>
             </div>
         </div>

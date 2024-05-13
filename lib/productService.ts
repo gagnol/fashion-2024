@@ -27,7 +27,7 @@ const getByQuery = cache(
   async ({
     q,
     category,
-    subcategory,
+    department,
     sort,
     price,
     rating,
@@ -35,7 +35,7 @@ const getByQuery = cache(
   }:{
     q: string
     category: string
-    subcategory:string
+    department:string
     price: string
     rating: string
     sort: string
@@ -53,7 +53,7 @@ const getByQuery = cache(
           }
         : {}
     const categoryFilter = category && category !== 'all' ? { category } : {}
-    const subcategoryFilter = subcategory && subcategory !== 'all' ? { subcategory } : {}
+    const departmentFilter = department && department !== 'all' ? { department } : {}
     const ratingFilter =
       rating && rating !== 'all'
         ? {
@@ -83,13 +83,13 @@ const getByQuery = cache(
 
     const categories = await ProductModel.find().distinct('category')
     
-    const subcategories = await ProductModel.find().distinct('subcategory')
+    const departments = await ProductModel.find().distinct('department')
     
     const products = await ProductModel.find(
       {
         ...queryFilter,
         ...categoryFilter,
-        ...subcategoryFilter,
+        ...departmentFilter,
         ...priceFilter,
         ...ratingFilter,
       },
@@ -103,7 +103,7 @@ const getByQuery = cache(
     const countProducts = await ProductModel.countDocuments({
       ...queryFilter,
       ...categoryFilter,
-      ...subcategoryFilter,
+      ...departmentFilter,
       ...priceFilter,
       ...ratingFilter,
     })
@@ -114,7 +114,7 @@ const getByQuery = cache(
       page,
       pages: Math.ceil(countProducts / PAGE_SIZE),
       categories,
-      subcategories,
+      departments,
     }
   }
 )
@@ -124,10 +124,10 @@ const getCategories = cache(async () => {
   const categories = await ProductModel.find().distinct('category')
   return categories
 })
-const getSubcategories = cache(async () => {
+const getdepartments = cache(async () => {
   await dbConnect()
-  const subcategories = await ProductModel.find().distinct('subcategory')
-  return subcategories
+  const departments = await ProductModel.find().distinct('department')
+  return departments
 })
 
 
@@ -137,7 +137,7 @@ const productService = {
   getBySlug,
   getByQuery,
   getCategories,
-  getSubcategories
+  getdepartments
 
 }
 export default productService

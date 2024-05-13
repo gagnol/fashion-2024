@@ -14,7 +14,7 @@ function TrendingCategories() {
             <div className="flex flex-wrap gap-4 mx-auto xl:mx-16 w-full items-center ">
                 {TRENDING_CATEGORIES.map((category:any) => (
                   <div key={category.id} className="relative flex-1 block group
-                     min-h-[300px] max-h-[300px] min-w-[350px] max-w-[350px]
+                     min-h-[300px] max-h-[300px] min-w-[330px] max-w-[330px]
                       rounded-lg overflow-hidden border border-gray-300">
                      <Link href="/" >
                      <Image
