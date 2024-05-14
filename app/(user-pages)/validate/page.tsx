@@ -3,6 +3,7 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
+import { Text } from "@radix-ui/themes";
 
 function Validate() {
   const [error, setError] = useState();
@@ -15,7 +16,7 @@ function Validate() {
       const formData = new FormData(event.currentTarget);
       const tokenResponse = await axios.post("/api/auth/validate", {
         token: formData.get("token"),
-
+ 
       });
       console.log(tokenResponse);
 
@@ -61,12 +62,12 @@ function Validate() {
           {error && <div className="bg-red-500 text-white p-2 mb-2">{error}</div>}
 
           <h1 className="text-[21px] font-bold pb-5">Verification required</h1>
-          <div className='a_label mb-2'>
+          <Text size="2" color="jade" >
             To continue, complete this verification step.
             We have sent a One Time Password (OTP) to the email
             <a className='text-primary px-1 font-semibold'>{userInfo.email} </a>
             <p>Please enter it below.</p>
-          </div>
+          </Text>
           <label className="">Enter OTP</label>
           <input
             type="text"

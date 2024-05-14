@@ -46,7 +46,7 @@ const Footer = () => {
                                 width={100}
                                 height={100}
                                 style={{ width: 100, height: "auto" }}
-                                src='/logo1.jpg'
+                                src='https://m.media-amazon.com/images/S/al-na-9d5791cf-3faf/fcf7ac46-f921-4b66-b183-8db87d9e61eb._CR0%2C0%2C1800%2C1800_SX200_.png'
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 loading='lazy'
                             />

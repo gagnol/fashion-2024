@@ -69,7 +69,7 @@ export default function Signin() {
                         { required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })}
                         aria-invalid={errors.email ? "true" : "false"}
                     />
-                    {errors.email?.type === 'required' && <p className='a_error'> Email is required</p>}
+                    {errors.email?.type === 'required' && <p className='a_error'>Email is required</p>}
                     {errors.email?.type === 'pattern' && <p className='a_error'> Invalid email format</p>}
 
                     <h5>Password</h5>
@@ -85,12 +85,14 @@ export default function Signin() {
                     {errors.password?.type === 'maxLength' && <p className='a_error'> Passwords must be up to 20 characters.</p>}
 
                     <br /><br />
-                    <button className='btn btn-outline btn-primary w-full' type='submit' >Continue</button>
+                    <button className='btn btn-outline btn-primary w-full' type='submit' >
+                        Continue
+                    </button>
                 </form>
 
-                <div className='a_label'>By continuing, you agree to Milproveedores&apos;s
-                    <a className='text-[#0066c0]'> Conditions of Use </a>
-                    and<a className='text-[#0066c0]'> Privacy Notice</a>
+                <div className='a_label'>By continuing, you agree to our
+                    <Link href="/terminos" className='text-[#0066c0] hover:text-white'> Conditions of Use </Link>
+                    and<Link href="/aviso"  className='text-[#0066c0] hover:text-white'> Privacy Notice</Link>
                 </div>
                 <br />
                 <div className='a_flabel mb-4'>
@@ -101,7 +103,7 @@ export default function Signin() {
                     </Link>
                 </div>
          
-            <div className='a_divider'> New Customer</div>   
+            <div className='a_divider'> New Customer?</div>   
                 <Link href="/register" >
                 <button className='a_regbtn'>Create your account </button>
                 </Link>

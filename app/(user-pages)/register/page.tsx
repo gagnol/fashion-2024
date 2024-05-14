@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Separator } from "@radix-ui/themes";
 
 function Signup() {
   const [error, setError] = useState();
@@ -36,8 +37,7 @@ function Signup() {
   };
 
   return (
-    <div className='a_page'>
-
+    <div className='a_page'> 
       <div className='a_container'>
         <h1 className='text-[21px] font-bold pb-5'>Create account</h1>
         <form onSubmit={handleSubmit}>
@@ -71,11 +71,12 @@ function Signup() {
           </button>
         </form>
         <br />
-        <div className='a_label'>By continuing, you agree to Milproveedores&apos;s
-          <a className='text-[#0066c0]'> Conditions of Use </a>and<a className='text-[#0066c0]'> Privacy Notice</a>
+        <div className='a_label'>By continuing, you agree to
+        <Link href="/terminos" className='text-[#0066c0] hover:text-white'> Conditions of Use </Link>
+                    and<Link href="/aviso"  className='text-[#0066c0] hover:text-white'> Privacy Notice</Link>
         </div>
         <br />
-        <div className='a_divider'>______________________________________</div>
+        <Separator color="indigo" orientation="horizontal" size="4" />
         <div className='a_label'>
           Already have an account?&nbsp;
           <Link href="/signin" >

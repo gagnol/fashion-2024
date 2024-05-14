@@ -75,7 +75,7 @@ body {
 }
 
 .a_container {
-  @apply w-[350px] h-fit flex-col rounded-[5px]  text-white my-5
+  @apply w-[350px] h-fit flex-col rounded-[5px]  text-white my-5 bg-[#141726]
    border-[#666] border-[1px] px-[26px] py-[20px];
 }
 

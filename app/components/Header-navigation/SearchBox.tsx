@@ -14,12 +14,12 @@ const SearchBox = () => {
       <div className="join">
         <All/>
         <input
-          className="join-item input input-bordered w-[400px] h-[40px]"
+          className="join-item input input-bordered w-[400px] "
           placeholder="Search"
           defaultValue={q}
           name="q"
         />
-        <Button variant='classic' color='gray' size="3" className="join-item btn">
+        <Button variant='classic' color='gray' size="4" className="join-item btn">
           <FaSearch/>
         </Button>
       </div>

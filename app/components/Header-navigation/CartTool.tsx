@@ -13,7 +13,6 @@ const CartTool = () => {
       );
   return (
     <>
-
        <Link
           href={"/cart"}
           className="flex items-center px-2 border border-transparent xl:mx-10

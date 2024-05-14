@@ -19,15 +19,15 @@ const { data, error } = useSWR('/api/products/categories', fetcher)
     return (
 <DropdownMenu.Root >
   <DropdownMenu.Trigger >
-    <Button variant="soft" size="3" onChange={onSelectChange}>
+    <Button variant="soft" size="4" onChange={onSelectChange}>
       Categories
       <DropdownMenu.TriggerIcon />
     </Button>
   </DropdownMenu.Trigger>
-  <DropdownMenu.Content>
+  <DropdownMenu.Content  >
             {data
                 ? data.categories.map((item:any) => {
-                    return <DropdownMenu.Item key={item}>{item}</DropdownMenu.Item>;
+                    return <DropdownMenu.Item  shortcut="     " key={item}>{item}</DropdownMenu.Item>;
                 })
                 : null}
     </DropdownMenu.Content>

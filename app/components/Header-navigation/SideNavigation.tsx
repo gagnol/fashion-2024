@@ -7,6 +7,7 @@ import { FaChevronDown, FaChevronUp, FaTimes, FaUserCircle } from 'react-icons/f
 import { LuMenu } from 'react-icons/lu';
 import useSWR from 'swr'
 import { removeUser } from "@/store/nextSlice"
+import { Text } from '@radix-ui/themes';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 const SideBar = () => {
@@ -27,13 +28,13 @@ const SideBar = () => {
                 <p className="flex items-center gap-1 h-8 px-2 border border-transparent
                 text-white  hover:border-white cursor-pointer duration-300" >
                     <LuMenu className="text-xl text-white font-extrabold" /> 
-                    <span className='font-bold'>All</span>
+                    <Text size="4" className='font-bold'>All</Text>
                 </p>
             </button>
             <div className='py-3 top-0 left-0 right-0 shadow-md z-30 text-white'>
                 <div className={`${!open && "hidden"} bg-gray-600/50 min-h-screen w-full 
               fixed top-0 left-0 right-0 `} onClick={() => setOpen(false)}></div>
-                <div className={`${open ? "w-80" : "w-0"}  bg-base-300 min-h-screen fixed overflow-y-scroll
+                <div className={`${open ? "w-80" : "w-0"}  bg-[#141726] min-h-screen fixed overflow-y-scroll
                 top-0 left-0 transition-all duration-300 `}>
                     <div className={`${!open && "hidden"} pt-3 mt-[80px]`}>
                         {session?.user ? (
@@ -72,7 +73,7 @@ const SideBar = () => {
                             </div>)}
                         <div className="p-5 text-neutral-content">
                             <h2 className='text-[18px] font-semibold mb-2 text-white'>
-                                Shop by Department
+                                Shop by Categories
                                 </h2>
                             <ul>
                                 {data?.categories.map((category: string) => (
@@ -80,7 +81,7 @@ const SideBar = () => {
                                         <li className='py-2 text-white hover:bg-[#babebe]  
                                         hover:text-black cursor-pointer'
                                             key={category} value={category} onClick={() => setOpen(false)}>
-                                            <p>{category}</p>
+                                            <Text size="4">{category}</Text>
                                         </li>
                                     </Link>
                                 )).slice(0, 3)}
@@ -100,7 +101,7 @@ const SideBar = () => {
                                               hover:text-black cursor-pointer'
                                                 key={category} value={category} 
                                                 onClick={() => setOpen(false)}>
-                                                <p>{category}</p>
+                                                <Text size="4" >{category}</Text>
                                             </li>
                                         </Link>
                                     )).slice(3, 10)}
