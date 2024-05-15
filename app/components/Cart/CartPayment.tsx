@@ -67,7 +67,7 @@ useEffect(() => {
   if(!userInfo){
     router.push('/signin');
   }
-  if (userInfo.user?.address === "") {
+  if (userInfo.user?.address === ""|| undefined) {
    
     router.push('/profile')
   }

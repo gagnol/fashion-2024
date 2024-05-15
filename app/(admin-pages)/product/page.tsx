@@ -3,7 +3,7 @@ import { Toaster } from 'react-hot-toast'
 import CreateForm from '../../components/Admin-navigation/create-product'
 import dbConnect from '@/lib/db-connect'
 import ProductModel, { Product } from '@/lib/product-model'
-import Rating from '../../components/rating'
+import Rating from '@/app/components/Rating'
 import DeleteForm from '../../components/Admin-navigation/delete-product'
 import Link from 'next/link'
 import { getServerSession } from 'next-auth'
@@ -68,7 +68,7 @@ export default async function Dashboard({searchParams}:
      Total products :  {totalProducts}
       <table className="table text-center">
         <thead>
-          <tr className='bg-base-200'>
+          <tr className='bg-[#141726]'>
             <th>Image</th>
             <th>Name</th>
             <th>Price</th>
