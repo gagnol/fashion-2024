@@ -3,7 +3,6 @@ import { Toaster } from 'react-hot-toast'
 import CreateForm from '../../components/Admin-navigation/create-product'
 import dbConnect from '@/lib/db-connect'
 import ProductModel, { Product } from '@/lib/product-model'
-import Rating from '@/app/components/Rating'
 import DeleteForm from '../../components/Admin-navigation/delete-product'
 import Link from 'next/link'
 import { getServerSession } from 'next-auth'
@@ -72,7 +71,6 @@ export default async function Dashboard({searchParams}:
             <th>Image</th>
             <th>Name</th>
             <th>Price</th>
-            <th>Rating</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -97,9 +95,7 @@ export default async function Dashboard({searchParams}:
                 </td>
                 <td className='text-neutral-content'>{product.name}</td>
                 <td className='text-bold'>${product.price}</td>
-                <td>
-                  <Rating value={product.rating} />
-                </td>
+                
                 <td>
                   <DeleteForm
                     _id={product._id.toString()}
