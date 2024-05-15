@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { checkoutOrder, createOrder } from '@/lib/order-actions';
 import { useEffect } from "react";
 import Link from "next/link";
+import { Button } from "@radix-ui/themes";
 
 interface CartItem {
   discountPrice: number;
@@ -67,10 +68,8 @@ useEffect(() => {
   if(!userInfo){
     router.push('/signin');
   }
-  if (userInfo.user?.address === ""|| undefined) {
-   
-    router.push('/profile')
-  }
+  
+  
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [session]);
  
@@ -98,13 +97,14 @@ const onCheckout = async () => {
     <div className="flex flex-wrap flex-col gap-3 min-w-full bg-[#141726]">
       <div className="rounded-md border mt-5 p-2 text-white">      
       <h1>Shipping Info</h1>
-      <h2>Address:&nbsp;{userInfo?.user.address}</h2>
-      <h2>City:&nbsp;{userInfo?.user.city}</h2>
-      <h2>Postal number:&nbsp;{userInfo?.user.postal}</h2>
-      
+      <h2>Address:&nbsp;{userInfo?.user.address||""}</h2>
+      <h2>City:&nbsp;{userInfo?.user.city||""}</h2>
+      <h2>Postal number:&nbsp;{userInfo?.user.postal||""}</h2>
+      <Button variant="classic" size="2" color="indigo" asChild >
       <Link href="/profile">
         <p className="text-primary cursor hover:text-secondary">Change shipping address</p>
       </Link>
+      </Button>
       </div>
       <p className="flex items-center justify-between px-1 font-semibold text-white">
         SubTotal: {" "}(
