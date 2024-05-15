@@ -17,19 +17,20 @@ const SuccessPage = async () => {
       <div className='a_page'>
         <Clearcart/>
         <ul className="steps pb-10 sm:mx-5">
-          <li data-content="✓" className="step step-primary text-white">Compra realizada con éxito!!!</li>
-          <li className="step step-primary flex text-white">Preparando <span className="animate-ping">...</span></li>
-          <li className="step step-primary flex text-white">Enviando <span className="animate-ping">...</span></li>
-          <li className="step step-primary flex text-white">Producto recibido <span className="animate-ping">...</span></li>
+          <li data-content="✓" className="step step-primary text-white">Purchase success!!!</li>
+          <li className="step step-primary flex text-white">Preparing Order <span className="animate-ping">...</span></li>
+          <li className="step step-primary flex text-white">Shipping <span className="animate-ping">...</span></li>
+          <li className="step step-primary flex text-white">Order Deliver <span className="animate-ping">...</span></li>
         </ul>
         <div className=' w-[400px] xl:w-[800px] h-[800px] justify-center items-center text-center'>
-          <h1 className="pb-10 text-2xl text-center font-bold text-white">Gracias por su compra, su pedido se está preparando</h1>
+          <h1 className="pb-10 text-2xl text-center font-bold text-white">Thank you for purchase
+          , your order is preparing</h1>
           <div className=" xl:flex justify-between w-full ">
             <Link href="/" >
-            <button className="btn btn-primary m-5">Continuar comprando</button>
+            <button className="btn btn-primary m-5">Continue Shopping</button>
             </Link>
             <Link href="/profile" >
-            <button className="btn btn-primary m-5">Ver detalles de la compra</button>
+            <button className="btn btn-primary m-5">Order details</button>
             </Link>
           </div>
         </div>

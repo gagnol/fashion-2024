@@ -15,7 +15,7 @@ export async function POST(request:any) {
           currency: "eur",
           product_data: {
             name: body.name,
-            images: ["https://res.cloudinary.com/dps8xubee/image/upload/v1713101274/peimljwzlw8eylbkhl9m.png"],
+            images: ["https://m.media-amazon.com/images/S/al-na-9d5791cf-3faf/fcf7ac46-f921-4b66-b183-8db87d9e61eb._CR0%2C0%2C1800%2C1800_SX200_.png"],
           },
           unit_amount: body.price,
         },

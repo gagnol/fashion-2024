@@ -1,11 +1,11 @@
- "use client"
+"use client"
 import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { checkoutOrder, createOrder } from '@/lib/order-actions';
 import { useEffect } from "react";
-import { Button } from "@radix-ui/themes";
+import Link from "next/link";
 
 interface CartItem {
   discountPrice: number;
@@ -96,7 +96,16 @@ const onCheckout = async () => {
 
   return (
     <div className="flex flex-wrap flex-col gap-3 min-w-full bg-[#141726]">
+      <div className="rounded-md border mt-5 p-2 text-white">      
+      <h1>Shipping Info</h1>
+      <h2>Address:&nbsp;{userInfo?.user.address}</h2>
+      <h2>City:&nbsp;{userInfo?.user.city}</h2>
+      <h2>Postal number:&nbsp;{userInfo?.user.postal}</h2>
       
+      <Link href="/profile">
+        <p className="text-primary cursor hover:text-secondary">Change shipping address</p>
+      </Link>
+      </div>
       <p className="flex items-center justify-between px-1 font-semibold text-white">
         SubTotal: {" "}(
         {Math.ceil(
@@ -115,9 +124,12 @@ const onCheckout = async () => {
       </p>
       <div className="flex flex-col items-center">
       <form action={onCheckout} >
-        <Button variant="classic" size="3" color="amber"  type="submit"  >
+        <button
+          type="submit"
+          className="btn btn-primary btn-outline w-full"
+        >
           Order Now
-        </Button>
+        </button>
         </form>
       </div>
     </div>

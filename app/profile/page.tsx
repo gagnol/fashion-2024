@@ -59,6 +59,7 @@ export default async function ProfileScreen() {
 
 
     return (
+        <div className="max-w-screen-2xl mx-auto py-2 overflow-x-hidden">
         <div className="grid md:grid-cols-4 md:gap-5">
             <div className='mx-4 my-5 border-r-[1px] '>
                 <h1 className=" text-xl font-bold text-center">Your Account</h1>
@@ -141,7 +142,7 @@ export default async function ProfileScreen() {
                 </div>
             </div>
         </div>
-
+</div>
     );
 }
 
