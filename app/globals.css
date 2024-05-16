@@ -118,7 +118,7 @@ body {
 }
 
 .a_list_left {
-  @apply flex-1 flex flex-row min-w-[50%] relative mx-1 my-0 overflow-x-hidden
+  @apply flex-1 flex flex-row min-w-[50%] relative mx-1  overflow-x-hidden
  }
 
 

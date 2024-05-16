@@ -146,7 +146,11 @@ export const nextSlice = createSlice({
     },
     selectedSize: (state, action: PayloadAction<string>) => {
       state.sizePiked = action.payload;
-    }
+    },
+    resetPickedValues: (state) => {
+      state.colorPiked = "";
+      state.sizePiked = "";
+    },
   },
 });
 
@@ -163,7 +167,8 @@ export const {
   setAllProducts,
   addCountry,
  selectedColor,
- selectedSize
+ selectedSize,
+ resetPickedValues
 } = nextSlice.actions;
 
 export default nextSlice.reducer;

@@ -6,7 +6,7 @@ import Loading from "@/app/components/Product-detail/loading";
 import Progressbar from "@/app/components/Product-detail/progressbar";
 import Reviews from "@/app/components/Product-detail/reviews";
 import Slider from "@/app/components/Slider";
-import Rating from "@/app/components/rating";
+import Rating from "@/app/components/Rating";
 import dbConnect from "@/lib/db-connect";
 import ProductModel from "@/lib/product-model";
 import TaskModel from "@/lib/task-model";
@@ -20,6 +20,8 @@ import SizePicker from "@/app/components/Product-detail/sizePicker";
 import ColorPicker from "@/app/components/Product-detail/colorPicker";
 import Topimage from "@/app/components/Product-detail/topImage";
 import Middleimage from "@/app/components/Product-detail/middleImage";
+import FormattedPrice from "@/app/components/FormattedPrice";
+import { Box,Text } from "@radix-ui/themes";
 
 export default async function ProductDetail({ params }: { params: { slug: string } }) {
 
@@ -35,7 +37,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const questionProductsDocs = (await TaskModel.find({ product: product._id }, "-reviews"))
   const questionProducts = JSON.parse(JSON.stringify(questionProductsDocs));
 
-  const discountPrice = Math.ceil(product.price - (product.price * (product.discount / 100)))
+  const discountPrice =(product.price - (product.price * (product.discount / 100)))
 
   const videoCounter = product?.video?.length || 0;
   const imageCounter = product?.image?.length || 0;
@@ -106,7 +108,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
             {product.bestSeller === "true" ?
               (
                 <div className="flex" >
-                  <Image alt='' src='/bestseller.png' width={124} height={38} style={{ width: 123, height: "auto" }} />
+                  <Image alt='' src='/Bestseller.png' width={100} height={100} style={{ width: 100, height: "auto" }} />
                   <p className="p-2">in&nbsp;{product.subcategory} </p>
                 </div>)
               :
@@ -119,20 +121,19 @@ export default async function ProductDetail({ params }: { params: { slug: string
                 <h5 className="text-[28px] text-[#CC0C39] ">-{product.discount}%</h5>
                 &nbsp;
                 <h4 className="text-[28px] pl-2">
-                  <span className="text-[13px] align-middle">€</span>
-                    {Math.ceil(discountPrice)}
+                  <FormattedPrice discountPrice={discountPrice}/>
                 </h4>
               </div>
               <div className="flex">
                 <h6>List price :</h6>
-                &nbsp;   &nbsp;<h6 className="line-through"> €{product.price}</h6>
+                &nbsp;   &nbsp;<h6 className="line-through"> ${product.price}</h6>
               </div>
             </>
             :
             <div className="flex text-center">
               <h4 className="text-[28px] ">
                 <span className=" text-[14px] font-bold mr-5">Price: </span>
-                <span className="text-[13px] align-middle"> €</span>
+                <span className="text-[13px] align-middle"> $</span>
                 {product.price}
               </h4>
             </div>
@@ -162,8 +163,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
               <div className="flex align-middle">
                 <h4 className="text-[28px] pl-2">
                   <span className=" text-[18px] align-middle">Price: </span>
-                  <span className="text-[13px] align-middle"> €</span>
-                  {Math.ceil(discountPrice)}
+                  <FormattedPrice discountPrice={discountPrice}/>
                 </h4>
               </div>
             </>
@@ -171,22 +171,26 @@ export default async function ProductDetail({ params }: { params: { slug: string
             <div className="flex align-middle">
               <h4 className="text-[28px] pl-2">
                 <span className=" text-[18px] align-middle">Price: </span>
-                <span className="text-[13px] align-middle">€</span>
+                <span className="text-[13px] align-middle">$</span>
                 {product.price}
               </h4>
             </div>
           }
 
           <CountryTaxes discountPrice={discountPrice} product={product}/>
-
+          <Box>
           {product.countInStock > 0 ? <>
-            <h4 className="text-[18px] text-[#007600] font-normal my-2">
-              In Stock
-            </h4><br />
+            <Text size="4" color="jade">
+             In Stock 
+            </Text>
+            
+            <br />
             <AddToCart product={product} discountPrice={discountPrice} />
              </>
             : <h4 className="text-[18px] text-[#B12704] font-normal my-2">
               Temporarily out of stock.</h4>}
+          </Box>
+          <AddToFavorite product={product} />
           <h4 className="flex text-[14px] text-primary my-1">
             <FaLock color='#949494' fontSize={16} />
             &nbsp; Secure transaction</h4>
@@ -222,7 +226,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
           <label>
            
           </label>
-          <AddToFavorite product={product} />
+          
         </div>
       </div>
       <br />

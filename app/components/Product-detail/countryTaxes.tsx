@@ -1,39 +1,52 @@
 "use client"
+import * as Popover from '@radix-ui/react-popover';
+import { Separator, Text } from '@radix-ui/themes'
 import React from 'react'
 import { FaCaretDown } from 'react-icons/fa'
+import FormattedPrice from '../FormattedPrice';
 
 const CountryTaxes = ({ discountPrice,product }: any) => {
    
-    const totalPrice = Math.ceil(discountPrice + product.shipping )
+    const totalPrice = (discountPrice + product.shipping )
 
     return (
-        <>
-            <div className="group border border-transparent  hover:cursor-pointer ">
-                <h4 className="text-neutral-300 text-[14px] my-2 flex ">
-                    € {product.shipping} Shipping
-                </h4>
-                <span className="flex py-3 text-primary ">Details <FaCaretDown className=' text-[14px] pt-2' /></span>
-                <span className="absolute w-[300px] h-[170px] rounded-sm hidden
-                        bg-neutral-600 border-[1px] text-neutral top-[220px] right-11
-                        border-[#777] z-[1]  group-hover:block ">
-                    <div className='p-2'>
+        <> 
+              <Popover.Root>
+                        <Popover.Trigger >
+                <Text size="2" color='gray' className=" my-2 flex ">
+                    $ {product.shipping} Shipping
+                </Text>
+                <Text   size="2" color='indigo' className="flex py-3 text-primary ">
+                    Details 
+                    <FaCaretDown className=' text-[14px] pt-2' />
+                </Text>                
+                </Popover.Trigger>
+                <Popover.Portal >
+                        <Popover.Content >
+                    <div className='p-2 bg-[#141726] w-60 h-60'>
                         <ul className='m-0 p-0 '>
                             <h4 className='text-[18px] font-bold p-2 border-b text-white'>
                                 Total Price 
                             </h4>
                             <li className="nav_text">Price
-                             <span className='float-right'>€{discountPrice}</span></li>
+                             <span className='float-right'>
+                                <FormattedPrice discountPrice={discountPrice}/>
+                            </span>
+                                </li>
                             <li className="nav_text">Shipping
-                                <span className='float-right'>€{product.shipping}</span></li>
-                            
+                                <span className='float-right'>${product.shipping}</span></li>
+                                <Separator size="4" color='jade' />
                             <h4 className='font-bold text-[14px] pt-2 text-neutral-200'>Total
-                                <span className='float-right'>€{totalPrice}</span>
+                                <span className='float-right'>
+                                <FormattedPrice discountPrice={totalPrice}/>
+                                </span>
                             </h4>
                         </ul>
                     </div>
-                </span>
-                <br />
-            </div>
+                </Popover.Content>
+                </Popover.Portal>
+              
+            </Popover.Root>
             
         </>
     )

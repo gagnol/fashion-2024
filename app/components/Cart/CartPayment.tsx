@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import { checkoutOrder, createOrder } from '@/lib/order-actions';
 import { useEffect } from "react";
 import Link from "next/link";
-import { Button } from "@radix-ui/themes";
+import { Button, Text } from "@radix-ui/themes";
+import FormattedPrice from "../FormattedPrice";
 
 interface CartItem {
   discountPrice: number;
@@ -95,12 +96,12 @@ const onCheckout = async () => {
 
   return (
     <div className="flex flex-wrap flex-col gap-3 min-w-full bg-[#141726]">
-      <div className="rounded-md border mt-5 p-2 text-white">      
-      <h1>Shipping Info</h1>
+      <div className="rounded-md border mt-5 p-2 text-white text-center">      
+      <Text size="4"  >Shipping Info</Text>
       <h2>Address:&nbsp;{userInfo?.user.address||""}</h2>
       <h2>City:&nbsp;{userInfo?.user.city||""}</h2>
       <h2>Postal number:&nbsp;{userInfo?.user.postal||""}</h2>
-      <Button variant="classic" size="2" color="indigo" asChild >
+      <Button variant="surface" size="2" color="indigo" asChild >
       <Link href="/profile">
         <p className="text-primary cursor hover:text-secondary">Change shipping address</p>
       </Link>
@@ -108,19 +109,19 @@ const onCheckout = async () => {
       </div>
       <p className="flex items-center justify-between px-1 font-semibold text-white">
         SubTotal: {" "}(
-        {Math.ceil(
+        {(
           productData.reduce((a: number, c: CartItem) => a + c.quantity, 0)
         )}{" "}
         items)
-        <span className="font-bold text-xl text-white">€{subTotal}</span>
+        <FormattedPrice discountPrice={subTotal}/>
       </p>
       
       <p className="text-white">
-        Shipping:<span className="float-right pr-1">€{shipping}</span>
+        Shipping:<span className="float-right pr-1">${shipping}</span>
       </p>
       <p className="flex items-center justify-between px-1 font-semibold border-t text-white">
         Total:{" "}
-        <span className="font-bold text-xl pt-1 text-white">€{Math.ceil(totalAmount)}</span>
+        <FormattedPrice discountPrice={totalAmount}/>
       </p>
       <div className="flex flex-col items-center">
       <form action={onCheckout} >

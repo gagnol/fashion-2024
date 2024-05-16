@@ -10,6 +10,7 @@ import {
   increaseQuantity,
 } from "@/store/nextSlice";
 import Link from "next/link";
+import { Separator } from "@radix-ui/themes";
 
 const CartProduct = ({ item }:any) => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const CartProduct = ({ item }:any) => {
           <p className=" text-base">
             Price{" "}
             <span className="font-semibold text-white ">
-             € {item.price.toFixed(2)}
+             ${item.price.toFixed(2)}
             </span>
           </p>
           <p className=" text-base">
@@ -47,7 +48,7 @@ const CartProduct = ({ item }:any) => {
               {item.sizePiked}
             </span>
           </p>
-          <div className="flex items-center gap-6 justify-center">
+          <div className="flex mb-10 gap-6 ">
             <div className="flex items-center mt-1 justify-between border
              border-gray-300 px-4 py-1 rounded-full w-28 shadow-lg shadow-gray-300">
               <span
@@ -130,9 +131,12 @@ const CartProduct = ({ item }:any) => {
               className="flex items-center text-sm font-medium text-white
                hover:text-red-600 cursor-pointer duration-300"
             >
-              <IoMdClose className="mt-[2px]" /> <p>Delete</p>
+              <IoMdClose className="mt-[2px]"/>
+               <p>Delete</p>
             </div>
+           
           </div>
+          
         </div>
       
       </div>

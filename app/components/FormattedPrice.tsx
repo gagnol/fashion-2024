@@ -1,7 +1,7 @@
 
 
-const FormattedPrice = ({ amount }:any) => {
-  const formattedAmount = new Number(amount).toLocaleString("en-US", {
+const FormattedPrice = ({ discountPrice }:any) => {
+  const formattedAmount = new Number(discountPrice).toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2,

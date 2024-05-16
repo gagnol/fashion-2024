@@ -70,9 +70,11 @@ const Cardgrid=({product}:any)=> {
                         </DropdownMenu.Content>
                     </DropdownMenu.Root>
                 </Flex>
-                <Button variant="surface" className="cursor-pointer">
+                <Button variant="surface" mx="2" asChild>
+                <Link href={`/products/${product.slug}`} >
                     <AiOutlineShoppingCart />
-                    Add to cart
+                    Order Now
+                    </Link>
                 </Button>
             </Flex>
         </Card>

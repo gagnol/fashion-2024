@@ -1,5 +1,5 @@
 import ProductItem from '@/app/components/sections-home/Card'
-import Rating from '@/app/components/rating'
+import Rating from '@/app/components/Rating'
 import productServices from '@/lib/productService'
 import Link from 'next/link'
 
@@ -114,6 +114,7 @@ export default async function SearchPage({
     sort,
   })
   return (
+    <div className="max-w-screen-2xl mx-auto py-2 overflow-x-hidden">
     <div className="grid md:grid-cols-5 md:gap-5 mx-5 ">
       <div >
         <div className="text-xl pt-3">Department</div>
@@ -256,13 +257,13 @@ export default async function SearchPage({
           </div>
         </div>
 
-        <div>
+        <div >
           <div className="grid grid-cols-1 gap-4  xl:grid-cols-3 md:grid-cols-1">
             {products.map((product) => (
               <ProductItem key={product.slug} product={product} />
             ))}
           </div>
-          <div className="xl:join md:max-w-[500px]">
+          <div className="xl:join md:max-w-[500px] my-10">
             {products.length > 0 &&
               Array.from(Array(pages).keys()).map((p) => (
                 <Link
@@ -277,6 +278,7 @@ export default async function SearchPage({
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

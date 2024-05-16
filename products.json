@@ -833,4 +833,77 @@
     "XL"
   ],
   "slug": "0026"
-}]
+},
+{
+"shipping": 5.99,
+"video": "https://m.media-amazon.com/images/S/al-na-9d5791cf-3faf/84422cdf-ee1c-46bc-b0d8-8a0263cf18d1.mp4",
+"name": "Legendary Whitetails Women's Country High Fleece",
+"discount": 0,
+"numReviews": 571,
+"rating": 4.6,
+"isFeature": true,
+"brand": "Legendary",
+"price": 31.78,
+"description": "GREAT STYLE: The ombre motif provides an aesthetic appeal, while the raw edge seams add interest,SOFT & COMFORTABLE: Made from cotton terry, modal, and spandex, this shirt is soft to the touch,RELAXED FIT: This long sleeve shirt includes the right amount of room in all the right places, with an extended tail and side vent, it can be worn tucked in or untucked.EASY TO MAINTAIN: This women's pullover is machine washable so you can maintain this product easily from the comfort of your home",
+"department": "Women",
+"category": "Shirt",
+"topDeal": false,
+"bestSeller": false,
+"countInStock": 17,
+"image": [
+  "https://m.media-amazon.com/images/I/810w9qUAzCL._AC_SX569_.jpg",
+  "https://m.media-amazon.com/images/I/71xyVQR7YeL._AC_SX522_.jpg",
+  "https://m.media-amazon.com/images/I/71Ju2mAwxjL._AC_SX569_.jpg"
+],
+"colors": [
+  {
+    "name": "Ivy Camo",
+    "color": "#474b3a"
+  },
+  {
+    "name": "Rusty Maroon Ombre",
+    "color": "#f4c4b6"
+  },
+  {
+    "name": "Navy Ombre",
+    "color": "#93d5e3"
+  }
+],
+"sizes": [
+  "S",
+  "M",
+  "L",
+  "XL"
+],
+"slug": "0027"
+},
+{
+  "shipping": 0,
+  "video": "https://m.media-amazon.com/images/S/al-na-9d5791cf-3faf/84422cdf-ee1c-46bc-b0d8-8a0263cf18d1.mp4",
+  "name": "Team Realtree Camo Cap Deer Logo Realtree Hat Camo Ball Cap Tan Camo Cap",
+  "discount": 0,
+  "numReviews": 571,
+  "rating": 4.6,
+  "isFeature": true,
+  "brand": "Legendary",
+  "price": 15.58,
+  "description": "Team Realtree Camo Cap with Deer Logo Men's Realtree Hat Tan. 6 panel cap, unstructured, mid profile. Heavy wash for worn look. Moisture wicking sweatband. Plus We will send you a free gift with your order!!!!",
+  "department": "Men",
+  "category": "Accesories",
+  "topDeal": false,
+  "bestSeller": false,
+  "countInStock": 17,
+  "image": [
+    "https://m.media-amazon.com/images/I/91MbMBw0ySL._AC_SX569_.jpg",
+    "https://m.media-amazon.com/images/I/91CkPIYKLEL._AC_SY550_.jpg",
+    "https://m.media-amazon.com/images/I/91EQq6QAi8L._AC_SX679_.jpg"
+  ],
+  "colors": [
+    
+  ],
+  "sizes": [
+
+  ],
+  "slug": "0028"
+  }
+]

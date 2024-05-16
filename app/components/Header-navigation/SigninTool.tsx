@@ -42,8 +42,8 @@ function SigninTool() {
         <>
             {session?.user ? (
                 <>
-                    <div>
-                    <Popover.Root>
+                    <div >
+                    <Popover.Root >
                         <Popover.Trigger >
                     <Avatar
                     size="4"
@@ -53,7 +53,7 @@ function SigninTool() {
                         </Popover.Trigger>
                         <Popover.Portal>
                         <Popover.Content >
-                            <div className='bg-[#141726] w-[360px] h-[320px]'>
+                            <div className='bg-[#141726] w-[360px] h-[320px] rounded-lg border-[2px]'>
                             <div className="a_tooltip-header ">
                                 <Image src={session?.user?.image || ''} alt="" 
                                 width={100} height={100}
@@ -69,7 +69,7 @@ function SigninTool() {
                                 <div className='a_list_left'>
                                     {session?.user?.email === "admin@example.com"}
                                     <ul className='m-0 p-0'>
-                                        <h4 className='text-[16px] font-bold pb-2 text-white'>
+                                        <h4 className='text-[16px] font-bold py-2 text-white'>
                                             Your List </h4>
                                         
                                         <Link href="/main">
@@ -80,9 +80,9 @@ function SigninTool() {
                                     </ul>
                                 </div>
                                 <div className='border-l-[2px] border-l-[#fff] '></div>
-                                <div className='flex-1 flex flex-row max-w-[50%] relative mx-4 my-0 '>
+                                <div className='flex-1 flex flex-row max-w-[50%] min-w-[50%] relative mx-4 my-0 '>
                                     <ul>
-                                        <h4 className='text-[16px] font-bold pb-2 text-white '>
+                                        <h4 className='text-[16px] font-bold py-2 text-white '>
                                             Your Account
                                        </h4>
                                         <li className="nav_text">
@@ -94,7 +94,9 @@ function SigninTool() {
                                         <li className="nav_text">Recommendations</li>
                                         
                                         <li className="nav_text"> 
-                                         <Link href="/customer">Customer Services </Link>
+                                         <Link href="/customer">
+                                        Customer Services 
+                                        </Link>
                                         </li>
 
                                         <li className="nav_text" onClick={handleSignOutClick}>
