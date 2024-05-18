@@ -16,7 +16,7 @@ const CartProduct = ({ item }:any) => {
   const dispatch = useDispatch();
   return (
     <div className=" bg-[#141726] rounded-lg flex text-white ">
-      <Link href={`/product/${item.slug}`}>
+      <Link href={`/products/${item.slug}`}>
         <Image
           width={150}
           height={150}

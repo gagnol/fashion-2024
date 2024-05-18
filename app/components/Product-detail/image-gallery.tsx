@@ -5,6 +5,7 @@ import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import Modal from '../Modal';
 import TabsComponent from './tabs';
+import { Text } from '@radix-ui/themes';
 
 const ImageGallery = ({ product }: any) => {
   const [index, setIndex] = useState(0);
@@ -31,18 +32,19 @@ const ImageGallery = ({ product }: any) => {
           alt={product.name}
           width={483}
           height={483}
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
-          className="max-h-[483px] min-h-[483px] min-w-[483px]"
+          className="xl:max-h-[483px] xl:min-h-[483px] xl:min-w-[483px] 
+          min-h-[283px] min-w-[283px] max-h-[283px] rounded-md"
         />
       </Zoom>
-      <p className="text-[#565959] text-center block text-[14px]">
+      <Text size="1" color='gray' mx="9">
         Click image to open expanded view
-      </p>
+      </Text>
       <div>
         {product.image?.map((item: any, i: number) => (
           <div className='inline-flex justify-between mt-4 ml-3 border-transparent 
-          border-[3px]  hover:border-[#c45500] cursor-pointer' key={i}>
+          border-[3px]  hover:border-[#c45500] cursor-pointer rounded-md' key={i}>
             <Image
               width={100}
               height={100}
@@ -56,7 +58,7 @@ const ImageGallery = ({ product }: any) => {
           </div>
         )).slice(0, 3)}
         <div className="inline-flex overflow-hidden relative border-transparent border-[3px] 
-        mt-4 ml-4 hover:border-[#c45500] cursor-pointer" onClick={openModalHanlder}>
+        mt-4 ml-4 hover:border-[#c45500] cursor-pointer rounded-md" onClick={openModalHanlder}>
           <Image
             width={100}
             height={100}
@@ -77,7 +79,7 @@ const ImageGallery = ({ product }: any) => {
           onDismiss={closeModalHanlder}
           title=''
         >
-          <div className="flex rounded-[8px]  w-[1500px] h-[600px] bg-white" >
+          <div className="flex rounded-[8px]  w-[600px] h-[600px] bg-[#141726]" >
             <TabsComponent product={product} setIndex={setIndex} index={index} />
           </div>
         </Modal>

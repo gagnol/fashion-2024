@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { checkoutOrder, createOrder } from '@/lib/order-actions';
 import { useEffect } from "react";
 import Link from "next/link";
-import { Button, Text } from "@radix-ui/themes";
+import { Button, Heading, Text } from "@radix-ui/themes";
 import FormattedPrice from "../FormattedPrice";
 
 interface CartItem {
@@ -97,13 +97,14 @@ const onCheckout = async () => {
   return (
     <div className="flex flex-wrap flex-col gap-3 min-w-full bg-[#141726]">
       <div className="rounded-md border mt-5 p-2 text-white text-center">      
-      <Text size="4"  >Shipping Info</Text>
-      <h2>Address:&nbsp;{userInfo?.user.address||""}</h2>
-      <h2>City:&nbsp;{userInfo?.user.city||""}</h2>
-      <h2>Postal number:&nbsp;{userInfo?.user.postal||""}</h2>
+      <Heading size="5"  >Shipping Info</Heading>
+      
+      <Text size="1" >Address:&nbsp;{userInfo?.user.address||""}</Text><br/>
+      <Text size="1">City:&nbsp;{userInfo?.user.city||""}</Text><br/>
+      <Text size="1">Postal Code:&nbsp;{userInfo?.user.postal||""}</Text><br/>
       <Button variant="surface" size="2" color="indigo" asChild >
       <Link href="/profile">
-        <p className="text-primary cursor hover:text-secondary">Change shipping address</p>
+        Change Info
       </Link>
       </Button>
       </div>

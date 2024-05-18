@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} >
-       <Theme appearance='dark' accentColor='amber'>
+       <Theme appearance='dark' accentColor='indigo'>
             <Session>
               <Navbar />
               <BottomHeader />

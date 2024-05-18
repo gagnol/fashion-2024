@@ -26,13 +26,12 @@ export default async function Home() {
       <div className="max-w-screen-2xl mx-auto py-2 overflow-x-hidden">
     <HeroBanner/>
     <Hero2/>
-    <WinterCollection products={products}/>
-    <Advertise/>
     <GridList products={men}/>
-    <Newstock products={products}/>
-    <GridList2 products={women}/>
+    <Advertise/>
+     <GridList2 products={women}/>
+     <Newstock products={products}/>
     <Trending/>
-
+    <WinterCollection products={products}/>
       </div>
     </main>
   );

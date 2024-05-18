@@ -21,17 +21,17 @@ const Modal = ({ isOpen, title = 'My Modal', onDismiss, children }: any) => {
 
   return (
     <div
-      className='fixed w-screen h-screen  bg-opacity-60 top-0 left-0 right-0 bottom-0 
-      z-50 flex justify-center items-center'
+      className='fixed w-screen h-screen bg-opacity-75 top-0 left-0 right-0 bottom-0 
+      z-50 flex justify-center items-center bg-[#141726]'
       onClick={onDismiss}
     >
       <div
-        className='min-w-[400px] max-w-full overflow-x-hidden bg-base-200 border-[1px] rounded-sm
-        p-2 flex flex-col relative'
+        className='min-w-[400px] max-w-full overflow-x-hidden 
+        border-[1px] rounded-md p-2 flex flex-col relative'
         onClick={(event) => event.stopPropagation()}
       >
-        <AiOutlineClose
-          className='absolute right-4 top-4 text-2xl text-white cursor-pointer'
+        <AiOutlineClose 
+          className='absolute right-4 top-4 text-2xl cursor-pointer'
           onClick={onDismiss}          
         />
         <div className='w-full h-10 flex items-center mb-1 '>

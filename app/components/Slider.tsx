@@ -21,9 +21,9 @@ function Slider({ product }:any) {
             <div className='flex items-center mx-10 py-5'>
                 <MdChevronLeft className='opacity-50 cursor-pointer hover:opacity-100 text-white' 
                 onClick={slideLeft} size={40} />
-                <div   id='slider'
-                    className='flex w-full h-full overflow-x-scroll scroll whitespace-nowrap 
-                      scroll-smooth scrollbar-hide'>
+                <div id='slider' className='flex w-full h-full 
+                overflow-x-scroll scroll whitespace-nowrap 
+                scroll-smooth scrollbar-hide'>
                   <Cardgrid product={product}/>
                 </div>
                 <MdChevronRight className='opacity-50 cursor-pointer text-white

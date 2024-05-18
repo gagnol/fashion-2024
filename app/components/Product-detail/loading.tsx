@@ -24,8 +24,8 @@ const Loading: React.FC<LoadingProps> = ({ children }) => {
     <div className="max-w-screen-2xl mx-auto px-4 py-4 md:py-4">
       {isLoading ? (
         <div className="w-full flex flex-col gap-6 items-center justify-center py-20">
-          <Text size="4" >Loading product...</Text>
-          <BeatLoader color="#18244b" size={40} />
+          <Text size="6" >Loading product...</Text>
+          <BeatLoader color="#6c79b0" size={40} />
         </div>
       ) : (
         <>{children}</>

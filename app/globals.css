@@ -137,11 +137,11 @@ body {
   @apply w-[33px] h-[33px] rounded-md border-[1px]
 }
 .sizePiked {
-  @apply w-[133px] h-[33px] border-2 border-white text-white
+  @apply w-[133px] h-[33px] border-2 border-white text-white rounded-md
 }
 
 .sizeBox {
-  @apply w-[133px] h-[33px]  text-white cursor-pointer align-baseline
+  @apply w-[133px] h-[33px] py-1 text-white cursor-pointer align-bottom rounded-md
 }
 /* Chat List */
 .main-container {

@@ -21,7 +21,9 @@ import ColorPicker from "@/app/components/Product-detail/colorPicker";
 import Topimage from "@/app/components/Product-detail/topImage";
 import Middleimage from "@/app/components/Product-detail/middleImage";
 import FormattedPrice from "@/app/components/FormattedPrice";
-import { Box,Text } from "@radix-ui/themes";
+import { Box,Strong,Text } from "@radix-ui/themes";
+import DescriptionList from "@/app/components/Product-detail/description";
+
 
 export default async function ProductDetail({ params }: { params: { slug: string } }) {
 
@@ -46,6 +48,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
 
   const session = await getServerSession();
 
+
   //CUSTOMER REVIEWS
 
   const reviewsMaping = product.reviews.map((item: any) => {
@@ -68,25 +71,25 @@ export default async function ProductDetail({ params }: { params: { slug: string
   });
 
   return (
-    <Loading >
+    <Loading>
       <div className="flex flex-wrap sm:justify-center lg:justify-start ml-10 text-white">
         <Topimage product={product}/>
         <div >
           <ImageGallery product={product} />
-          <div className="w-[483px] h-[240px] bg-base-200 mt-5 text-center p-2 " >
+          <div className="hidden xl:block xl:w-[483px] h-[240px] bg-[#141726] mt-5 text-center p-2 " >
             <div className="w-[80%] mx-auto">
               <p><strong>We want you to know</strong></p>
             </div>
             <div className="w-[80%] mx-auto">
-              <div className="text-[14px]"><p></p>
-                <p>  Discover the legendary range of colors and sizes available at our store! 
+              
+                <Text size="3" > Discover the legendary range of colors and sizes available at our store! 
                 Explore endless possibilities to express your style. 
                 Visit us today and unleash your creativity!
                   <br />
-                  <span >Learn more about availability.</span>
-                </p>
+                  <Text color="indigo" >Learn more about availability.</Text>
+                </Text>
                 <br />
-              </div>
+              
             </div>
           </div>
         </div>
@@ -109,7 +112,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
               (
                 <div className="flex" >
                   <Image alt='' src='/Bestseller.png' width={100} height={100} style={{ width: 100, height: "auto" }} />
-                  <p className="p-2">in&nbsp;{product.subcategory} </p>
+                  <p className="hidden xl:flex p-2">Best seller in&nbsp;{product.department}&apos;s&nbsp;{product.category} </p>
                 </div>)
               :
               (<></>)}
@@ -150,10 +153,10 @@ export default async function ProductDetail({ params }: { params: { slug: string
           <SizePicker product={product}/>
           <ColorPicker product={product}/>
           <div className="mt-5">
-            <h4 className="text-[16px] font-bold mt-2" >About this product</h4>
-            <h5 className="text-[14px] font-normal text-neutral-content" >
-              {product.description}
-            </h5>
+            <Text size="4"><Strong>About this product</Strong></Text><br/>
+            <Text size="3" >
+           <DescriptionList description={product.description} />  
+            </Text>
           </div>
         </div>
         {/* Rigth */}

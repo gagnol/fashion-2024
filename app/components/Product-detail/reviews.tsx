@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaUserCircle } from 'react-icons/fa';
 import Image from 'next/image';
-import Rating from '../rating';
+import Rating from '../Rating';
 
 function Reviews({ item }:any) {
 
