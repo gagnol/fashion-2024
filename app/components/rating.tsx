@@ -1,5 +1,5 @@
 
-export default function Rating({ value }: { value: number }) {
+function Rating({ value }: { value: number }) {
     const Full = () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -42,3 +42,4 @@ export default function Rating({ value }: { value: number }) {
       </div>
     )
   }
+  export default Rating;

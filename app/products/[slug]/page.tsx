@@ -6,7 +6,7 @@ import Loading from "@/app/components/Product-detail/loading";
 import Progressbar from "@/app/components/Product-detail/progressbar";
 import Reviews from "@/app/components/Product-detail/reviews";
 import Slider from "@/app/components/Slider";
-import Rating from "@/app/components/Rating";
+import Rating from "@/app/components/Rating"
 import dbConnect from "@/lib/db-connect";
 import ProductModel from "@/lib/product-model";
 import TaskModel from "@/lib/task-model";
