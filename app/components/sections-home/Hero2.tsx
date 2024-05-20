@@ -35,7 +35,7 @@ const Hero2 = () => {
              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
              className='min-h-[320px] max-h-[320px] cursor-pointer hover:opacity-75'/>
       <div className="absolute inset-0 p-6">
-      <Button variant='classic' size="2" color='amber' asChild >    
+      <Button variant='classic' size="2"  asChild >    
       <Link href="/search?department=Women">
         View More
       </Link>
@@ -52,7 +52,7 @@ const Hero2 = () => {
             className='min-h-[320px] max-h-[320px] cursor-pointer hover:opacity-75' 
              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
       <div className="absolute inset-0 p-6  right-0 ">
-      <Button variant='classic' size="2" color='amber' asChild >    
+      <Button variant='classic' size="2"  asChild >    
       <Link href="/search?department=Men">
         View More
       </Link>

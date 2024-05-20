@@ -3,35 +3,40 @@ import Image from "next/image";
 import React from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
+import { Button, Strong, Text } from "@radix-ui/themes";
 
 const FavoriteProduct = ({ item }: any) => {
   const dispatch = useDispatch();
   return (
-    <div className="bg-base-300 text-white rounded-lg flex flex-col md:flex-row p-2 items-center gap-4 mb-2">
-      <Link  href={`/products/${item.slug}`} >
+    <div className="bg-[#141726] text-white rounded-lg flex flex-col md:flex-row p-2 items-center gap-4 mb-2">
+      
         <div className="block min-w-[150px] text-center text-primary cursor-pointer">
           <Image src={item.image[0]} alt="Product image" width={150} height={150}
             className="max-h-[150px] min-h-[150px]	" />
-          <p>Ver producto</p>
+
+          <Button size="2" asChild my="2">
+          <Link  href={`/products/${item.slug}`} >
+            Order Now
+            </Link>
+            </Button>
         </div>
-      </Link>
+      
       <div className="flex items-center px-2 gap-4">
         <div className="flex flex-col gap-1">
-          <p className="text-lg font-semibold ">{item.name}</p>
-          <p className="text-sm text-gray-500">{item.description}</p>
+          <Text size="4" ><Strong>{item.name}</Strong></Text>
+          <Text size="3" >{item.description}</Text>
           <p className="text-sm">
-            Precio unitario:{" "}
-            <span className="font-semibold text-amazon_blue">
-              €{item.price}
+            Price:{" "}
+            <span className="font-semibold text-primary">
+              ${item.price}
             </span>
           </p>
 
         </div>
-        <div className="text-lg font-semibold text-amazon_blue">
-          ${item.price * item.quantity}
-        </div>
+               
+        
       </div>
-    </div>
+    </div >
   );
 };
 

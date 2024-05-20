@@ -19,7 +19,7 @@ const SearchBox = () => {
           defaultValue={q}
           name="q"
         />
-        <Button variant='classic' color='gray' size="4" className="join-item btn">
+        <Button variant='classic' size="4" className="join-item btn">
           <FaSearch/>
         </Button>
       </div>

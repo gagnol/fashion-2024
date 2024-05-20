@@ -45,7 +45,7 @@ const Cardgrid = ({ product }: any) => {
                 <Text as="p" size="4">
                     <Strong><span className="text-[14px] align-top">$</span>{product.price}</Strong>
                 </Text>
-                <Separator orientation="horizontal" size="4" color='indigo' className="my-2 text-slate-600 w-full" />
+                <Separator orientation="horizontal" size="4" my="1" />
                 <Text as="p" size="1" className="mb-2">
                     {product.name.substring(21, 50)}
                 </Text>

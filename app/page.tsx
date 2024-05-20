@@ -9,6 +9,7 @@ import GridList from './components/sections-home/GridList';
 import Newstock from './components/sections-home/NewStock';
 import GridList2 from './components/sections-home/GridList2';
 import Trending from './components/sections-home/Trending';
+import Grid from './components/sections-home/Grid';
 
 export default async function Home() {
   await dbConnect();
@@ -25,12 +26,14 @@ export default async function Home() {
     <main>
       <div className="max-w-screen-2xl mx-auto py-2 overflow-x-hidden">
     <HeroBanner/>
-    <Hero2/>
+    
+    <Trending/>
+    
     <GridList products={men}/>
     <Advertise/>
      <GridList2 products={women}/>
      <Newstock products={products}/>
-    <Trending/>
+     <Hero2/>-
     <WinterCollection products={products}/>
       </div>
     </main>

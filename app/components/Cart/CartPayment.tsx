@@ -24,7 +24,9 @@ const CartPayment = () => {
   const { productData, userInfo } = useSelector(
     (state: any) => state.next
   );
-  
+  const shippingAddress= userInfo.user?.address+","+userInfo.user?.city+","
+  +userInfo.user?.country+","+userInfo.user?.postal 
+
   const shipping = (
     productData.reduce(
       (acc: number,item: CartItem ) => acc + item.shipping ,0
@@ -77,9 +79,10 @@ useEffect(() => {
 const onCheckout = async () => {
   const order  = {
     name:userInfo.user?.name,
-    price:totalAmount * 100,
+    price:Math.ceil(totalAmount * 100),
     items:productData,
-    email:userInfo.user?.email
+    email:userInfo.user?.email,
+    shippingAddress:shippingAddress
   }
   console.log(order)  
   const res:any = await fetch('/api/checkout', {

@@ -12,7 +12,7 @@ export async function POST(request:any) {
     line_items: [
       {
         price_data: {
-          currency: "eur",
+          currency: "usd",
           product_data: {
             name: body.name,
             images: ["https://m.media-amazon.com/images/S/al-na-9d5791cf-3faf/fcf7ac46-f921-4b66-b183-8db87d9e61eb._CR0%2C0%2C1800%2C1800_SX200_.png"],
@@ -22,9 +22,7 @@ export async function POST(request:any) {
         quantity: 1,
       },
     ],
-    shipping_address_collection: {
-      allowed_countries: ["ES"]
-    },
+    
     metadata: {
        product: JSON.stringify(body.items.map((item:any) => item._id)), 
        name: JSON.stringify(body.items.map((item:any) => item.name)),
@@ -32,7 +30,8 @@ export async function POST(request:any) {
        prices: JSON.stringify(body.items.map((item:any) => item.price)),
        shipping: JSON.stringify(body.items.map((item:any) => item.shipping)),
        quantity: JSON.stringify(body.items.map((item:any) => item.quantity)),
-       user: body.email
+       user: body.email,
+       shippingAddress:body.shippingAddress
     },
     mode: "payment",
 

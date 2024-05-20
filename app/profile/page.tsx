@@ -49,11 +49,11 @@ export default async function ProfileScreen() {
 
     await dbConnect();
 
-    const orderDocs = (await OrderModel.find({ userId: session.user.name }).sort({
+    const orderDocs = (await OrderModel.find({ user:session.user.email }).sort({
         _id: -1,
     }))
     const orders = JSON.parse(JSON.stringify(orderDocs));
-
+console.log(orders)
     const userDocs = (await UserModel.findOne({ email: session.user.email }))
     const users = JSON.parse(JSON.stringify(userDocs));
 
@@ -111,14 +111,14 @@ export default async function ProfileScreen() {
                                     <tr key={item._id}>
                                         <td>
                                             <Image
-                                                src={item.productImage[0]}
+                                                src={item.image[0]}
                                                 alt=""
                                                 width={50}
                                                 height={50}
                                                 className="rounded-lg max-w-[50px] max-h-[50px] min-h-[50px]"
                                             />
                                         </td>
-                                        <td className='text-neutral-content'>{item.userId}</td>
+                                        <td className='text-neutral-content'>{item.user}</td>
                                         <td className='text-bold'>${item.totalAmount.toFixed(2)}</td>
                                         <td>
                                             {new Date(item.createdAt.substring(0, 10)).toLocaleDateString(

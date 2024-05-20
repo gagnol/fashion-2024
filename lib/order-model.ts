@@ -2,29 +2,37 @@ import mongoose, { Document, Schema } from "mongoose";
 
 
 interface OrderDocument extends Document {
-  quantity: string[],
+  quantity: number[],
   product: string[],
   image: string[],
   name: string[],
-  totalAmount: string,
+  prices: string[],
   email: string,
-  userId: string
+  user: string
   orderStatus: string,
   createdAt: Date
-  shipping:string
+  shipping:number[]
+  payment_status:string
+  payment_intent:string
+  totalAmount:number
+  shippingAdress:string
 }
 
 const orderSchema = new Schema<OrderDocument>({
 
-  product: { type: [String], required: true },
-  image: { type: [String], required: true },
-  name: { type: [String], required: true },
-  userId: { type: String, required: true },
-  totalAmount: { type: String, required: true },
-  quantity: { type: [String], required: true },
-  orderStatus: { type: String, default: "Preparando" },
-  shipping: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
+  product: { type: [String], required: true },//coming from metadata
+  image: { type: [String], required: true },//coming from metadata
+  name: { type: [String], required: true },//coming from metadata
+  user: { type: String, required: true },//coming from metadata
+  prices: { type: [String], required: true },//coming from metadata
+  quantity: { type: [Number], required: true },//coming from metadata
+  orderStatus: { type: String, default: "Processing" },//auto generated
+  shipping: { type: [Number], required: true },//coming from metadata
+  payment_status:{ type: String, required: true },//coming from payment_status
+  payment_intent:{ type: String, required: true },//coming from payment_intent
+  totalAmount: { type:Number, required: true },// comming from amount_total
+  shippingAdress:{ type: String, required: true },//coming from metadata
+  createdAt: { type: Date, default: Date.now }//auto generated
   
 });
 

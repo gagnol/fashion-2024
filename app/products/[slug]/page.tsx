@@ -21,8 +21,9 @@ import ColorPicker from "@/app/components/Product-detail/colorPicker";
 import Topimage from "@/app/components/Product-detail/topImage";
 import Middleimage from "@/app/components/Product-detail/middleImage";
 import FormattedPrice from "@/app/components/FormattedPrice";
-import { Box,Strong,Text } from "@radix-ui/themes";
+import { Box,Heading,Strong,Text } from "@radix-ui/themes";
 import DescriptionList from "@/app/components/Product-detail/description";
+import CardGrid from "@/app/components/sections-home/Card";
 
 
 export default async function ProductDetail({ params }: { params: { slug: string } }) {
@@ -34,7 +35,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const product = JSON.parse(JSON.stringify(productDocs));
 
   const similarProductsDocs = (await ProductModel.find({ category: product.category }, "-reviews"))
-  const similarProducts = JSON.parse(JSON.stringify(similarProductsDocs));
+  const similar = JSON.parse(JSON.stringify(similarProductsDocs));
 
   const questionProductsDocs = (await TaskModel.find({ product: product._id }, "-reviews"))
   const questionProducts = JSON.parse(JSON.stringify(questionProductsDocs));
@@ -76,11 +77,17 @@ export default async function ProductDetail({ params }: { params: { slug: string
         <Topimage product={product}/>
         <div >
           <ImageGallery product={product} />
-          <div className="hidden xl:block xl:w-[483px] h-[240px] bg-[#141726] mt-5 text-center p-2 " >
+          <div className="hidden xl:block xl:w-[483px] h-[240px]  mt-5 text-center p-2  rounded-md border border-white/[0.1"
+            style={{
+                 background: "rgb(4,7,29)",
+                backgroundColor:
+                  "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
+              }} >
             <div className="w-[80%] mx-auto">
               <p><strong>We want you to know</strong></p>
             </div>
-            <div className="w-[80%] mx-auto">
+            <div className="w-[80%] mx-auto"
+             >
               
                 <Text size="3" > Discover the legendary range of colors and sizes available at our store! 
                 Explore endless possibilities to express your style. 
@@ -236,11 +243,18 @@ export default async function ProductDetail({ params }: { params: { slug: string
       <br />
       <div >
         <br />
-        <div className="relative max-w-screen-2xl  px-4 py-4 md:py-4">
-          <h2 className="text-[21px] font-semibold px-10 pt-1 mb-2 text-white">
+        <div className="relative max-w-screen-2xl  px-4 py-4 md:py-4 text-center">
+          <Heading size="6">
           Popular products based on this item
-          </h2>
-          <Slider product={product} />
+          </Heading>
+          <Slider >
+          {similar?.map((product:any) => (
+            <div key={product.slug} className="gap-3" >
+            <CardGrid product={product}/>
+            </div>
+          ))}
+            </Slider>
+
         </div >
         {/******************Sizes ****************/}
         <Middleimage product={product}/>

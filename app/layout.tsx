@@ -24,12 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} >
-       <Theme appearance='dark' accentColor='indigo'>
+       <Theme appearance='dark' accentColor='jade'>
             <Session>
-              <Navbar />
-              <BottomHeader />
+              <Navbar/>
+              <BottomHeader/>
               {children}
-              <Footer />
+              <Footer/>
             </Session>
         </Theme>
       </body>
