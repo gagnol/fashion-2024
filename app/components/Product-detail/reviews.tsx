@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaUserCircle } from 'react-icons/fa';
 import Image from 'next/image';
-import Rating from '@/app/components/Rating';
+import Stars from '@/app/components/Stars';
 
 function Reviews({ item }:any) {
 
@@ -23,7 +23,7 @@ function Reviews({ item }:any) {
         <h4 className='my-1'>&nbsp;{item.name}</h4>
       </li>
       <li className='block md:flex'>
-        <Rating value={item.rating} />
+        <Stars value={item.rating} />
         <h4 ><b>&nbsp; {item.subject}</b></h4>
       </li>
       <li >

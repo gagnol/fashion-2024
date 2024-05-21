@@ -1,5 +1,5 @@
 import ProductItem from '@/app/components/sections-home/Card'
-import Rating from '@/app/components/Rating'
+import Rating from '@/app/components/Stars'
 import productServices from '@/lib/productService'
 import Link from 'next/link'
 

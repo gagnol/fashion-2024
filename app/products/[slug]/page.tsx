@@ -6,7 +6,7 @@ import Loading from "@/app/components/Product-detail/loading";
 import Progressbar from "@/app/components/Product-detail/progressbar";
 import Reviews from "@/app/components/Product-detail/reviews";
 import Slider from "@/app/components/Slider";
-import Rating from "@/app/components/Rating"
+import Stars from "@/app/components/Stars"
 import dbConnect from "@/lib/db-connect";
 import ProductModel from "@/lib/product-model";
 import TaskModel from "@/lib/task-model";
@@ -108,7 +108,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
               <div className="flex">
               <span className="mx-1">{product?.rating}</span>
 
-                <Rating value={product.rating} />
+                <Stars value={product.rating} />
               </div>
             </div>
             <span className="ml-1">{product.numReviews} ratings </span>
@@ -265,7 +265,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
         <div className="grid grid-cols-2 px-10">
           <div className=" grid-cols-1 block mx-5 ">
             <div className="flex">
-              <Rating value={product.rating} />
+              <Stars value={product.rating} />
               <h1 className="px-2">{product.rating ? product.rating + ' out of 5' : 'Rating not available'}</h1>
             </div>
             <h2>{product.numReviews} Total Ratings</h2>

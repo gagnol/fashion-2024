@@ -4,7 +4,7 @@ import { updateReview } from '@/lib/user-action'
 import React, { useState } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import toast from 'react-hot-toast'
-import Rating from '../rating'
+import Rating from '../Stars'
 import { Button } from '@radix-ui/themes'
 
 export default function ReviewForm({ session, product }: any) {

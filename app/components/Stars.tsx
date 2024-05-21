@@ -1,5 +1,5 @@
 
-function Rating({ value }: { value: number }) {
+function Stars({ value }: { value: number }) {
     const Full = () => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -42,4 +42,4 @@ function Rating({ value }: { value: number }) {
       </div>
     )
   }
-  export default Rating;
+  export default Stars;
