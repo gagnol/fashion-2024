@@ -27,7 +27,7 @@ const { data, error } = useSWR('/api/products/categories', fetcher)
   <DropdownMenu.Content  >
             {data
                 ? data.categories.map((item:any) => {
-                    return <DropdownMenu.Item  shortcut="     " key={item}>{item}</DropdownMenu.Item>;
+                    return <DropdownMenu.Item  shortcut="⌘" key={item}>{item}</DropdownMenu.Item>;
                 })
                 : null}
     </DropdownMenu.Content>

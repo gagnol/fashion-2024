@@ -1,6 +1,7 @@
 'use client'
 
 import { updateUser } from '@/lib/user-action'
+import { Button, Heading } from '@radix-ui/themes'
 import { useFormState, useFormStatus } from 'react-dom'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
@@ -17,7 +18,7 @@ export default function UpdateForm({session}:any) {
   return (
              
         <div className="py-5">
-          <h1 className="tex-2xl font-bold pm-4">Update your personal information</h1>
+          <Heading size="5"  >Update your personal information</Heading>
           <form
             action={async (formData) => {
               const res = await updateUser(null, formData)
@@ -110,11 +111,13 @@ export default function UpdateForm({session}:any) {
                 defaultValue={userInfo?.user.country}
               />
               </div>
-              </div>
-              </div>
-            <button type="submit" disabled={pending} className="btn btn-primary btn-outline">
+              <Button size="3" type="submit" disabled={pending} >
               Upate
-            </button>
+            </Button>
+              </div>
+            
+              </div>
+           
           </form>
         </div>
 

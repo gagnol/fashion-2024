@@ -8,6 +8,7 @@ import FavoriteList from "./FavoriteList";
 import All from "./All";
 import { getServerSession } from "next-auth";
 import CartTool from "./CartTool";
+import { Text } from "@radix-ui/themes";
 
 const Navbar = async () => {
   const session = await getServerSession();
@@ -27,6 +28,7 @@ const Navbar = async () => {
             src="/logo1.jpg" alt="logo" width={50} height={50}
              style={{ width: 50, height: "auto" }}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+            <Text size="3" mx="2" >Legendary</Text>
         </Link>
      
        

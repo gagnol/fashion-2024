@@ -7,7 +7,7 @@ import { FaChevronDown, FaChevronUp, FaTimes, FaUserCircle } from 'react-icons/f
 import { LuMenu } from 'react-icons/lu';
 import useSWR from 'swr'
 import { removeUser } from "@/store/nextSlice"
-import { Text } from '@radix-ui/themes';
+import { Separator, Text } from '@radix-ui/themes';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 const SideBar = () => {
@@ -113,8 +113,8 @@ const SideBar = () => {
                                 </ul>
                             }
                         </div>
-                       
-                        <div className="p-5 text-neutral-content border-t-2 border-gray-400">
+                       <Separator size="4" />
+                        <div className="p-5 text-white ">
                             <h2 className='text-[18px] font-semibold mb-2 text-white'>
                                 Your account
                             </h2>

@@ -36,7 +36,7 @@ export default async function Main() {
 
   ])
 
-  const formattedSales = ordersPriceGroup[0]?.sales.toFixed(2) || '0.00';
+  const formattedSales = (ordersPriceGroup[0]?.sales)/100
 
   const salesData = await OrderModel.aggregate([
     {
@@ -135,7 +135,6 @@ export default async function Main() {
                     </tr>
                   </thead>
                   <tbody>
-
                     {productsData.map((item: any) => (
                       <tr key={item.category}>
                         <td >

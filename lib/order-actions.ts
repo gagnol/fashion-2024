@@ -135,7 +135,7 @@ export async function updateOrder(prevState: any, formData: FormData) {
     // Use { new: true } to return the modified document
     const updatedOrder = await Order.findByIdAndUpdate(
       { _id: data._id },
-      {orderStatus : `deliver at ${new Date().toISOString()}` },
+      {orderStatus : `Deliver at ${new Date().toISOString()}` },
       { new: true }
     );
      // Check if the order was found and updated successfully

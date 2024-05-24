@@ -1,8 +1,10 @@
 'use client'
 
 import { deleteProduct } from '@/lib/action'
+import { Button } from '@radix-ui/themes'
 import { useFormStatus } from 'react-dom'
 import toast from 'react-hot-toast'
+import { FaTrash } from 'react-icons/fa'
 
 export default function DeleteForm({
   _id,
@@ -27,9 +29,10 @@ export default function DeleteForm({
     >
       <input type="hidden" name="_id" value={_id} />
       <input type="hidden" name="name" value={name} />
-      <button type="submit" disabled={pending} className="btn btn-error btn-outline">
+      <Button size="2" color='ruby' variant='surface' type="submit" >
         Delete
-      </button>
+        <FaTrash/>
+      </Button>
     </form>
   )
 }

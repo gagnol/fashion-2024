@@ -63,14 +63,14 @@ export default async function orders() {
                       <td>{order._id}</td>
                       <td>
                         <Image
-                          src={order.productImage[0]}
+                          src={order.image[0]}
                           alt={order.name}
                           width={50}
                           height={50}
                           className="rounded-lg max-w-[50px] max-h-[50px] min-h-[50px]"
                         />
                       </td>
-                      <td className='text-neutral-content'>{order.userId}</td>
+                      <td className='text-neutral-content'>{order.user}</td>
                       <td className='text-bold'>{order.orderStatus}</td>
                       <td>
                         <UpdateForm

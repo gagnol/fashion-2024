@@ -1,9 +1,10 @@
 'use client'
-
 import { useFormState, useFormStatus } from 'react-dom'
 import { createProduct } from '@/lib/action'
 import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
+import { Button, Heading  } from '@radix-ui/themes'
+import { FaArrowRight } from 'react-icons/fa'
 
 interface StringArrayInputProps { }
 
@@ -12,9 +13,6 @@ export default function CreateForm() {
   const [state, formAction] = useFormState(createProduct, {
     message: '',
   })
-
-
-
 
   const { pending } = useFormStatus()
   const ref = useRef<HTMLFormElement>(null)
@@ -30,29 +28,28 @@ export default function CreateForm() {
 
   return (
     <div>
-      <button
-        className="btn btn-primary btn-outline"
+      <Button size="2"
+        
         onClick={() =>
           (document.getElementById('my_modal_3')! as any).showModal()
         }
       >
         Create Product
-      </button>
+      </Button>
       <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
-          <h2 className="tex-2xl font-bold pm-4">Create Product</h2>
+        <div className="modal-box justify-center items-center w-full mx-auto">
+          <Heading size="6" color='gray'>Create Product</Heading>
           <form ref={ref} action={formAction}>
             <div className="form-control w-full max-w-xs py-4">
               <label htmlFor="name">Name</label>
-              <input
+             <input
                 type="text"
                 id="name"
                 name="name"
-                className="a_input"
                 required
                 autoComplete='false'
               />
-
+              
               <label htmlFor="description">Description</label>
               <input
                 type="text"
@@ -72,11 +69,11 @@ export default function CreateForm() {
                 required
                 autoComplete='false'
               />
-              <label htmlFor="subcategory">Subcategory</label>
+              <label htmlFor="department">Department</label>
               <input
                 type="text"
-                id="subcategoty"
-                name="subcategory"
+                id="department"
+                name="department"
                 className="a_input"
                 required
                 autoComplete='false'
@@ -149,26 +146,30 @@ export default function CreateForm() {
                 id="video"
                 name="video"
                 className="a_input"
-               
-              />
+                />
              
             </div>
-            <button
-              className="btn btn-primary btn-outline mr-3"
+            
+            <Button
+              size="2"
               type="submit"
-              disabled={pending}
+              variant='surface'
             >
               Create
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary btn-outline"
+            </Button>
+            
+            
+            <Button size="2" variant='surface'
+              type="button" mx="2"
+              color='gray'
               onClick={() =>
                 (document.getElementById('my_modal_3') as any).close()
               }
             >
               Back
-            </button>
+              <FaArrowRight />
+            </Button>
+            
           </form>
         </div>
       </dialog>

@@ -17,7 +17,7 @@ interface OrderDocument extends Document {
   totalAmount:number
   shippingAdress:string
 }
-
+ 
 const orderSchema = new Schema<OrderDocument>({
 
   product: { type: [String], required: true },//coming from metadata

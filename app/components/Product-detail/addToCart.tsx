@@ -55,7 +55,7 @@ const AddCart: React.FC<AddToCartProps> = ({ product, discountPrice }) => {
   };
 
   return (
-    <Button variant='classic' color='amber' size="3" my="3" style={{ width: "100%" }} 
+    <Button variant='surface'  size="3" my="3" style={{ width: "100%" }} 
     onClick={addToCartHandler}>
       Add to Cart
     </Button>

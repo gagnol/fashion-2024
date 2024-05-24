@@ -1,6 +1,7 @@
 'use client'
 
 import { updateOrder } from '@/lib/order-actions'
+import { Button } from '@radix-ui/themes'
 import { useFormState, useFormStatus } from 'react-dom'
 import toast from 'react-hot-toast'
 
@@ -22,9 +23,9 @@ export default function UpdateForm({ _id,orderStatus}: {_id: string,orderStatus:
           >
             <input type="hidden" name="_id" value={_id} />
             <input type="hidden" name="orderStatus" value={orderStatus} />
-            <button type="submit" disabled={pending} className="btn btn-primary btn-outline">
-              Upate
-            </button>
+            <Button size="2" variant='surface' type="submit" >
+              Update
+            </Button>
             
           </form>
        </div>

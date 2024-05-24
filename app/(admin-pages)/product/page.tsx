@@ -8,6 +8,8 @@ import Link from 'next/link'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import Sidebar from '@/app/components/Admin-navigation/sidebar'
+import { Button, Text } from '@radix-ui/themes'
+import { FaChevronLeft, FaChevronRight, FaPencilAlt } from 'react-icons/fa'
 
 
 export default async function Dashboard({searchParams}:
@@ -68,10 +70,11 @@ export default async function Dashboard({searchParams}:
       <table className="table text-center">
         <thead>
           <tr className='bg-[#141726]'>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Actions</th>
+            <th><Text size="2" color='gray'  >Image</Text></th>
+            <th><Text size="2" color='gray'  >Name</Text></th>
+            <th><Text size="2" color='gray'  >Price</Text></th>
+            <th><Text size="2" color='gray'  >Edit</Text></th>
+            <th><Text size="2" color='gray'  >Delete</Text></th>
           </tr>
         </thead>
         <tbody>
@@ -93,10 +96,18 @@ export default async function Dashboard({searchParams}:
                   />
                   </Link>
                 </td>
-                <td className='text-neutral-content'>{product.name}</td>
+                <td ><Text size="2" color='gray'>{product.name}</Text></td>
                 <td className='text-bold'>${product.price}</td>
-                
                 <td>
+                <Button size="2"  variant='surface' asChild>
+                  <Link href={`/product/${product._id}`} >
+                  Edit
+                  <FaPencilAlt/>
+                  </Link>
+                </Button>
+                </td>
+                <td>
+
                   <DeleteForm
                     _id={product._id.toString()}
                     name={product.name}
@@ -111,14 +122,15 @@ export default async function Dashboard({searchParams}:
       <div className="flex justify-center items-center my-16">
           <div className="flex border-[1px] gap-4 rounded-[10px] border-light-green p-4">
             {page === 1 ? (
-              <button className="join-item btn btn-outline opacity-40" aria-disabled="true">
+              <Button size="2" variant='surface' color='gray' aria-disabled="true">
                 Previous
-              </button>
+              </Button>
             ) : (
               <Link href={`?page=${prevPage}`} aria-label="Previous Page">
-                 <button className="join-item btn btn-outline">
+                 <Button  size="2" variant='surface' >
+                <FaChevronLeft/>
                 Previous
-                </button>
+                </Button>
               </Link>
             )}
             {pageNumbers.map((pageNumber, index) => (
@@ -126,8 +138,8 @@ export default async function Dashboard({searchParams}:
                 key={index}
                 className={
                   page === pageNumber
-                    ? "join-item btn btn-square"
-                    : "hover:join-item btn btn-square btn-primary"
+                    ? "join-item btn btn-square btn-sm "
+                    : "hover:join-item btn btn-square btn-neutral btn-sm "
                 }
                 href={`?page=${pageNumber}`}
               >
@@ -135,14 +147,15 @@ export default async function Dashboard({searchParams}:
               </Link>
             ))}
             {page === totalPages ? (
-              <button className="join-item btn btn-outline opacity-40" aria-disabled="true">
+              <Button size="2" variant='surface' color='gray' aria-disabled="true">
                 Next
-              </button>
+              </Button>
             ) : (
               <Link href={`?page=${nextPage}`} aria-label="Next Page">
-                <button className="join-item btn btn-outline">
+                <Button  size="2" variant='surface'>
                 Next
-                </button>
+                <FaChevronRight/>
+                </Button>
               </Link>
             )}
           </div>

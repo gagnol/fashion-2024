@@ -10,6 +10,7 @@ import Uploadfile from "../components/User-navigation/uploadfile"
 import Link from 'next/link';
 import { MdAttachMoney, MdFavorite, MdOutlineChat } from "react-icons/md";
 import { RiCustomerService2Line } from "react-icons/ri";
+import { Button, Strong, Text } from '@radix-ui/themes';
 const menuItems = [
     {
         title: "Pages",
@@ -53,7 +54,7 @@ export default async function ProfileScreen() {
         _id: -1,
     }))
     const orders = JSON.parse(JSON.stringify(orderDocs));
-console.log(orders)
+
     const userDocs = (await UserModel.findOne({ email: session.user.email }))
     const users = JSON.parse(JSON.stringify(userDocs));
 
@@ -93,8 +94,9 @@ console.log(orders)
                     <h2 className=" text-xl">Latest Transactions</h2>
                     <table className="table text-center">
                         <thead>
-                            <tr className="bg-base-200">
+                            <tr className="bg-[#141726] text-white">
                                 <th>Product</th>
+                                <th>Detail</th>
                                 <th>Buyer</th>
                                 <th>Price</th>
                                 <th>Date</th>
@@ -104,7 +106,7 @@ console.log(orders)
                         <tbody>
                             {orders.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5}>No orders found</td>
+                                  <td colSpan={5}>No orders found</td>
                                 </tr>
                             ) : (
                                 orders.map((item: any) => (
@@ -118,20 +120,37 @@ console.log(orders)
                                                 className="rounded-lg max-w-[50px] max-h-[50px] min-h-[50px]"
                                             />
                                         </td>
-                                        <td className='text-neutral-content'>{item.user}</td>
-                                        <td className='text-bold'>${item.totalAmount.toFixed(2)}</td>
                                         <td>
-                                            {new Date(item.createdAt.substring(0, 10)).toLocaleDateString(
+                                            <Button size="2" >
+                                            <Link href={`/orders/${item._id}`} >
+                                                Order detail
+                                            </Link>
+                                            </Button>
+                                        </td>
+                                        <td className='text-white'>{item.user}</td>
+                                        <td  className='justify-end'>
+                                            <span className='text-[12px]'>$</span>
+                                        <Text size="3" > 
+                                        <Strong>{(item.totalAmount)/100}</Strong>
+                                        </Text>   
+                                          
+                                            </td>
+                                        <td>
+                                            {new Date(item.createdAt.substring(0, 10)).
+                                            toLocaleDateString(
                                                 'en-US',
                                                 {
                                                     year: 'numeric',
                                                     month: 'long',
                                                     day: 'numeric'
                                                 }
-                                            )};
+                                            )}
                                         </td>
                                         <td>
-                                            {item.orderStatus}
+                                            <Button size="1" variant='surface' color='jade' >                                                
+                                                {item.orderStatus}
+                                            </Button>
+                                            
                                         </td>
                                     </tr>
                                 ))

@@ -69,7 +69,7 @@ export async function updateUser(prevState: any, formData: FormData) {
         address: z.string().min(6),
         city: z.string().min(2),
         postal: z.string().min(4),
-        country: z.string().min(6)
+        country: z.string().min(2)
     });
 
     const parse = schema.safeParse({

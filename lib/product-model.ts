@@ -6,7 +6,7 @@ export type Product = {
     name: string,
     slug: string,
     category: string,
-    subcategory: string,
+    department: string,
     image: [string],
     price: number,
     brand: string,
@@ -43,7 +43,7 @@ const reviewSchema = new mongoose.Schema(
       name: { type: String, required: true },
       slug: { type: String, required: true, unique: true },
       category: { type: String, required: true },  
-      subcategory: { type: String,required: false},
+      department: { type: String,required: false},
       image: { type:[String],required: true },
       price: { type: Number, required: true },
       brand: { type: String, required: true },
@@ -63,11 +63,10 @@ const reviewSchema = new mongoose.Schema(
       ],
       required: false
     },
-    sizes: { type:[String],required: true },
-    shipping:{ type: Number, required: true  },
+    sizes: { type:[String],required: false },
+    shipping:{ type: Number, required: false  },
     reviews: [reviewSchema],
-  
-    },
+      },
     {
       timestamps: true,
     }
