@@ -10,40 +10,40 @@ import { redirect } from 'next/navigation'
 import Sidebar from '@/app/components/Admin-navigation/sidebar'
 import { Button, Text } from '@radix-ui/themes'
 import { FaChevronLeft, FaChevronRight, FaPencilAlt } from 'react-icons/fa'
+import SearchBox from '@/app/components/Admin-navigation/search'
 
 
-export default async function Dashboard({searchParams}:
-  {searchParams:{[key:string]:string |string }}) {
-  
-    const session = await getServerSession();
+export default async function ProductDashboard({ searchParams }:
+  { searchParams: { [key: string]: string | string } }) {
 
-    if( session?.user?.email !== "admin@example.com")    
-    {
-      redirect("/")
-    }
+  const session = await getServerSession();
 
-  const query=searchParams.query||'';
+  if (session?.user?.email !== "admin@example.com") {
+    redirect("/")
+  }
+
+  const query = searchParams.query || '';
   await dbConnect()
 
   let page = parseInt(searchParams.page, 10);
   page = !page || page < 1 ? 1 : page;
   const perPage = 8;
   const products = (await ProductModel.find({
-    name: { $regex: new RegExp(query, 'i') }, // Use a case-insensitive regular expression for searching
+    name: { $regex: new RegExp(query, 'i') }, 
   })
-  .skip(perPage * (page - 1))
-  .limit(perPage)
-  .sort({
-    _id: 1,
-  })) as Product[];
- 
- const totalProducts= (await ProductModel.countDocuments({})) 
+    .skip(perPage * (page - 1))
+    .limit(perPage)
+    .sort({
+      _id: 1,
+    })) as Product[];
 
- const totalPages = Math.ceil(totalProducts / perPage);
+  const totalProducts = (await ProductModel.countDocuments({}))
+
+  const totalPages = Math.ceil(totalProducts / perPage);
 
   const prevPage = page - 1 > 0 ? page - 1 : 1;
   const nextPage = page + 1;
-	
+
   const pageNumbers = [];
   const offsetNumber = 3;
   for (let i = page - offsetNumber; i <= page + offsetNumber; i++) {
@@ -52,118 +52,119 @@ export default async function Dashboard({searchParams}:
     }
   }
 
+  
   return (
     <div className="max-w-screen-2xl mx-auto my-10">
-    <div className="grid md:grid-cols-5 md:gap-5">
-    <Sidebar/>
-    <div className="md:col-span-3">
-    <div className="mx-auto max-w-2xl lg:max-w-7xl" >
-      <div className="flex justify-between items-center">
-       
-        <h1 className="font-bold py-10 text-2xl ">Admin Products</h1>
-        <Toaster />
-        <CreateForm />
+      <div className="grid md:grid-cols-5 md:gap-5">
+        <Sidebar />
+        <div className="md:col-span-3">
+          <div className="mx-auto max-w-2xl lg:max-w-7xl" >
+            <div className="flex justify-between items-center">
 
-      </div>
-     
-     Total products :  {totalProducts}
-      <table className="table text-center">
-        <thead>
-          <tr className='bg-[#141726]'>
-            <th><Text size="2" color='gray'  >Image</Text></th>
-            <th><Text size="2" color='gray'  >Name</Text></th>
-            <th><Text size="2" color='gray'  >Price</Text></th>
-            <th><Text size="2" color='gray'  >Edit</Text></th>
-            <th><Text size="2" color='gray'  >Delete</Text></th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.length === 0 ? (
-            <tr>
-              <td colSpan={5}>No product found</td>
-            </tr>
-          ) : (
-            products.map((product: Product) => (
-              <tr key={product._id}>
-                <td>
-                  <Link href={`/products/${product.slug}`}>
-                  <Image
-                    src={product.image[0]}
-                    alt={product.name}
-                    width={100}
-                    height={100}
-                    className="rounded-lg max-w-[100px] max-h-[100px] min-h-[100px]"
-                  />
-                  </Link>
-                </td>
-                <td ><Text size="2" color='gray'>{product.name}</Text></td>
-                <td className='text-bold'>${product.price}</td>
-                <td>
-                <Button size="2"  variant='surface' asChild>
-                  <Link href={`/product/${product._id}`} >
-                  Edit
-                  <FaPencilAlt/>
-                  </Link>
-                </Button>
-                </td>
-                <td>
+              <h1 className="font-bold py-10 text-2xl ">Admin Products</h1>
+              <Toaster />
+              <CreateForm />
+             <SearchBox query={query}/>
+            </div>
 
-                  <DeleteForm
-                    _id={product._id.toString()}
-                    name={product.name}
-                  />
-                </td>
-              </tr>
-            ))
-          )
-           }
-        </tbody>
-      </table>
-      <div className="flex justify-center items-center my-16">
-          <div className="flex border-[1px] gap-4 rounded-[10px] border-light-green p-4">
-            {page === 1 ? (
-              <Button size="2" variant='surface' color='gray' aria-disabled="true">
-                Previous
-              </Button>
-            ) : (
-              <Link href={`?page=${prevPage}`} aria-label="Previous Page">
-                 <Button  size="2" variant='surface' >
-                <FaChevronLeft/>
-                Previous
-                </Button>
-              </Link>
-            )}
-            {pageNumbers.map((pageNumber, index) => (
-              <Link
-                key={index}
-                className={
-                  page === pageNumber
-                    ? "join-item btn btn-square btn-sm "
-                    : "hover:join-item btn btn-square btn-neutral btn-sm "
+            Total products :  {totalProducts}
+            <table className="table text-center">
+              <thead>
+                <tr className='bg-[#141726]'>
+                  <th><Text size="2" color='gray'  >Image</Text></th>
+                  <th><Text size="2" color='gray'  >Name</Text></th>
+                  <th><Text size="2" color='gray'  >Price</Text></th>
+                  <th><Text size="2" color='gray'  >Edit</Text></th>
+                  <th><Text size="2" color='gray'  >Delete</Text></th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.length === 0 ? (
+                  <tr>
+                    <td colSpan={5}>No product found</td>
+                  </tr>
+                ) : (
+                  products.map((product: Product) => (
+                    <tr key={product._id}>
+                      <td>
+                        <Link href={`/products/${product.slug}`}>
+                          <Image
+                            src={product.image[0]}
+                            alt={product.name}
+                            width={100}
+                            height={100}
+                            className="rounded-lg max-w-[100px] max-h-[100px] min-h-[100px]"
+                          />
+                        </Link>
+                      </td>
+                      <td ><Text size="2" color='gray'>{product.name}</Text></td>
+                      <td className='text-bold'>${product.price}</td>
+                      <td>
+                        <Button size="2" variant='surface' asChild>
+                          <Link href={`/product/${product._id}`} >
+                            Edit
+                            <FaPencilAlt />
+                          </Link>
+                        </Button>
+                      </td>
+                      <td>
+
+                        <DeleteForm
+                          _id={product._id.toString()}
+                          name={product.name}
+                        />
+                      </td>
+                    </tr>
+                  ))
+                )
                 }
-                href={`?page=${pageNumber}`}
-              >
-                {pageNumber}
-              </Link>
-            ))}
-            {page === totalPages ? (
-              <Button size="2" variant='surface' color='gray' aria-disabled="true">
-                Next
-              </Button>
-            ) : (
-              <Link href={`?page=${nextPage}`} aria-label="Next Page">
-                <Button  size="2" variant='surface'>
-                Next
-                <FaChevronRight/>
-                </Button>
-              </Link>
-            )}
+              </tbody>
+            </table>
+            <div className="flex justify-center items-center my-16">
+              <div className="flex border-[1px] gap-4 rounded-[10px] border-light-green p-4">
+                {page === 1 ? (
+                  <Button size="2" variant='surface' color='gray' aria-disabled="true">
+                    Previous
+                  </Button>
+                ) : (
+                  <Link href={`?page=${prevPage}`} aria-label="Previous Page">
+                    <Button size="2" variant='surface' >
+                      <FaChevronLeft />
+                      Previous
+                    </Button>
+                  </Link>
+                )}
+                {pageNumbers.map((pageNumber, index) => (
+                  <Link
+                    key={index}
+                    className={
+                      page === pageNumber
+                        ? "join-item btn btn-square btn-sm "
+                        : "hover:join-item btn btn-square btn-neutral btn-sm "
+                    }
+                    href={`?page=${pageNumber}`}
+                  >
+                    {pageNumber}
+                  </Link>
+                ))}
+                {page === totalPages ? (
+                  <Button size="2" variant='surface' color='gray' aria-disabled="true">
+                    Next
+                  </Button>
+                ) : (
+                  <Link href={`?page=${nextPage}`} aria-label="Next Page">
+                    <Button size="2" variant='surface'>
+                      Next
+                      <FaChevronRight />
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            </div>
           </div>
         </div>
+      </div>
     </div>
-    </div>
-    </div>
-    </div>
-  
+
   )
 }

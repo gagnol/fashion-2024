@@ -42,7 +42,7 @@ export default function EditForm({ product }: any) {
                             autoComplete='false'
                             defaultValue={product.description}
                         />
-                        <div className="flex ">
+                        <div className="flex flex-wrap ">
                             <label htmlFor="category" className='m-2'>Category</label>
                             <input
                                 type="text"
@@ -84,7 +84,7 @@ export default function EditForm({ product }: any) {
                                 defaultValue={product.price}
                             />
                         </div>
-                        <div className="flex ">
+                        <div className="flex flex-wrap ">
                             <label htmlFor="discount" className='m-2'>Discount</label>
                             <input
                                 type="number"
@@ -127,7 +127,7 @@ export default function EditForm({ product }: any) {
                             />
                         </div>
                         {product.image.map((img: any, index: number) => (
-                            <div className="flex" key={index}>
+                            <div className="flex flex-wrap" key={index}>
                                 <label htmlFor={`image-${index}`}>Image {index + 1}</label>
                                 <Image src={img} alt="" width={50} height={50} className='rounded-md m-2' />
                                 <input
@@ -141,7 +141,7 @@ export default function EditForm({ product }: any) {
                                 />
                             </div>
                         ))}
-                        <div className="flex">
+                        <div className="flex flex-wrap">
                             <label htmlFor="feature" className='m-2'>Feature</label>
                             <input
                                 type="text"
@@ -180,9 +180,9 @@ export default function EditForm({ product }: any) {
                         autoComplete='false'
                         defaultValue={product.video}
                     />
-                    <div className='flex '>
+                    <div className='flex flex-wrap '>
                        {product.sizes.map((size: any, index: number) => (
-                            <div className="flex" key={index}>
+                            <div className="flex flex-wrap" key={index}>
                                 <label htmlFor={`size-${index}`} 
                                 className='mx-2 align-middle'>Size {index + 1}</label>
                                 
@@ -200,7 +200,7 @@ export default function EditForm({ product }: any) {
                     </div>
                     <div>
                     {product.colors.map((color:any, index:number) => (
-        <div className="flex" key={index}>
+        <div className="flex flex-wrap" key={index}>
         
             <div
             className="w-6 h-6 rounded-full"
@@ -235,7 +235,7 @@ export default function EditForm({ product }: any) {
       ))}
         </div>
             </div>
-            <div className='flex justify-around mx-auto w-full'>
+            <div className='flex flex-wrap justify-around mx-auto w-full'>
                 <div>
                     <Button size="3" type="submit" variant='surface' >
                         Save

@@ -34,11 +34,11 @@ export default function CreateForm() {
           (document.getElementById('my_modal_3')! as any).showModal()
         }
       >
-        Create Product
+        Create New Product
       </Button>
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box justify-center items-center w-full mx-auto">
-          <Heading size="6" color='gray'>Create Product</Heading>
+          <Heading size="6" color='gray'>Create New Product</Heading>
           <form ref={ref} action={formAction}>
             <div className="form-control w-full max-w-xs py-4">
               <label htmlFor="name">Name</label>
