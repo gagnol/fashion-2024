@@ -4,7 +4,7 @@ import { MdPlayCircleFilled, MdReadMore } from "react-icons/md";
 
 const Rightbar = () => {
   return (
-    <div className="border-l-2 border-neutral-500">
+    <div className="border-l-2 border-neutral-500 max-lg:hidden">
       <div className="p-5 border-md mb-5 relative">
         <div className="absolute right-0 bottom-0 w-[50%] h-[100%]">
         

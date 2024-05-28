@@ -12,7 +12,7 @@ export default function UpdateForm({session}:any) {
     message: '',
   })
   const { pending } = useFormStatus()
-  
+   
   const { userInfo } = useSelector((state: any) => state.next);
 
   return (
@@ -37,7 +37,7 @@ export default function UpdateForm({session}:any) {
                 required
                 autoComplete='false'
                 defaultValue={session?.user?.name}
-              />
+              /> 
             </div>
               <input
                 type="hidden"

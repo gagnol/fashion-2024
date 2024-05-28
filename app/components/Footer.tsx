@@ -58,11 +58,11 @@ const Footer = () => {
                          text-center gap-8 text-[#5e514b] text-2xl">
                             <Link href="/"
                              className='cursor-pointer hover:text-[#5e514b]'>
-                            <FaFacebookF className='text-[#58abb3] hover:text-[#5e514b]'/>
+                            <FaFacebookF className='text-[#777] hover:text-[#5e514b]'/>
                             </Link>
-                            <BsTwitter className='text-[#58abb3] hover:text-[#5e514b]'/>
-                            <BsPinterest className='text-[#58abb3] hover:text-[#5e514b]'/>
-                            <FaLinkedinIn className='text-[#58abb3] hover:text-[#5e514b]'/>
+                            <BsTwitter className='text-[#777] hover:text-[#5e514b]'/>
+                            <BsPinterest className='text-[#777] hover:text-[#5e514b]'/>
+                            <FaLinkedinIn className='text-[#777] hover:text-[#5e514b]'/>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ const Footer = () => {
                                Cookies Policy</p>
                             </Link>
                         </div>
-                         <p className='text-center pt-5'>Copyrigth &copy; 2023-{new Date().getFullYear()},
+                         <p className='text-center pt-5'>Copyrigth &copy; {new Date().getFullYear()},
                           Legendary, all rigths reserved.</p>
                         <br/>
                     </div>

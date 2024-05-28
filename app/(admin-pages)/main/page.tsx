@@ -10,7 +10,7 @@ import ProductModel from '@/lib/product-model'
 import UserModel from '@/lib/user-model'
 import dbConnect from '@/lib/db-connect'
 import Rightbar from "@/app/components/Admin-navigation/rightbar";
-
+import AdminNavigation from "@/app/components/Admin-navigation/admin-navigation";
 
 export default async function Main() {
   const session = await getServerSession();
@@ -92,8 +92,10 @@ export default async function Main() {
 
   return (
     <>
-      <div className="max-w-screen-2xl mx-auto my-10">
+      <div className="max-w-screen-2xl w-full mx-auto my-10">
+      <AdminNavigation/>
         <div className="grid md:grid-cols-5 md:gap-4">
+          
           <Sidebar />
         
           <div className="md:col-span-3">

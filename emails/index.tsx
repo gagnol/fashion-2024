@@ -3,6 +3,7 @@ import {
 	Button,
 	Container,
 	Head,
+	Heading,
 	Hr,
 	Html,
 	Img,
@@ -35,9 +36,9 @@ export const KoalaWelcomeEmail = ({ramdom}:any) => (
 				To authenticate, please use the following One Time Password (OTP):
 				</Text>
 				<Section style={btnContainer}>
-					<Button style={button} href="http://localhost:3000/validate">
-					<strong>{ramdom}</strong>
-					</Button>
+					
+					<Text style={paragraph}><strong>{ramdom}</strong></Text>
+					
 				</Section>
 				<Text style={paragraph}>
 				Don&apos;t share this OTP with anyone.

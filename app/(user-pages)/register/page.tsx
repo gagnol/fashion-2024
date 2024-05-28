@@ -72,8 +72,8 @@ function Signup() {
         </form>
         <br />
         <div className='a_label'>By continuing, you agree to
-        <Link href="/terminos" className='text-[#0066c0] hover:text-white'> Conditions of Use </Link>
-                    and<Link href="/aviso"  className='text-[#0066c0] hover:text-white'> Privacy Notice</Link>
+        <Link href="/terminos" className='text-[#333] hover:text-white'> Conditions of Use </Link>
+            and<Link href="/aviso"  className='text-[#333] hover:text-white'> Privacy Notice</Link>
         </div>
         <br />
         <Separator color="indigo" orientation="horizontal" size="4" />

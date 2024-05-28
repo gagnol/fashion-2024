@@ -2,27 +2,42 @@
 import React, { useState } from 'react'
 import { FaArrowRight, FaSave } from "react-icons/fa";
 import Link from "next/link";
-import { Button, Strong, Text } from "@radix-ui/themes";
+import { Button, Strong, Text, TextArea, TextField } from "@radix-ui/themes";
 import { useFormState, useFormStatus } from 'react-dom'
-import { createProduct } from '@/lib/action'
+import {  updateProduct } from '@/lib/action'
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 
-
-
-
+  
 export default function EditForm({ product }: any) {
 
-    const [state, formAction] = useFormState(createProduct, {
-        message: '',
-    })
+    
+  const [state, formAction] = useFormState( updateProduct, {
+    message: '',
+  })
+  
+
     return (
         <div>
             <div className="bg-[#141726] p-4 rounded-lg justify-center text-center w-full mx-auto">
                 <Text size="5" ><Strong>Edit Product</Strong></Text>
-                <form action={formAction}>
+                <form    action={async (formData) => {
+              const res = await  updateProduct(null, formData)
+              toast.success(res.message, { duration: 4000, position: "top-center", })
+            }}
+          >
                     <div className="form-control w-full  py-4">
+                    <input
+                type="hidden"
+                id="_id"
+                name="_id"
+                className="a_input"
+                required
+                autoComplete='off'
+                defaultValue={product._id}
+              />
                         <label htmlFor="name">Name</label>
-                        <input
+                        <TextField.Root
                             type="text"
                             id="name"
                             name="name"
@@ -33,18 +48,17 @@ export default function EditForm({ product }: any) {
                         />
 
                         <label htmlFor="description">Description</label>
-                        <input
-                            type="text"
+                        <TextArea
+                            
                             id="description"
                             name="description"
-                            className="a_input"
                             required
                             autoComplete='false'
                             defaultValue={product.description}
                         />
                         <div className="flex flex-wrap ">
                             <label htmlFor="category" className='m-2'>Category</label>
-                            <input
+                            <TextField.Root
                                 type="text"
                                 id="category"
                                 name="category"
@@ -54,7 +68,7 @@ export default function EditForm({ product }: any) {
                                 defaultValue={product.category}
                             />
                             <label htmlFor="department" className='m-2'>Dept</label>
-                            <input
+                            <TextField.Root
                                 type="text"
                                 id="department"
                                 name="department"
@@ -64,7 +78,7 @@ export default function EditForm({ product }: any) {
                                 defaultValue={product.department}
                             />
                             <label htmlFor="brand" className='m-2'>Brand&nbsp;&nbsp;</label>
-                            <input
+                            <TextField.Root
                                 type="text"
                                 id="brand"
                                 name="brand"
@@ -74,19 +88,19 @@ export default function EditForm({ product }: any) {
                                 defaultValue={product.brand}
                             />
                             <label htmlFor="price" className='m-2'>Price</label>
-                            <input
+                            <TextField.Root  style={{ width: "fit-content" }}
                                 type="number"
                                 id="price"
                                 name="price"
-                                className="a_input_sm"
                                 required
                                 autoComplete='false'
                                 defaultValue={product.price}
+                                step="0.01"
                             />
                         </div>
                         <div className="flex flex-wrap ">
                             <label htmlFor="discount" className='m-2'>Discount</label>
-                            <input
+                            <TextField.Root
                                 type="number"
                                 id="discount"
                                 name="discount"
@@ -96,7 +110,7 @@ export default function EditForm({ product }: any) {
                                 defaultValue={product.discount}
                             />
                             <label htmlFor="countInStock" className='m-2'>Stock</label>
-                            <input
+                            <TextField.Root
                                 type="number"
                                 id="countInStock"
                                 name="countInStock"
@@ -106,44 +120,43 @@ export default function EditForm({ product }: any) {
                                 defaultValue={product.countInStock}
                             />
                             <label htmlFor="rating" className='m-2'>Rating&nbsp;</label>
-                            <input
+                            <TextField.Root
                                 type="number"
                                 id="rating"
                                 name="rating"
-                                className="a_input_sm"
                                 required
                                 autoComplete='false'
                                 defaultValue={product.rating}
                             />
                             <label htmlFor="slug" className='m-2'>Slug</label>
-                            <input
+                            <TextField.Root
                                 type="number"
                                 id="slug"
                                 name="slug"
-                                className="a_input_sm"
                                 required
                                 autoComplete='false'
                                 defaultValue={product.slug}
                             />
+                             
                         </div>
                         {product.image.map((img: any, index: number) => (
                             <div className="flex flex-wrap" key={index}>
                                 <label htmlFor={`image-${index}`}>Image {index + 1}</label>
                                 <Image src={img} alt="" width={50} height={50} className='rounded-md m-2' />
-                                <input
+                                <TextField.Root
                                     type="text"
                                     id={`image-${index}`}
                                     name={`image-${index}`}
-                                    className="a_input"
                                     required
                                     autoComplete='false'
                                     defaultValue={img}
                                 />
                             </div>
                         ))}
+                
                         <div className="flex flex-wrap">
                             <label htmlFor="feature" className='m-2'>Feature</label>
-                            <input
+                            <TextField.Root
                                 type="text"
                                 id="feature"
                                 name="feature"
@@ -152,7 +165,7 @@ export default function EditForm({ product }: any) {
                                 defaultValue={product.isFeature}
                             />
                                <label htmlFor="topDeal" className='m-2'>topDeal</label>
-                            <input
+                            <TextField.Root
                                 type="text"
                                 id="topDeal"
                                 name="topDeal"
@@ -161,7 +174,7 @@ export default function EditForm({ product }: any) {
                                 defaultValue={product.topDeal}
                             />
                                 <label htmlFor="bestSeller" className='m-2'>bestSeller</label>
-                            <input
+                            <TextField.Root
                                 type="text"
                                 id="bestSeller"
                                 name="bestSeller"
@@ -172,7 +185,7 @@ export default function EditForm({ product }: any) {
                         </div>
         
                     <label htmlFor="video">Video</label>
-                    <input
+                    <TextField.Root
                         type="text"
                         id="video"
                         name="video"
@@ -186,7 +199,7 @@ export default function EditForm({ product }: any) {
                                 <label htmlFor={`size-${index}`} 
                                 className='mx-2 align-middle'>Size {index + 1}</label>
                                 
-                                <input
+                                <TextField.Root
                                     type="text"
                                     id={`size-${index}`}
                                     name={`size-${index}`}
@@ -200,16 +213,15 @@ export default function EditForm({ product }: any) {
                     </div>
                     <div>
                     {product.colors.map((color:any, index:number) => (
-        <div className="flex flex-wrap" key={index}>
-        
-            <div
+                <div className="flex flex-wrap" key={index}>
+               <div
             className="w-6 h-6 rounded-full"
             style={{ backgroundColor: color.color }}
           ></div>
           <label htmlFor={`color-name-${index}`} className="mx-2 align-middle">
             Color Name {index + 1}
           </label>
-          <input
+          <TextField.Root
             type="text"
             id={`color-name-${index}`}
             name={`color-name-${index}`}
@@ -221,7 +233,7 @@ export default function EditForm({ product }: any) {
           <label htmlFor={`color-value-${index}`} className="mx-2 align-middle">
             Color Value
           </label>
-          <input
+          <TextField.Root
             type="text"
             id={`color-value-${index}`}
             name={`color-value-${index}`}

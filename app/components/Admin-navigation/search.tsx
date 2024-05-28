@@ -9,7 +9,9 @@ const SearchInput = ({query}:any) => {
     <form action="" method="GET" >
                 <TextField.Root   name="query"
                     placeholder="Search products…"
-                    defaultValue={query}>
+                    defaultValue={query}
+                    autoComplete='off'
+                 >
                   <TextField.Slot>
                     <MagnifyingGlassIcon height="16" width="16" />
                   </TextField.Slot>

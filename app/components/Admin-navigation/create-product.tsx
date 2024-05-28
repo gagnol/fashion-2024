@@ -3,8 +3,10 @@ import { useFormState, useFormStatus } from 'react-dom'
 import { createProduct } from '@/lib/action'
 import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
-import { Button, Heading  } from '@radix-ui/themes'
+import { Button, Heading, TextArea  } from '@radix-ui/themes'
 import { FaArrowRight } from 'react-icons/fa'
+import SizesInput from './Create_product/sizes'
+import ImagesInput from './Create_product/images'
 
 interface StringArrayInputProps { }
 
@@ -38,28 +40,29 @@ export default function CreateForm() {
       </Button>
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box justify-center items-center w-full mx-auto">
-          <Heading size="6" color='gray'>Create New Product</Heading>
+          <Heading size="6" color='jade'>Create New Product</Heading>
           <form ref={ref} action={formAction}>
             <div className="form-control w-full max-w-xs py-4">
               <label htmlFor="name">Name</label>
              <input
+             className='a_input'
                 type="text"
                 id="name"
                 name="name"
                 required
                 autoComplete='false'
               />
-              
+          
               <label htmlFor="description">Description</label>
-              <input
-                type="text"
+              <TextArea
                 id="description"
                 name="description"
                 className="a_input"
                 required
                 autoComplete='false'
+            
               />
-
+          
               <label htmlFor="category">Category</label>
               <input
                 type="text"
@@ -103,7 +106,7 @@ export default function CreateForm() {
                   name="countInStock"
                   className="a_input"
                   required
-                />
+                /> 
               </div>
               <div className="flex ">
                 <label htmlFor="rating" className='m-2'>Rating&nbsp;</label>
@@ -123,14 +126,7 @@ export default function CreateForm() {
                   required
                 />
               </div>
-              <label htmlFor="image">Image</label>
-              <input
-                type="text"
-                id="image"
-                name="image"
-                className="a_input"
-                required
-              />
+             <ImagesInput/>
               <label htmlFor="price">Price</label>
               <input
                 type="number"
@@ -138,7 +134,7 @@ export default function CreateForm() {
                 name="price"
                 className="a_input"
                 required
-                defaultValue="1"
+                step="0.01"
               />
                <label htmlFor="video">Video</label>
               <input
@@ -147,7 +143,7 @@ export default function CreateForm() {
                 name="video"
                 className="a_input"
                 />
-             
+                 <SizesInput />
             </div>
             
             <Button

@@ -1,6 +1,7 @@
 import ProductItem from '@/app/components/sections-home/Card'
 import Rating from '@/app/components/Stars'
 import productServices from '@/lib/productService'
+import { Button } from '@radix-ui/themes'
 import Link from 'next/link'
 
 const sortOrders = ['newest', 'lowest', 'highest', 'rating']
@@ -117,7 +118,7 @@ export default async function SearchPage({
     <div className="max-w-screen-2xl mx-auto py-2 overflow-x-hidden">
     <div className="grid md:grid-cols-5 md:gap-5 mx-5 ">
       <div >
-        <div className="text-xl pt-3">Department</div>
+        <div className="text-xl pt-3">Categories</div>
         <div >
           <ul>
             <li>
@@ -169,9 +170,11 @@ export default async function SearchPage({
           </ul>
         </div>
         <div className='my-5'>
-          <div className="text-xl pt-3">Categories</div>
+          
           <div className="dropdown dropdown-top ">
-            <div tabIndex={0} role="button" className="btn btn-primary btn-outline m-1">View Categories</div>
+            <div tabIndex={0} role="button" className="btn btn-outline m-1">
+              Departments
+            </div>
             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
               <li>
                 <Link
@@ -237,9 +240,11 @@ export default async function SearchPage({
               department !== 'all' ||
               rating !== 'all' ||
               price !== 'all' ? (
-              <Link className="btn btn-sm btn-error btn-outline" href="/search">
+                <Button size="2" color='ruby' variant='surface' asChild>
+                <Link href="/search">
                 Clear
-              </Link>
+                </Link>
+                </Button>
             ) : null}
           </div>
           <div>

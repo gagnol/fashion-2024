@@ -80,11 +80,11 @@ body {
 }
 
 .a_input {
-  @apply bg-base-100 w-[98%] h-[31px] px-[7px] py-[8px] mb-2
+  @apply  w-[98%] h-[31px] px-[7px] py-[8px] mb-2
    border-[#949494] border-[1px] rounded-[3px] font-extralight;
 }
 .a_input_sm {
-  @apply w-fit bg-slate-500  border-[#949494] border-[1px] rounded-[3px] p-[3px] mb-2 
+  @apply min-w-fit max-w-fit  border-[#949494] border-[1px] rounded-[3px] p-[3px] m-2 
 }
 
 .a_error {

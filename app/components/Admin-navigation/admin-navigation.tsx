@@ -16,7 +16,9 @@ import { signOut, useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Separator } from "@radix-ui/themes";
+import { Separator, Text } from "@radix-ui/themes";
+import { useState } from "react";
+import { LuMenu } from "react-icons/lu";
 
 const menuItems = [
   {
@@ -81,15 +83,29 @@ const menuItems = [
   },
 ];
 
-const Sidebar = () => {
+const AdminSidebar = () => {
   const { data: session } = useSession();
   const pathname = usePathname();
-  
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="h-screen left-0 top-0 sticky p-10 flex flex-col border-[1px] border-spacing-1 
-     border-[#666]  gap-5 shadow-xl max-lg:hidden">
-       <div className="flex flex-col gap-3">
-        <Separator orientation="vertical"  size="4" mx="1"/>
+<>
+    <button onClick={() => setOpen(true)}>
+                <p className=" items-center gap-1 h-8 px-2 border border-transparent
+                text-white  hover:border-white cursor-pointer duration-300 flex xl:hidden" >
+                    <LuMenu className="text-xl text-white font-extrabold" /> 
+                    <Text size="4" className='font-bold'>Navigation</Text>
+                </p>
+            </button>
+            <div className='py-3 top-0 left-0 right-0 shadow-md z-10 text-white'>
+                <div className={`${!open && "hidden"} bg-gray-600/50 min-h-screen w-full 
+              fixed top-0 left-0 right-0 `} onClick={() => setOpen(false)}></div>
+                <div className={`${open ? "w-80" : "w-0"}  bg-[#141726] min-h-screen fixed overflow-y-scroll
+                top-0 left-0 transition-all duration-300 `}>
+                    <div className={`${!open && "hidden"} pt-3 mt-[80px]`}></div>
+   
+       <div className="flex flex-col gap-3 z-30 bg-[#141726]">
+        
         <Image
           className="rounded-[50%]"
           src={session?.user?.image || "/noavatar.png"}
@@ -121,7 +137,9 @@ const Sidebar = () => {
       </ul>
       </div>
       </div>
+      </div>
+      </>
   );
 };
 
-export default Sidebar;
+export default AdminSidebar;

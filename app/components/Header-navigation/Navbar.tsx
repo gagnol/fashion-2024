@@ -33,14 +33,16 @@ const Navbar = async () => {
      
        
         {/* search */}
-        <div className="flex-1 h-10 hidden md:inline-flex items-center xl:justify-center  relative">
+        <div className="flex-1 h-10 hidden xl:inline-flex items-center xl:justify-center  relative">
          
           {/*  Searchfield  */}
           <SearchBox />
         </div>
+        <div className=" h-10 hidden md:inline-flex items-center xl:justify-center  relative">
         <SigninTool />
         <FavoriteList />
           <CartTool/>
+          </div>
         {/* Theme */}
         
       </div>

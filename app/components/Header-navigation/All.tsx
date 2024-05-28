@@ -19,7 +19,7 @@ const { data, error } = useSWR('/api/products/categories', fetcher)
     return (
 <DropdownMenu.Root >
   <DropdownMenu.Trigger >
-    <Button variant="soft" size="4" onChange={onSelectChange}>
+    <Button variant="soft" size="3" onChange={onSelectChange}>
       Categories
       <DropdownMenu.TriggerIcon />
     </Button>

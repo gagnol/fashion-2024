@@ -6,7 +6,7 @@ import { Heading } from '@radix-ui/themes';
 
 const GridList = ({ products }:any) => {
     return (
-        <InView as="div" onChange={(inView, entry) => console.log('Inview0:', inView)}>
+        <InView as="div" onChange={(inView, entry) => inView}>
             <div className="my-6 w-full mx-auto text-center">
                 <Heading size="6" className="mb-4 text-xl font-medium">Recommended Products for Men&apos;s</Heading>
                 <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-5 xl:gap-4 mx-24">

@@ -1,27 +1,30 @@
 'use client'
-import { Button } from '@radix-ui/themes'
+import { Button, TextField } from '@radix-ui/themes'
 import { useSearchParams } from 'next/navigation'
 import { FaSearch } from 'react-icons/fa'
 import All from './All'
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons'
 
 
 const SearchBox = () => {
   const searchParams = useSearchParams()
   const q = searchParams.get('q') || ''
-  
+
   return (
     <form action="/search" method="GET">
       <div className="join">
-        <All/>
-        <input
-          className="join-item input input-bordered w-[400px] "
-          placeholder="Search"
-          defaultValue={q}
+        <All />
+
+        <TextField.Root 
+        size="3"
+        defaultValue={q}
           name="q"
-        />
-        <Button variant='classic' size="4" className="join-item btn">
-          <FaSearch/>
-        </Button>
+          placeholder="Search products…">
+          <TextField.Slot>
+            <MagnifyingGlassIcon height="16" width="16" />
+          </TextField.Slot>
+        </TextField.Root>
+
       </div>
     </form>
   )

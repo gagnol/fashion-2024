@@ -49,6 +49,7 @@ function SigninTool() {
                     size="4"
                     src={session?.user?.image || undefined }
                     fallback="A"
+                    color='gray'
                     />    
                         </Popover.Trigger>
                         <Popover.Portal>

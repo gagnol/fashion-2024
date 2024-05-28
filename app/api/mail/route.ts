@@ -24,6 +24,7 @@ export async function POST(request: Request, res: Response) {
     return Response.json(
       {
         message: "Incorrect Email, Please Register",
+      
       },
       {
         status: 422,
@@ -43,5 +44,5 @@ export async function POST(request: Request, res: Response) {
 		return Response.json(error);
 	}
 
-	return Response.json({ message: "Email sent successfully" });
+	return Response.json({ message: "Email sent successfully",email });
 }

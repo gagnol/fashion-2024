@@ -9,7 +9,7 @@ import { z } from 'zod'
 export async function createProduct(prevState: any, formData: FormData) {
   const schema = z.object({
     name: z.string().min(3),
-    image: z.string(),
+    image: z.array(z.string()),
     price: z.number().min(1),
     rating: z.number().min(1).max(5),
     video: z.string(),
@@ -20,11 +20,19 @@ export async function createProduct(prevState: any, formData: FormData) {
     countInStock: z.number().min(1),
     description: z.string().min(1).max(1000),
     discount: z.number().min(0).max(99),
+    sizes: z.array(z.string()),
 
   })
+  
+  const image = formData.get('image');
+  const parsedImage = image ? JSON.parse(image as string) : [];
+
+  const sizes = formData.get('sizes');
+  const parsedSizes = sizes ? JSON.parse(sizes as string) : [];
+
   const parse = schema.safeParse({
     name: formData.get('name'),
-    image: formData.get('image'),
+    image: parsedImage,
     price: Number(formData.get('price')),
     rating: Number(formData.get('rating')),
     video: formData.get('video'),
@@ -35,6 +43,7 @@ export async function createProduct(prevState: any, formData: FormData) {
     countInStock: Number(formData.get('countInStock')),
     description: formData.get('description'),
     discount: Number(formData.get('discount')),
+    sizes: parsedSizes
 
 
   })
@@ -176,5 +185,100 @@ export async function updateStock(prevState: any, formData: FormData) {
   } catch (e) {
     console.error(e); // Log the actual error for debugging
     return { message: 'Failed to update ' };
+  }
+}
+//Update product
+
+export async function updateProduct(prevState: any, formData: FormData) {
+  const schema = z.object({
+    _id:z.string().min(1),
+    name: z.string().min(1),
+    price: z.number().min(1),
+    rating: z.number().min(1).max(5),
+    video: z.string(),
+    slug: z.string().min(1).max(1000),
+    category: z.string().min(1),
+    department: z.string().min(1),
+    brand: z.string().min(1).max(100),
+    countInStock: z.number().min(1),
+    description: z.string().min(1).max(1000),
+    discount: z.number().min(0).max(99),
+
+  });
+
+  const parse = schema.safeParse({
+    _id: formData.get('_id'),
+    name: formData.get('name'),
+    price: Number(formData.get('price')),
+    rating: Number(formData.get('rating')),
+    video: formData.get('video'),
+    slug: formData.get('slug'),
+    category: formData.get('category'),
+    department: formData.get('department'),
+    brand: formData.get('brand'),
+    countInStock: Number(formData.get('countInStock')),
+    description: formData.get('description'),
+    discount: Number(formData.get('discount')),
+  });
+
+  if (!parse.success) {
+      console.log(parse.error);
+      return { message: 'Form data is not valid' };
+  }
+
+  const data = parse.data;
+
+  try {
+      await dbConnect();
+ 
+      const existingProduct = await ProductModel.findOne({ _id: data._id });
+
+      if (!existingProduct) {
+          return { message: 'Product not found' };
+      }
+
+      // Update fields if they are provided in the form data
+      if (data.name) {
+          existingProduct.name = data.name;
+      }
+      if (data.price) {
+        existingProduct.price = data.price;
+      }
+      if (data.rating) {
+          existingProduct.rating = data.rating;
+      }
+      if (data.video) {
+          existingProduct.video = data.video;
+      }
+      if (data.slug) {
+          existingProduct.slug = data.slug;
+      }
+      if (data.category) {
+          existingProduct.category = data.category;
+      }
+      if (data.department) {
+          existingProduct.department = data.department;
+      }
+      if (data.brand) {
+        existingProduct.brand = data.brand;
+    }
+    if (data.countInStock) {
+      existingProduct.countInStock = data.countInStock;
+  }
+  if (data.description) {
+    existingProduct.description = data.description;
+}
+if (data.discount) {
+  existingProduct.discount = data.discount;
+}
+      // Save the updated Product
+      await existingProduct.save();
+      revalidatePath('/')
+      // You can return the updated Product or a success message if needed
+      return { message: 'Product updated successfully', 
+      product: JSON.parse(JSON.stringify(existingProduct)) };
+  } catch (e) {
+      console.error(e);
+      return { message: 'Failed to update Product' };
   }
 }

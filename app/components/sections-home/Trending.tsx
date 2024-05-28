@@ -8,10 +8,10 @@ import { InView } from "react-intersection-observer"
 
 function TrendingCategories() {
     return (
-        <InView as="div" onChange={(inView, entry) => console.log('Inview0:', inView)}>
+        <InView as="div" onChange={(inView, entry) => inView}>
         <div className="my-6 w-full mx-auto text-center">
         <Heading size="6" className="mb-4 text-xl font-medium">Trending Categories</Heading>
-            <div className="flex flex-wrap gap-4 mx-auto xl:mx-16 w-full items-center ">
+            <div className="flex flex-wrap gap-4 mx-24 xl:mx-16 w-full items-center ">
                 {TRENDING_CATEGORIES.map((category:any) => (
                   <div key={category.id} className="relative flex-1 block group 
                      min-h-[300px] max-h-[300px] min-w-[330px] max-w-[330px]
