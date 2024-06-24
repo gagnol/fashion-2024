@@ -66,7 +66,6 @@ export default async function ProfileScreen() {
                 <h1 className=" text-xl font-bold text-center">Your Account</h1>
                 <h2 className="font-semibold text-center">&nbsp;{session?.user?.name}</h2>
                 <h2 className=" xl:block text-center font-semibold md:hidden  ">&nbsp;{session?.user?.email} </h2>
-
                 <Image className="mx-auto" src={users.image || "/noavatar.png"} alt=''
                     width={100} height={100} priority style={{ width: 100, height: "auto" }} />
                 <Uploadfile users={users} />
@@ -89,12 +88,12 @@ export default async function ProfileScreen() {
                 </ul>
             </div>
             <div className="md:col-span-3">
-                <UserUpdate session={session} />
+              <UserUpdate session={session} />
                 <div className="my-5 rounded-md">
                     <h2 className=" text-xl">Latest Transactions</h2>
                     <table className="table text-center">
                         <thead>
-                            <tr className="bg-[#141726] text-white">
+                            <tr className="bg-[#141726] ">
                                 <th>Product</th>
                                 <th>Detail</th>
                                 <th>Buyer</th>
@@ -127,7 +126,7 @@ export default async function ProfileScreen() {
                                             </Link>
                                             </Button>
                                         </td>
-                                        <td className='text-white'>{item.user}</td>
+                                        <td className=''>{item.user}</td>
                                         <td  className='justify-end'>
                                             <span className='text-[12px]'>$</span>
                                         <Text size="3" > 

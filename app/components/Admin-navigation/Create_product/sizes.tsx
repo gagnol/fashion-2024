@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const SizesInput = () => {
   const [sizes, setSizes] = useState(['']);
-
+ 
   const handleSizeChange = (index:any, event:any) => {
     const newSizes = [...sizes];
     newSizes[index] = event.target.value;

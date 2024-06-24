@@ -42,7 +42,7 @@ const Mailer = ({ session }:any) => {
 
   return (
 
-    <div className="grid lg:grid-cols-[50%,1fr] gap-20 text-white">
+    <div className="grid lg:grid-cols-[50%,1fr] gap-20 ">
       <div>
         <Image
           className="w-[80%] h-auto lg:w-auto lg:h-auto mx-auto"
@@ -55,7 +55,7 @@ const Mailer = ({ session }:any) => {
         />
       </div>
       <div className="self-center mx-5 xl:mx-0">
-        <h2 className="text-2xl xl:text-4xl font-bold mx-2 text-white">Contactanos</h2>
+        <h2 className="text-2xl xl:text-4xl font-bold mx-2 ">Contactanos</h2>
 
         <div className="min-h-[400px] mt-5">
 

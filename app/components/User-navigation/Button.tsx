@@ -46,7 +46,7 @@ const Button = ({ children, className = '', color = 'slate', onClick, users }: B
   let buttonColor = 'btn btn-primary btn-outline';
 
   if (color === 'red') {
-    buttonColor = 'text-white bg-red-600 hover:bg-red-500 dark:bg-red-500 dark:hover:bg-red-400';
+    buttonColor = ' bg-red-600 hover:bg-red-500 dark:bg-red-500 dark:hover:bg-red-400';
   }
 
   return (

@@ -16,7 +16,7 @@ import { signOut, useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Separator } from "@radix-ui/themes";
+import { Button, Separator } from "@radix-ui/themes";
 
 const menuItems = [
   {
@@ -87,7 +87,7 @@ const Sidebar = () => {
   
   return (
     <div className="h-screen left-0 top-0 sticky p-10 flex flex-col border-[1px] border-spacing-1 
-     border-[#666]  gap-5 shadow-xl max-lg:hidden">
+     border-[#666] gap-5 shadow-xl max-lg:hidden">
        <div className="flex flex-col gap-3">
         <Separator orientation="vertical"  size="4" mx="1"/>
         <Image
@@ -107,11 +107,14 @@ const Sidebar = () => {
             {cat.list.map((item) => (
               <div key={item.title}>
                 <Link href={item.path}  className={`flex gap-4 text-body-medium rounded-lg ${
-              pathname === item.path ? "text-white bg-[#444] border-2 font-semibold border-base-100" : "text-green-200"
+              pathname === item.path ? " bg-[#444] border-2 font-semibold border-base-100" : "text-green-200"
             }`} >
-                  <div className=" flex gap-2 my-5 hover:text-primary">
-                    <span className="text-primary text-[22px] mx-1">{item.icon}</span>
-                    {item.title}
+                  <div className=" flex gap-2 MX-1 my-5 hover:text-primary">
+                    <Button variant="ghost" size="3">
+                      {item.icon}
+                      {item.title}
+                      </Button>
+                    
                   </div>
                 </Link>
               </div>

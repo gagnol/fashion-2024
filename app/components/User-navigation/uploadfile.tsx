@@ -73,21 +73,22 @@ async function Upload({users}:{users:any}) {
   return (
     <>
       <h2 className="text-l font-bold mb-2">Change avatar image</h2>
-      <form action={create} className="bg-base-200 border border-slate-200 rounded-md p-6 mb-6 mx-2" >
+      <form action={create} className=" border border-slate-200 rounded-md p-6 mb-6 mx-2" >
         <p className="mb-6">
           <label htmlFor="image" className="block font-semibold text-sm mb-2">
             Select an Image to Upload
           </label>
           <input
             id="image"
-            className="block w-full border-slate-400 rounded focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="block w-full border-slate-400 rounded focus:border-indigo-300 focus:ring
+             focus:ring-indigo-200 focus:ring-opacity-50"
             type="file"
             name="image"
             required  
             
           />
         </p>
-        <Button users={users} >Submit</Button>
+        <Button users={users}  >Submit</Button>
       </form>
       
        

@@ -1,7 +1,9 @@
 
 "use client"
+import { Badge, Button } from '@radix-ui/themes';
 import Link from 'next/link'
 import React from 'react'
+import { FaHeart } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
 function FavoriteList() {
@@ -10,23 +12,29 @@ function FavoriteList() {
     (state:any) => state.next
   );
   return (
-    <div>
+    <div className='mx-5 min-w-[80px]'>
      {/* fovorite */}
-     <Link
-          href={"/favorite"}
-          className="text-xs text-gray-100 hidden xl:flex 
-          flex-col justify-center p-3 border border-transparent
-           hover:border-white cursor-pointer duration-300 h-[70%] relative"
-        >
-          <p>Your</p>
-          <p className="text-white font-bold flex items-center">Whishlist</p>
-          {favoriteData.length > 0 && (
-            <span className="absolute right-2 top-2 w-4 h-4 border-[1px]
-             border-gray-400 flex items-center justify-center text-xs text-amazon_yellow">
-              {favoriteData.length}
-            </span>
+     <Button variant='ghost' size="3" asChild> 
+     <Link  href="/favorite">
+     
+     <FaHeart className='text-[20px]' />
+     
+          {favoriteData.length > 0 && ( 
+            <>
+            {/* <span className="absolute right-2 top-2 w-4 h-4 border-[1px]
+             border-gray-400 flex items-center justify-center "> */}
+             
+               <Badge variant="surface" radius="full" >
+                {favoriteData.length}
+               </Badge>
+             
+              </>
+              
+            
           )}
-        </Link>   
+              
+           </Link>   
+    </Button>
     </div>
   )
 }

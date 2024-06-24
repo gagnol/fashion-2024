@@ -27,20 +27,20 @@ body {
 }
 
 .footer_back {
-  @apply text-center bg-[#5b514e] text-white pt-4 pb-4 hover:opacity-70 cursor-pointer;
+  @apply text-center bg-[#5b514e]  pt-4 pb-4 hover:opacity-70 cursor-pointer;
 }
 
 .footer_middle {
-  @apply text-white grid xl:grid-cols-4 grid-cols-2 gap-10 py-8 mx-auto 
-  justify-center text-center items-center  bg-[#141726]
+  @apply  grid xl:grid-cols-4 grid-cols-2 gap-10 py-8 mx-auto 
+  justify-center text-center items-center 
 }
 
 .footer_bottom {
-  @apply text-white flex flex-wrap p-2 px-8 w-full gap-2  bg-[#141726]
+  @apply  flex flex-wrap p-2 px-8 w-full gap-2  
 }
 
 .footer_ul {
-  @apply text-white flex flex-col align-top
+  @apply  flex flex-col align-top
 }
 
 .footer_logo {
@@ -48,11 +48,11 @@ body {
 }
 
 .footer_copyright {
-  @apply text-white flex-col w-full text-sm font-normal  bg-[#141726];
+  @apply  flex-col w-full text-sm font-normal  ;
 }
 
 .footer_column {
-  @apply text-white flex-1 flex flex-col gap-3 text-sm min-w-max  bg-[#141726];
+  @apply  flex-1 flex flex-col gap-3 text-sm min-w-max  bg-[#141726];
 }
 
 /* Card */
@@ -62,12 +62,12 @@ body {
 }
 
 .card_headline {
-  @apply text-xl  pl-[17px] pt-2 font-semibold leading-normal text-white;
+  @apply text-xl  pl-[17px] pt-2 font-semibold leading-normal ;
 }
 
 /* Forms pages */
 .a_page {
-  @apply flex flex-col py-5 items-center h-full ;
+  @apply flex flex-col py-5 items-center h-full min-h-[900px];
 }
 
 .a_logo {
@@ -75,7 +75,7 @@ body {
 }
 
 .a_container {
-  @apply w-[350px] h-fit flex-col rounded-[5px]  text-white my-5 bg-[#141726]
+  @apply w-[350px] h-fit flex-col rounded-[5px]   my-5 bg-[#141726]
    border-[#666] border-[1px] px-[26px] py-[20px];
 }
 
@@ -126,7 +126,7 @@ body {
 
 
 .nav_text {
-  @apply block text-[13px] text-white font-normal py-1 hover:bg-[#EAEDED]
+  @apply block text-[13px]  font-normal py-1 hover:bg-[#EAEDED]
   hover:text-black cursor-pointer
 }
 .a_after{
@@ -140,11 +140,11 @@ body {
   @apply w-[33px] h-[33px] rounded-md border-[1px]
 }
 .sizePiked {
-  @apply w-[133px] h-[33px] border-2 border-white text-white rounded-md
+  @apply w-[133px] h-[33px] border-2 border-white  rounded-md
 }
 
 .sizeBox {
-  @apply w-[133px] h-[33px] py-1 text-white cursor-pointer align-bottom rounded-md
+  @apply w-[133px] h-[33px] py-1  cursor-pointer align-bottom rounded-md text-white
 }
 /* Chat List */
 .main-container {
@@ -241,7 +241,7 @@ body {
 }
 
 .message-text-sender {
-  @apply w-fit bg-primary-content text-white p-3 rounded-lg font-semibold;
+  @apply w-fit bg-primary-content  p-3 rounded-lg font-semibold;
 }
 
 /* Message Input */

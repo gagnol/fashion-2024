@@ -21,7 +21,7 @@ const SizePicker = ({product}:any) => {
                 <div className='block xl:flex'>
                   {product.sizes?.map((item:any, i:number) => (
                     <div className="inline-flex justify-between border-transparent border-[3px]
-                    text-white text-center
+                     text-center
                     hover:border-[#c45500] cursor-pointer'" key={i}>
                       <div className={sizepiker === item ? "sizePiked" : "sizeBox"}
                         style={{ backgroundColor:"#5e514b"}}

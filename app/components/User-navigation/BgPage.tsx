@@ -70,7 +70,7 @@ function BgPage({ children }: any) {
       </svg>
       <div style={{ position: 'relative', zIndex: 1 }}>
         <div className="w-[350px] h-fit flex-col rounded-[5px]
-         text-white my-5 opacity-75 border border-[#666] 
+          my-5 opacity-75 border border-[#666] 
          px-[26px] py-[20px] bg-white/10 backdrop-blur-lg shadow-xl">
           {children}
         </div>

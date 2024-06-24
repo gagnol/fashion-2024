@@ -60,13 +60,13 @@ console.log(userInfo)
   return (
    <BgPage>
         <form onSubmit={handleSubmit} >
-          {error && <div className="bg-red-500 text-white p-2 mb-2">{error}</div>}
+          {error && <div className="bg-red-500  p-2 mb-2">{error}</div>}
 
           <h1 className="text-[21px] font-bold pb-5">Verification required</h1>
           <Text size="2">
             To continue, complete this verification step.
             We have sent a One Time Password (OTP) to the email
-            <a className='px-1 text-white font-semibold'>{userInfo.email} </a>
+            <a className='px-1  font-semibold'>{userInfo.email} </a>
             <p>Please enter it below.</p>
           </Text>
           <label htmlFor="token"  >Enter OTP</label>

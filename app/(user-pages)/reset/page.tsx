@@ -35,7 +35,7 @@ console.log(userInfo)
   return (
     <BgPage>
       <form onSubmit={handleSubmit}>
-        {error && <div className="bg-red-500 text-white p-2 mb-2">{error}</div>}
+        {error && <div className="bg-red-500  p-2 mb-2">{error}</div>}
         <h1 className="text-[21px] font-bold pb-5">Create a new password</h1>
         <div className="a_label">We will ask for this password whenever you Sign-In.</div>
         <label htmlFor="password" className="text-slate-300">Password</label>

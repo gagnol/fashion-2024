@@ -1,12 +1,12 @@
 'use client'
 import { useFormState, useFormStatus } from 'react-dom'
 import { createProduct } from '@/lib/action'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
 import { Button, Heading, TextArea  } from '@radix-ui/themes'
 import { FaArrowRight } from 'react-icons/fa'
 import SizesInput from './Create_product/sizes'
-import ImagesInput from './Create_product/images'
+
 
 interface StringArrayInputProps { }
 
@@ -126,7 +126,14 @@ export default function CreateForm() {
                   required
                 />
               </div>
-             <ImagesInput/>
+              <label htmlFor="image">Image</label>
+              <input
+                type="text"
+                id="image"
+                name="image"
+                className="a_input"
+                required
+              />
               <label htmlFor="price">Price</label>
               <input
                 type="number"

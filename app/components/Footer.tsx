@@ -5,14 +5,15 @@ import React from 'react'
 import { footerLinks } from "@/constant";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { BsTwitter, BsPinterest } from "react-icons/bs";
+import { Button } from '@radix-ui/themes';
 
 
 const FooterColumnMiddle = ({ title, links }:any) => (
     <div className="mx-auto">
-        <h3 className="font-semibold m-1 text-white">{title}</h3>
+        <h3 className="font-semibold m-1 ">{title}</h3>
         <ul className="footer_ul m-1">
             {links.map((link:any) => <Link href="/" key={link} className='text-[13px]
-            text-white mb-1 relative block pt-5 hover:underline'>{link}</Link>)}
+             mb-1 relative block pt-5 hover:underline'>{link}</Link>)}
         </ul>
     </div>
 );
@@ -30,7 +31,6 @@ const Footer = () => {
             <footer>
                 <div className="footer_back" onClick={ScrollToTop}>
                     <a>Back to Top</a>
-                    
                 </div>
                 <div className="footer_middle ">
                     <FooterColumnMiddle title={footerLinks[0].title} links={footerLinks[0].links} />
@@ -38,7 +38,7 @@ const Footer = () => {
                     <FooterColumnMiddle title={footerLinks[2].title} links={footerLinks[2].links} />
                     <FooterColumnMiddle title={footerLinks[3].title} links={footerLinks[3].links} />
                 </div>
-                <div className='block bg-[#141726]'>
+                <div className='block '>
                     <div className='flex w-full items-center justify-center pt-2 text-center border-t' >
                         <Link href="/" >
                             <Image
@@ -55,19 +55,33 @@ const Footer = () => {
                        <div className=' w-full items-center justify-center 
                         p-1 text-center '>
                        <div className="flex w-full items-center justify-center 
-                         text-center gap-8 text-[#5e514b] text-2xl">
-                            <Link href="/"
-                             className='cursor-pointer hover:text-[#5e514b]'>
-                            <FaFacebookF className='text-[#777] hover:text-[#5e514b]'/>
+                         text-center gap-8 text-2xl mt-5 ">
+                           <Button variant='ghost' size="4"   >
+                           <Link href="/">
+                             <FaFacebookF />
                             </Link>
-                            <BsTwitter className='text-[#777] hover:text-[#5e514b]'/>
-                            <BsPinterest className='text-[#777] hover:text-[#5e514b]'/>
-                            <FaLinkedinIn className='text-[#777] hover:text-[#5e514b]'/>
+                           </Button>
+                           <Button variant='ghost' size="4"   >
+                           <Link href="/">
+                             <BsTwitter />
+                            </Link>
+                           </Button>
+                           <Button variant='ghost' size="4"   >
+                           <Link href="/">
+                             <BsPinterest />
+                            </Link>
+                           </Button>
+                           <Button variant='ghost' size="4"   >
+                           <Link href="/">
+                             <FaLinkedinIn />
+                            </Link>
+                           </Button>
+                            
                         </div>
                     </div>
                 </div>
                 <div className="footer_bottom ">
-                    <div className='footer_copyright text-white pt-1 mx-auto'>
+                    <div className='footer_copyright  pt-1 mx-auto'>
                        
                     <div className="flex gap-10 mx-auto justify-center">
                             <p className='text-[14px] relative hover:underline cursor-pointer'>Terms and Conditions</p>

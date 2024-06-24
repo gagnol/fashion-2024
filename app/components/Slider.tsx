@@ -22,7 +22,7 @@ function Slider({ children }:any) {
     return (
         <>
             <div className='flex items-center mx-10 py-5'>
-                <MdChevronLeft className='opacity-50 cursor-pointer hover:opacity-100 text-white'
+                <MdChevronLeft className='opacity-50 cursor-pointer hover:opacity-100 '
                     onClick={slideLeft} size={40} />
                 <div id='slider' className='flex w-full h-full 
                 overflow-x-scroll scroll whitespace-nowrap gap-5
@@ -30,7 +30,7 @@ function Slider({ children }:any) {
                  <> {children} </>  
               
                 </div>
-                <MdChevronRight className='opacity-50 cursor-pointer text-white
+                <MdChevronRight className='opacity-50 cursor-pointer 
                 hover:opacity-100' onClick={slideRight} size={40} />
             </div>
         </>

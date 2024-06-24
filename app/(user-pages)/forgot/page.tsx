@@ -38,7 +38,7 @@ function Forgot() {
   return (
    <BgPage>
         <form onSubmit={handleSubmit}>
-          {error && <div className="bg-red-500 text-white p-2 mb-2">{error}</div>}
+          {error && <div className="bg-red-500  p-2 mb-2">{error}</div>}
           <h1 className="text-[21px] font-bold pb-5">Password Assistance</h1>
           <Text size="2" color="jade" >
             Enter the email address associated with your account.&nbsp;

@@ -73,16 +73,13 @@ export default async function ProductDetail({ params }: { params: { slug: string
 
   return (
     <Loading>
-      <div className="flex flex-wrap sm:justify-center lg:justify-start ml-10 text-white">
+      <div className="flex flex-wrap sm:justify-center lg:justify-start ml-10 ">
         <Topimage product={product}/>
         <div >
           <ImageGallery product={product} />
-          <div className="hidden xl:block xl:w-[483px] h-[240px]  mt-5 text-center p-2  rounded-md border border-white/[0.1"
-            style={{
-                 background: "rgb(4,7,29)",
-                backgroundColor:
-                  "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
-              }} >
+          <div className="hidden xl:block xl:w-[483px] h-[240px] 
+           mt-5 text-center p-2  rounded-md border border-white/[0.1]"
+           >
             <div className="w-[80%] mx-auto">
               <p><strong>We want you to know</strong></p>
             </div>
@@ -101,7 +98,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
           </div>
         </div>
         <div className="w-[40%] ml-5">
-          <h4 className="text-[24px] text-white">{product.name}</h4>
+          <h4 className="text-[24px] ">{product.name}</h4>
           <h4>Seller: <a className="text-primary">{product.brand}</a></h4>
           <div className="flex flex-wrap items-center space-x-2 mb-2  border-b-2 ">
             <div className="my-2">
@@ -259,17 +256,17 @@ export default async function ProductDetail({ params }: { params: { slug: string
         {/******************Sizes ****************/}
         <Middleimage product={product}/>
         {/****************** CUSTOMER REVIEWS ****************/}
-        <h2 className="text-[21px] pl-4 font-semibold mx-10 pt-2 border-t-2 text-white">
-        Customer reviews
-        </h2>
-        <div className="grid grid-cols-2 px-10">
-          <div className=" grid-cols-1 block mx-5 ">
+        <Text size="7" >
+          Customer reviews
+        </Text>
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-5 px-10 py-5">
+          <div className=" col-span-1 xl:col-span-3 ">
             <div className="flex">
               <Stars value={product.rating} />
               <h1 className="px-2">{product.rating ? product.rating + ' out of 5' : 'Rating not available'}</h1>
             </div>
             <h2>{product.numReviews} Total Ratings</h2>
-            <div className="border-white border-[1px] rounded p-2 my-5">
+            <div className=" border-[2px] rounded-lg p-2 my-5">
               {product.reviews && product.reviews.length > 0 ? (
                 reviewsPercentage
                   ?.sort((a: any, b: any) => parseInt(b[0]) - parseInt(a[0]))
@@ -282,7 +279,6 @@ export default async function ProductDetail({ params }: { params: { slug: string
                 <p>No reviews for this product.</p>
               )}
             </div>
-
             {session ? (
               <>
                 <ReviewForm session={session} product={product} />
@@ -290,28 +286,28 @@ export default async function ProductDetail({ params }: { params: { slug: string
             ) : (
               <div className='block '>
                 <p >Review this product</p>
-                <p className='text-neutral-400 text-[14px] my-2'>
-                Share your thoughts with other customers
+                <p className='text-[14px] my-2'>
+                  Share your thoughts with other customers
                 </p>
                 <Link href={`/signin?redirect=/product/${product.slug}`} >
                   <button className="my-[15px] p-1 w-[50%] btn btn-primary btn-outline" >
-                  Write a customer review
+                    Write a customer review
                   </button>
                 </Link>
               </div>
             )}
-
           </div>
-          <div className="grid grid-cols-1 ">
+          <div className="col-span-1 xl:col-span-2 ">
             {product.reviews
-              ?.map((item: any) => (
+              ?.sort((a: any, b: any) => new Date(b.createdAt).getTime() 
+              - new Date(a.createdAt).getTime()) // Sort in descending order
+              .slice(0, 10) // Limit to the first 10 reviews
+              .map((item: any) => (
                 <div key={item._id}>
-                  <Reviews item={item} key={item} />
+                  <Reviews item={item} key={item._id} /> {/* Use item._id for the key */}
                 </div>
               ))
-              .slice(0, 10)
             }
-
           </div>
         </div>
       </div>

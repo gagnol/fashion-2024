@@ -1,10 +1,10 @@
 "use client"
-import Image from 'next/image'
+
 import Link from 'next/link'
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { BsFillCartFill } from "react-icons/bs";
-import { Badge } from '@radix-ui/themes';
+import { Badge, Button } from '@radix-ui/themes';
+import { FaOpencart } from 'react-icons/fa';
 
 const CartTool = () => {
 
@@ -13,17 +13,19 @@ const CartTool = () => {
       );
   return (
     <>
-       <Link
-          href={"/cart"}
-          className="flex items-center px-2 border border-transparent xl:mx-10
-           hover:border-white cursor-pointer duration-300 h-[70%] relative"
-        >
-          <BsFillCartFill className='text-[30px]' />
-          <p className="text-xs text-white font-bold mt-3">Cart</p>
-          <p className="absolute left-[18px] text-[16px] text-black font-semibold">
+    <div className='relative mx-5'>
+    <Button variant='ghost'size="3" asChild  >
+       <Link href={"/cart"} >
+       <FaOpencart className='text-[30px]'/>
+       <span className="absolute -top-1 flex items-center justify-center "> 
+            <Badge variant="solid" radius="full" >
             {productData ? productData.length : 0}
-          </p>
-        </Link>
+            </Badge>
+            </span>
+            
+           </Link>
+      </Button>
+      </div>
     </>
   )
 }

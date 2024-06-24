@@ -8,7 +8,7 @@ import { Button, Strong, Text } from "@radix-ui/themes";
 const FavoriteProduct = ({ item }: any) => {
   const dispatch = useDispatch();
   return (
-    <div className="bg-[#141726] text-white rounded-lg flex flex-col md:flex-row p-2 items-center gap-4 mb-2">
+    <div className="bg-[#141726]  rounded-lg flex flex-col md:flex-row p-2 items-center gap-4 mb-2">
       
         <div className="block min-w-[150px] text-center text-primary cursor-pointer">
           <Image src={item.image[0]} alt="Product image" width={150} height={150}

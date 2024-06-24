@@ -16,7 +16,7 @@ function Categories2() {
                  flex-col bg-cover bg-center bg-no-repeat"
                  style={{ backgroundImage: "url('/cow6.jpg')" }} 
             >
-                <Heading size="6" className="text-white text-center">
+                <Heading size="6" className=" text-center">
                 <Strong>Shop by Category</Strong> 
                 </Heading>
              

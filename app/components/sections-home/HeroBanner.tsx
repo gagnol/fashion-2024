@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const HeroBanner = () => {
     return (
-        <div className="relative text-white text-[20px] w-full max-w-[1540px] mx-auto">
+        <div className="relative  text-[20px] w-full max-w-[1540px] mx-auto">
             <Carousel
                 autoPlay={true}
                 infiniteLoop={true}

@@ -423,21 +423,25 @@ export const TRENDING_CATEGORIES = [
     {
         id: 1,
         name: "Fannels",
-        image: "/lenador.jpg"
+        image: "/lenador.jpg",
+        link:"/search?category=Flannel"
     },
     {
         id: 2,
-        name: "Winter Jumpers",
+        name: "Shirts",
         image: "/cow6.jpg",
+        link:"/search?category=Shirt"
     },
     {
         id: 3,
         name: "Accesories",
         image: "/accesories.jpg",
+        link:"/search?category=Accesories"
     },
     {
       id: 4,
       name: "Jackets",
       image: "/advertise.jpg",
+      link:"/search?category=Jacket"
   },
 ]

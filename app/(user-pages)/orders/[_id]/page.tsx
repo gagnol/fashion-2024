@@ -13,7 +13,7 @@ export default async function OrderId({ params }: { params: { _id: string } }) {
  
     return (
         <div className="max-w-screen-xl mx-auto px-6 gap-10 py-4">
-            <div className="bg-[#141726] p-4 rounded-lg">
+            <div className=" p-4 rounded-lg">
                 <div className="flex items-center justify-between border-b-[1px] pb-1">
                     <p className="text-2xl font-semibold">
                         Your Order Detail

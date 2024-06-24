@@ -7,7 +7,11 @@ import { FaChevronDown, FaChevronUp, FaTimes, FaUserCircle } from 'react-icons/f
 import { LuMenu } from 'react-icons/lu';
 import useSWR from 'swr'
 import { removeUser } from "@/store/nextSlice"
-import { Separator, Text } from '@radix-ui/themes';
+import { Button, Separator, Text, TextField } from '@radix-ui/themes';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { useSearchParams } from 'next/navigation';
+import CartTool from './CartTool';
+import FavoriteList from './FavoriteList';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 const SideBar = () => {
@@ -15,26 +19,28 @@ const SideBar = () => {
     const [show, setShow] = useState(false);
     const { data, error } = useSWR('/api/products/categories', fetcher)
     const { data: session } = useSession();
+ 
+    const searchParams = useSearchParams()
+    const q = searchParams.get('q') || ''
 
-    
     const handleSignOutClick: React.MouseEventHandler<HTMLParagraphElement> = (event) => {
 
         removeUser()
-        signOut({redirect:false})
+        signOut({ redirect: false })
     };
     return (
-        <>
-            <button onClick={() => setOpen(true)}>
+        <div className='inline-flex md:hidden my-auto'>
+            <Button onClick={() => setOpen(true)}>
                 <p className="flex items-center gap-1 h-8 px-2 border border-transparent
-                text-white  hover:border-white cursor-pointer duration-300" >
-                    <LuMenu className="text-xl text-white font-extrabold" /> 
-                    <Text size="4" className='font-bold'>All</Text>
+                  cursor-pointer duration-300" >
+                    <LuMenu className="text-xl  font-extrabold" />
                 </p>
-            </button>
-            <div className='py-3 top-0 left-0 right-0 shadow-md z-30 text-white'>
+            </Button>
+            <div className='py-3 top-0 left-0 right-0 shadow-md z-30 '>
                 <div className={`${!open && "hidden"} bg-gray-600/50 min-h-screen w-full 
               fixed top-0 left-0 right-0 `} onClick={() => setOpen(false)}></div>
-                <div className={`${open ? "w-80" : "w-0"}  bg-[#141726] min-h-screen fixed overflow-y-scroll
+                <div className={`${open ? "w-80" : "w-0"}  bg-gray-800 min-h-screen fixed
+                 overflow-y-scroll
                 top-0 left-0 transition-all duration-300 `}>
                     <div className={`${!open && "hidden"} pt-3 mt-[80px]`}>
                         {session?.user ? (
@@ -52,36 +58,80 @@ const SideBar = () => {
                                         // Handle the case where session.user.image is null or undefined
                                         <div>Image not available</div>
                                     )}
-                                    <div className="text-xs text-white flex flex-col pl-5 ">
+                                    <div className="text-xs  flex flex-col pl-5 ">
                                         <p className="text-base font-bold text-[18px]">{session.user.name}</p>
                                         <p>{session.user.email}</p>
                                     </div>
-                                    <button className='ml-auto ' aria-label="close" onClick={() => setOpen(false)}>
-                                        <FaTimes color='#fff' />
-                                    </button>
+                                    <Button className='ml-auto '
+                                        aria-label="close" onClick={() => setOpen(false)}>
+                                        <FaTimes />
+                                    </Button>
                                 </div>
                             </>
                         ) : (
-                            <div className="flex bg-black text-white text-[22px] justify-between p-5">
+                            <div className="flex text-[22px] justify-between p-5">
                                 <i> <FaUserCircle /></i>
                                 <Link href='/signin'>
                                     <h2>Hello, <span>Signin</span></h2>
                                 </Link>
-                                <button aria-label="close" onClick={() => setOpen(false)}>
-                                    <FaTimes color='#fff' />
-                                </button>
+                                <Button aria-label="close" onClick={() => setOpen(false)}>
+                                    <FaTimes />
+                                </Button>
                             </div>)}
-                        <div className="p-5 text-neutral-content">
-                            <h2 className='text-[18px] font-semibold mb-2 text-white'>
+                            <Separator size="4" />
+                        <div className="p-5 ">
+                         <div className='flex justify-between m-5'>
+                            <CartTool/>
+                            <FavoriteList/>
+                            </div>
+        
+        <form action="/search" method="GET">
+      <div className="join flex justify-center">
+        
+        <TextField.Root 
+        size="3"
+        defaultValue={q}
+          name="q"
+          placeholder="Search products…">
+          <TextField.Slot>
+          <MagnifyingGlassIcon height="16" width="16" />
+          </TextField.Slot>
+        </TextField.Root>
+
+      </div>
+    </form>
+                            <ul>
+                                <li className='py-2  hover:bg-[#babebe]  
+                                        hover:text-black cursor-pointer'>  <Link href="#home" >
+                                    Home
+                                </Link></li>
+                                <li className='py-2  hover:bg-[#babebe]  
+                                        hover:text-black cursor-pointer'><Link href="#collection" >
+                                    Collections
+                                </Link>
+                                </li>
+                                <li className='py-2  hover:bg-[#babebe]  
+                                        hover:text-black cursor-pointer'><Link href={`/search?discount>`} >
+                                    Today&apos;s Deals
+                                </Link>
+                                </li>
+                                <li className='py-2  hover:bg-[#babebe]  
+                                        hover:text-black cursor-pointer'><Link href={`/products/557`} >
+                                    Gift
+                                </Link></li>
+
+                            </ul>
+                            <Separator size="4" />
+                            <h2 className='text-[18px] font-semibold my-2 '>
                                 Shop by Categories
-                                </h2>
+                            </h2>
                             <ul>
                                 {data?.categories.map((category: string) => (
                                     <Link key={category} href={`/search?category=${category}`}>
-                                        <li className='py-2 text-white hover:bg-[#babebe]  
+                                        <li className='py-2  hover:bg-[#babebe]  
                                         hover:text-black cursor-pointer'
                                             key={category} value={category} onClick={() => setOpen(false)}>
-                                            <Text size="4">{category}</Text>
+                                            <Text size="2">{category}</Text>
                                         </li>
                                     </Link>
                                 )).slice(0, 3)}
@@ -97,15 +147,15 @@ const SideBar = () => {
                                 <ul >
                                     {data?.categories.map((category: string) => (
                                         <Link key={category} href={`/search?category=${category}`}>
-                                            <li className='py-2 hover:bg-[#babebe] text-white
+                                            <li className='py-2 hover:bg-[#babebe] 
                                               hover:text-black cursor-pointer'
-                                                key={category} value={category} 
+                                                key={category} value={category}
                                                 onClick={() => setOpen(false)}>
-                                                <Text size="4" >{category}</Text>
+                                                <Text size="2" >{category}</Text>
                                             </li>
                                         </Link>
                                     )).slice(3, 10)}
-                                    <div className='flex py-2 leading-3 text-primary
+                                    <div className='flex py-2 leading-3 
                                      hover:text-orange-400 cursor-pointer'>
                                         <li onClick={() => setShow(false)} >See less</li>
                                         <FaChevronUp />
@@ -113,36 +163,36 @@ const SideBar = () => {
                                 </ul>
                             }
                         </div>
-                       <Separator size="4" />
-                        <div className="p-5 text-white ">
-                            <h2 className='text-[18px] font-semibold mb-2 text-white'>
+                        <Separator size="4" />
+                        <div className="p-5 ">
+                            <h2 className='text-[18px] font-semibold mb-2 '>
                                 Your account
                             </h2>
-                            <p className='py-2 hover:bg-[#babebe] text-white hover:text-black cursor-pointer'>
+                            <p className='py-2 hover:bg-[#babebe]  hover:text-black cursor-pointer'>
                                 Account
                             </p>
-                            <p className='py-2 hover:bg-[#babebe] text-white hover:text-black cursor-pointer'>
-                            <Link href="/customer">
-                                Customer Services
-                            </Link></p>
-                            {session?.user ? (  
-                                <p className='py-2 hover:bg-[#babebe] text-white hover:text-black cursor-pointer'
-                                 onClick={handleSignOutClick}> 
-                                 Signout 
-                                 </p>
-                            ):(
-                            <>
-                                <p className='py-2 hover:bg-[#babebe] text-white  hover:text-black cursor-pointer'>
-                              <Link href="/signin">Signin </Link>
-                              </p>
-                            
-                            </>
+                            <p className='py-2 hover:bg-[#babebe]  hover:text-black cursor-pointer'>
+                                <Link href="/customer">
+                                    Customer Services
+                                </Link></p>
+                            {session?.user ? (
+                                <p className='py-2 hover:bg-[#babebe]  hover:text-black cursor-pointer'
+                                    onClick={handleSignOutClick}>
+                                    Signout
+                                </p>
+                            ) : (
+                                <>
+                                    <p className='py-2 hover:bg-[#babebe]   hover:text-black cursor-pointer'>
+                                        <Link href="/signin">Signin </Link>
+                                    </p>
+
+                                </>
                             )}
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

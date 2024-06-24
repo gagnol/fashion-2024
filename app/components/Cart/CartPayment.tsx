@@ -99,19 +99,18 @@ const onCheckout = async () => {
 
   return (
     <div className="flex flex-wrap flex-col gap-3 min-w-full bg-[#141726]">
-      <div className="rounded-md border mt-5 p-2 text-white text-center">      
+      <div className="rounded-md border mt-5 p-2  text-center">      
       <Heading size="5"  >Shipping Info</Heading>
-      
-      <Text size="1" >Address:&nbsp;{userInfo?.user.address||""}</Text><br/>
-      <Text size="1">City:&nbsp;{userInfo?.user.city||""}</Text><br/>
-      <Text size="1">Postal Code:&nbsp;{userInfo?.user.postal||""}</Text><br/>
+      <Text size="2" >Address:&nbsp;{userInfo?.user.address||""}</Text><br/>
+      <Text size="2">City:&nbsp;{userInfo?.user.city||""}</Text><br/>
+      <Text size="2">Postal Code:&nbsp;{userInfo?.user.postal||""}</Text><br/>
       <Button variant="surface" size="2" color="indigo" asChild >
       <Link href="/profile">
         Change Info
       </Link>
       </Button>
       </div>
-      <p className="flex items-center justify-between px-1 font-semibold text-white">
+      <p className="flex items-center justify-between px-1 font-semibold ">
         SubTotal: {" "}(
         {(
           productData.reduce((a: number, c: CartItem) => a + c.quantity, 0)
@@ -120,10 +119,10 @@ const onCheckout = async () => {
         <FormattedPrice discountPrice={subTotal}/>
       </p>
       
-      <p className="text-white">
+      <p className="">
         Shipping:<span className="float-right pr-1">${shipping}</span>
       </p>
-      <p className="flex items-center justify-between px-1 font-semibold border-t text-white">
+      <p className="flex items-center justify-between px-1 font-semibold border-t ">
         Total:{" "}
         <FormattedPrice discountPrice={totalAmount}/>
       </p>

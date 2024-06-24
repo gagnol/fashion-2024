@@ -39,7 +39,7 @@ const ProgressBar = ({ value, item }: any) => {
           }}
         />
       </div>
-      <div className="flex flex-row w-[30px] ml-3 font-bold text-white">
+      <div className="flex flex-row w-[30px] ml-3 font-bold ">
         <p ref={progressTextRef}>0</p>
         <p>%</p>
       </div>

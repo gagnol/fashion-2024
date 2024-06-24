@@ -10,10 +10,12 @@ function RecommendedProducts({products}:any) {
         <InView as="div" onChange={(inView, entry) => inView}>
         <div className="my-6 w-full mx-auto">
             <Heading size="6" className="mb-4 text-xl font-medium text-center">Recommended Products for Women&apos;s</Heading>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-2 xl:gap-4  mx-24">
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {products.map((product:any) => (
-                  <Card  key={product.slug} product={product}/> 
-                )).slice(0, 10)}
+                       <div key={product.slug} className="flex justify-center">
+                  <Card  product={product}/> 
+                  </div>
+                )).slice(0, 12)}
             </div>
         </div>
         </InView>

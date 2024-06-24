@@ -11,7 +11,7 @@ function WinterCollection({products}:any) {
         <div className="my-6 border border-gray-300 bg-white flex overflow-hidden ">
             <div className="p-3 pr-12 w-[400px] bg-cover bg-center bg-no-repeat hidden xl:block"
                 style={{ backgroundImage: "url('/cow6.jpg')" }}>
-                <Heading  size="6" className="text-white text-center pb-2">
+                <Heading  size="6" className=" text-center pb-2">
                  Winter Collection
                 </Heading>
              </div>

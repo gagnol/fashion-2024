@@ -25,7 +25,7 @@ const CountryTaxes = ({ discountPrice,product }: any) => {
                         <Popover.Content >
                     <div className='p-2 bg-[#141726] w-60 h-60'>
                         <ul className='m-0 p-0 '>
-                            <h4 className='text-[18px] font-bold p-2 border-b text-white'>
+                            <h4 className='text-[18px] font-bold p-2 border-b '>
                                 Total Price 
                             </h4>
                             <li className="nav_text">Price

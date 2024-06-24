@@ -15,7 +15,7 @@ import { Separator } from "@radix-ui/themes";
 const CartProduct = ({ item }:any) => {
   const dispatch = useDispatch();
   return (
-    <div className=" bg-[#141726] rounded-lg flex text-white ">
+    <div className=" bg-[#141726] rounded-lg flex  ">
       <Link href={`/products/${item.slug}`}>
         <Image
           width={150}
@@ -32,19 +32,19 @@ const CartProduct = ({ item }:any) => {
           </p>
           <p className=" text-base">
             Price{" "}
-            <span className="font-semibold text-white ">
+            <span className="font-semibold  ">
              ${item.price.toFixed(2)}
             </span>
           </p>
           <p className=" text-base">
             Color:{" "}
-            <span className="font-semibold text-white ">
+            <span className="font-semibold  ">
               {item.colorPiked}
             </span>
           </p>
           <p className=" text-base">
             Size:{" "}
-            <span className="font-semibold text-white ">
+            <span className="font-semibold  ">
               {item.sizePiked}
             </span>
           </p>
@@ -128,7 +128,7 @@ const CartProduct = ({ item }:any) => {
             </div>
             <div
               onClick={() => dispatch(deleteProduct(item._id))}
-              className="flex items-center text-sm font-medium text-white
+              className="flex items-center text-sm font-medium 
                hover:text-red-600 cursor-pointer duration-300"
             >
               <IoMdClose className="mt-[2px]"/>

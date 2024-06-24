@@ -8,7 +8,7 @@ import { InView } from 'react-intersection-observer'
 const Advertise = () => {
     return (
       <InView as="div" onChange={(inView, entry) => console.log('Inview0:', inView)}>
-        <div className="container w-full mx-auto ">
+        <div className="max-w-screen-xl w-full mx-auto ">
             <div className="border-b-3 border-dotted border-gray-500 pb-30 " id="top">
                 <div className="container-fluid">
                     <div className="flex flex-wrap">

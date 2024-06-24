@@ -1,8 +1,7 @@
-import { Button, Heading, Text } from '@radix-ui/themes'
+import { Button, Heading, Quote, Text } from '@radix-ui/themes'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-
 
 const Hero2 = () => {
     return (
@@ -13,8 +12,10 @@ const Hero2 = () => {
                         <div className="lg:w-1/2 hidden xl:block">
                             <div className="left-content">
                                 <div className="thumb">
-                                    <div className="absolute bg-[#ebe6e2] top-48 left-[510px] text-center w-[240px]">
-                                     
+                                    <div className="text-black absolute  top-[750px] left-[560px] text-center w-[240px]">
+                                                                         
+                                     <Quote  >The hunting spirit</Quote>
+                                     <Button variant='classic' size="3" >SHOP NOW</Button>
                                         </div>
     <Image src="/cow13.jpg" width={327} height={327} alt="banner13"
     priority

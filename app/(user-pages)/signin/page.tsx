@@ -77,55 +77,55 @@ export default function Signin() {
           </g>
           <defs>
             <radialGradient id="paint0_radial_37_453-1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-804.109 -2036.8) rotate(64.9401) scale(6436.87 6304.81)">
-              <stop stop-color="var(--color-background)"></stop>
-              <stop offset="0.0833333" stop-color="var(--accent-7)"></stop>
-              <stop offset="0.364583" stop-color="var(--accent-5)"></stop>
-              <stop offset="0.658041" stop-color="var(--color-background)"></stop>
-              <stop offset="0.798521" stop-color="var(--accent-9)"></stop>
-              <stop offset="0.942708" stop-color="var(--color-background)"></stop>
-              <stop offset="1" stop-color="var(--color-background)"></stop>
+              <stop stopColor="var(--color-background)"></stop>
+              <stop offset="0.0833333" stopColor="var(--accent-7)"></stop>
+              <stop offset="0.364583" stopColor="var(--accent-5)"></stop>
+              <stop offset="0.658041" stopColor="var(--color-background)"></stop>
+              <stop offset="0.798521" stopColor="var(--accent-9)"></stop>
+              <stop offset="0.942708" stopColor="var(--color-background)"></stop>
+              <stop offset="1" stopColor="var(--color-background)"></stop>
             </radialGradient>
             <radialGradient id="paint1_radial_37_453-1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(201.6 -1080.02) rotate(64.9401) scale(6436.87 6304.81)">
-              <stop stop-color="var(--color-background)"></stop>
-              <stop offset="0.0833333" stop-color="var(--accent-2)"></stop>
-              <stop offset="0.333803" stop-color="var(--accent-1)"></stop>
-              <stop offset="0.658041" stop-color="var(--color-background)"></stop>
-              <stop offset="0.798521" stop-color="var(--accent-9)"></stop>
-              <stop offset="0.942708" stop-color="var(--color-background)"></stop>
-              <stop offset="1" stop-color="var(--color-background)"></stop>
+              <stop stopColor="var(--color-background)"></stop>
+              <stop offset="0.0833333" stopColor="var(--accent-2)"></stop>
+              <stop offset="0.333803" stopColor="var(--accent-1)"></stop>
+              <stop offset="0.658041" stopColor="var(--color-background)"></stop>
+              <stop offset="0.798521" stopColor="var(--accent-9)"></stop>
+              <stop offset="0.942708" stopColor="var(--color-background)"></stop>
+              <stop offset="1" stopColor="var(--color-background)"></stop>
             </radialGradient>
             <radialGradient id="paint2_radial_37_453-1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(912.834 -811.021) rotate(64.9401) scale(6436.87 6304.81)">
-              <stop stop-color="var(--color-background)"></stop>
-              <stop offset="0.140625" stop-color="var(--accent-3)"></stop>
-              <stop offset="0.333803" stop-color="var(--accent-7)"></stop>
-              <stop offset="0.658041" stop-color="var(--color-background)"></stop>
-              <stop offset="0.798521" stop-color="var(--accent-9)"></stop>
-              <stop offset="0.942708" stop-color="var(--color-background)"></stop>
-              <stop offset="1" stop-color="var(--color-background)"></stop>
+              <stop stopColor="var(--color-background)"></stop>
+              <stop offset="0.140625" stopColor="var(--accent-3)"></stop>
+              <stop offset="0.333803" stopColor="var(--accent-7)"></stop>
+              <stop offset="0.658041" stopColor="var(--color-background)"></stop>
+              <stop offset="0.798521" stopColor="var(--accent-9)"></stop>
+              <stop offset="0.942708" stopColor="var(--color-background)"></stop>
+              <stop offset="1" stopColor="var(--color-background)"></stop>
             </radialGradient>
             <radialGradient id="paint3_radial_37_453-1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1711.41 -1639.11) rotate(64.9401) scale(6436.87 6304.81)">
-              <stop stop-color="var(--color-background)"></stop>
-              <stop offset="0.0833333" stop-color="var(--accent-7)"></stop>
-              <stop offset="0.333803" stop-color="var(--accent-1)"></stop>
-              <stop offset="0.658041" stop-color="var(--color-background)"></stop>
-              <stop offset="0.798521" stop-color="var(--accent-9)"></stop>
-              <stop offset="0.942708" stop-color="var(--color-background)"></stop>
-              <stop offset="1" stop-color="var(--color-background)"></stop>
+              <stop stopColor="var(--color-background)"></stop>
+              <stop offset="0.0833333" stopColor="var(--accent-7)"></stop>
+              <stop offset="0.333803" stopColor="var(--accent-1)"></stop>
+              <stop offset="0.658041" stopColor="var(--color-background)"></stop>
+              <stop offset="0.798521" stopColor="var(--accent-9)"></stop>
+              <stop offset="0.942708" stopColor="var(--color-background)"></stop>
+              <stop offset="1" stopColor="var(--color-background)"></stop>
             </radialGradient>
             <radialGradient id="paint4_radial_37_453-1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(3479.06 -623.459) rotate(113.028) scale(8332.26 4870.62)">
-              <stop stop-color="var(--color-background)"></stop>
-              <stop offset="0.0833333" stop-color="var(--accent-7)"></stop>
-              <stop offset="0.333803" stop-color="var(--accent-1)"></stop>
-              <stop offset="0.658041" stop-color="var(--color-background)"></stop>
-              <stop offset="0.798521" stop-color="var(--accent-9)"></stop>
-              <stop offset="0.942708" stop-color="var(--color-background)"></stop>
-              <stop offset="1" stop-color="var(--color-background)"></stop>
+              <stop stopColor="var(--color-background)"></stop>
+              <stop offset="0.0833333" stopColor="var(--accent-7)"></stop>
+              <stop offset="0.333803" stopColor="var(--accent-1)"></stop>
+              <stop offset="0.658041" stopColor="var(--color-background)"></stop>
+              <stop offset="0.798521" stopColor="var(--accent-9)"></stop>
+              <stop offset="0.942708" stopColor="var(--color-background)"></stop>
+              <stop offset="1" stopColor="var(--color-background)"></stop>
             </radialGradient>
           </defs>
         </svg>
         <div style={{ position: 'relative', zIndex: 1 }}>
         <div className="w-[350px] h-fit flex-col rounded-[5px]
-         text-white my-5 opacity-75 border border-[#666] 
+          my-5 opacity-75 border border-[#666] 
          px-[26px] py-[20px] bg-white/10 backdrop-blur-lg shadow-xl">
 
                 <h1 className='text-[21px] font-bold pb-5'>Sign in</h1>

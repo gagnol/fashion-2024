@@ -7,6 +7,7 @@ import { useFormState, useFormStatus } from 'react-dom'
 import {  updateProduct } from '@/lib/action'
 import Image from 'next/image';
 import toast from 'react-hot-toast';
+import SizesInput from './update_product/sizesInput';
 
   
 export default function EditForm({ product }: any) {
@@ -155,11 +156,11 @@ export default function EditForm({ product }: any) {
                         ))}
                 
                         <div className="flex flex-wrap">
-                            <label htmlFor="feature" className='m-2'>Feature</label>
+                            <label htmlFor="isFeature" className='m-2'>Feature</label>
                             <TextField.Root
                                 type="text"
-                                id="feature"
-                                name="feature"
+                                id="isFeature"
+                                name="isFeature"
                                 className="a_input_sm"
                                 autoComplete="off"
                                 defaultValue={product.isFeature}
@@ -193,23 +194,8 @@ export default function EditForm({ product }: any) {
                         autoComplete='false'
                         defaultValue={product.video}
                     />
-                    <div className='flex flex-wrap '>
-                       {product.sizes.map((size: any, index: number) => (
-                            <div className="flex flex-wrap" key={index}>
-                                <label htmlFor={`size-${index}`} 
-                                className='mx-2 align-middle'>Size {index + 1}</label>
-                                
-                                <TextField.Root
-                                    type="text"
-                                    id={`size-${index}`}
-                                    name={`size-${index}`}
-                                    className="a_input_sm"
-                                    required
-                                    autoComplete='false'
-                                    defaultValue={size}
-                                />
-                            </div>
-                        ))}
+                    <div className='flex flex-wrap'>
+                    <SizesInput initialSizes={product.sizes} />
                     </div>
                     <div>
                     {product.colors.map((color:any, index:number) => (

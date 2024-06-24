@@ -68,7 +68,7 @@ const ImageSlider = ({products}:any) => {
         <Button variant="classic" size="3" color="gray" className="py-2 px-4 cursor-pointer"
           onClick={handleBack}
         >
-          <MdChevronLeft className='text-white text-[18px]'/>
+          <MdChevronLeft className=' text-[18px]'/>
           Back
         </Button>
         <Button variant="classic" size="3" color="gray"
@@ -76,7 +76,7 @@ const ImageSlider = ({products}:any) => {
           onClick={handleNext}
         >
           Next
-          <MdChevronRight className='text-white text-[18px]' />
+          <MdChevronRight className=' text-[18px]' />
         </Button>
       </div>
     </div>

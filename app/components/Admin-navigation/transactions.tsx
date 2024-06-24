@@ -11,7 +11,7 @@ const Transactions = async () => {
 
 
   return (
-    <div className="my-5 rounded-md">
+    <div className="max-w-[350px] xl:max-w-full my-5 rounded-md">
       <h2 className=" text-xl">Pending Transactions</h2>
       <table className="table text-center">
         <thead>

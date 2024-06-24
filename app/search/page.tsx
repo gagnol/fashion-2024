@@ -1,7 +1,7 @@
 import ProductItem from '@/app/components/sections-home/Card'
-import Rating from '@/app/components/Stars'
+
 import productServices from '@/lib/productService'
-import { Button } from '@radix-ui/themes'
+import { Button, Separator, Text } from '@radix-ui/themes'
 import Link from 'next/link'
 
 const sortOrders = ['newest', 'lowest', 'highest', 'rating']
@@ -115,10 +115,11 @@ export default async function SearchPage({
     sort,
   })
   return (
-    <div className="max-w-screen-2xl mx-auto py-2 overflow-x-hidden">
+    <div className="max-w-screen-2xl mx-auto py-2 overflow-x-hidden min-h-[900px]">
     <div className="grid md:grid-cols-5 md:gap-5 mx-5 ">
-      <div >
-        <div className="text-xl pt-3">Categories</div>
+      <div className='flex justify-center xl:block min-h-full'>
+      <div className='block'>
+        <Text size="5" >Categories</Text>
         <div >
           <ul>
             <li>
@@ -144,8 +145,12 @@ export default async function SearchPage({
             ))}
           </ul>
         </div>
+        </div>
         <div>
-          <div className="text-xl pt-3">Price</div>
+          <Separator size="4"/>
+          <div className='mt-0 mx-2 xl:mt-4 xl:mx-0'>
+          <Text size="5">Price</Text>
+        
           <ul>
             <li>
               <Link
@@ -169,13 +174,14 @@ export default async function SearchPage({
             ))}
           </ul>
         </div>
-        <div className='my-5'>
-          
-          <div className="dropdown dropdown-top ">
-            <div tabIndex={0} role="button" className="btn btn-outline m-1">
+        </div>
+             <div >
+          <Separator size="4"/>
+          <div className='mt-0 ml-2 xl:mt-4 xl:ml-0' >
+          <Text size="5" >
               Departments
-            </div>
-            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+            </Text>
+            <ul>
               <li>
                 <Link
                   className={`link link-hover ${'all' === department && 'link-primary'
@@ -199,31 +205,7 @@ export default async function SearchPage({
             </ul>
           </div>
         </div>
-        <div className='my-5'>
-          <div className="text-xl pt-3">Customer Review</div>
-          <ul>
-            <li>
-              <Link
-                href={getFilterUrl({ r: 'all' })}
-                className={`link link-hover ${'all' === rating && 'link-primary'
-                  }`}
-              >
-                Any
-              </Link>
-            </li>
-            {ratings.map((r) => (
-              <li key={r} className='flex'>
-                <Link
-                  href={getFilterUrl({ r: `${r}` })}
-                  className={`link link-hover ${`${r}` === rating && 'link-primary'
-                    }`}
-                >
-                  <Rating value={r}></Rating>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        
       </div>
       <div className="md:col-span-4">
         <div className="flex items-center justify-between  py-4">
@@ -265,20 +247,25 @@ export default async function SearchPage({
         <div >
           <div className="grid grid-cols-1 gap-4  xl:grid-cols-3 md:grid-cols-1">
             {products.map((product) => (
-              <ProductItem key={product.slug} product={product} />
+             
+              <div key={product.slug} className='flex justify-center'>
+              <ProductItem  product={product} />
+              </div>
+            
             ))}
           </div>
-          <div className="xl:join md:max-w-[500px] my-10">
+          <div className="xl:join md:max-w-[500px] my-10 flex justify-center mx-auto">
             {products.length > 0 &&
               Array.from(Array(pages).keys()).map((p) => (
+                <Button variant="surface" size="3" key={p} mx="1" asChild>
                 <Link
-                  key={p}
-                  className={`join-item btn ${Number(page) === p + 1 ? 'btn-active' : ''
+                className={`join-item btn ${Number(page) === p + 1 ? 'btn-active' : ''
                     } `}
                   href={getFilterUrl({ pg: `${p + 1}` })}
                 >
                   {p + 1}
                 </Link>
+                </Button>
               ))}
           </div>
         </div>
