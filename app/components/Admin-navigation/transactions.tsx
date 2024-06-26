@@ -1,6 +1,8 @@
 import Image from "next/image";
 import dbConnect from "@/lib/db-connect";
 import OrderModel from "@/lib/order-model"
+import { Button } from "@radix-ui/themes";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Transactions = async () => {
   await dbConnect();
@@ -11,9 +13,13 @@ const Transactions = async () => {
 
 
   return (
+    <div className="overflow-x-auto">
+    <div className='block md:hidden xl:hidden'>
+    <Button variant="ghost" size="3"><FaArrowLeft/> Scroll <FaArrowRight/></Button>                
+    </div>
     <div className="max-w-[350px] xl:max-w-full my-5 rounded-md">
       <h2 className=" text-xl">Pending Transactions</h2>
-      <table className="table text-center">
+      <table className="table text-center"> 
         <thead>
           <tr className="bg-base-200">
             <th>Product</th>
@@ -60,6 +66,7 @@ const Transactions = async () => {
           )}
         </tbody>
       </table>
+    </div>
     </div>
   );
 };

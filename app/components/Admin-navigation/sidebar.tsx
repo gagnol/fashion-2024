@@ -90,6 +90,7 @@ const Sidebar = () => {
      border-[#666] gap-5 shadow-xl max-lg:hidden">
        <div className="flex flex-col gap-3">
         <Separator orientation="vertical"  size="4" mx="1"/>
+        <div className="flex flex-col items-center">
         <Image
           className="rounded-[50%]"
           src={session?.user?.image || "/noavatar.png"}
@@ -99,6 +100,7 @@ const Sidebar = () => {
         />
           <span className="font-bold">{session?.user?.name}</span>
           <span className="text-[12px]">Administrator</span>
+        </div>
        <ul className="list-none">
         {menuItems.map((cat) => (
           <li key={cat.title}>

@@ -12,6 +12,8 @@ import { getSalesPerDay, getSalesPerMonth } from "@/lib/action";
 import SalesChart from "@/app/components/Admin-navigation/Charts/salesChart";
 import DailyChart from "@/app/components/Admin-navigation/Charts/dailyChart";
 import ResponsiveSideBar from "@/app/components/Admin-navigation/responsive-sidebar";
+import MonthlySales from "@/app/components/Admin-navigation/monthly_sales";
+import { Text } from "@radix-ui/themes";
 
 export default async function Main() {
   const session = await getServerSession();
@@ -27,6 +29,7 @@ export default async function Main() {
   const productsCount = await ProductModel.countDocuments()
   const usersCount = await UserModel.countDocuments()
 
+  /* YTD SALES */
   const ordersPriceGroup = await OrderModel.aggregate([
     {
       $group: {
@@ -38,25 +41,41 @@ export default async function Main() {
   ])
 
   const formattedSales = (ordersPriceGroup[0]?.sales)/100
-
-  const salesData = await OrderModel.aggregate([
-    {
-      $group: {
-        _id: { $dateToString: { format: '%d-%m', date: '$createdAt' } },
-        totalOrders: { $sum: 1 },
-        totalSales: { $sum: '$totalAmount' }
+/* END */
+/* ACTUALS */
+const monthlySales = await OrderModel.aggregate([
+  {
+    $project: {
+      year: { $year: "$createdAt" },
+      month: { $month: "$createdAt" },
+      totalAmount: 1,
+    },
+  },
+  {
+    $group: {
+      _id: {
+        year: "$year",
+        month: "$month"
       },
+      totalSales: { $sum: '$totalAmount' },
     },
-    {
-      $project: {
-        _id: 1,
-        totalOrders: 1,
-        totalSales: { $round: ['$totalSales', 2] } // Round to 2 decimal places
-      }
+  },
+  {
+    $sort: {
+      "_id.year": 1,
+      "_id.month": 1,
     },
-    { $sort: { _id: 1 } },
-  ]);
+  },
+]);
 
+const formattedMonthlySales = monthlySales.map(sale => ({
+  year: sale._id.year,
+  month: sale._id.month,
+  totalSales: sale.totalSales / 100, // Assuming totalAmount is in cents
+}));
+
+console.log(formattedMonthlySales);
+/* END */
 
   const totalProductsCount = await ProductModel.aggregate([
     {
@@ -66,8 +85,6 @@ export default async function Main() {
       },
     },
   ]);
-
-  
 
   const totalProducts = totalProductsCount.length > 0 ? totalProductsCount[0].totalProducts : 0;
 
@@ -105,8 +122,12 @@ export default async function Main() {
         <div className="col-span-1 md:col-span-3">
             <h1 className="m-4 text-[28px] font-extrabold">Admin Dashboard</h1>
             <div>
-              <div className="grid grid-cols-1 md:grid-cols-4 ">
-                <div className=" max-w-[350px] xl:max-w-full m-5 p-5 rounded-md border-2">
+              <div className="grid grid-cols-1 md:grid-cols-3 ">
+                <div>
+                <MonthlySales salesData={formattedMonthlySales}/>
+                </div>
+               <div className=" max-w-[350px] xl:max-w-full m-5 p-5 rounded-md border-2">
+                <Text size="5">Year to Date</Text>
                   <p className="text-3xl">${formattedSales} </p>
                   <p>Sales</p>
                   <Link href="/admin/orders" className="hover:text-primary">View sales</Link>

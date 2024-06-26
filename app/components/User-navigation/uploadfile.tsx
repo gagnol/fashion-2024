@@ -6,6 +6,7 @@ import dbConnect from '@/lib/db-connect';
 import UserModel from '@/lib/user-model'
 import { getServerSession } from 'next-auth';
 
+
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -78,15 +79,9 @@ async function Upload({users}:{users:any}) {
           <label htmlFor="image" className="block font-semibold text-sm mb-2">
             Select an Image to Upload
           </label>
-          <input
-            id="image"
-            className="block w-full border-slate-400 rounded focus:border-indigo-300 focus:ring
-             focus:ring-indigo-200 focus:ring-opacity-50"
-            type="file"
-            name="image"
-            required  
+       
             
-          />
+        
         </p>
         <Button users={users}  >Submit</Button>
       </form>

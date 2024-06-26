@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { Toaster } from 'react-hot-toast'
-import CreateForm from '../../components/Admin-navigation/create-product'
 import dbConnect from '@/lib/db-connect'
 import ProductModel, { Product } from '@/lib/product-model'
 import DeleteForm from '../../components/Admin-navigation/delete-product'
@@ -9,7 +8,7 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import Sidebar from '@/app/components/Admin-navigation/sidebar'
 import { Button, Text } from '@radix-ui/themes'
-import { FaChevronLeft, FaChevronRight, FaPencilAlt } from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight, FaPencilAlt } from 'react-icons/fa'
 import SearchBox from '@/app/components/Admin-navigation/search'
 
 
@@ -51,7 +50,6 @@ export default async function ProductDashboard({ searchParams }:
       pageNumbers.push(i);
     }
   }
-
   
   return (
     <div className="max-w-screen-2xl mx-auto my-10">
@@ -59,15 +57,21 @@ export default async function ProductDashboard({ searchParams }:
         <Sidebar />
         <div className="md:col-span-3">
           <div className="mx-auto max-w-2xl lg:max-w-7xl" >
-            <div className="flex justify-between items-center">
-
+            <div className="block xl:flex justify-between items-center">
               <h1 className="font-bold py-10 text-2xl ">Admin Products</h1>
               <Toaster />
-              <CreateForm />
+              <Button size="3">
+                <Link href="/product/new">
+                Create New Product
+                </Link>
+              </Button>
              <SearchBox query={query}/>
             </div>
-
-            Total products :  {totalProducts}
+           Total products :  {totalProducts}
+            <div className="overflow-x-auto">
+              <div className='block md:hidden xl:hidden'>
+              <Button variant="ghost" size="3"><FaArrowLeft/> Scroll <FaArrowRight/></Button>                
+              </div> 
             <table className="table text-center">
               <thead>
                 <tr className='bg-[#141726]'>
@@ -120,6 +124,7 @@ export default async function ProductDashboard({ searchParams }:
                 }
               </tbody>
             </table>
+            </div>
             <div className="flex justify-center items-center my-16">
               <div className="flex border-[1px] gap-4 rounded-[10px] border-light-green p-4">
                 {page === 1 ? (

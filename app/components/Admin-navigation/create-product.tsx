@@ -1,12 +1,12 @@
 'use client'
 import { useFormState, useFormStatus } from 'react-dom'
 import { createProduct } from '@/lib/action'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Button, Heading, TextArea  } from '@radix-ui/themes'
 import { FaArrowRight } from 'react-icons/fa'
 import SizesInput from './Create_product/sizes'
-
+import ImageUpload from '../UploadImage'
 
 interface StringArrayInputProps { }
 
@@ -20,13 +20,23 @@ export default function CreateForm() {
   const ref = useRef<HTMLFormElement>(null)
   useEffect(() => {
     if (state.message.indexOf('Created product') === 0) {
-      ; (document.getElementById('my_modal_3') as any)!.close()
+      
       ref.current?.reset()
       toast(state.message)
     } else if (state.message) {
       toast.success(state.message, { duration: 4000, position: "top-center", })
     }
   }, [state.message])
+
+  /* Image upload */
+  const [images, setImages] = useState<string[]>([]);
+  const handleImageChange = (url: string) => {
+    setImages([...images, url]);
+  };
+
+  const handleImageRemove = (url: string) => {
+    setImages(images.filter(image => image !== url));
+  };
 
   return (
     <div>
@@ -127,12 +137,10 @@ export default function CreateForm() {
                 />
               </div>
               <label htmlFor="image">Image</label>
-              <input
-                type="text"
-                id="image"
-                name="image"
-                className="a_input"
-                required
+              <ImageUpload
+                value={images}
+                onChange={handleImageChange}
+                onRemove={handleImageRemove}
               />
               <label htmlFor="price">Price</label>
               <input

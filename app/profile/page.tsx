@@ -11,6 +11,9 @@ import Link from 'next/link';
 import { MdAttachMoney, MdFavorite, MdOutlineChat } from "react-icons/md";
 import { RiCustomerService2Line } from "react-icons/ri";
 import { Button, Strong, Text } from '@radix-ui/themes';
+
+
+
 const menuItems = [
     {
         title: "Pages",
@@ -69,6 +72,7 @@ export default async function ProfileScreen() {
                 <Image className="mx-auto" src={users.image || "/noavatar.png"} alt=''
                     width={100} height={100} priority style={{ width: 100, height: "auto" }} />
                 <Uploadfile users={users} />
+             
                 <ul className="list-none">
                     {menuItems.map((item) => (
                         <li key={item.title}>

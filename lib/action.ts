@@ -10,42 +10,45 @@ import { z } from 'zod'
 export async function createProduct(prevState: any, formData: FormData) {
   const schema = z.object({
     name: z.string().min(3),
-    image: z.string(),
+    image: z.array(z.string()), // Define image as an array of strings (URLs)
     price: z.number().min(1),
     rating: z.number().min(1).max(5),
-    video: z.string(),
     slug: z.string().min(1).max(1000),
     category: z.string().min(1),
-    department: z.string().min(1),
     brand: z.string().min(1).max(100),
     countInStock: z.number().min(1),
     description: z.string().min(1).max(1000),
-    discount: z.number().min(0).max(99),
     sizes: z.array(z.string()),
- 
+    department: z.string().min(1),
+    discount: z.number().min(0).max(99),
+    colors: z.array(z.object({
+      name: z.string(),
+      color: z.string(),
+    })),
   })
   
   
 
   const sizes = formData.get('sizes');
   const parsedSizes = sizes ? JSON.parse(sizes as string) : [];
+  const colors = formData.get('colors');
+  const parsedColors = colors ? JSON.parse(colors as string) : [];
+
 
   const parse = schema.safeParse({
     name: formData.get('name'),
-    image: formData.get('image'),
+    image: JSON.parse(formData.get('image') as string), // Parse image array from string
     price: Number(formData.get('price')),
     rating: Number(formData.get('rating')),
-    video: formData.get('video'),
     slug: formData.get('slug'),
     category: formData.get('category'),
-    department: formData.get('department'),
     brand: formData.get('brand'),
     countInStock: Number(formData.get('countInStock')),
     description: formData.get('description'),
+    sizes: parsedSizes,
+    department: formData.get('department'),
     discount: Number(formData.get('discount')),
-    sizes: parsedSizes
-
-
+    colors: parsedColors,
   })
   if (!parse.success) {
     console.log(parse.error)
