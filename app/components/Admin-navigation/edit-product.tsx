@@ -98,6 +98,7 @@ export default function EditForm({ product }: any) {
                                 defaultValue={product.price}
                                 step="0.01"
                             />
+                           
                         </div>
                         <div className="flex flex-wrap ">
                             <label htmlFor="discount" className='m-2'>Discount</label>
@@ -140,6 +141,7 @@ export default function EditForm({ product }: any) {
                             />
                              
                         </div>
+                        
                         {product.image.map((img: any, index: number) => (
                             <div className="flex flex-wrap" key={index}>
                                 <label htmlFor={`image-${index}`}>Image {index + 1}</label>
@@ -182,6 +184,16 @@ export default function EditForm({ product }: any) {
                                 className="a_input_sm"
                                 autoComplete="off"
                                 defaultValue={product.bestSeller}
+                            />
+                            <label htmlFor="shipping" className='m-2'>Shipping</label>
+                            <TextField.Root  style={{ width: "fit-content" }}
+                                type="number"
+                                id="shipping"
+                                name="shipping"
+                                autoComplete='off'
+                                defaultValue={product.shipping}
+                                step="0.01"
+                                 className="a_input_sm"
                             />
                         </div>
         

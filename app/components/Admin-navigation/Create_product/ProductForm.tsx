@@ -136,6 +136,8 @@ export default function CreateForm() {
                 className="a_input"
                 required
               />
+              
+              
               <label htmlFor="slug" className='m-2'>Slug</label>
               <input
                 type="text"
@@ -160,6 +162,15 @@ export default function CreateForm() {
               required
               step="0.01"
             />
+            <label htmlFor="shipping" className='m-2'>Shipping&nbsp;</label>
+              <input
+                type="number"
+                id="shipping"
+                name="shipping"
+                className="a_input"
+                required
+                 step="0.01"
+              />
             <label htmlFor="video">Video</label>
             <TextField.Root
               type="text"

@@ -14,6 +14,7 @@ export async function createProduct(prevState: any, formData: FormData) {
     price: z.number().min(1),
     rating: z.number().min(1).max(5),
     slug: z.string().min(1).max(1000),
+    shipping: z.number().min(0),
     category: z.string().min(1),
     brand: z.string().min(1).max(100),
     countInStock: z.number().min(1),
@@ -28,7 +29,6 @@ export async function createProduct(prevState: any, formData: FormData) {
   })
   
   
-
   const sizes = formData.get('sizes');
   const parsedSizes = sizes ? JSON.parse(sizes as string) : [];
   const colors = formData.get('colors');
@@ -40,6 +40,7 @@ export async function createProduct(prevState: any, formData: FormData) {
     image: JSON.parse(formData.get('image') as string), // Parse image array from string
     price: Number(formData.get('price')),
     rating: Number(formData.get('rating')),
+    shipping: Number(formData.get('shipping')),
     slug: formData.get('slug'),
     category: formData.get('category'),
     brand: formData.get('brand'),
@@ -197,6 +198,7 @@ export async function updateProduct(prevState: any, formData: FormData) {
     _id: z.string().min(1),
     name: z.string().min(1),
     price: z.number().min(1),
+    shipping: z.number(),
     rating: z.number().min(1).max(5),
     slug: z.string().min(1),
     category: z.string().min(1),
@@ -223,6 +225,7 @@ export async function updateProduct(prevState: any, formData: FormData) {
     department: formData.get('department') as string,
     brand: formData.get('brand') as string,
     price: Number(formData.get('price')),
+    shipping: Number(formData.get('shipping')),
     discount: Number(formData.get('discount')),
     countInStock: Number(formData.get('countInStock')),
     rating: Number(formData.get('rating')),

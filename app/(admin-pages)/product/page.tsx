@@ -8,7 +8,7 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import Sidebar from '@/app/components/Admin-navigation/sidebar'
 import { Button, Text } from '@radix-ui/themes'
-import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight, FaPencilAlt } from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight, FaPencilAlt, FaPlus } from 'react-icons/fa'
 import SearchBox from '@/app/components/Admin-navigation/search'
 
 
@@ -62,7 +62,7 @@ export default async function ProductDashboard({ searchParams }:
               <Toaster />
               <Button size="3">
                 <Link href="/product/new">
-                Create New Product
+                 Create New Product
                 </Link>
               </Button>
              <SearchBox query={query}/>

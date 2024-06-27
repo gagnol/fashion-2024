@@ -64,7 +64,7 @@ const reviewSchema = new mongoose.Schema(
       required: false
     },
     sizes: { type:[String],required: false },
-    shipping:{ type: Number, required: false  },
+    shipping:{ type: Number, required: false ,default:0 },
     reviews: [reviewSchema],
       },
     {
