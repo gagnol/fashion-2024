@@ -1,4 +1,5 @@
 "use client"
+import { Button } from "@/components/ui/button";
 import emailjs from "emailjs-com";
 import Image from 'next/image';
 import { useState } from "react";
@@ -45,8 +46,8 @@ const Mailer = ({ session }:any) => {
     <div className="grid lg:grid-cols-[50%,1fr] gap-20 ">
       <div>
         <Image
-          className="w-[80%] h-auto lg:w-auto lg:h-auto mx-auto"
-          src="/logo.png"
+          className="m-5 w-[80%] h-auto lg:w-auto lg:h-auto mx-auto"
+          src="/customer.jpeg"
           width={500}
           height={500}
           alt="survey image"
@@ -55,7 +56,9 @@ const Mailer = ({ session }:any) => {
         />
       </div>
       <div className="self-center mx-5 xl:mx-0">
-        <h2 className="text-2xl xl:text-4xl font-bold mx-2 ">Contactanos</h2>
+        <h2 className="text-2xl xl:text-4xl font-bold mx-2 ">
+          Contactanos
+        </h2>
 
         <div className="min-h-[400px] mt-5">
 
@@ -66,15 +69,15 @@ const Mailer = ({ session }:any) => {
                   placeholder="Tu nombre"
                   required
                   autoComplete="false"
-                  className="bg-[#18191E] border
+                  className=" border
                   border-[#33353F] placeholder-[#9CA2A9] text-gray-100 
                   text-sm rounded-lg block w-3/4 p-2.5 mb-4"
                 />
                 <input
                   name="email"
                   type="text"
-                  className="bg-[#18191E] border
-                  border-[#33353F] placeholder-[#9CA2A9] text-gray-100 
+                  className=" border
+                  border-[#33353F] placeholder-[#9CA2A9]  
                   text-sm rounded-lg block w-3/4 p-2.5 mb-4"
                   placeholder="Tu Email *no es editable"
                   defaultValue={session.user.email}
@@ -85,7 +88,7 @@ const Mailer = ({ session }:any) => {
                   type="text"
                   placeholder="Asunto"
                   required
-                  className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9]
+                  className=" border border-[#33353F] placeholder-[#9CA2A9]
                    text-gray-100 text-sm rounded-lg block w-3/4 p-2.5 mb-4"
                    autoComplete="false"
                 />
@@ -95,13 +98,13 @@ const Mailer = ({ session }:any) => {
                   placeholder="Mensaje"
                   required
                   autoComplete="false"
-                  className="bg-[#18191E] border border-[#33353F]
+                  className=" border border-[#33353F]
                   placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-3/4 p-2.5 mb-4"
                      
                 ></textarea>
-                <button className="btn btn-primary cursor-pointer w-3/4" type="submit">
+                <Button type="submit" className="mx-auto w-1/2">
                   Enviar
-                </button>
+                </Button>
               </form>
         </div>
       </div>

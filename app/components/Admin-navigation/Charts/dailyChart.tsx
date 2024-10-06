@@ -2,7 +2,8 @@
 
 
 import { Text } from '@radix-ui/themes';
-import { ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, LineChart, Line } from 'recharts'
+import { ResponsiveContainer, XAxis, YAxis, CartesianGrid, 
+  Tooltip, LineChart, Line } from 'recharts'
 
 const SalesChart = ({ data }: { data: { month: string, data: any[] }} ) => {
     

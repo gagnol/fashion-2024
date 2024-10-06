@@ -107,7 +107,7 @@ function Signup() {
         <div className="w-[350px] h-fit flex-col rounded-[5px]
       my-5 opacity-75 border border-[#666] 
      px-[26px] py-[20px] bg-white/10 backdrop-blur-lg shadow-xl">
-          <h1 className='text-[21px] font-bold pb-5'>Create account</h1>
+         <Text size="8" >Creá una Cuenta</Text>
           <form onSubmit={handleSubmit}>
             {error && <div className="bg-red-500  p-2 mb-2">{error}</div>}
             <Text size="3" style={{ margin: "5px" }} >Full Name</Text>
@@ -128,27 +128,27 @@ function Signup() {
               className="a_input"
               name="email"
             />
-            <Text size="3" style={{ margin: "5px" }} >Password</Text>
+            <Text size="3" style={{ margin: "5px" }} >Contraseña</Text>
             <TextField.Root size="3"
               style={{ marginBottom: "10px" }}
               autoComplete='off'
               type="password"
-              placeholder="Password"
+              placeholder="Ingesa una contraseña mayor a 6 dígitos"
               className="a_input"
               name="password"
             />
 
             <Button variant='surface' size="3" type='submit' style={{ width: "100%", marginTop:"10px" }}>
-              Signup
+              Registrate
             </Button>
           </form>
           <br />
 
         
-          <Text>Already have an account?&nbsp;</Text>
+          <Text>Ya tenés una cuenta?&nbsp;</Text>
           <Button variant="ghost" size="2" asChild >
             <Link href="/signin" >
-              <Text> Sign in</Text>
+              <Text> Iniciá sesión</Text>
             </Link>
           </Button>
         </div>

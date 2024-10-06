@@ -2,24 +2,68 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer base {
+  @layer base {
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 224 71.4% 4.1%;
+      --card: 0 0% 100%;
+      --card-foreground: 224 71.4% 4.1%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 224 71.4% 4.1%;
+      --primary: 262.1 83.3% 57.8%;
+      --primary-foreground: 210 20% 98%;
+      --secondary: 220 14.3% 95.9%;
+      --secondary-foreground: 220.9 39.3% 11%;
+      --muted: 220 14.3% 95.9%;
+      --muted-foreground: 220 8.9% 46.1%;
+      --accent: 220 14.3% 95.9%;
+      --accent-foreground: 220.9 39.3% 11%;
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 210 20% 98%;
+      --border: 220 13% 91%;
+      --input: 220 13% 91%;
+      --ring: 262.1 83.3% 57.8%;
+      --radius: 0.6rem;
+    }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    .dark {
+      --background: 224 71.4% 4.1%;
+      --foreground: 210 20% 98%;
+      --card: 224 71.4% 4.1%;
+      --card-foreground: 210 20% 98%;
+      --popover: 224 71.4% 4.1%;
+      --popover-foreground: 210 20% 98%;
+      --primary: 263.4 70% 50.4%;
+      --primary-foreground: 210 20% 98%;
+      --secondary: 215 27.9% 16.9%;
+      --secondary-foreground: 210 20% 98%;
+      --muted: 215 27.9% 16.9%;
+      --muted-foreground: 217.9 10.6% 64.9%;
+      --accent: 215 27.9% 16.9%;
+      --accent-foreground: 210 20% 98%;
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 210 20% 98%;
+      --border: 215 27.9% 16.9%;
+      --input: 215 27.9% 16.9%;
+      --ring: 263.4 70% 50.4%;
+    }
   }
 }
 
-body {
-  
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
+
+.sidebar-height {
+  height: calc(100vh - 56px);
+}
 
 /* Footer */
 .footer {
@@ -27,7 +71,8 @@ body {
 }
 
 .footer_back {
-  @apply text-center bg-[#5b514e]  pt-4 pb-4 hover:opacity-70 cursor-pointer;
+  @apply text-center bg-[#5b514e]  pt-4 pb-4 
+  hover:opacity-70 cursor-pointer;
 }
 
 .footer_middle {
@@ -44,7 +89,8 @@ body {
 }
 
 .footer_logo {
-  @apply flex gap-1 text-[13px] p-2 border-solid border-[1px] border-[#999] rounded
+  @apply flex gap-1 text-[13px] p-2 border-solid border-[1px]
+   border-[#999] rounded
 }
 
 .footer_copyright {
@@ -92,7 +138,7 @@ body {
 }
 
 .a_signBtn {
-  @apply btn btn-primary btn-outline w-full;
+  @apply  w-full;
 }
 
 .a_label {
@@ -204,7 +250,7 @@ body {
 }
 
 .selected-contact {
-  @apply font-bold p-2 bg-primary-content rounded-lg;
+  @apply font-bold p-2 rounded-lg;
 }
 
 
@@ -241,7 +287,7 @@ body {
 }
 
 .message-text-sender {
-  @apply w-fit bg-primary-content  p-3 rounded-lg font-semibold;
+  @apply w-fit p-3 rounded-lg font-semibold;
 }
 
 /* Message Input */

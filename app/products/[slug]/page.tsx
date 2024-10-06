@@ -21,9 +21,11 @@ import ColorPicker from "@/app/components/Product-detail/colorPicker";
 import Topimage from "@/app/components/Product-detail/topImage";
 import Middleimage from "@/app/components/Product-detail/middleImage";
 import FormattedPrice from "@/app/components/FormattedPrice";
-import { Box,Heading,Strong,Text } from "@radix-ui/themes";
+import { Box,Heading,Separator,Strong,Text } from "@radix-ui/themes";
 import DescriptionList from "@/app/components/Product-detail/description";
 import CardGrid from "@/app/components/sections-home/Card";
+import Questions from "@/app/components/Product-detail/questions";
+import QuestionForm from "@/app/components/Product-detail/questionForm";
 
 
 export default async function ProductDetail({ params }: { params: { slug: string } }) {
@@ -75,7 +77,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
     <Loading>
       <div className="flex flex-wrap sm:justify-center lg:justify-start ml-10 ">
         <Topimage product={product}/>
-        <div >
+        <div>
           <ImageGallery product={product} />
           <div className="hidden xl:block xl:w-[483px] h-[240px] 
            mt-5 text-center p-2  rounded-md border border-white/[0.1]"
@@ -97,7 +99,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
             </div>
           </div>
         </div>
-        <div className="w-[40%] ml-5">
+        <div className="w-[350px] xl:w-[40%] ml-5">
           <h4 className="text-[24px] ">{product.name}</h4>
           <h4>Seller: <a className="text-primary">{product.brand}</a></h4>
           <div className="flex flex-wrap items-center space-x-2 mb-2  border-b-2 ">
@@ -108,6 +110,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
                 <Stars value={product.rating} />
               </div>
             </div>
+            <Separator orientation="vertical" />
             <span className="ml-1">{product.numReviews} ratings </span>
             
           </div>
@@ -164,7 +167,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
           </div>
         </div>
         {/* Rigth */}
-        <div className=" w-[50%] md:w-[20%] ml-5 flex-col border-white border-[1px] rounded p-2">
+        <div className="w-[50%] md:w-[20%] ml-5 flex-col border-white border-[1px] rounded p-2">
           {product.discount > 0 ?
             <>
               <div className="flex align-middle">
@@ -253,8 +256,13 @@ export default async function ProductDetail({ params }: { params: { slug: string
             </Slider>
 
         </div >
-        {/******************Sizes ****************/}
+        {/******************Image Sizes ****************/}
         <Middleimage product={product}/>
+        
+   {/****************** QUESTIONS & ANSWERS ****************/}
+   <Questions questionProducts={questionProducts} product={product} />
+        <QuestionForm product={product} />        
+        
         {/****************** CUSTOMER REVIEWS ****************/}
         <Text size="7" >
           Customer reviews

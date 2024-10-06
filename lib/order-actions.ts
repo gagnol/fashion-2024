@@ -133,9 +133,11 @@ export async function updateOrder(prevState: any, formData: FormData) {
     await dbConnect();
   
     // Use { new: true } to return the modified document
+    const date = new Date();
+const formattedDate = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
     const updatedOrder = await Order.findByIdAndUpdate(
       { _id: data._id },
-      {orderStatus : `Deliver at ${new Date().toISOString()}` },
+      {orderStatus : `Deliver at ${formattedDate}` },
       { new: true }
     );
      // Check if the order was found and updated successfully

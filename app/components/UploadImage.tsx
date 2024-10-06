@@ -27,7 +27,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             <div className="absolute top-0 right-0 z-40">
               <Button type="button" onClick={() => onRemove(url)} 
                       size="3" className="bg-red-1 text-white">
-                <FaTrash className="h-4 w-4" />
+                      <FaTrash className="h-4 w-4" />
               </Button>
             </div>
             <Image

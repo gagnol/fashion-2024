@@ -64,7 +64,7 @@ export default function CreateForm() {
       <div className="w-[550px] mx-auto h-fit flex-col rounded-[5px]
          my-5 opacity-75 border border-[#666] 
          px-[26px] py-[20px] bg-white/10 backdrop-blur-lg shadow-xl ">
-        <Heading size="6" color='jade'>Create New Product</Heading>
+        <Heading size="6" >Create New Product</Heading>
         <form ref={ref} onSubmit={handleSubmit}>
           <div className="form-control w-full max-w-xs py-4 ">
             <label htmlFor="name">Name</label>
@@ -181,12 +181,12 @@ export default function CreateForm() {
             <SizesInput />
             <ColorsInput onColorsChange={handleColorsChange} />
           </div>
-          <Button size="4" type="submit" variant='surface'>
+          <Button size="4" type="submit" variant='classic'>
             Create
           </Button>
-          <Button size="4" variant='surface' type="button" mx="2" color='gray' asChild >
-            <Link href="/product">
-              Back
+          <Button size="4" variant='classic' type="button" mx="2" color='gray' asChild >
+            <Link href="/admin/product">
+              Cancel
               <FaArrowRight />
             </Link>
           </Button>

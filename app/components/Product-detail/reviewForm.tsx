@@ -3,7 +3,6 @@ import { updateReview } from '@/lib/user-action'
 import React, { useState } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import toast from 'react-hot-toast'
-
 import { Button, Dialog, Flex, Text, TextArea, TextField } from '@radix-ui/themes'
 import Stars from '../Stars'
 
@@ -46,7 +45,7 @@ export default function ReviewForm({ session, product }: any) {
           <Dialog.Description size="2" mb="4">
             Share your thoughts with other customers.
           </Dialog.Description>
-
+ 
           <Flex direction="column" gap="3">
             <form
               onSubmit={async (event) => {

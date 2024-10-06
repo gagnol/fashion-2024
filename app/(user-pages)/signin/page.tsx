@@ -6,7 +6,9 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { signIn, useSession } from 'next-auth/react';
-import { Button, Text, TextField } from '@radix-ui/themes';
+import { Button, Separator, Text, TextField } from '@radix-ui/themes';
+import {FcGoogle} from "react-icons/fc"
+
 
 export default function Signin() {
     const { data: session } = useSession();
@@ -54,6 +56,13 @@ export default function Signin() {
             );
         }
     };
+
+const OnClick=(provider:"google")=>{
+  signIn(provider,{
+    callbackUrl:'/'
+  })
+}
+
 
     return (
      
@@ -127,8 +136,9 @@ export default function Signin() {
         <div className="w-[350px] h-fit flex-col rounded-[5px]
          my-5 opacity-75 border border-[#666] 
          px-[26px] py-[20px] bg-white/10 backdrop-blur-lg shadow-xl">
-
-                <h1 className='text-[21px] font-bold pb-5'>Sign in</h1>
+            <div className='py-2'>
+                <Text size="8" >Inicia Sesión</Text>
+                </div>
                 <form onSubmit={handleSubmit(submitHandler)} >
                     <Text size="3" style={{margin:"5px"}} >Email</Text>
                     <TextField.Root size="3"
@@ -142,8 +152,14 @@ export default function Signin() {
                     />
                     {errors.email?.type === 'required' && <p className='a_error'>Email is required</p>}
                     {errors.email?.type === 'pattern' && <p className='a_error'> Invalid email format</p>}
-
-                    <Text size="3" my="4" style={{margin:"5px"}} >Password</Text>
+                 <div className='flex justify-between'>
+                    <Text size="3" my="4" style={{margin:"5px"}}>Contraseña</Text>
+                    <Button variant='ghost' size="2" asChild my="4" style={{margin:"5px"}}>
+                    <Link href="/forgot" >
+                     Olvidaste tu contraseña?
+                     </Link>
+                     </Button>
+                     </div>
                     <TextField.Root size="3"
                         autoComplete='on'
                         id="password"
@@ -155,27 +171,35 @@ export default function Signin() {
                     {errors.password?.type === 'minLength' && <p className='a_error'> Passwords must be at least 6 characters.</p>}
                     {errors.password?.type === 'maxLength' && <p className='a_error'> Passwords must be up to 20 characters.</p>}
 
-                    <br /><br />
-                    <Button variant='surface' size="3" type='submit' style={{ width: "100%" }}>
-                        Continue
+                    <br />
+                    <Separator size="4" color='gray'/>
+                    <Button variant='classic' size="3" type='submit' style={{ width: "100%" }}>
+                        Continuar
                     </Button>
                 </form>
-
-                
-                <br />
-                <div className='a_flabel mb-4'>
-                  
-                  <Button variant='ghost' size="2" asChild>
-                    <Link href="/forgot" >
-                     Forgot your password?
-                     </Link>
+               <br/>
+               <Separator size="4"/> 
+               <Text size="2" className='my-1'>Inicia tu sesión desde tu cuenta de Google</Text>
+             <Button 
+             variant='surface' 
+             size="3" 
+             onClick={()=>OnClick("google")}
+             asChild  
+             style={{ width: "100%" }}
+             >
+                    <FcGoogle/>
+             </Button>
+             
+             <div className='flex justify-between my-5'>
+                    <Text size="3" my="4" style={{margin:"5px"}}>Nuevo cliente?</Text>
+                    <Button variant='ghost' size="2" asChild my="4" style={{margin:"5px"}}>
+                    <Link href="/register" >
+                    Crea tu cuenta
+                    </Link>
                      </Button>
-                </div>
-         
-            <div className='a_divider'> New Customer?</div>   
-                <Link href="/register" >
-                <Button variant='outline' size="3" style={{ width: "100%" }}>Create your account </Button>
-                </Link>
+                     </div>
+               
+             
             </div>
         </div>
         </div>

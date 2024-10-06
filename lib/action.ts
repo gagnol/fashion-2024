@@ -6,6 +6,7 @@ import TaskModel from './task-model'
 import OrderModel from './order-model'
 import dbConnect from './db-connect'
 import { z } from 'zod'
+import SliderModel from './slider-model'
 
 export async function createProduct(prevState: any, formData: FormData) {
   const schema = z.object({
@@ -338,4 +339,97 @@ export const getSalesPerDay = async () => {
   return { month: monthName, data: graphData };
 }
 
+//UPDATE BANNER
+export async function updateBannerProduct(prevState: any, formData: FormData) {
+  const schema = z.object({
+    _id: z.string().min(1),
+    text: z.string().min(1),
+    image: z.string().min(1),
+    link: z.string().min(1),
+    
+  });
+  
+  const parse = schema.safeParse({
+    _id: formData.get('_id') as string,
+    text: formData.get('text') as string,
+    image: formData.get('image') as string,
+    link: formData.get('link') as string,    
+  });
+
+  if (!parse.success) {
+    console.log(parse.error);
+    return { message: 'Form data is not valid' };
+  }
+
+  const data = parse.data;
+
+  try {
+    await dbConnect();
+
+    const existingProduct = await SliderModel.findOne({ _id: data._id });
+
+    if (!existingProduct) {
+      return { message: 'Product not found' };
+    }
+
+    existingProduct.text = data.text;
+    existingProduct.image = data.image;
+    existingProduct.link = data.link
+    
+    await existingProduct.save();
+    revalidatePath('/');
+    return { message: 'Slider updated successfully', product: JSON.parse(JSON.stringify(existingProduct)) };
+  } catch (e) {
+    console.error(e);
+    return { message: 'Failed to update Slider' };
+  }
+}
+
+//DELETE BANNER
+
+export async function deleteBannerProduct(formData: FormData) {
+  const schema = z.object({
+    _id: z.string().min(1),
+    
+  })
+  const data = schema.parse({
+    _id: formData.get('_id'),
+     })
+  try {
+    await dbConnect()
+    await SliderModel.findOneAndDelete({ _id: data._id })
+    revalidatePath('/')
+    return { message: `Deleted product ${data._id}` }
+  } catch (e) {
+    return { message: 'Failed to delete product' }
+  }
+}
+//CREATE BANNER
+export async function createBannerProduct(prevState: any, formData: FormData) {
+  const schema = z.object({
+    text: z.string().min(1),
+    image: z.string().min(1),
+    link: z.string().min(1),
+  })
+  
+  const parse = schema.safeParse({
+    text: formData.get('text') as string,
+    image: formData.get('image') as string,
+    link: formData.get('link') as string,    
+  })
+  if (!parse.success) {
+    console.log(parse.error)
+    return { message: 'Form data is not valid' }
+  }
+  const data = parse.data
+  try {
+    await dbConnect()
+    const product = new SliderModel(data)
+    await product.save()
+    revalidatePath('/')
+    return { message: 'Created Banner successfully' }
+  } catch (e) {
+    return { message: 'Failed to create banner' }
+  }
+}
 

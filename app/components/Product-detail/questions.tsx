@@ -4,6 +4,7 @@ import { FaCaretDown, FaCaretUp } from 'react-icons/fa'
 import { submitLike } from '@/lib/user-action'
 import { useFormStatus } from 'react-dom'
 import { useFormState } from 'react-dom'
+import { Text } from '@radix-ui/themes'
 
 function Questions({ questionProducts }: any) {
   
@@ -16,10 +17,10 @@ function Questions({ questionProducts }: any) {
     <div className='max-w-screen-2xl pb-2 ml-10'>
       <div className='flex flex-wrap justify-start '>
         <div className='w-[100%]' >
-          <h2 className="text-[21px] pl-4 font-semibold pt-1">
-            Customer questions & answers
-          </h2>
-
+        <Text size="7" >
+        Customer questions & answers
+        </Text>
+          
           {questionProducts?.map((item: any) => (
             <ul key={item._id} >
               <li key={item.title}>

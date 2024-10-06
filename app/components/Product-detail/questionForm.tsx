@@ -1,6 +1,7 @@
 'use client'
 
 import { submitQuestion } from '@/lib/user-action'
+import { Button } from '@radix-ui/themes'
 import { useFormState, useFormStatus } from 'react-dom'
 import toast from 'react-hot-toast'
 
@@ -41,9 +42,9 @@ export default function UpdateForm({product}:any) {
                 defaultValue=""
                 />
             </div>
-            <button type="submit" disabled={pending} className="btn btn-primary btn-outline">
+            <Button variant="surface"  type="submit" disabled={pending}>
               Submit Question
-            </button>
+            </Button>
           </form>
         </div>
 

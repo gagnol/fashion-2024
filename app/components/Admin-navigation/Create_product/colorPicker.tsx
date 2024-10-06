@@ -3,7 +3,7 @@ import { Button } from '@radix-ui/themes';
 import React, { useState } from 'react';
 
 const ColorsInput = ({ onColorsChange }:
-     { onColorsChange: (colors: {name: string, color: string}[]) => void }) => {
+   { onColorsChange: (colors: {name: string, color: string}[]) => void }) => {
  
      const [colors, setColors] = useState<{name: string, color: string}[]>([]);
 
@@ -26,10 +26,9 @@ const ColorsInput = ({ onColorsChange }:
 
   return (
     <div>
-        <label>Colors</label>
+      <label>Colors</label>
       {colors.map((color, index) => (
-        
-            <div key={index}>
+          <div key={index}>
           <input
             type="text"
             placeholder="Name"
@@ -42,13 +41,13 @@ const ColorsInput = ({ onColorsChange }:
             onChange={(e) => updateColor(index, 'color', e.target.value)}
           />
             <Button variant='ghost' size="1" color='ruby' type="button" onClick={() => removeColor(index)}>
-            <CrossCircledIcon />    Remove
+            <CrossCircledIcon /> Remove
             </Button>
         </div>
       ))}
       <Button variant='ghost' size="1" color='indigo' my="2" onClick={addColor}>
       <PlusCircledIcon/>Add Color
-        </Button>
+      </Button>
     </div>
   );
 }

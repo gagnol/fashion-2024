@@ -69,9 +69,8 @@ const MonthlySales = ({ salesData }: any) => {
                 <div className="flex items-center">
                         <p className="text-2xl">{percentageVariation.toFixed(2)}%</p>
                         {percentageVariation > 0 ? (
-                           
+                          
                            <Button variant='ghost' color='jade'> <FaArrowUp  className=" ml-2" /></Button>
-
                            
                         ) : percentageVariation < 0 ? (
                             <Button variant='ghost' color='red'> <FaArrowDown  className=" ml-2" /></Button>

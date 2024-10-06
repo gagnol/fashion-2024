@@ -18,7 +18,7 @@ const SizePicker = ({product}:any) => {
                   </> 
                   ):( <></>  )
                 }
-                <div className='block xl:flex'>
+                <div className='block xl:flex xl:flex-wrap'>
                   {product.sizes?.map((item:any, i:number) => (
                     <div className="inline-flex justify-between border-transparent border-[3px]
                      text-center
