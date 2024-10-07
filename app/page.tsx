@@ -6,20 +6,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Image from "next/image"
 import SigninTool from "@/components/header/SigninTool"
 import Link from "next/link"
+import Navbar from "@/components/header/navbar"
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
-      <header className="py-6 px-4 md:px-6 lg:px-8 flex justify-between items-center">
-          <div className="text-2xl font-bold"><span color="#EAEDED">Press</span>Connect</div>
-        <nav className="hidden md:flex space-x-4">
-          <a href="#features" className="text-muted-foreground hover:text-primary">Características</a>
-          <a href="#testimonials" className="text-muted-foreground hover:text-primary">Testimonios</a>
-          <a href="#pricing" className="text-muted-foreground hover:text-primary">Precios</a>
-        </nav>
-       <SigninTool/>
-      </header>
-
+     
       <main>
         <section className="py-20 px-4 md:px-6 lg:px-8 text-center">
           <motion.h1 

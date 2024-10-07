@@ -5,6 +5,7 @@ import './globals.css'
 import Session from './components/session'
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
+import Navbar from '@/components/header/navbar';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +23,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className} >
        <Theme appearance='light' accentColor='gray'>
-            <Session>
+           <Session>
+            <Navbar/>
              {children}
             </Session>
         </Theme>

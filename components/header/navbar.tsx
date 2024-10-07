@@ -1,30 +1,19 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { useState, useTransition } from "react";
-import NavLink from "./navLink";
-import { motion } from "framer-motion";
-import {  Text } from "@radix-ui/themes";
 import SigninTool from "./SigninTool";
 
 const Navbar = () => {
 
   return (
-    <div
-      className="w-full h-[65px] top-0 z-1 px-10"
-    >
-      <div className="w-full h-full flex flex-row items-center justify-between m-auto px-[10px]">
-        <div className="hidden xl:flex h-auto w-auto xl:flex-row items-center">
-          <Text size="6"> Dashboard </Text>
-        </div>
-   
-        <div className="hidden xl:flex xl:flex-row gap-5">
-            <SigninTool/>
-        </div>
-      
-</div>
-
-    </div>
+    <header className="py-6 px-4 md:px-6 lg:px-8 flex justify-between items-center">
+    <div className="text-2xl font-bold">	<Image src='/logo.svg' alt='logo' width={170} height={100} /></div>
+       <nav className="hidden md:flex space-x-4">
+         <a href="#features" className="text-muted-foreground hover:text-primary">Características</a>
+         <a href="#testimonials" className="text-muted-foreground hover:text-primary">Testimonios</a>
+         <a href="#pricing" className="text-muted-foreground hover:text-primary">Precios</a>
+       </nav>
+      <SigninTool/>
+     </header>
   );
 };
 

@@ -44,7 +44,7 @@ export default function Signin() {
                 password,
             });
          
-            router.push( '/');
+            router.push( '/profile/main');
 
         } catch (err:any) {
             toast.error(
@@ -59,14 +59,12 @@ export default function Signin() {
 
 const OnClick=(provider:"google")=>{
   signIn(provider,{
-    callbackUrl:'/'
+    callbackUrl:'/profile/main'
   })
 }
 
-
     return (
-     
-        <div className="a_page" style={{ position: 'relative', width: '100%', height: '100%' }}>
+     <div className="a_page" style={{ position: 'relative', width: '100%', height: '100%' }}>
         <svg
           width="1000px"
           height="1000px"
