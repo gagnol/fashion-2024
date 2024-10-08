@@ -110,12 +110,12 @@ function Signup() {
          <Text size="8" >Creá una Cuenta</Text>
           <form onSubmit={handleSubmit}>
             {error && <div className="bg-red-500  p-2 mb-2">{error}</div>}
-            <Text size="3" style={{ margin: "5px" }} >Full Name</Text>
+            <Text size="3" style={{ margin: "5px" }} >Tu Nombre</Text>
             <TextField.Root size="3"
               style={{ marginBottom: "10px" }}
               autoComplete='off'
               type="text"
-              placeholder="Fullname"
+              placeholder="Tu nombre"
               className="a_input"
               name="name"
             />

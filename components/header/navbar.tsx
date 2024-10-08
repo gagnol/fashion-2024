@@ -1,12 +1,17 @@
 "use client";
 import Image from "next/image";
 import SigninTool from "./SigninTool";
+import Link from "next/link";
 
 const Navbar = () => {
 
   return (
     <header className="py-6 px-4 md:px-6 lg:px-8 flex justify-between items-center">
-    <div className="text-2xl font-bold">	<Image src='/logo.svg' alt='logo' width={170} height={100} /></div>
+    <div className="text-2xl font-bold">
+      	<Link href="/">
+        <Image src='/logo.svg' alt='logo' width={170} height={100} />
+        </Link>
+        </div>
        <nav className="hidden md:flex space-x-4">
          <a href="#features" className="text-muted-foreground hover:text-primary">Características</a>
          <a href="#testimonials" className="text-muted-foreground hover:text-primary">Testimonios</a>
