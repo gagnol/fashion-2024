@@ -1,26 +1,58 @@
 "use client"
-
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Search, Filter, ChevronDown } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Search, Filter, ChevronDown, XCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
-export default function CommunicationDashboard() {
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false)
+export default function CommunicationDashboard({ product }: any) {
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Estados para cada filtro
+  const [selectedSector, setSelectedSector] = useState("");
+  const [selectedSpecialization, setSelectedSpecialization] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedExperience, setSelectedExperience] = useState("");
+
+  // Filtrar productos en base a los selectores y al término de búsqueda
+  const filteredProducts = product.filter((i: any) => {
+    const matchesSearchQuery = i.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSector = selectedSector ? i.sector === selectedSector : true;
+    const matchesSpecialization = selectedSpecialization ? i.specialization === selectedSpecialization : true;
+    const matchesLocation = selectedLocation ? i.location === selectedLocation : true;
+    const matchesExperience = selectedExperience ? i.experience === selectedExperience : true;
+
+    return (
+      matchesSearchQuery &&
+      matchesSector &&
+      matchesSpecialization &&
+      matchesLocation &&
+      matchesExperience
+    );
+  });
+
+  // Función para resetear filtros
+  const clearFilters = () => {
+    setSearchQuery("");
+    setSelectedSector("");
+    setSelectedSpecialization("");
+    setSelectedLocation("");
+    setSelectedExperience("");
+  };
 
   return (
     <div className="min-h-screen bg-background p-8">
@@ -40,6 +72,8 @@ export default function CommunicationDashboard() {
               <Input
                 placeholder="Buscar responsables..."
                 className="flex-grow"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)} // Actualiza searchQuery en cada cambio de input
               />
               <Button onClick={() => setIsFiltersOpen(!isFiltersOpen)}>
                 <Filter className="mr-2 h-4 w-4" />
@@ -50,7 +84,18 @@ export default function CommunicationDashboard() {
                   }`}
                 />
               </Button>
+
+              {/* Botón de borrar filtros */}
+              <Button
+                variant="ghost"
+                onClick={clearFilters}
+                className="flex items-center space-x-2"
+              >
+                <XCircle className="h-4 w-4" />
+                <span>Borrar Filtros</span>
+              </Button>
             </div>
+
             <motion.div
               initial={false}
               animate={{ height: isFiltersOpen ? "auto" : 0 }}
@@ -58,7 +103,8 @@ export default function CommunicationDashboard() {
               className="overflow-hidden"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                <Select>
+                {/* Sector Selector */}
+                <Select value={selectedSector} onValueChange={setSelectedSector}>
                   <SelectTrigger>
                     <SelectValue placeholder="Sector" />
                   </SelectTrigger>
@@ -69,7 +115,9 @@ export default function CommunicationDashboard() {
                     <SelectItem value="asociacion">Asociación Civil</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select>
+
+                {/* Especialización Selector */}
+                <Select value={selectedSpecialization} onValueChange={setSelectedSpecialization}>
                   <SelectTrigger>
                     <SelectValue placeholder="Área de especialización" />
                   </SelectTrigger>
@@ -80,7 +128,9 @@ export default function CommunicationDashboard() {
                     <SelectItem value="rse">Responsabilidad Social</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select>
+
+                {/* Ubicación Selector */}
+                <Select value={selectedLocation} onValueChange={setSelectedLocation}>
                   <SelectTrigger>
                     <SelectValue placeholder="Ubicación" />
                   </SelectTrigger>
@@ -90,7 +140,9 @@ export default function CommunicationDashboard() {
                     <SelectItem value="internacional">Internacional</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select>
+
+                {/* Experiencia Selector */}
+                <Select value={selectedExperience} onValueChange={setSelectedExperience}>
                   <SelectTrigger>
                     <SelectValue placeholder="Experiencia" />
                   </SelectTrigger>
@@ -111,35 +163,41 @@ export default function CommunicationDashboard() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="grid gap-6"
         >
-          {[1, 2, 3].map((i) => (
-            <Card key={i}>
-              <CardHeader>
-                <CardTitle>Nombre del Responsable {i}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="font-semibold">Sector:</p>
-                    <p>Empresarial</p>
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((i: any) => (
+              <Card key={i._id}>
+                <CardHeader>
+                  <CardTitle>Nombre del Responsable {i.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="font-semibold">Sector:</p>
+                      <p>{i.sector}</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold">Organización:</p>
+                      <p>{i.organization}</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold">Área de especialización:</p>
+                      <p>{i.specialization}</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold">Ubicación:</p>
+                      <p>{i.location}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold">Organización:</p>
-                    <p>Empresa Innovadora S.A.</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold">Área de especialización:</p>
-                    <p>Comunicación Corporativa</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold">Ubicación:</p>
-                    <p>Madrid, España</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            ))
+          ) : (
+            <div className="text-center text-muted-foreground">
+              No se encontraron registros.
+            </div>
+          )}
         </motion.div>
       </div>
     </div>
-  )
+  );
 }

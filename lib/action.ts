@@ -11,47 +11,23 @@ import SliderModel from './slider-model'
 export async function createProduct(prevState: any, formData: FormData) {
   const schema = z.object({
     name: z.string().min(3),
-    image: z.array(z.string()), // Define image as an array of strings (URLs)
-    price: z.number().min(1),
-    rating: z.number().min(1).max(5),
-    slug: z.string().min(1).max(1000),
-    shipping: z.number().min(0),
-    category: z.string().min(1),
-    brand: z.string().min(1).max(100),
-    countInStock: z.number().min(1),
-    description: z.string().min(1).max(1000),
-    sizes: z.array(z.string()),
-    department: z.string().min(1),
-    discount: z.number().min(0).max(99),
-    colors: z.array(z.object({
-      name: z.string(),
-      color: z.string(),
-    })),
+    email: z.string().min(3),
+    topics: z.string().min(3),
+    mediaName: z.string().min(3),
+    mediaType: z.string().min(3),
+    location: z.string().min(3),
+    bio: z.string().min(3),
   })
-  
-  
-  const sizes = formData.get('sizes');
-  const parsedSizes = sizes ? JSON.parse(sizes as string) : [];
-  const colors = formData.get('colors');
-  const parsedColors = colors ? JSON.parse(colors as string) : [];
-
-
+    
   const parse = schema.safeParse({
     name: formData.get('name'),
-    image: JSON.parse(formData.get('image') as string), // Parse image array from string
-    price: Number(formData.get('price')),
-    rating: Number(formData.get('rating')),
-    shipping: Number(formData.get('shipping')),
-    slug: formData.get('slug'),
-    category: formData.get('category'),
-    brand: formData.get('brand'),
-    countInStock: Number(formData.get('countInStock')),
-    description: formData.get('description'),
-    sizes: parsedSizes,
-    department: formData.get('department'),
-    discount: Number(formData.get('discount')),
-    colors: parsedColors,
-  })
+    email: formData.get('email'),
+    topics: formData.get('topics'),
+    mediaName: formData.get('mediaName'),
+    mediaType: formData.get('mediaType'),
+    location: formData.get('location'),
+    bio:formData.get('bio')
+     })
   if (!parse.success) {
     console.log(parse.error)
     return { message: 'Form data is not valid' }
@@ -432,4 +408,42 @@ export async function createBannerProduct(prevState: any, formData: FormData) {
     return { message: 'Failed to create banner' }
   }
 }
+//crear comunicador
 
+export async function createComunicador(prevState: any, formData: FormData) {
+  const schema = z.object({
+    name: z.string().min(1, "El nombre debe tener al menos 3 caracteres."),
+    email: z.string().email("Correo electrónico no válido."),
+    sector: z.enum(['empresarial', 'publico', 'ong', 'asociacion']),
+    organization: z.string().min(1, "El nombre de la organización debe tener al menos 3 caracteres."),
+    specialization: z.enum(['corporativa', 'crisis', 'digital', 'rse']),
+    experience: z.number().min(1, "Debe tener al menos 1 año de experiencia."),
+    location: z.string().min(3, "La ubicación debe tener al menos 3 caracteres."),
+    bio: z.string().optional(),
+  })
+  
+  const parse = schema.safeParse({
+    name: formData.get('name') as string,
+    email: formData.get('email') as string,
+    sector: formData.get('sector') as string,
+    organization: formData.get('organization') as string,
+    specialization: formData.get('specialization') as string,
+    experience: Number(formData.get('experience')), // Convert to number
+    location: formData.get('location') as string,
+    bio: formData.get('bio') as string | undefined, // Optional field
+  })
+  if (!parse.success) {
+    console.log(parse.error)
+    return { message: 'Form data is not valid' }
+  }
+  const data = parse.data
+  try {
+    await dbConnect()
+    const product = new SliderModel(data)
+    await product.save()
+    revalidatePath('/')
+    return { message: 'Comunicador registrado exitosamente' }
+  } catch (e) {
+    return { message: 'Failed to create ' }
+  }
+}

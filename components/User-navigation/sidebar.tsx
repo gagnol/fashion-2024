@@ -79,7 +79,7 @@ isOpen ? 'border-r w-[280px] overflow-hidden left-0' : 'w-0 -left-full'
 							} else onOpen()
 						}}
 					>
-						<FaGripLines className='h-5 w-5 text-[#6649B6]' />
+						<FaGripLines className='h-5 w-5 text-[#5865F2]' />
 						<span className='sr-only'>Toggle navigation menu</span>
 					</Button>
 					<Link href='/' className='flex items-center gap-2 
@@ -100,9 +100,9 @@ isOpen ? 'border-r w-[280px] overflow-hidden left-0' : 'w-0 -left-full'
                 <Link href={item.path}  
 				className={`flex gap-1 text-body-medium  ${
 pathname === item.path ? 
-" bg-gray-200 font-semibold " : "text-[#6649B6]"
+" bg-gray-200 font-semibold " : "text-[#5865F2]"
             }`} >
-                  <div className=" flex my-2 
+	<div className=" flex my-2 
 				  hover:text-black">
                  <span className='text-[32px]'> {item.icon}</span>    
                  <span className='text-gray-800 leading-8'>{item.title}</span>  

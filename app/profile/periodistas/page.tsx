@@ -22,16 +22,7 @@ export default async function ProfileScreen() {
         redirect("/signin")
     }
 
-    await dbConnect();
-
-    const orderDocs = (await OrderModel.find({ user:session.user.email }).sort({
-        _id: -1,
-    }))
-    const orders = JSON.parse(JSON.stringify(orderDocs));
-
-    const userDocs = (await UserModel.findOne({ email: session.user.email }))
-    const users = JSON.parse(JSON.stringify(userDocs));
-
+     
 
     return (
       <div>

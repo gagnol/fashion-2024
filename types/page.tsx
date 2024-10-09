@@ -1,45 +1,37 @@
 "use client"
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useState } from "react"
+import { motion } from "framer-motion"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardFooter,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import toast from "react-hot-toast";
-import { createComunicador } from "@/lib/action";
+} from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import toast from "react-hot-toast"
+import { createComicador } from "@/lib/action"
 
 export default function CommunicationRegistrationForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // State to store selected values for 'Select' components
-  const [sector, setSector] = useState("");
-  const [specialization, setSpecialization] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (formData: any) => {
-    setIsSubmitting(true);
-    
-    // Manually append the 'Select' values to the formData
-    formData.append("sector", sector);
-    formData.append("specialization", specialization);
-    
-    const res = await createComunicador(null, formData);
+    setIsSubmitting(true)
+    const res = await  createComicador(null, formData);
+    console.log(formData)
     toast.success(res.message, { duration: 4000, position: "top-center" });
-    setIsSubmitting(false);
+    setIsSubmitting(false)
   };
 
   return (
@@ -63,40 +55,22 @@ export default function CommunicationRegistrationForm() {
             <CardTitle>Formulario de Alta</CardTitle>
           </CardHeader>
           <CardContent>
-            <form
-              onSubmit={async (event) => {
+            <form   onSubmit={async (event) => {
                 event.preventDefault();
                 const formData = new FormData(event.currentTarget);
                 await handleSubmit(formData);
-              }}
-              className="space-y-4"
-            >
+              }} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nombre completo</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="Nombre del responsable"
-                  required
-                />
+                <Input id="name" placeholder="Nombre del responsable" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Correo electrónico</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="correo@ejemplo.com"
-                  required
-                />
+                <Input id="email" type="email" placeholder="correo@ejemplo.com" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="sector">Sector</Label>
-                <Select
-                  onValueChange={(value) => setSector(value)}
-                  value={sector}
-                  required
-                >
+                <Select>
                   <SelectTrigger>
                     <SelectValue placeholder="Seleccionar sector" />
                   </SelectTrigger>
@@ -110,72 +84,43 @@ export default function CommunicationRegistrationForm() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="organization">Nombre de la organización</Label>
-                <Input
-                  id="organization"
-                  name="organization"
-                  placeholder="Nombre de la empresa/entidad"
-                  required
-                />
+                <Input id="organization" placeholder="Nombre de la empresa/entidad" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="specialization">Área de especialización</Label>
-                <Select
-                  onValueChange={(value) => setSpecialization(value)}
-                  value={specialization}
-                  required
-                >
+                <Select>
                   <SelectTrigger>
                     <SelectValue placeholder="Seleccionar área de especialización" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="corporativa">
-                      Comunicación Corporativa
-                    </SelectItem>
+                    <SelectItem value="corporativa">Comunicación Corporativa</SelectItem>
                     <SelectItem value="crisis">Gestión de Crisis</SelectItem>
-                    <SelectItem value="digital">
-                      Comunicación Digital
-                    </SelectItem>
-                    <SelectItem value="rse">
-                      Responsabilidad Social
-                    </SelectItem>
+                    <SelectItem value="digital">Comunicación Digital</SelectItem>
+                    <SelectItem value="rse">Responsabilidad Social</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="experience">Años de experiencia</Label>
-                <Input
-                  id="experience"
-                  name="experience"
-                  type="number"
-                  placeholder="Años de experiencia"
-                  required
-                />
+                <Input id="experience" type="number" placeholder="Años de experiencia" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="location">Ubicación</Label>
-                <Input
-                  id="location"
-                  name="location"
-                  placeholder="Ciudad, País"
-                  required
-                />
+                <Input id="location" placeholder="Ciudad, País" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="bio">Perfil profesional</Label>
-                <Textarea
-                  id="bio"
-                  name="bio"
-                  placeholder="Breve descripción de su experiencia y responsabilidades actuales"
-                />
+                <Textarea id="bio" placeholder="Breve descripción de su experiencia y responsabilidades actuales" />
               </div>
-
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Enviando..." : "Registrar Responsable"}
-              </Button>
             </form>
           </CardContent>
+          <CardFooter>
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Enviando..." : "Registrar Responsable"}
+            </Button>
+          </CardFooter>
         </Card>
       </motion.div>
     </div>
-  );
+  )
 }

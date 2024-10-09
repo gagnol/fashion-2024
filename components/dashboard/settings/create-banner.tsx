@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
 import { FaSave } from 'react-icons/fa';
-import { createBannerProduct } from '@/lib/action';
+import { createComunicador } from '@/lib/action';
 import { FaPlus } from 'react-icons/fa6';
 
 export default function BannerForm() {
@@ -12,7 +12,7 @@ export default function BannerForm() {
  
     // Function to handle form submission
   const handleSubmit = async (formData: any) => {
-    const res = await  createBannerProduct(null, formData);
+    const res = await  createComunicador(null, formData);
     toast.success(res.message, { duration: 4000, position: "top-center" });
     setIsDialogOpen(false); // Close the dialog after submission
   };
@@ -28,7 +28,7 @@ export default function BannerForm() {
         <Dialog.Content maxWidth="450px">
           <Dialog.Title>Add New Banner</Dialog.Title>
           <Flex direction="column" gap="3">
-            <form
+            <form 
               onSubmit={async (event) => {
                 event.preventDefault();
                 const formData = new FormData(event.currentTarget);

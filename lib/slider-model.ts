@@ -1,17 +1,26 @@
 import mongoose from 'mongoose';
 
 export type Slider = {
-  _id:string,
-  text:string ,
-  image: string,
-  link:string
+  name: string;
+  email: string;
+  sector: string;
+  organization: string;
+  specialization: string;
+  experience: number;
+  location: string;
+  bio: string;
 }
 
 const sliderSchema = new mongoose.Schema(
   {
-    text: { type: String, required: true },
-    image: {type: String, required: true},
-    link:{ type: String, required: true }
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    sector: { type: String, enum: ['empresarial', 'publico', 'ong', 'asociacion'], required: true },
+    organization: { type: String, required: true },
+    specialization: { type: String, enum: ['corporativa', 'crisis', 'digital', 'rse'], required: true },
+    experience: { type: Number, required: true },
+    location: { type: String, required: true },
+    bio: { type: String },
   },
   {
     timestamps: true,
