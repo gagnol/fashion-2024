@@ -1,26 +1,47 @@
 "use client"
-
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Search, Filter, ChevronDown } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactNode, useState } from "react";
+import { motion } from "framer-motion";
+import { Search, Filter, ChevronDown } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
-export default function Dashboard() {
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false)
+export default function Dashboard({ product }: any) {
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedMediaType, setSelectedMediaType] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+
+  // Filtered products based on search and filters
+  const filteredProducts = product.filter((i: any) => {
+    const matchesSearch = i.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesTopic = selectedTopic ? JSON.parse(i.topics).includes(selectedTopic) : true;
+    const matchesMediaType = selectedMediaType ? i.mediaType === selectedMediaType : true;
+    const matchesLocation = selectedLocation ? i.location === selectedLocation : true;
+
+    return matchesSearch && matchesTopic && matchesMediaType && matchesLocation;
+  });
+
+  // Reset filters
+  const clearFilters = () => {
+    setSelectedTopic("");
+    setSelectedMediaType("");
+    setSelectedLocation("");
+    setSearchQuery("");
+  };
 
   return (
     <div className="min-h-screen bg-background p-8">
@@ -40,6 +61,8 @@ export default function Dashboard() {
               <Input
                 placeholder="Buscar periodistas..."
                 className="flex-grow"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Button onClick={() => setIsFiltersOpen(!isFiltersOpen)}>
                 <Filter className="mr-2 h-4 w-4" />
@@ -58,7 +81,7 @@ export default function Dashboard() {
               className="overflow-hidden"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                <Select>
+                <Select onValueChange={setSelectedTopic} value={selectedTopic}>
                   <SelectTrigger>
                     <SelectValue placeholder="Temática" />
                   </SelectTrigger>
@@ -70,7 +93,7 @@ export default function Dashboard() {
                     <SelectItem value="deportes">Deportes</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select>
+                <Select onValueChange={setSelectedMediaType} value={selectedMediaType}>
                   <SelectTrigger>
                     <SelectValue placeholder="Tipo de medio" />
                   </SelectTrigger>
@@ -81,7 +104,7 @@ export default function Dashboard() {
                     <SelectItem value="digital">Digital</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select>
+                <Select onValueChange={setSelectedLocation} value={selectedLocation}>
                   <SelectTrigger>
                     <SelectValue placeholder="Ubicación" />
                   </SelectTrigger>
@@ -92,45 +115,56 @@ export default function Dashboard() {
                   </SelectContent>
                 </Select>
               </div>
+              <div className="mt-4">
+                <Button onClick={clearFilters} variant="outline">
+                  Borrar filtros
+                </Button>
+              </div>
             </motion.div>
           </CardContent>
         </Card>
-
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="grid gap-6"
         >
-          {[1, 2, 3].map((i) => (
-            <Card key={i}>
-              <CardHeader>
-                <CardTitle>Nombre del Periodista {i}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="font-semibold">Temáticas:</p>
-                    <p>Política, Economía</p>
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((i: any) => (
+              <Card key={i._id}>
+                <CardHeader>
+                  <CardTitle>Nombre del Periodista {i.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="font-semibold">Temáticas:</p>
+                      {Array.isArray(JSON.parse(i.topics)) &&
+                        JSON.parse(i.topics).map((topic: string, idx: number) => (
+                          <p key={idx}>{topic}</p>
+                        ))}
+                    </div>
+                    <div>
+                      <p className="font-semibold">Nombre del medio:</p>
+                      <p>{i.mediaName}</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold">Tipo de medio:</p>
+                      <p>{i.mediaType}</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold">Ubicación:</p>
+                      <p>{i.location}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold">Nombre del medio:</p>
-                    <p>Diario El Informador</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold">Tipo de medio:</p>
-                    <p>Prensa Digital</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold">Ubicación:</p>
-                    <p>Madrid, España</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            ))
+          ) : (
+            <p>No se encontraron resultados.</p>
+          )}
         </motion.div>
       </div>
     </div>
-  )
+  );
 }

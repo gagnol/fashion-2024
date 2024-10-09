@@ -1,18 +1,9 @@
 
-import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import dbConnect from "@/lib/db-connect";
-import OrderModel from "@/lib/order-model"
-import UserModel from "@/lib/user-model"
-import UserUpdate from "../../components/User-navigation/update-user"
 import Journalist from "@/components/User-navigation/journalist"
-import Link from 'next/link';
-import { MdAttachMoney, MdFavorite, MdOutlineChat } from "react-icons/md";
-import { RiCustomerService2Line } from "react-icons/ri";
-import { Button, Strong, Text } from '@radix-ui/themes';
-
-
+import PeriodistaModel from '@/lib/periodista-model';
 
 export default async function ProfileScreen() {
 
@@ -21,12 +12,13 @@ export default async function ProfileScreen() {
     if (!session?.user) {
         redirect("/signin")
     }
-
-     
-
+    await dbConnect();
+    const productsDocs = await PeriodistaModel.find().sort({ _id: -1 });
+    const product = JSON.parse(JSON.stringify(productsDocs));
+    
     return (
       <div>
-        <Journalist/>
+        <Journalist product={product}/>
       </div>
     );
 }

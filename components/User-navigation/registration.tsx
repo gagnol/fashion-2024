@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Input } from "@/components/ui/input"
@@ -20,15 +19,24 @@ import {
 } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import toast from "react-hot-toast"
+import { createPeriodista } from "@/lib/action"
 
 export default function RegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  // State to store selected values for 'Select' components
+  const [selectedTopics, setSelectedTopics] = useState<string[]>([])
+  const [selectedMediaType, setSelectedMediaType] = useState<string>("")
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     setIsSubmitting(true)
-    // Aquí iría la lógica para enviar los datos del formulario
-    await new Promise(resolve => setTimeout(resolve, 2000)) // Simulación de envío
+    const formData = new FormData(event.currentTarget as HTMLFormElement)
+    formData.append('topics', JSON.stringify(selectedTopics)) // Store topics as a JSON string
+    formData.append('mediaType', selectedMediaType)
+    const res = await createPeriodista(null, formData)
+    toast.success(res.message, { duration: 4000, position: "top-center" })
     setIsSubmitting(false)
   }
 
@@ -40,7 +48,7 @@ export default function RegistrationForm() {
         transition={{ duration: 0.5 }}
         className="text-4xl font-bold mb-8 text-center"
       >
-      Registro de Periodista
+        Registro de Periodista
       </motion.h1>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -56,15 +64,15 @@ export default function RegistrationForm() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nombre completo</Label>
-                <Input id="name" placeholder="Nombre del periodista" required />
+                <Input id="name" name="name" placeholder="Nombre del periodista" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Correo electrónico</Label>
-                <Input id="email" type="email" placeholder="correo@ejemplo.com" required />
+                <Input id="email" name="email" type="email" placeholder="correo@ejemplo.com" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="topics">Temáticas</Label>
-                <Select>
+                <Select onValueChange={(value) => setSelectedTopics([...selectedTopics, value])}>
                   <SelectTrigger>
                     <SelectValue placeholder="Seleccionar temáticas" />
                   </SelectTrigger>
@@ -79,11 +87,11 @@ export default function RegistrationForm() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="mediaName">Nombre del medio</Label>
-                <Input id="mediaName" placeholder="Nombre del medio de comunicación" required />
+                <Input id="mediaName" name="mediaName" placeholder="Nombre del medio de comunicación" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="mediaType">Tipo de medio</Label>
-                <Select>
+                <Select onValueChange={(value) => setSelectedMediaType(value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Seleccionar tipo de medio" />
                   </SelectTrigger>
@@ -97,19 +105,19 @@ export default function RegistrationForm() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="location">Ubicación</Label>
-                <Input id="location" placeholder="Ciudad, País" required />
+                <Input id="location" name="location" placeholder="Ciudad, País" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="bio">Biografía breve</Label>
-                <Textarea id="bio" placeholder="Breve descripción de la experiencia y especialización del periodista" />
+                <Textarea id="bio" name="bio" placeholder="Breve descripción de la experiencia y especialización del periodista" />
               </div>
+              <CardFooter>
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? "Enviando..." : "Registrar Periodista"}
+                </Button>
+              </CardFooter>
             </form>
           </CardContent>
-          <CardFooter>
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Enviando..." : "Registrar Periodista"}
-            </Button>
-          </CardFooter>
         </Card>
       </motion.div>
     </div>

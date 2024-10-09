@@ -7,6 +7,7 @@ import OrderModel from './order-model'
 import dbConnect from './db-connect'
 import { z } from 'zod'
 import SliderModel from './slider-model'
+import PeriodistaModel from './periodista-model'
 
 export async function createProduct(prevState: any, formData: FormData) {
   const schema = z.object({
@@ -361,55 +362,54 @@ export async function updateBannerProduct(prevState: any, formData: FormData) {
   }
 }
 
-//DELETE BANNER
 
-export async function deleteBannerProduct(formData: FormData) {
+//crear Periodista
+export async function createPeriodista(prevState: any, formData: FormData) {
   const schema = z.object({
-    _id: z.string().min(1),
-    
-  })
-  const data = schema.parse({
-    _id: formData.get('_id'),
-     })
-  try {
-    await dbConnect()
-    await SliderModel.findOneAndDelete({ _id: data._id })
-    revalidatePath('/')
-    return { message: `Deleted product ${data._id}` }
-  } catch (e) {
-    return { message: 'Failed to delete product' }
-  }
-}
-//CREATE BANNER
-export async function createBannerProduct(prevState: any, formData: FormData) {
-  const schema = z.object({
-    text: z.string().min(1),
-    image: z.string().min(1),
-    link: z.string().min(1),
-  })
-  
+    name: z.string().min(3, { message: "El nombre debe tener al menos 3 caracteres" }),
+    email: z.string().email({ message: "Debe ser un correo electrónico válido" }),
+    topics: z.array(z.string()).nonempty({ message: "Debe seleccionar al menos una temática" }),
+    mediaName: z.string().min(1, { message: "El nombre del medio es obligatorio" }),
+    mediaType: z.enum(['prensa', 'television', 'radio', 'digital'] ),
+    location: z.string().min(1, { message: "La ubicación es obligatoria" }),
+    bio: z.string().optional(), // Biografía opcional
+  });
+
+  // Parsear los datos del formulario utilizando formData.get para extraer los valores
   const parse = schema.safeParse({
-    text: formData.get('text') as string,
-    image: formData.get('image') as string,
-    link: formData.get('link') as string,    
-  })
+    name: formData.get('name') as string,
+    email: formData.get('email') as string,
+    topics: formData.getAll('topics') as string[],  // getAll para múltiples valores (array)
+    mediaName: formData.get('mediaName') as string,
+    mediaType: formData.get('mediaType') as string,
+    location: formData.get('location') as string,
+    bio: formData.get('bio') as string | undefined, // El campo bio es opcional
+  });
+
   if (!parse.success) {
-    console.log(parse.error)
-    return { message: 'Form data is not valid' }
+    console.log(parse.error); // Mostrar errores en la consola
+    return { message: 'Form data is not valid', errors: parse.error.errors }; // Retornar un objeto con el mensaje de error y los detalles de validación
   }
-  const data = parse.data
+    const data = parse.data;
   try {
-    await dbConnect()
-    const product = new SliderModel(data)
-    await product.save()
-    revalidatePath('/')
-    return { message: 'Created Banner successfully' }
+    // Conectar a la base de datos y crear el registro
+    await dbConnect();
+    const periodista = new PeriodistaModel(data);
+    await periodista.save();
+
+    // Revalidar la ruta (opcional, si es necesario)
+    revalidatePath('/');
+
+    // Retornar un mensaje de éxito
+    return { message: 'Periodista registrado exitosamente' };
   } catch (e) {
-    return { message: 'Failed to create banner' }
+    console.error(e); // Mostrar cualquier error
+    return { message: 'Failed to create ' };
   }
 }
-//crear comunicador
 
+
+//crear comunicador
 export async function createComunicador(prevState: any, formData: FormData) {
   const schema = z.object({
     name: z.string().min(1, "El nombre debe tener al menos 3 caracteres."),
