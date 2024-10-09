@@ -108,7 +108,6 @@ export default function PressReleaseDirectory() {
             </motion.div>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader>
             <CardTitle>Lista de Comunicados</CardTitle>

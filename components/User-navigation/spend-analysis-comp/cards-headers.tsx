@@ -21,13 +21,12 @@ export default function CardHeaders({
 				<CardTitle className="text-sm font-medium text-[#8A8A8A]">
 					{title}
 				</CardTitle>
-			        {Icon}
+			     {Icon}
 			</CardHeader>
 			<CardContent>
 				<div className="text-2xl font-[700] text-[#6649B6]">
 					{withSymbol && countSymbol } {count}
 				</div>
-			
 			</CardContent>
 		</Card>
 	);
