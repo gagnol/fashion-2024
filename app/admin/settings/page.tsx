@@ -9,7 +9,7 @@ import {
 	BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import dbConnect from '@/lib/db-connect';
-import BannersList from "@/components/dashboard/settings/bannersList";
+
 import ProductModel from "@/lib/product-model";
 import SliderModel from "@/lib/slider-model";
 
@@ -46,7 +46,7 @@ export default async function Settings() {
 		<h1 className="mt-4 mb-7 text-[32px] font-[700]">General</h1>
 		<main className="bg-white w-full h-full rounded-t-[12px] rounded-b-[12px]">
 		<Tabmenu />
-		<BannersList products={products}/>
+		
 		</main>
 		</div>
 	);
