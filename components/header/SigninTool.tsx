@@ -47,6 +47,10 @@ function SigninTool() {
     <>
        {session?.user ? (
        <div className='min-w-[200px]'>
+        <ul>
+        <li onClick={handleSignOutClick}>CERRAR SESION</li>
+        </ul>
+        
         <Popover.Root open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
          <Popover.Trigger asChild>
           <Avatar

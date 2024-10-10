@@ -10,7 +10,7 @@ import Navbar from '@/components/header/navbar';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Newcommerce',
+  title: 'PressConnect',
   description: 'Generated Guille',
 }
 
