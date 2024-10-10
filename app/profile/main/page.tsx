@@ -1,4 +1,4 @@
-import Tabmenu from "@/components/User-navigation/spend-analysis-comp/tabmenu";
+
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -7,19 +7,9 @@ import {
 	BreadcrumbPage,
 	BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-
-import BannersList from "@/components/dashboard/settings/bannersList";
-import ProductModel from "@/lib/product-model";
-import SliderModel from "@/lib/slider-model";
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
-import { getSalesPerDay, getSalesPerMonth } from "@/actions/dashborad";
-import CardHeaders from "@/components/dashboard/spend-analysis-comp/cards-headers";
-import MonthlySales from "@/components/dashboard/spend-analysis-comp/monthly_sales";
-import SupplierNeeds from "@/components/dashboard/spend-analysis-comp/supplierneeds";
-import dbConnect from "@/lib/db-connect";
 import OrderModel from '@/lib/order-model'
-import { motion } from "framer-motion";
 import PressReleaseDirectory from "@/components/User-navigation/directorio";
 
 
@@ -59,7 +49,7 @@ export default async function ProfileScreen() {
 			</Breadcrumb>
 		
 		<main className="bg-white w-full h-full rounded-t-[12px] rounded-b-[12px]">
-		<Tabmenu />
+		
 		<PressReleaseDirectory/>
 		</main>
 		</div>
