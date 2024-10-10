@@ -2,7 +2,6 @@
 import { FC } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/datatable";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@radix-ui/themes";

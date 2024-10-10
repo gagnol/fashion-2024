@@ -23,7 +23,7 @@ export async function POST(request: Request, res: Response) {
   if (!userData) {
     return Response.json(
       {
-        message: "Incorrect Email, Please Register",
+        message: "El email no fue encontrado",
       
       },
       {
@@ -36,7 +36,7 @@ export async function POST(request: Request, res: Response) {
 	const { data, error } = await resend.emails.send({
 		from: "Acme <onboarding@resend.dev>",
 		to: [email],
-		subject: "Legendary Password Assistance",
+		subject: "Asistencia de PressConnect",
 		html: render(WelcomeTemplate({ramdom})),
 	});
 
@@ -44,5 +44,5 @@ export async function POST(request: Request, res: Response) {
 		return Response.json(error);
 	}
 
-	return Response.json({ message: "Email sent successfully",email });
+	return Response.json({ message: "Te enviamos un email a",email });
 }

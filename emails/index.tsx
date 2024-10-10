@@ -33,7 +33,7 @@ export const KoalaWelcomeEmail = ({ramdom}:any) => (
 				/>
 				
 				<Text style={paragraph}>
-				To authenticate, please use the following One Time Password (OTP):
+				Para autenticarte, por favor utiliza la siguiente Contraseña de Único Uso (OTP):
 				</Text>
 				<Section style={btnContainer}>
 					
@@ -41,21 +41,17 @@ export const KoalaWelcomeEmail = ({ramdom}:any) => (
 					
 				</Section>
 				<Text style={paragraph}>
-				Don&apos;t share this OTP with anyone.
-         		Our customer service team will never ask you for your password, OTP, 
-				credit card, or banking info.
-        		We hope to see you again soon.
+				No compartas este OTP con nadie.
+				Nuestro equipo de servicio al cliente nunca te pedirá tu contraseña, OTP, información de tu tarjeta de crédito o bancaria.
+				Esperamos verte de nuevo pronto.
 				</Text>
-				
 				<Text style={paragraph}>
-					Best,
+					Saludos,
 					<br />
-					Legendary
+					PressConnect
 				</Text>
 				<Hr style={hr} />
-				<Text style={footer}>If you no longer use the email 
-				address associated with your account, you may contact 
-				Customer Services for help restoring access to your account.</Text>
+				<Text style={footer}>Si ya no utilizas la dirección de correo electrónico asociada a tu cuenta, puedes contactar con el servicio de atención al cliente para obtener ayuda y restaurar el acceso a tu cuenta.</Text>
 			</Container>
 		</Body>
 	</Html>

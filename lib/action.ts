@@ -8,6 +8,7 @@ import dbConnect from './db-connect'
 import { z } from 'zod'
 import SliderModel from './slider-model'
 import PeriodistaModel from './periodista-model'
+import PressModel from './Pressrelease-model'
 
 export async function createProduct(prevState: any, formData: FormData) {
   const schema = z.object({
@@ -445,5 +446,50 @@ export async function createComunicador(prevState: any, formData: FormData) {
     return { message: 'Comunicador registrado exitosamente' }
   } catch (e) {
     return { message: 'Failed to create ' }
+  }
+}
+
+
+export async function nuevaComicacion(prevState: any, formData: FormData) {
+  const schema = z.object({
+    title: z.string().min(1, 'El título es obligatorio'),
+    content: z.string().min(1, 'El contenido es obligatorio'),
+    mediaType: z.enum(['prensa', 'television', 'radio', 'digital']),
+    topic: z.enum(['politica', 'economia', 'tecnologia', 'cultura']),
+    location: z.enum(['local', 'nacional', 'internacional']),
+    reach: z.enum(['pequeno', 'mediano', 'grande']),
+    distributionDate: z.string().transform((str) => new Date(str)), // Parsear a fecha
+  });
+
+  const parse = schema.safeParse({
+    title: formData.get('title') as string,
+    content: formData.get('content') as string,
+    mediaType: formData.get('mediaType') as string,
+    topic: formData.get('topic') as string,
+    location: formData.get('location') as string,
+    reach: formData.get('reach') as string,
+    distributionDate: formData.get('distributionDate') as string,
+  });
+
+  if (!parse.success) {
+    console.log(parse.error); // Mostrar errores en la consola
+    return { message: 'Form data is not valid', errors: parse.error.errors }; // Retornar un objeto con el mensaje de error y los detalles de validación
+  }
+
+  const data = parse.data;
+  try {
+    // Conectar a la base de datos y crear el registro
+    await dbConnect();
+    const comunicado = new PressModel(data);
+    await comunicado.save();
+
+    // Revalidar la ruta (opcional, si es necesario)
+    revalidatePath('/');
+
+    // Retornar un mensaje de éxito
+    return { message: 'Comunicado enviado exitosamente' };
+  } catch (e) {
+    console.error(e); // Mostrar cualquier error
+    return { message: 'Failed to create comunicado' };
   }
 }
