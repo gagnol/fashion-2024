@@ -3,8 +3,8 @@ import { FormEvent, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import BgPage from "@/app/components/User-navigation/BgPage";
-import { Button, TextField } from "@radix-ui/themes";
+import { Button} from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 function Reset() {
   const [error, setError] = useState<string | null>(null);
@@ -33,25 +33,25 @@ console.log(userInfo)
   };
 
   return (
-    <BgPage>
+    <>
       <form onSubmit={handleSubmit}>
         {error && <div className="bg-red-500  p-2 mb-2">{error}</div>}
         <h1 className="text-[21px] font-bold pb-5">Create a new password</h1>
         <div className="a_label">We will ask for this password whenever you Sign-In.</div>
         <label htmlFor="password" className="text-slate-300">Password</label>
-        <TextField.Root size="3" 
+        <Input
         type="password" 
         placeholder="Password" 
         autoComplete="off" 
         name="password"
          />
         <label htmlFor="cpassword" className="text-slate-300">Re-enter password</label>
-        <TextField.Root size="3" 
+        <Input
         type="password" 
         placeholder="Password" autoComplete="off" 
         name="cpassword"
          />
-        <Button variant="surface" size="3" type="submit" style={{ width: "100%", marginTop: "10px" }}>
+        <Button type="submit" style={{ width: "100%", marginTop: "10px" }}>
           Reset password
         </Button>
       </form>
@@ -65,7 +65,7 @@ console.log(userInfo)
           <li>Do not use the same password for multiple online accounts.</li>
         </ul>
       </div>
-    </BgPage>
+    </>
   );
 }
 

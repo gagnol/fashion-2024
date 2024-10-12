@@ -5,10 +5,11 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { addUser } from "@/store/nextSlice";
 import { useDispatch } from "react-redux";
-import { Button, Text, TextField } from "@radix-ui/themes";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import BgPage from "@/app/components/User-navigation/BgPage";
+
 import toast from "react-hot-toast";
+import { Input } from "@/components/ui/input";
 
 function Forgot() {
   const [error, setError] = useState();
@@ -36,21 +37,21 @@ function Forgot() {
   };
 
   return (
-   <BgPage>
+  
         <form onSubmit={handleSubmit}>
           {error && <div className="bg-red-500  p-2 mb-2">{error}</div>}
           <h1 className="text-[21px] font-bold pb-5">Recuperación de clave</h1>
-          <Text size="2" color="jade" >
+          <h5 >
             &nbsp;Ingresa la dirección de correo electrónico asociada con tu cuenta
-          </Text>
+          </h5>
           <br/>
           <label htmlFor="email" className="text-slate-300 ">Email</label>
-          <TextField.Root size="3"
+          <Input
             type="email"
             placeholder="Email"
             name="email"
           />
-         <Button variant="surface" size="3" type="submit" style={{ width: "100%", marginTop: "10px" }}>
+         <Button type="submit" style={{ width: "100%", marginTop: "10px" }}>
             Continuar
           </Button>
           <h5 className="a_label mt-5">¿Tu correo electrónico ha cambiado?</h5>
@@ -58,7 +59,7 @@ function Forgot() {
              <Link href="/customer" className="text-primary hover:underline">Servivio al cliente </Link>para obtener ayuda y restaurar el acceso a tu cuenta.
           </div>
         </form>
-    </BgPage>  
+
     
   );
 }

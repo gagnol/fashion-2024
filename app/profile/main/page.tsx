@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
-import OrderModel from '@/lib/order-model'
 import PressReleaseDirectory from "@/components/User-navigation/directorio";
 
 
@@ -18,11 +17,9 @@ export default async function ProfileScreen() {
     const session = await getServerSession();
 
     if (!session?.user) {
-        redirect("/signin")
+        redirect("/")
     }
-  /* data table */
-  const orderDocs = await OrderModel.find().sort({ _id: -1 });
-  const orders = JSON.parse(JSON.stringify(orderDocs));
+  
 
     return (
       <div className="bg-[#F6F6F6] p-4 lg:gap-6 lg:p-6 h-full w-full">

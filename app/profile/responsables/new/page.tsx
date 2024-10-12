@@ -16,7 +16,6 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-  CardFooter,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -41,7 +40,6 @@ export default function CommunicationRegistrationForm() {
     toast.success(res.message, { duration: 4000, position: "top-center" });
     setIsSubmitting(false);
   };
-
   return (
     <div className="min-h-screen bg-background p-8">
       <motion.h1

@@ -1,5 +1,4 @@
 
-import Mailer from '@/app/components/User-navigation/Mailer';
 import { getServerSession } from 'next-auth';
 import Image from 'next/image'
 import Link from 'next/link';
@@ -33,7 +32,7 @@ import React from 'react'
                         <a className="hidden-link"  >
                         </a>
                     </p>
-                <Mailer session={session}/>
+         {/*        <Mailer session={session}/> */}
                 {/* fin email */}
                     <div className="grid md:grid-cols-3 md:gap-5 m-5">
                         <div className="flex  p-[12px] rounded-md bg-[#999]">

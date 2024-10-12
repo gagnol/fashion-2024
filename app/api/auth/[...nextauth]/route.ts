@@ -7,17 +7,15 @@ import GoogleProvider from "next-auth/providers/google";
 
 const handler = NextAuth({
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
     CredentialsProvider({
       name: "Credentials",
+
       credentials: {
         email: { label: "Email", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials): Promise<any> {
+
         await dbConnect();
 
         if (!credentials?.email || !credentials?.password) {
@@ -37,10 +35,15 @@ const handler = NextAuth({
 
         if (!passwordMatch) throw new Error("Invalid credentials");
 
-        return Promise.resolve(userFound);
+        return Promise.resolve(userFound); // Devuelve la promesa
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
+
   pages: {
     signIn: "/signin",
   },
@@ -48,26 +51,27 @@ const handler = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, user, trigger, session }: { token: any; user?: any; trigger?: any; session?: any }) {
-      if (trigger === "update") {
-        return { ...token, ...session.user };
+    async jwt({ token, user,trigger,session }: { token: any; user?: any ;trigger?:any;session?:any}) {
+      if(trigger==="update"){
+          return {...token ,...session.user}
       }
       if (user) {
-        token._id = user._id;
+        token._id = user._id,
         token.name = user.name;
         token.image = user.image;
         token.isAdmin = user.isAdmin;
         token.address = user.address;
         token.city = user.city;
         token.postal = user.postal;
-        token.country = user.country;
-      }
+        token.country = user.country
+
+      };
 
       return token;
     },
     async session({ session, token }: { session: any; token: any }) {
       if (token) {
-        session.user._id = token._id;
+        session.user._id = token._id,
         session.user.name = token.name;
         session.user.image = token.image;
         session.user.isAdmin = token.isAdmin;
@@ -77,8 +81,10 @@ const handler = NextAuth({
         session.user.country = token.country;
       }
       return session;
+
     },
   },
 });
 
-export { handler as GET, handler as POST };
+
+export { handler as GET, handler as POST }

@@ -3,16 +3,13 @@ import { motion } from "framer-motion"
 import { ArrowRight, CheckCircle, Users, FileText, Send, BarChart2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import Image from "next/image"
-import SigninTool from "@/components/header/SigninTool"
 import Link from "next/link"
-import Navbar from "@/components/header/navbar"
+
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
-     
-      <main>
+     <main>
         <section className="py-20 px-4 md:px-6 lg:px-8 text-center">
           <motion.h1 
             className="text-4xl md:text-6xl font-bold mb-6"
@@ -175,11 +172,11 @@ export default function LandingPage() {
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="text-muted-foreground hover:text-primary">Sobre nosotros</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary">Blog</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary">
+              <li className="text-muted-foreground hover:text-primary" >
                 <Link href="/customer">
                 Contacto
                 </Link>
-                </a></li>
+                </li>
             </ul>
           </div>
           <div>
@@ -187,23 +184,21 @@ export default function LandingPage() {
               Legal
               </h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-muted-foreground hover:text-primary">
+              <li className="text-muted-foreground hover:text-primary">
               <Link href="/terminos">
                 Términos de servicio
-                </Link>
-                </a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary">
+              </Link>
+              </li>
+              <li className="text-muted-foreground hover:text-primary">
               <Link href="/aviso">
                 Política de privacidad
                 </Link>
-                </a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-primary">
+                </li>
+                <li className="text-muted-foreground hover:text-primary">
               <Link href="/cookies">
                 Política de Cookies
                 </Link>
-                </a></li>
-
-
+              </li>
             </ul>
           </div>
         </div>

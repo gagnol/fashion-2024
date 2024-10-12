@@ -13,15 +13,14 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import Sidebar from '@/components/User-navigation/sidebar'
-import { Toaster } from 'react-hot-toast'
+
 import { useCollapsibleStore } from '@/lib/usecollapse'
-import { FaGripLinesVertical, FaMagic, FaPaintBrush, FaPlus, FaSpinner } from 'react-icons/fa'
 import { useState } from 'react'
-import { FaUser } from 'react-icons/fa6'
+import { User,Wand,Loader2,Plus,Brush,GripVertical } from 'lucide-react';
 
 export default function Dashboard({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname()
-	const { isOpen, onOpen, onClose } = useCollapsibleStore()
+	const {isOpen, onOpen, onClose } = useCollapsibleStore()
 	const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = () => {
@@ -32,16 +31,15 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
     }, 2000); // You can replace this timeout with actual logic
   };
 	return (
-		<section className='relative'>
+		<section className='relative z-2'>
 			<Sidebar />
 			<main
 				className={cn(
-					'flex flex-1 flex-col transition-[margin-left] duration-500 delay-0 ease-in-out',
+					'flex flex-1 flex-col transition-[margin-left] duration-500 delay-0 ease-in-out ',
 					isOpen ? 'lg:ml-[280px]' : 'lg:ml-0'
 				)}
 			>
-				<Toaster />
-
+			
 				<header className='flex h-14 items-center gap-4 border-b bg-white px-4 lg:h-[60px] lg:px-6 sticky top-0 z-[3]'>
 					<Sheet>
 						<SheetTrigger asChild>
@@ -50,7 +48,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
 								size='icon'
 								className='shrink-0 lg:hidden'
 							>
-								<FaGripLinesVertical className='h-5 w-5' />
+								<GripVertical className='h-5 w-5' />
 								<span className='sr-only'>Toggle navigation menu</span>
 							</Button>
 						</SheetTrigger>
@@ -67,7 +65,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
 											' text-primary bg-indigo-200'
 									)}
 								>
-									<FaPaintBrush className='h-4 w-4' />
+									< Brush className='h-4 w-4' />
 									Spend Analysis
 								</Link>
 								<Link
@@ -77,7 +75,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
 										pathname.includes('/projects') && 'bg-indigo-200 text-primary'
 									)}
 								>
-									<FaPaintBrush className='h-4 w-4' />
+									< Brush className='h-4 w-4' />
 									All Projects
 								</Link>
 								<Link
@@ -87,7 +85,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
 										pathname.includes('/settings') && 'bg-indigo-200 text-primary'
 									)}
 								>
-									<FaPaintBrush className='h-4 w-4' />
+									< Brush className='h-4 w-4' />
 									Settings
 								</Link>
 							</nav>
@@ -123,7 +121,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
 							} else onOpen()
 						}}
 					>
-						<FaMagic className='h-5 w-5' />
+						<Wand className='h-5 w-5' />
 						<span className='sr-only'>Toggle navigation menu</span>
 					</Button>
 					<div
@@ -134,17 +132,17 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
 					>
 					</div>
 					<div className='flex items-center gap-4 sm:gap-8
-					 md:gap-9'>
+					 md:gap-9 z-10'>
 		<Link href="/profile/periodistas/new" className='block'>
 		<Button disabled size='lg' className='bg-[#666]
 		text-white' onClick={handleClick}>
 		 {isLoading ? (
           <>
-            <FaSpinner className="animate-spin" /> &nbsp; Loading...
+            <Loader2 className="animate-spin" /> &nbsp; Loading...
           </>
         ) : (
           <>
-            <FaUser /> &nbsp; Registrate Periodista
+            <User /> &nbsp; Registrate Periodista
           </>
         )}
 		</Button>
@@ -154,11 +152,11 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
 		text-white' onClick={handleClick}>
 		 {isLoading ? (
           <>
-            <FaSpinner className="animate-spin" /> &nbsp; Loading...
+            <Loader2 className="animate-spin" /> &nbsp; Loading...
           </>
         ) : (
           <>
-            <FaUser /> &nbsp; Registrate comunicador
+            <User /> &nbsp; Registrate comunicador
           </>
         )}
 		</Button>
@@ -167,11 +165,11 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
 		<Button onClick={handleClick}>
 		 {isLoading ? (
           <>
-            <FaSpinner className="animate-spin" /> &nbsp; Loading...
+            <Loader2 className="animate-spin" /> &nbsp; Loading...
           </>
         ) : (
           <>
-            <FaPlus /> &nbsp; Crear comunicación
+            <Plus /> &nbsp; Crear comunicación
           </>
         )}
 		</Button>

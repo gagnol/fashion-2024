@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Edit, Users, Send, ChevronDown } from "lucide-react";
@@ -8,23 +7,23 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { nuevaComicacion } from "@/lib/action";
+import { useSession } from "next-auth/react";
 
 export default function PressReleaseDashboard() {
+  const { data: session } = useSession();
   const [isSegmentationOpen, setIsSegmentationOpen] = useState(false);
   const [mediaType, setMediaType] = useState("");
   const [topic, setTopic] = useState("");
   const [location, setLocation] = useState("");
   const [reach, setReach] = useState("");
-  const [distributionDate, setDistributionDate] = useState("");
-
+  const [distributionDate, setDistributionDate] = useState(""); 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (formData: FormData) => {
-    setIsSubmitting(true);
 
+    setIsSubmitting(true);
     // Manually append the 'Select' values to the formData
     formData.append("mediaType", mediaType);
     formData.append("topic", topic);
@@ -39,6 +38,7 @@ export default function PressReleaseDashboard() {
 
   return (
     <div className="flex h-screen bg-background">
+     <Toaster/>
       <div className="flex-1 overflow-auto p-8">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
