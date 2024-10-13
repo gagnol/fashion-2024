@@ -169,7 +169,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
           </>
         ) : (
           <>
-            <Plus /> &nbsp; Crear comunicación
+            <Plus /> &nbsp; Crear comunicado
           </>
         )}
 		</Button>

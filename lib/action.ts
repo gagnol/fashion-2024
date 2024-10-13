@@ -115,7 +115,6 @@ export async function createComunicador(prevState: any, formData: FormData) {
   }
 }
 
-
 export async function nuevaComicacion(prevState: any, formData: FormData) {
   const schema = z.object({
     title: z.string().min(1, 'El título es obligatorio'),
@@ -124,7 +123,12 @@ export async function nuevaComicacion(prevState: any, formData: FormData) {
     topic: z.enum(['politica', 'economia', 'tecnologia', 'cultura']),
     location: z.enum(['local', 'nacional', 'internacional']),
     reach: z.enum(['pequeno', 'mediano', 'grande']),
-    distributionDate: z.string().transform((str) => new Date(str)), // Parsear a fecha
+    distributionDate: z
+    .string()
+    .transform((str) => new Date(str))
+    .optional(), // Mark as optional
+    email: z.string().email('Debe ser un correo válido'), // Validate email format
+    image: z.string().optional(), // Optional string field for image
   });
 
   const parse = schema.safeParse({
@@ -134,28 +138,31 @@ export async function nuevaComicacion(prevState: any, formData: FormData) {
     topic: formData.get('topic') as string,
     location: formData.get('location') as string,
     reach: formData.get('reach') as string,
-    distributionDate: formData.get('distributionDate') as string,
+    distributionDate: formData.get('distributionDate') || undefined, // Handle undefined case
+    email: formData.get('email') as string,
+    image: formData.get('image') as string,
   });
 
   if (!parse.success) {
-    console.log(parse.error); // Mostrar errores en la consola
-    return { message: 'Form data is not valid', errors: parse.error.errors }; // Retornar un objeto con el mensaje de error y los detalles de validación
+    console.log(parse.error); // Log errors to the console
+    return { message: 'Form data is not valid', errors: parse.error.errors }; // Return error message and details
   }
 
   const data = parse.data;
+
   try {
-    // Conectar a la base de datos y crear el registro
+    // Connect to the database and create the record
     await dbConnect();
     const comunicado = new PressModel(data);
     await comunicado.save();
 
-    // Revalidar la ruta (opcional, si es necesario)
+    // Revalidate the path (optional)
     revalidatePath('/');
 
-    // Retornar un mensaje de éxito
+    // Return success message
     return { message: 'Comunicado enviado exitosamente' };
   } catch (e) {
-    console.error(e); // Mostrar cualquier error
+    console.error(e); // Log any error
     return { message: 'Failed to create comunicado' };
   }
 }

@@ -1,44 +1,67 @@
 "use client";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { motion } from "framer-motion";
-import { Edit, Users, Send, ChevronDown } from "lucide-react";
+import { Edit } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast, Toaster } from "react-hot-toast";
 import { nuevaComicacion } from "@/lib/action";
 import { useSession } from "next-auth/react";
+import ImageUpload from "@/components/User-navigation/UploadImage";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useRouter } from "next/navigation"; 
 
 export default function PressReleaseDashboard() {
   const { data: session } = useSession();
-  const [isSegmentationOpen, setIsSegmentationOpen] = useState(false);
+  const router = useRouter(); // Initialize useRouter
   const [mediaType, setMediaType] = useState("");
   const [topic, setTopic] = useState("");
   const [location, setLocation] = useState("");
   const [reach, setReach] = useState("");
-  const [distributionDate, setDistributionDate] = useState(""); 
+  const [distributionDate, setDistributionDate] = useState("");
+  const [image, setImage] = useState<string[]>([]); // Store uploaded image URLs
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (formData: FormData) => {
+  const handleImageChange = (url: string) => setImage([url]); // Limit to one image
+  const handleImageRemove = () => setImage([]);
 
+  const handleSubmit = async (formData: FormData) => {
     setIsSubmitting(true);
-    // Manually append the 'Select' values to the formData
+
+    // Append hidden email and image to formData
+    formData.append("email", session?.user?.email || "");
+    if (image.length > 0) {
+      formData.append("image", image[0]); // Only one image
+    }
+
+    // Append Select values
     formData.append("mediaType", mediaType);
     formData.append("topic", topic);
     formData.append("location", location);
     formData.append("reach", reach);
     formData.append("distributionDate", distributionDate);
 
-    const res = await nuevaComicacion(null, formData); // Llamar a nuevaComicacion (action.ts)
+    const res = await nuevaComicacion(null, formData);
     toast.success(res.message, { duration: 4000, position: "top-center" });
     setIsSubmitting(false);
+
+    // Redirect after 2 seconds
+    setTimeout(() => {
+      router.push("/profile/main");
+    }, 2000);
   };
 
   return (
     <div className="flex h-screen bg-background">
-     <Toaster/>
+      <Toaster />
       <div className="flex-1 overflow-auto p-8">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -65,14 +88,18 @@ export default function PressReleaseDashboard() {
                 }}
                 className="space-y-4"
               >
-                {/* Campo para el título */}
+                <div>
+                  <h4>Imagen de portada</h4>
+                  <ImageUpload
+                    value={image}
+                    onChange={handleImageChange}
+                    onRemove={handleImageRemove}
+                  />
+                </div>
                 <Input name="title" placeholder="Título del comunicado" required />
-
-                {/* Campo para el contenido */}
                 <Textarea name="content" placeholder="Contenido del comunicado" rows={10} required />
 
-                {/* Select para el tipo de medio */}
-                <Select onValueChange={(value) => setMediaType(value)} required>
+                <Select onValueChange={(value: SetStateAction<string>) => setMediaType(value)} required>
                   <SelectTrigger>
                     <SelectValue placeholder="Tipo de medio" />
                   </SelectTrigger>
@@ -84,8 +111,7 @@ export default function PressReleaseDashboard() {
                   </SelectContent>
                 </Select>
 
-                {/* Select para la temática */}
-                <Select onValueChange={(value) => setTopic(value)} required>
+                <Select onValueChange={(value: SetStateAction<string>) => setTopic(value)} required>
                   <SelectTrigger>
                     <SelectValue placeholder="Temática" />
                   </SelectTrigger>
@@ -97,8 +123,7 @@ export default function PressReleaseDashboard() {
                   </SelectContent>
                 </Select>
 
-                {/* Select para la ubicación */}
-                <Select onValueChange={(value) => setLocation(value)} required>
+                <Select onValueChange={(value: SetStateAction<string>) => setLocation(value)} required>
                   <SelectTrigger>
                     <SelectValue placeholder="Ubicación" />
                   </SelectTrigger>
@@ -109,8 +134,7 @@ export default function PressReleaseDashboard() {
                   </SelectContent>
                 </Select>
 
-                {/* Select para el alcance */}
-                <Select onValueChange={(value) => setReach(value)} required>
+                <Select onValueChange={(value: SetStateAction<string>) => setReach(value)} required>
                   <SelectTrigger>
                     <SelectValue placeholder="Alcance" />
                   </SelectTrigger>
@@ -121,15 +145,12 @@ export default function PressReleaseDashboard() {
                   </SelectContent>
                 </Select>
 
-                {/* Input para la fecha de distribución */}
                 <Input
                   type="datetime-local"
                   name="distributionDate"
-                  onChange={(e) => setDistributionDate(e.target.value)}
-                  required
+                  onChange={(e: { target: { value: SetStateAction<string>; }; }) => setDistributionDate(e.target.value)}
                 />
-
-                {/* Botón de enviar */}
+                
                 <div className="flex justify-end">
                   <Button type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Enviando..." : "Enviar comunicado"}

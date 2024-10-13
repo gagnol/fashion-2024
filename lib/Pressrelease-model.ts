@@ -31,14 +31,26 @@ const pressReleaseSchema = new mongoose.Schema({
   },
   distributionDate: {
     type: Date,
-    required: true,
+    required: false,
   },
   status: {
     type: String,
     enum: ['draft', 'scheduled', 'sent'],
     default: 'draft',
   },
-});
+  email: {
+    type: String,
+    required: [true, 'El correo electrónico es obligatorio'],
+  },
+  image: {
+    type: String,
+    required: false,
+  },
+},
+{
+  timestamps: true,
+}
+);
 
 const PressRelease = mongoose.models.PressRelease || mongoose.model('PressRelease', pressReleaseSchema);
 export default PressRelease;

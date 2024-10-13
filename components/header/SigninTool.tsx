@@ -68,7 +68,7 @@ function SigninTool() {
                                     <div className='flex bg-white'>
                                         <div className='flex-1 flex flex-row max-w-[40%] min-w-[40%] mx-4'>
                                             <ul className='m-0 p-0'>
-                                                <h4 className='text-[16px] font-bold py-2'>Your List</h4>
+                                                <h4 className='text-[16px] font-bold py-2'></h4>
                                                 <Link href="/admin/main">
                                                     {session?.user?.email === "admin@example.com" && (
                                                         <li className="nav_text font-bold" onClick={handleButtonClick}>
