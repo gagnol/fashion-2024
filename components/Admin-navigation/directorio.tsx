@@ -5,7 +5,7 @@ import { DataTable } from "./datatable";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Eye, Filter, Search, X } from "lucide-react";
+import { ChevronDown, Edit, Eye, Filter, Search, Trash, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -17,10 +17,27 @@ import {
 } from "@/components/ui/select";
 import { Input } from "../ui/input";
 import { subDays, subMonths, subYears, isAfter } from "date-fns";
+import { deleteComicacion } from "@/lib/action";
+import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 interface Props {
   orders: any[]; // Ajustar según el modelo de orden
 }
+// Delete handler function with FormData
+const handleDelete = async (id: string) => {
+  const confirmed = confirm("Está seguro de borrar el comunicado?");
+  if (!confirmed) return;
+
+  const formData = new FormData();
+  formData.append("_id", id); // Add the item ID to the form data
+
+  const res = await deleteComicacion(null, formData);
+  toast.success(res.message, { duration: 4000, position: "top-center" });
+    setTimeout(() => {
+    redirect("/admin/main")
+  }, 2000);
+};
 
 // Columnas para DataTable
 export const ordersColumn: ColumnDef<any>[] = [
@@ -84,6 +101,28 @@ export const ordersColumn: ColumnDef<any>[] = [
       </Link>
     ),
   },
+  {
+    id: "edit",
+    cell: ({ row }) => (
+      <Link href={`/profile/main/comunicados/${row.original._id}`}>
+        <Button variant="ghost" className="text-blue-500 hover:text-blue-700">
+          <Edit size={24} />
+        </Button>
+      </Link>
+    ),
+  },
+  {
+    id: "delete",
+    cell: ({ row }) => (
+      <Button
+        variant="ghost"
+        className="text-red-500 hover:text-red-700"
+        onClick={() => handleDelete(row.original._id)}
+      >
+        <Trash size={24} />
+      </Button>
+    ),
+  },
 ];
 
 const SupplierNeeds: FC<Props> = ({ orders }) => {
@@ -129,7 +168,7 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
         transition={{ duration: 0.5 }}
         className="text-4xl font-bold mb-8 mt-8"
       >
-        Directorio de Comunicados
+        Últimos Comunicados
       </motion.h1>
 
       {/* Sección de búsqueda y filtros */}
@@ -156,7 +195,6 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
               <X className="h-4 w-4" /> Limpiar filtros
             </Button>
           </div>
-
           {/* Filtros desplegables */}
           <motion.div
             initial={false}
@@ -178,7 +216,6 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
                   <SelectItem value="ultimo-ano">Último año</SelectItem>
                 </SelectContent>
               </Select>
-
               <Select
                 onValueChange={(value) => setSelectedLocation(value)}
                 value={selectedLocation}
@@ -196,7 +233,6 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
           </motion.div>
         </CardContent>
       </Card>
-
       {/* Tabla de datos */}
       <DataTable
         columns={ordersColumn}

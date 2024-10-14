@@ -7,28 +7,57 @@ import SliderModel from './slider-model'
 import PeriodistaModel from './periodista-model'
 import PressModel from './Pressrelease-model'
 
-
 export async function deleteUser(formData: FormData) {
   const schema = z.object({
     _id: z.string().min(1),
-    name: z.string().min(1),
-  })
+    })
   const data = schema.parse({
     _id: formData.get('_id'),
-    name: formData.get('name'),
-  })
-
+    })
   try {
     await dbConnect()
     await UserModel.findOneAndDelete({ _id: data._id })
     revalidatePath('/')
-    console.log({ message: `Deleted user ${data.name}` })
-    return { message: `Deleted user ${data.name}` }
+    return { message: `Deleted user ${data._id}` }
   } catch (e) {
     return { message: 'Failed to delete product' }
   }
 }
 
+//delete periodista
+export async function deletePeriodista(p0: null, formData: FormData) {
+  const schema = z.object({
+    _id: z.string().min(1),
+  })
+  const data = schema.parse({
+    _id: formData.get('_id'),
+  })
+  try {
+    await dbConnect()
+    await PeriodistaModel.findOneAndDelete({ _id: data._id })
+    revalidatePath('/')
+    return { message: `Deleted periodista ${data._id}` }
+  } catch (e) {
+    return { message: 'Failed to delete periodista' }
+  }
+}
+//delete comunicador
+export async function deleteComunicador(p0: null, formData: FormData) {
+  const schema = z.object({
+    _id: z.string().min(1),
+  })
+  const data = schema.parse({
+    _id: formData.get('_id'),
+  })
+  try {
+    await dbConnect()
+    await SliderModel.findOneAndDelete({ _id: data._id })
+    revalidatePath('/')
+    return { message: `Deleted Comunicador ${data._id}` }
+  } catch (e) {
+    return { message: 'Failed to delete comunicador' }
+  }
+}
 
 //crear Periodista
 export async function createPeriodista(prevState: any, formData: FormData) {
@@ -166,3 +195,191 @@ export async function nuevaComicacion(prevState: any, formData: FormData) {
     return { message: 'Failed to create comunicado' };
   }
 }
+
+//editar comunicacion
+export async function editComicacion(p0: null, formData: FormData) {
+  const schema = z.object({
+    _id: z.string().min(1, 'El ID es obligatorio'), // Ensure _id is required
+    title: z.string().min(1, 'El título es obligatorio'),
+    content: z.string().min(1, 'El contenido es obligatorio'),
+    mediaType: z.enum(['prensa', 'television', 'radio', 'digital']),
+    topic: z.enum(['politica', 'economia', 'tecnologia', 'cultura']),
+    location: z.enum(['local', 'nacional', 'internacional']),
+    reach: z.enum(['pequeno', 'mediano', 'grande']),
+    distributionDate: z
+      .string()
+      .transform((str) => (str ? new Date(str) : undefined)) // Handle optional date
+      .optional(),
+    email: z.string().email('Debe ser un correo válido'),
+    image: z.string().optional(),
+  });
+
+  // Log formData for debugging
+  console.log("Form Data:", Object.fromEntries(formData.entries()));
+
+  // Parse form data
+  const parse = schema.safeParse({
+    _id: formData.get('_id') as string || '', // Extract the ID from the formData
+    title: formData.get('title') as string,
+    content: formData.get('content') as string,
+    mediaType: formData.get('mediaType') as string,
+    topic: formData.get('topic') as string,
+    location: formData.get('location') as string,
+    reach: formData.get('reach') as string,
+    distributionDate: formData.get('distributionDate') || undefined,
+    email: formData.get('email') as string,
+    image: formData.get('image') as string,
+  });
+
+  // Check for validation errors
+  if (!parse.success) {
+    console.log(parse.error);
+    return { message: 'Form data is not valid', errors: parse.error.errors };
+  }
+
+  const data = parse.data;
+
+  // Ensure _id is not empty after parsing
+  if (!data._id) {
+    return { message: 'El ID es obligatorio para actualizar el comunicado.' };
+  }
+
+  try {
+    // Connect to the database
+    await dbConnect();
+    
+    // Update the existing record
+    const updatedComunicado = await PressModel.findByIdAndUpdate(data._id, data, { new: true, runValidators: true });
+
+    if (!updatedComunicado) {
+      return { message: 'Comunicado no encontrado.' };
+    }
+
+    // Optional: Revalidate the path
+    revalidatePath('/');
+
+    // Return success message
+    return { message: 'Comunicado actualizado exitosamente' };
+  } catch (e) {
+    console.error(e);
+    return { message: 'Failed to update comunicado' };
+  }
+}
+
+//delete comunicacion usuario
+export async function deleteComicacion(p0: null, formData: FormData) {
+  const schema = z.object({
+    _id: z.string().min(1),
+   
+  })
+  const data = schema.parse({
+    _id: formData.get('_id'),
+   
+  })
+
+  try {
+    await dbConnect()
+    await PressModel.findOneAndDelete({ _id: data._id })
+    revalidatePath('/')
+    console.log({ message: `Comunicado borrado ${data._id}` })
+    return { message: `Comunicado borrado ${data._id}` }
+  } catch (e) {
+    return { message: 'Failed to delete product' }
+  }
+}
+
+//admin graficos
+
+ /*daily  graphics */
+ export const comunicadosDiarios = async () => {
+  await dbConnect();
+
+  const now = new Date();
+  const currentMonth = now.getMonth(); // Mes actual (0 para enero, 11 para diciembre)
+  const currentYear = now.getFullYear();
+
+  // Obtener comunicados creados en el mes y año actuales
+  const comunicados = await PressModel.find({
+    createdAt: {
+      $gte: new Date(currentYear, currentMonth, 1), // Primer día del mes
+      $lt: new Date(currentYear, currentMonth + 1, 1), // Primer día del siguiente mes
+    },
+  });
+
+  // Agrupar los comunicados por día del mes
+  const comunicadosPerDay = comunicados.reduce((acc: Record<number, number>, comunicado) => {
+    const day = new Date(comunicado.createdAt).getDate(); // Día del mes (1-31)
+    acc[day] = (acc[day] || 0) + 1; // Incrementa el contador del día
+    return acc;
+  }, {});
+
+  // Obtener la cantidad total de días en el mes actual
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+  // Generar los datos para el gráfico, asegurando que todos los días estén presentes
+  const graphData = Array.from({ length: daysInMonth }, (_, i) => {
+    const day = i + 1;
+    return { name: `${day}`, comunicados: comunicadosPerDay[day] || 0 };
+  });
+
+  // Obtener el nombre del mes en español
+  const monthName = new Intl.DateTimeFormat('es-ES', { month: 'long' }).format(
+    new Date(currentYear, currentMonth)
+  );
+
+  return { month: monthName, data: graphData };
+};
+
+
+//*****************  Monthly graphics *****************
+export const comunicadosMensuales = async () => {
+  await dbConnect();
+
+  const currentYear = new Date().getFullYear();
+
+  // Obtener los comunicados del año actual
+  const comunicados = await PressModel.find({
+    createdAt: {
+      $gte: new Date(`${currentYear}-01-01`), // Primer día del año
+      $lt: new Date(`${currentYear + 1}-01-01`), // Primer día del próximo año (exclusivo)
+    },
+  });
+
+  // Agrupar comunicados por mes
+  const comunicadosPerMonth = comunicados.reduce((acc: Record<number, number>, comunicado) => {
+    const monthIndex = new Date(comunicado.createdAt).getMonth(); // 0 para enero, 11 para diciembre
+    acc[monthIndex] = (acc[monthIndex] || 0) + 1; // Incrementar el contador para el mes correspondiente
+    return acc;
+  }, {});
+
+  // Generar datos para el gráfico, asegurando que todos los meses estén presentes
+  const graphData = Array.from({ length: 12 }, (_, i) => {
+    const month = new Intl.DateTimeFormat('es-ES', { month: 'short' }).format(new Date(0, i));
+    return { name: month, comunicados: comunicadosPerMonth[i] || 0 };
+  });
+
+  return graphData;
+};
+/* ***********COMUNICADOS POR TEMA********* */
+export const comunicadosPorTema = async () => {
+  await dbConnect();
+
+  // Obtener la cantidad de comunicados agrupados por topic
+  const topicsAggregation = await PressModel.aggregate([
+    {
+      $group: {
+        _id: "$topic", // Agrupar por tema
+        count: { $sum: 1 }, // Contar el número de comunicados por tema
+      },
+    },
+    { $sort: { count: -1 } }, // Ordenar por mayor número de comunicados
+  ]);
+
+  // Transformar los datos para el frontend
+  const graphData = topicsAggregation.map((topic) => ({
+    name: topic._id,
+    value: topic.count,
+  }));
+
+  return graphData;
+}; 

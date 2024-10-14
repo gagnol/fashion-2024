@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 
-
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
@@ -83,11 +82,10 @@ export default function LandingPage() {
             </Card>
           </div>
         </section>
-
         <section id="testimonials" className="py-20 px-4 md:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Lo que dicen nuestros clientes</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
+            {["Infobae","La Nacion","Neura"].map((i) => (
               <Card key={i}>
                 <CardHeader>
                   <CardTitle>Empresa {i}</CardTitle>
@@ -102,48 +100,62 @@ export default function LandingPage() {
             ))}
           </div>
         </section>
-
         <section id="pricing" className="py-20 px-4 md:px-6 lg:px-8 bg-muted">
-          <h2 className="text-3xl font-bold text-center mb-12">Planes y precios</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {['Básico', 'Profesional', 'Empresarial'].map((plan, index) => (
-              <Card key={plan} className={index === 1 ? 'border-primary' : ''}>
-                <CardHeader>
-                  <CardTitle>{plan}</CardTitle>
-                  <CardDescription>
-                    {index === 0 && 'Para pequeñas empresas'}
-                    {index === 1 && 'Para empresas en crecimiento'}
-                    {index === 2 && 'Para grandes corporaciones'}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-3xl font-bold mb-4">
-                    ${(index + 1) * 50}<span className="text-sm font-normal">/mes</span>
-                  </p>
-                  <ul className="space-y-2">
-                    {[
-                      'Directorio de contactos',
-                      'Creación de comunicados',
-                      'Distribución segmentada',
-                      'Análisis básico',
-                      index > 0 && 'Soporte prioritario',
-                      index > 1 && 'API access'
-                    ].filter(Boolean).map((feature, i) => (
-                      <li key={i} className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="w-full mt-6" variant={index === 1 ? 'default' : 'outline'}>
-                    Elegir plan
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+  <h2 className="text-3xl font-bold text-center mb-12">Planes y precios</h2>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+    {['Básico', 'Profesional', 'Empresarial'].map((plan, index) => (
+      <Card
+        key={plan}
+        className={`flex flex-col justify-between h-full ${
+          index === 1 ? 'border-primary' : ''
+        }`}
+      >
+        <CardHeader>
+          <CardTitle>{plan}</CardTitle>
+          <CardDescription>
+            {index === 0 && 'Para pequeñas empresas'}
+            {index === 1 && 'Para empresas en crecimiento'}
+            {index === 2 && 'Para grandes corporaciones'}
+          </CardDescription>
+        </CardHeader>
 
+        <CardContent className="flex-grow">
+          <p className="text-3xl font-bold mb-4">
+            ${(index + 1) * 50}
+            <span className="text-sm font-normal">/mes</span>
+          </p>
+          <ul className="space-y-2">
+            {[
+              'Directorio de contactos',
+              'Creación de comunicados',
+              'Distribución segmentada',
+              'Análisis básico',
+              index > 0 && 'Soporte prioritario',
+              index > 1 && 'API access',
+            ]
+              .filter(Boolean)
+              .map((feature, i) => (
+                <li key={i} className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-primary mr-2" />
+                  {feature}
+                </li>
+              ))}
+          </ul>
+        </CardContent>
+
+        {/* Button inside the card, aligned at the bottom */}
+        <div className="mt-auto">
+          <Button
+            className="w-full"
+            variant={index === 1 ? 'default' : 'outline'}
+          >
+            Elegir plan
+          </Button>
+        </div>
+      </Card>
+    ))}
+  </div>
+</section>
         <section className="py-20 px-4 md:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">¿Listo para empezar?</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">

@@ -5,32 +5,36 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { useCollapsibleStore } from '@/lib/usecollapse';
 import { Button } from '@/components/ui/button';
-import { GripHorizontal, LayoutDashboard, User, ShoppingBag, HelpCircle, LogOut } from 'lucide-react';
+import { GripHorizontal, LayoutDashboard, User, ShoppingBag, HelpCircle, User2, Users } from 'lucide-react';
 
 const menuItems = [
   {
     list: [
       {
         title: "Dashboard",
-        path: "/profile/main",
+        path: "/admin/main",
         icon: <LayoutDashboard />,
       },
       {
         title: "Periodistas",
-        path: "/profile/periodistas",
-        icon: <User />,
+        path: "/admin/periodistas",
+        icon: <User2/>,
       },
       {
         title: "Comunicadores",
-        path: "/profile/responsables",
+        path: "/admin/responsables",
         icon: <ShoppingBag />,
+      },
+      {
+        title: "Usuarios",
+        path: "/admin/usuarios",
+        icon: <Users/>,
       },
       {
         title: "Ayuda",
         path: "/customer",
         icon: <HelpCircle />,
       },
- 
     ],
   },
 ];

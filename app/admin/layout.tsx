@@ -2,13 +2,12 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import Sidebar from '@/components/User-navigation/sidebar'
+import Sidebar from '@/components/Admin-navigation/sidebar'
 import { useCollapsibleStore } from '@/lib/usecollapse'
 import { useState } from 'react'
-import { User,Wand,Loader2,Plus,Brush,GripVertical, LayoutDashboard, User2, ShoppingBag } from 'lucide-react';
+import { User,Wand,Loader2,Plus,GripVertical, LayoutDashboard, User2, ShoppingBag } from 'lucide-react';
 
 export default function Dashboard({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname()
@@ -105,47 +104,7 @@ gap-4 border-b bg-white px-4 lg:h-[60px]
 		</div>
 		<div className='flex items-center gap-4 sm:gap-8
 		 md:gap-9 z-10'>
-		<Link href="/profile/periodistas/new" className='block'>
-		<Button disabled size='lg' className='bg-[#666]
-		text-white' onClick={handleClick}>
-		 {isLoading ? (
-          <>
-            <Loader2 className="animate-spin" /> &nbsp; Loading...
-          </>
-        ) : (
-          <>
-            <User /> &nbsp; Registrate Periodista
-          </>
-        )}
-		</Button>
-		</Link>
-		<Link href="/profile/responsables/new" className='block'>
-		<Button disabled size='lg' className='bg-[#666]
-		text-white' onClick={handleClick}>
-		 {isLoading ? (
-          <>
-            <Loader2 className="animate-spin" /> &nbsp; Loading...
-          </>
-        ) : (
-          <>
-            <User /> &nbsp; Registrate comunicador
-          </>
-        )}
-		</Button>
-		</Link>
-		<Link href="/profile/crear" className='block'>
-		<Button onClick={handleClick}>
-		 {isLoading ? (
-          <>
-            <Loader2 className="animate-spin" /> &nbsp; Loading...
-          </>
-        ) : (
-          <>
-            <Plus /> &nbsp; Crear comunicado
-          </>
-        )}
-		</Button>
-		</Link>
+		<h1 className='text-4xl font-semibold'> Panel de Administrador</h1>
 		</div>
 		</header>
 		{children}

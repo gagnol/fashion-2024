@@ -1,10 +1,18 @@
 
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbPage,
+	BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
-import PressReleaseDirectory from "@/components/User-navigation/directorio";
 import dbConnect from "@/lib/db-connect";
 import PressModel from '@/lib/Pressrelease-model'
 import Tabmenu from "@/components/User-navigation/tabmenu";
+import Miscomunicaciones from "@/components/User-navigation/miscom";
 
 
 export default async function ProfileScreen() {
@@ -15,15 +23,15 @@ export default async function ProfileScreen() {
         redirect("/")
     }
 	await dbConnect();
-    const ordersDocs = await PressModel.find().sort({ _id: -1 });
-    const orders = JSON.parse(JSON.stringify(ordersDocs));
+	const pressDocs = await PressModel.find({ email: session.user.email }).sort({ _id: -1 });
+    const orders = JSON.parse(JSON.stringify(pressDocs));
     
 
     return (
       <div className="bg-[#F6F6F6] p-4 lg:gap-6 lg:p-6 h-full w-full">
 		<main className="bg-white w-full h-full rounded-t-[12px] rounded-b-[12px]">
 		<Tabmenu/>
-		<PressReleaseDirectory orders={orders}/>
+		<Miscomunicaciones orders={orders}/>
 		</main>
 		</div>
 );

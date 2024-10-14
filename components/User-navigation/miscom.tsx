@@ -5,24 +5,36 @@ import { DataTable } from "./datatable";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Eye, Filter, Search, X } from "lucide-react";
+import { ChevronDown, Edit, Eye, Filter, Search, Trash, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Input } from "../ui/input";
 import { subDays, subMonths, subYears, isAfter } from "date-fns";
+import { toast } from "react-hot-toast";
+import { deleteComicacion } from "@/lib/action";
+import { redirect } from "next/navigation";
+
 
 interface Props {
-  orders: any[]; // Ajustar según el modelo de orden
+  orders: any[]; // Adjust based on the order model
 }
 
-// Columnas para DataTable
+// Delete handler function with FormData
+const handleDelete = async (id: string) => {
+  const confirmed = confirm("Está seguro de borrar el comunicado?");
+  if (!confirmed) return;
+
+  const formData = new FormData();
+  formData.append("_id", id); // Add the item ID to the form data
+
+  const res = await deleteComicacion(null, formData);
+  toast.success(res.message, { duration: 4000, position: "top-center" });
+    setTimeout(() => {
+    redirect("/profile/main")
+  }, 2000);
+};
+
+// Columns for DataTable
 export const ordersColumn: ColumnDef<any>[] = [
   {
     accessorKey: "image",
@@ -55,24 +67,22 @@ export const ordersColumn: ColumnDef<any>[] = [
   },
   {
     accessorKey: "date",
-    header: () => (
-      <div className="font-[700] text-[14px] text-[#8A8A8A]">Fecha</div>
-    ),
+    header: () => <div className="font-[700] text-[14px] text-[#8A8A8A]">Fecha</div>,
     cell: ({ row }) => {
-      const date = new Date(row.original.createdAt); // Assuming 'createdAt' holds the date
+      const date = new Date(row.original.createdAt);
       const formattedDate = date.toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
       });
-  
+
       return <div>{formattedDate}</div>;
     },
   },
   {
-    accessorKey: "location",
-    header: () => <div className="font-[700] text-[14px] text-[#8A8A8A]">Ubicación</div>,
-    cell: ({ row }) => <div>{row.original.location}</div>,
+    accessorKey: "status",
+    header: () => <div className="font-[700] text-[14px] text-[#8A8A8A]">Status</div>,
+    cell: ({ row }) => <div>{row.original.status}</div>,
   },
   {
     id: "actions",
@@ -84,9 +94,31 @@ export const ordersColumn: ColumnDef<any>[] = [
       </Link>
     ),
   },
+  {
+    id: "edit",
+    cell: ({ row }) => (
+      <Link href={`/profile/main/comunicados/${row.original._id}`}>
+        <Button variant="ghost" className="text-blue-500 hover:text-blue-700">
+          <Edit size={24} />
+        </Button>
+      </Link>
+    ),
+  },
+  {
+    id: "delete",
+    cell: ({ row }) => (
+      <Button
+        variant="ghost"
+        className="text-red-500 hover:text-red-700"
+        onClick={() => handleDelete(row.original._id)}
+      >
+        <Trash size={24} />
+      </Button>
+    ),
+  },
 ];
 
-const SupplierNeeds: FC<Props> = ({ orders }) => {
+const Miscomunicaciones: FC<Props> = ({ orders }) => {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState("");
@@ -129,10 +161,9 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
         transition={{ duration: 0.5 }}
         className="text-4xl font-bold mb-8 mt-8"
       >
-        Directorio de Comunicados
+        Mis Comunicados
       </motion.h1>
 
-      {/* Sección de búsqueda y filtros */}
       <Card className="mb-6">
         <CardContent className="p-6">
           <div className="flex items-center space-x-2">
@@ -156,54 +187,12 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
               <X className="h-4 w-4" /> Limpiar filtros
             </Button>
           </div>
-
-          {/* Filtros desplegables */}
-          <motion.div
-            initial={false}
-            animate={{ height: isFiltersOpen ? "auto" : 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-              <Select
-                onValueChange={(value) => setSelectedDateRange(value)}
-                value={selectedDateRange}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Fecha" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="ultima-semana">Última semana</SelectItem>
-                  <SelectItem value="ultimo-mes">Último mes</SelectItem>
-                  <SelectItem value="ultimo-ano">Último año</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select
-                onValueChange={(value) => setSelectedLocation(value)}
-                value={selectedLocation}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Ubicación" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="local">Local</SelectItem>
-                  <SelectItem value="nacional">Nacional</SelectItem>
-                  <SelectItem value="internacional">Internacional</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </motion.div>
         </CardContent>
       </Card>
 
-      {/* Tabla de datos */}
-      <DataTable
-        columns={ordersColumn}
-        data={filteredOrders}
-      />
+      <DataTable columns={ordersColumn} data={filteredOrders} />
     </div>
   );
 };
 
-export default SupplierNeeds;
+export default Miscomunicaciones;
