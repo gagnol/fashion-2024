@@ -161,7 +161,12 @@ export default function LandingPage() {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Únete a miles de profesionales que ya están mejorando su estrategia de comunicación con PressConnect.
           </p>
-          <Button size="lg">Comenzar ahora <ArrowRight className="ml-2 h-4 w-4" /></Button>
+          <Link href="/profile/main">
+          <Button size="lg">
+            Comenzar ahora 
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+          </Link>
         </section>
       </main>
 
@@ -175,15 +180,21 @@ export default function LandingPage() {
             <h4 className="text-sm font-semibold mb-4">Producto</h4>
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="text-muted-foreground hover:text-primary">Características</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary">Precios</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary">FAQ</a></li>
+              <li className="text-muted-foreground hover:text-primary">
+                <Link href="/customer">
+                  FAQ
+                </Link>
+                  </li>
             </ul>
           </div>
           <div>
             <h4 className="text-sm font-semibold mb-4">Compañía</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-muted-foreground hover:text-primary">Sobre nosotros</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary">Blog</a></li>
+              <li className="text-muted-foreground hover:text-primary">
+              <Link href="/about">
+                Sobre nosotros
+              </Link>
+              </li>
               <li className="text-muted-foreground hover:text-primary" >
                 <Link href="/customer">
                 Contacto

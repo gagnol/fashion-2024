@@ -1,4 +1,6 @@
 
+import ContactForm from '@/components/User-navigation/contactForm';
+import Faq from '@/components/User-navigation/faq';
 import { getServerSession } from 'next-auth';
 import Image from 'next/image'
 import Link from 'next/link';
@@ -6,10 +8,9 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 
  async function Customer() {
-   
     const session = await getServerSession();
 
-    if (!session) {
+    if (!session?.user) {
         redirect("/signin")
     }
     return (
@@ -26,15 +27,16 @@ import React from 'react'
       <div className="page-wrapper hero-banner">
           <div className="px-10">
                     <h1 className="text-2xl font-bold"  >
-         Bienvenido al servicio al cliente de PressConnect , {session?.user?.name || ""}</h1>
+         Bienvenido al servicio al cliente de PressConnect </h1>
                     <p className="header-subtext subtext-container">
          Contactate con nosotros y te responderemos a la brevedad.
                         <a className="hidden-link"  >
                         </a>
                     </p>
-         {/*        <Mailer session={session}/> */}
-                {/* fin email */}
-                    <div className="grid md:grid-cols-3 md:gap-5 m-5">
+       
+                    <ContactForm userEmail={session?.user?.email || ''} />
+                
+                    <div className="grid md:grid-cols-3 md:gap-5 m-8">
                         <div className="flex  p-[12px] rounded-md bg-[#999]">
                             <div className="flex mx-2 my-auto" role="button" >
                                 <div className="flex mx-2 my-auto-icon">
@@ -68,7 +70,12 @@ import React from 'react'
                                         POLITICA DE COOKIES
                                         </Link>
                                  </div></div>
-                       </div></div></div></div></div>
+                       </div></div></div>
+                       
+                       
+                       </div>
+                            <Faq/>                 
+                       </div>
                   </div>
     )
 }

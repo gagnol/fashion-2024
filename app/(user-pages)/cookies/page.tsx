@@ -4,7 +4,7 @@ import React from 'react'
 
 async function cookies() {
   return (
-    <div className=' max-w-screen-xl mx-5 xl:mx-auto py-5 '>
+    <div className=' max-w-screen-xl mx-10 xl:mx-auto py-5 '>
       <Link href="/">
       <Button className='btn btn-primary btn-outline m-5 text-center'> Volver </Button>
       </Link>
