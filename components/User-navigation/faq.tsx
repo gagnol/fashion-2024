@@ -3,13 +3,13 @@
 import { useState } from 'react';
 
 const faqs = [
-  { question: '¿Qué es PressConnect?', answer: 'PressConnect es una plataforma que conecta periodistas y comunicadores con empresas para gestionar comunicados y cobertura mediática.' },
+  { question: '¿Qué es Nexus?', answer: 'Nexus es una plataforma que conecta periodistas y comunicadores con empresas para gestionar comunicados y cobertura mediática.' },
   { question: '¿Cómo registro un comunicado de prensa?', answer: 'Inicia sesión en tu cuenta y accede al área de comunicados para subir y distribuir tu comunicado.' },
-  { question: '¿Qué tipo de medios pueden acceder?', answer: 'PressConnect trabaja con medios de comunicación nacionales e internacionales en diferentes áreas.' },
+  { question: '¿Qué tipo de medios pueden acceder?', answer: 'Nexus trabaja con medios de comunicación nacionales e internacionales en diferentes áreas.' },
   { question: '¿Puedo contactar directamente con un periodista?', answer: 'Sí, siempre que ambos estén registrados y se acepte la solicitud de contacto.' },
   { question: '¿Cómo verifico la recepción de mis comunicados?', answer: 'Cada comunicado tiene un historial de entrega y apertura disponible en tu dashboard.' },
-  { question: '¿Qué sectores cubre PressConnect?', answer: 'Cubrimos sectores como tecnología, economía, salud, entretenimiento y más.' },
-  { question: '¿PressConnect ofrece reportes de impacto?', answer: 'Sí, generamos reportes automáticos del alcance e impacto de cada comunicado.' },
+  { question: '¿Qué sectores cubre Nexus?', answer: 'Cubrimos sectores como tecnología, economía, salud, entretenimiento y más.' },
+  { question: '¿Nexus ofrece reportes de impacto?', answer: 'Sí, generamos reportes automáticos del alcance e impacto de cada comunicado.' },
   { question: '¿Puedo editar un comunicado después de enviarlo?', answer: 'Sí, siempre que el comunicado aún no haya sido distribuido.' },
   { question: '¿Cómo me registro como periodista?', answer: 'Ve a la sección de registro de periodistas, completa tus datos y espera la validación.' },
   { question: '¿Qué debo hacer si tengo problemas con mi cuenta?', answer: 'Contacta a nuestro equipo de soporte a través del formulario de contacto o envíanos un correo.' },

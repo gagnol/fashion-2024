@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React from "react";
 
-
 const AboutUs: React.FC = () => {
   return (
     <div className="max-w-screen-lg mx-auto px-6 py-10">
@@ -12,7 +11,7 @@ const AboutUs: React.FC = () => {
         <div>
           <h2 className="text-2xl font-semibold mb-4">Nuestra Historia</h2>
           <p className="text-gray-700 leading-7">
-            PressConnect nació con el propósito de conectar empresas, periodistas 
+            Nexus nació con el propósito de conectar empresas, periodistas 
             y comunicadores en un espacio eficiente para la gestión de prensa y la 
             distribución de comunicados. Nuestra misión es simplificar la interacción 
             entre los medios y las organizaciones, asegurando una comunicación clara, 
@@ -71,7 +70,7 @@ const AboutUs: React.FC = () => {
       </section>
 
       <footer className="mt-16 text-center text-sm text-gray-500">
-        <p>© 2024 PressConnect. Todos los derechos reservados.</p>
+        <p>© 2024 Nexus. Todos los derechos reservados.</p>
         <p>
           <Link href="/customer"  className="text-blue-500 underline">
             Contáctanos

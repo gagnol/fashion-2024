@@ -52,7 +52,7 @@ export default function UpdateForm({ session }: UpdateFormProps) {
                 name="email" 
                 defaultValue={session?.user?.email} 
               />
-              <Label htmlFor="password">Contraseña</Label>
+              <Label htmlFor="password">Nueva Contraseña<span className='text-red-600'>* opcional</span></Label>
               <Input 
                 type="password" 
                 id="password" 

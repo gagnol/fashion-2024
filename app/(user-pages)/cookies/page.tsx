@@ -13,7 +13,7 @@ async function cookies() {
   <li >
     <strong className='text-4xl'>POLITICA DE COOKIES</strong>
     <p className='text-2xl py-5'>
-      La presente política de cookies tiene por finalidad informarle de manera clara y precisa sobre las cookies que se utilizan en la página de comercio electrónico de PressConnect S.L..
+      La presente política de cookies tiene por finalidad informarle de manera clara y precisa sobre las cookies que se utilizan en la página de comercio electrónico de Nexus S.L..
     </p>
   </li>
   <li className='pb-5'>
@@ -31,7 +31,7 @@ async function cookies() {
       <li className='pb-5'>
         <strong>Cookies propias:</strong>
         <p>
-          Son aquellas que se envían al equipo terminal del usuario desde un equipo o dominio gestionado por el propio editor (PressConnect S.L., en este caso) y desde el que se presta el servicio solicitado por el usuario.
+          Son aquellas que se envían al equipo terminal del usuario desde un equipo o dominio gestionado por el propio editor (Nexus S.L., en este caso) y desde el que se presta el servicio solicitado por el usuario.
         </p>
       </li>
       <li className='pb-5'>
@@ -101,7 +101,7 @@ async function cookies() {
     </p>
     <ul>
       <li className='pb-5'>
-        <p>La página web de PressConnect S.L. descarga una cookie de tipo técnico denominada ECOMMERCE.NET_Login. Esta cookie permite identificar si el usuario ha iniciado sesión previamente y posibilitar la correcta navegación.</p>
+        <p>La página web de Nexus S.L. descarga una cookie de tipo técnico denominada ECOMMERCE.NET_Login. Esta cookie permite identificar si el usuario ha iniciado sesión previamente y posibilitar la correcta navegación.</p>
       </li>
       <li className='pb-5'>
         <p>Se descarga otra cookies técnica denominada ASP.NET_SessionId. Esta cookie permite almacenar un identificador único por sesión a través del que es posible vincular datos necesarios para posibilitar la navegación en curso.</p>
@@ -120,7 +120,7 @@ async function cookies() {
   <li className='pb-5'>
     <strong>CÓMO MODIFICAR LA CONFIGURACIÓN DE COOKIES</strong>
     <p>
-      Usted puede restringir, bloquear o borrar las cookies de PressConnect S.L. o cualquier otra página web utilizando su navegador. En cada navegador la operativa es diferente, la función de Ayuda le mostrará cómo hacerlo.
+      Usted puede restringir, bloquear o borrar las cookies de Nexus S.L. o cualquier otra página web utilizando su navegador. En cada navegador la operativa es diferente, la función de Ayuda le mostrará cómo hacerlo.
     </p>
   </li>
   <li className='pb-5'>

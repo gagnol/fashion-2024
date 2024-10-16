@@ -18,10 +18,10 @@ async function aviso() {
     <li className='pb-5'>
       <strong>¿QUIÉN ES EL RESPONSABLE DEL TRATAMIENTO DE SUS DATOS?</strong>
       <ul>
-        <li className='pb-5'>Razón Social: PressConnect S.L. (en adelante la <span className='text-primary'>Empresa</span> o el <span className='text-primary'>Responsable</span>)</li>
+        <li className='pb-5'>Razón Social: Nexus S.L. (en adelante la <span className='text-primary'>Empresa</span> o el <span className='text-primary'>Responsable</span>)</li>
         <li className='pb-5'>C.I.F.: B04056925</li>
         <li className='pb-5'>Dirección: Carretera NACIONAL 340 KM. 535</li>
-        <li className='pb-5'>Email: infoPressConnect@gmail.com</li>
+        <li className='pb-5'>Email: infoNexus@gmail.com</li>
         <li className='pb-5'>Teléfono: 950453316</li>
         <li className='pb-5'>Datos registrales: ES. 12.06814/AL CE ES. 40.16964/AL CE</li>
       </ul>
@@ -48,8 +48,8 @@ async function aviso() {
         <p>Sus datos serán tratados para prestar el servicio solicitado, lo que, entre otras actividades, puede implicar: (i) su registro como cliente; (ii) preparación del pedido y gestión de la entrega por alguno de los canales disponibles; (iii) tramitar y dar respuesta a sus dudas, consultas o reclamaciones.</p>
         <p>La no aceptación de esta finalidad conllevará que no podremos suscribir el/los contrato/s para prestarle los servicios en los que estás interesado.</p>
         <li className='pb-5'>Cumplir con las obligaciones legales.</li>
-        <p>PressConnect S.L. está sujeto a distintas normativas que implican la necesidad de tratar datos personales para cumplirlas (P.Ej: normativa fiscal)</p>
-        <p>En el cumplimiento de estas obligaciones, PressConnect S.L. podrá comunicar tus datos a las Administraciones Públicas o Tribunales competentes, siempre que la solicitud se realice a través de los cauces legales establecidos.</p>
+        <p>Nexus S.L. está sujeto a distintas normativas que implican la necesidad de tratar datos personales para cumplirlas (P.Ej: normativa fiscal)</p>
+        <p>En el cumplimiento de estas obligaciones, Nexus S.L. podrá comunicar tus datos a las Administraciones Públicas o Tribunales competentes, siempre que la solicitud se realice a través de los cauces legales establecidos.</p>
       </ol>
     </li>
     <li className='pb-5'>
@@ -88,8 +88,8 @@ async function aviso() {
     </li>
     <li className='pb-5'>
       <strong>SEGURIDAD DE SUS DATOS</strong>
-      <p>PressConnect S.L. se compromete a adoptar las medidas técnicas y organizativas necesarias, según el nivel de seguridad adecuado al riesgo de los datos recogidos, de forma que se garantice la seguridad de los datos de carácter personal y se evite la destrucción, pérdida o alteración accidental o ilícita de datos personales transmitidos, conservados o tratados de otra forma, o la comunicación o acceso no autorizados a dichos datos.</p>
-      <p>Sin embargo, debido a que PressConnect S.L. no puede garantizar la inexpugnabilidad de internet ni la ausencia total de hackers u otros que accedan de modo fraudulento a los datos personales, el Responsable del tratamiento se compromete a comunicar al Usuario sin dilación indebida cuando ocurra una violación de la seguridad de los datos personales que sea probable que entrañe un alto riesgo para los derechos y libertades de las personas físicas. Siguiendo lo establecido en el artículo 4 del RGPD, se entiende por violación de la seguridad de los datos personales toda violación de la seguridad que ocasione la destrucción, pérdida o alteración accidental o ilícita de datos personales transmitidos, conservados o tratados de otra forma, o la comunicación o acceso no autorizados a dichos datos.</p>
+      <p>Nexus S.L. se compromete a adoptar las medidas técnicas y organizativas necesarias, según el nivel de seguridad adecuado al riesgo de los datos recogidos, de forma que se garantice la seguridad de los datos de carácter personal y se evite la destrucción, pérdida o alteración accidental o ilícita de datos personales transmitidos, conservados o tratados de otra forma, o la comunicación o acceso no autorizados a dichos datos.</p>
+      <p>Sin embargo, debido a que Nexus S.L. no puede garantizar la inexpugnabilidad de internet ni la ausencia total de hackers u otros que accedan de modo fraudulento a los datos personales, el Responsable del tratamiento se compromete a comunicar al Usuario sin dilación indebida cuando ocurra una violación de la seguridad de los datos personales que sea probable que entrañe un alto riesgo para los derechos y libertades de las personas físicas. Siguiendo lo establecido en el artículo 4 del RGPD, se entiende por violación de la seguridad de los datos personales toda violación de la seguridad que ocasione la destrucción, pérdida o alteración accidental o ilícita de datos personales transmitidos, conservados o tratados de otra forma, o la comunicación o acceso no autorizados a dichos datos.</p>
       <p>Los datos personales serán tratados como confidenciales por el Responsable del tratamiento, quien se compromete a informar de y a garantizar por medio de una obligación legal o contractual que dicha confidencialidad sea respetada por sus empleados, asociados, y toda persona a la cual le haga accesible la información.</p>
     </li>
     <li className='pb-5'>
@@ -97,7 +97,7 @@ async function aviso() {
       <p>En relación con la recogida y tratamiento de sus datos personales, podrá ejercer frente al Responsable del tratamiento los siguientes derechos reconocidos en el RGPD y en la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales:</p>
       <ol>
         <li className='pb-5'><strong>Derecho de acceso:</strong></li>
-        <p>Es el derecho del Usuario a obtener confirmación de si PressConnect S.L. está tratando o no sus datos personales y, en caso afirmativo, obtener información sobre sus datos concretos de carácter personal y del tratamiento que PressConnect S.L. haya realizado o realice, así como, entre otra, de la información disponible sobre el origen de dichos datos y los destinatarios de las comunicaciones realizadas o previstas de los mismos.</p>
+        <p>Es el derecho del Usuario a obtener confirmación de si Nexus S.L. está tratando o no sus datos personales y, en caso afirmativo, obtener información sobre sus datos concretos de carácter personal y del tratamiento que Nexus S.L. haya realizado o realice, así como, entre otra, de la información disponible sobre el origen de dichos datos y los destinatarios de las comunicaciones realizadas o previstas de los mismos.</p>
         <li className='pb-5'><strong>Derecho de rectificación:</strong></li>
         <p>Es el derecho del Usuario a que se modifiquen sus datos personales que resulten ser inexactos o, teniendo en cuenta los fines del tratamiento, incompletos.</p>
         <li className='pb-5'><strong>Derecho de supresión (el derecho al olvido):</strong></li>

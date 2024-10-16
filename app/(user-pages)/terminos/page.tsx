@@ -8,7 +8,7 @@ const TermsAndConditions: React.FC = () => {
   return (
     <div className="max-w-screen-lg mx-auto px-6 py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">
-        Términos y Condiciones del Servicio de PressConnect
+        Términos y Condiciones del Servicio de Nexus
       </h1>
       <p className="text-sm text-gray-500 mb-4 text-center">
         Última actualización: 15 de octubre de 2024
@@ -18,7 +18,7 @@ const TermsAndConditions: React.FC = () => {
         <div>
           <h2 className="text-xl font-semibold mb-2">1. Introducción</h2>
           <p className="text-gray-700">
-            Bienvenido a <strong>PressConnect</strong>, una plataforma que conecta 
+            Bienvenido a <strong>Nexus</strong>, una plataforma que conecta 
             empresas, periodistas y comunicadores para la gestión y distribución de comunicados.
             Al utilizar nuestros servicios, aceptas estos términos y condiciones.
           </p>
@@ -98,7 +98,7 @@ const TermsAndConditions: React.FC = () => {
             7. Limitación de Responsabilidad
           </h2>
           <p className="text-gray-700">
-            PressConnect no se hace responsable por daños indirectos. La
+            Nexus no se hace responsable por daños indirectos. La
             responsabilidad máxima será equivalente a los pagos realizados en
             los últimos 3 meses.
           </p>
@@ -109,7 +109,7 @@ const TermsAndConditions: React.FC = () => {
             8. Modificación del Servicio
           </h2>
           <p className="text-gray-700">
-            PressConnect puede modificar el servicio o los términos en cualquier
+            Nexus puede modificar el servicio o los términos en cualquier
             momento, notificando los cambios con anticipación.
           </p>
         </div>

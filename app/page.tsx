@@ -88,7 +88,7 @@ export default function LandingPage() {
     {[
       {
         empresa: "Infobae",
-        texto: "PressConnect nos ha permitido llegar a nuestra audiencia de manera más rápida y eficaz.",
+        texto: "Nexus nos ha permitido llegar a nuestra audiencia de manera más rápida y eficaz.",
         nombre: "Ernesto Grinbaun",
         funcion: "Director de Comunicación",
       },
@@ -178,7 +178,7 @@ export default function LandingPage() {
         <section className="py-20 px-4 md:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">¿Listo para empezar?</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Únete a miles de profesionales que ya están mejorando su estrategia de comunicación con PressConnect.
+            Únete a miles de profesionales que ya están mejorando su estrategia de comunicación con Nexus.
           </p>
           <Link href="/profile/main">
           <Button size="lg">
@@ -192,7 +192,7 @@ export default function LandingPage() {
       <footer className="py-12 px-4 md:px-6 lg:px-8 bg-muted">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-semibold mb-4">PressConnect</h3>
+            <h3 className="text-lg font-semibold mb-4">Nexus</h3>
             <p className="text-sm text-muted-foreground">Transformando la distribución de comunicados de prensa desde 2023.</p>
           </div>
           <div>
@@ -245,7 +245,7 @@ export default function LandingPage() {
           </div>
         </div>
         <div className="mt-12 text-center text-sm text-muted-foreground">
-          © 2023 PressConnect. Todos los derechos reservados.
+          © 2023 Nexus. Todos los derechos reservados.
         </div>
       </footer>
     </div>

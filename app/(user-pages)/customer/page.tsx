@@ -27,7 +27,7 @@ import React from 'react'
       <div className="page-wrapper hero-banner">
           <div className="px-10">
                     <h1 className="text-2xl font-bold"  >
-         Bienvenido al servicio al cliente de PressConnect </h1>
+         Bienvenido al servicio al cliente de Nexus </h1>
                     <p className="header-subtext subtext-container">
          Contactate con nosotros y te responderemos a la brevedad.
                         <a className="hidden-link"  >
