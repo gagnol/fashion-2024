@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { useCollapsibleStore } from '@/lib/usecollapse';
 import { Button } from '@/components/ui/button';
-import { GripHorizontal, LayoutDashboard, User, ShoppingBag, HelpCircle, LogOut } from 'lucide-react';
+import { GripHorizontal, LayoutDashboard, User, ShoppingBag, HelpCircle, LogOut, Settings } from 'lucide-react';
 
 const menuItems = [
   {
@@ -24,6 +24,11 @@ const menuItems = [
         title: "Comunicadores",
         path: "/profile/responsables",
         icon: <ShoppingBag />,
+      },
+      {
+        title: "Ajustes",
+        path: "/profile/settings",
+        icon: <Settings/>,
       },
       {
         title: "Ayuda",

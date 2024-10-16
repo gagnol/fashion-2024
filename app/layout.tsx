@@ -5,8 +5,7 @@ import Session from "@/components/header/session";
 import Navbar from "@/components/header/navbar";
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
-
-
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
          <Theme appearance='light' >
+          <Toaster/>
       <Session>
       <Navbar/>
         {children}

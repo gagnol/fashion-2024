@@ -64,11 +64,13 @@ export default function RegistrationForm() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nombre completo</Label>
-                <Input id="name" name="name" placeholder="Nombre del periodista" required />
+  <Input id="name" name="name" 
+  placeholder="Nombre del periodista" 
+  required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Correo electrónico</Label>
-                <Input id="email" name="email" type="email" placeholder="correo@ejemplo.com" required />
+               <Input id="email" name="email" type="email" placeholder="correo@ejemplo.com" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="topics">Temáticas</Label>

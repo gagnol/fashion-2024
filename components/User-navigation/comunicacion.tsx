@@ -62,7 +62,7 @@ export default function CommunicationDashboard({ product }: any) {
         transition={{ duration: 0.5 }}
         className="text-4xl font-bold mb-8 text-center"
       >
-        Búsqueda de Responsables de Comunicación y Prensa
+      Búsqueda de Responsables de Comunicación y Prensa
       </motion.h1>
       <div className="max-w-4xl mx-auto space-y-6">
         <Card>
@@ -95,7 +95,6 @@ export default function CommunicationDashboard({ product }: any) {
                 <span>Borrar Filtros</span>
               </Button>
             </div>
-
             <motion.div
               initial={false}
               animate={{ height: isFiltersOpen ? "auto" : 0 }}
@@ -140,7 +139,6 @@ export default function CommunicationDashboard({ product }: any) {
                     <SelectItem value="internacional">Internacional</SelectItem>
                   </SelectContent>
                 </Select>
-
                 {/* Experiencia Selector */}
                 <Select value={selectedExperience} onValueChange={setSelectedExperience}>
                   <SelectTrigger>

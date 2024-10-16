@@ -42,7 +42,6 @@ export default function ContactForm({ userEmail }: ContactFormProps) {
       if (!response.ok) {
         throw new Error('Error al enviar el formulario.');
       }
-
       toast.success('Formulario enviado con éxito.');
     } catch (error) {
       toast.error('Hubo un error. Inténtalo de nuevo.');

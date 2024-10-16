@@ -39,7 +39,7 @@ export default function Signin() {
                 toast.error(result.error);
             } else {
                 // Wait for session to update after sign-in
-                toast.success("Signed in successfully!");
+                toast.success("Iniciaste sesión exitosamente!");
                 router.push('/profile/main'); // Immediate push after sign-in
             }
 
@@ -58,7 +58,9 @@ export default function Signin() {
             <div style={{ position: 'relative', zIndex: 1 }}>
                 <div className="w-[350px] h-fit flex-col rounded-[5px] my-5 opacity-75 border border-[#666] px-[26px] py-[20px] bg-white/10 backdrop-blur-lg shadow-xl">
                     <div className='py-2'>
-                        <h1 className="text-2xl text-black bold">Inicia Sesión</h1>
+                        <h1 className="text-2xl text-black bold">
+                            Inicia Sesión
+                        </h1>
                     </div>
                     <form onSubmit={handleSubmit(submitHandler)}>
                         <h2 className="font-bold text-black" style={{ margin: "5px" }}>Email</h2>
@@ -70,13 +72,13 @@ export default function Signin() {
                             {...register("email", { required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })}
                             aria-invalid={errors.email ? "true" : "false"}
                         />
-                        {errors.email?.type === 'required' && <p className='a_error'>Email is required</p>}
-                        {errors.email?.type === 'pattern' && <p className='a_error'> Invalid email format</p>}
+                        {errors.email?.type === 'required' && <p className='text-red-600'>Ingresá tu correo electrónico</p>}
+                        {errors.email?.type === 'pattern' && <p className='text-red-600'> El formato de correo electrónico no es válido</p>}
 
                         <div className='flex justify-between'>
                             <h2 className="font-bold text-black" style={{ margin: "5px" }}>Contraseña</h2>
                             <h6 className='text-[16px] text-indigo-700 leading-8'>
-                                <Link href="/forgot">Olvidaste tu contraseña?</Link>
+                               <Link href="/customer">Olvidaste tu contraseña?</Link>
                             </h6>
                         </div>
                         <Input
@@ -86,9 +88,9 @@ export default function Signin() {
                             {...register("password", { required: true, minLength: 6, maxLength: 20 })}
                             aria-invalid={errors.password ? "true" : "false"}
                         />
-                        {errors.password?.type === 'required' && <p className='a_error'> Password is required.</p>}
-                        {errors.password?.type === 'minLength' && <p className='a_error'> Passwords must be at least 6 characters.</p>}
-                        {errors.password?.type === 'maxLength' && <p className='a_error'> Passwords must be up to 20 characters.</p>}
+                        {errors.password?.type === 'required' && <p className='text-red-600'>Ingresá tu contraseña.</p>}
+                        {errors.password?.type === 'minLength' && <p className='text-red-600'>La contraseña debe tener al menos 6 dígitos.</p>}
+                        {errors.password?.type === 'maxLength' && <p className='text-red-600'>La contraseña debe tener un máximo de 20 caracteres.</p>}
 
                         <br />
                         <Separator />
@@ -101,7 +103,6 @@ export default function Signin() {
                             )}
                         </Button>
                     </form>
-
                     <br />
                     <Separator />
 

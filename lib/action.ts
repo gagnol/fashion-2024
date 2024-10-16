@@ -6,6 +6,7 @@ import { z } from 'zod'
 import SliderModel from './slider-model'
 import PeriodistaModel from './periodista-model'
 import PressModel from './Pressrelease-model'
+import ContactModel from './contact-model'
 
 export async function deleteUser(formData: FormData) {
   const schema = z.object({
@@ -58,6 +59,20 @@ export async function deleteComunicador(p0: null, formData: FormData) {
     return { message: 'Failed to delete comunicador' }
   }
 }
+//Borrar Mensaje
+export async function deleteMensaje(id: string) {
+  const schema = z.string().min(1, "Invalid ID"); // Validate the ID directly
+  const _id = schema.parse(id);
+  try {
+    await dbConnect();
+    await ContactModel.findOneAndDelete({ _id });
+    revalidatePath("/"); // Revalidate cache if necessary
+    return { message: `Comunicado borrado ${_id}` };
+  } catch (error) {
+    console.error("Error deleting message:", error);
+    throw new Error("Failed to delete comunicador");
+  }
+}
 
 //crear Periodista
 export async function createPeriodista(prevState: any, formData: FormData) {
@@ -103,7 +118,6 @@ export async function createPeriodista(prevState: any, formData: FormData) {
     return { message: 'Failed to create ' };
   }
 }
-
 
 //crear comunicador
 export async function createComunicador(prevState: any, formData: FormData) {
@@ -383,3 +397,121 @@ export const comunicadosPorTema = async () => {
 
   return graphData;
 }; 
+
+//editar avatar
+export async function editAvatar(p0: null, formData: FormData) {
+  const schema = z.object({
+    _id: z.string().min(1, 'El ID es obligatorio'), // Ensure _id is required
+    image: z.string().optional(),
+  });
+
+  // Log formData for debugging
+  console.log("Form Data:", Object.fromEntries(formData.entries()));
+
+  // Parse form data
+  const parse = schema.safeParse({
+    _id: formData.get('_id') as string || '', // Extract the ID from the formData
+     image: formData.get('image') as string,
+  });
+
+  // Check for validation errors
+  if (!parse.success) {
+    console.log(parse.error);
+    return { message: 'Form data is not valid', errors: parse.error.errors };
+  }
+
+  const data = parse.data;
+
+  // Ensure _id is not empty after parsing
+  if (!data._id) {
+    return { message: 'El ID es obligatorio para actualizar .' };
+  }
+
+  try {
+    // Connect to the database
+    await dbConnect();
+    
+    // Update the existing record
+    const updatedComunicado = await UserModel.findByIdAndUpdate(data._id, data, { new: true, runValidators: true });
+
+    if (!updatedComunicado) {
+      return { message: 'Usuario no encontrado.' };
+    }
+
+    // Optional: Revalidate the path
+    revalidatePath('/');
+
+    // Return success message
+    return { message: 'Usuario actualizado exitosamente' };
+  } catch (e) {
+    console.error(e);
+    return { message: 'Failed to update usuario' };
+  }
+}
+//update periodista
+export async function editPeriodista(p0: null, formData: FormData) {
+  // Esquema de validación con Zod (opcional)
+  const schema = z.object({
+    _id: z.string().min(1, "El ID es obligatorio"), // ID es obligatorio
+    name: z.string().min(1, "El nombre es obligatorio"),
+    email: z.string().email("Debe ser un correo válido"),
+    topics: z.array(z.string()).optional(), // Manejar como array de strings
+    mediaName: z.string().optional(),
+    mediaType: z.enum(["prensa", "television", "radio", "digital"]),
+    location: z.enum(["local", "nacional", "internacional"]),
+    biography: z.string().optional(),
+  });
+
+  // Log de datos para debug
+  console.log("Form Data:", Object.fromEntries(formData.entries()));
+
+  // Parsear los datos del formulario
+  const parse = schema.safeParse({
+    _id: formData.get("_id") as string || "", // Asegurar que _id esté presente
+    name: formData.get("name") as string,
+    email: formData.get("email") as string,
+    topics: (formData.getAll("topics") as string[]) || [], // Array de tópicos
+    mediaName: formData.get("mediaName") as string,
+    mediaType: formData.get("mediaType") as string,
+    location: formData.get("location") as string,
+    biography: formData.get("biography") as string,
+  });
+
+  // Verificar errores de validación
+  if (!parse.success) {
+    console.log(parse.error);
+    return { message: "Datos del formulario no válidos", errors: parse.error.errors };
+  }
+
+  const data = parse.data;
+
+  // Asegurar que _id no esté vacío
+  if (!data._id) {
+    return { message: "El ID es obligatorio para actualizar el periodista." };
+  }
+
+  try {
+    // Conectar a la base de datos
+    await dbConnect();
+
+    // Actualizar el periodista en la base de datos
+    const updatedPeriodista = await PeriodistaModel.findByIdAndUpdate(
+      data._id,
+      data,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedPeriodista) {
+      return { message: "Periodista no encontrado." };
+    }
+
+    // Revalidar la ruta (opcional)
+    revalidatePath("/");
+
+    // Retornar mensaje de éxito
+    return { message: "Periodista actualizado exitosamente" };
+  } catch (error) {
+    console.error(error);
+    return { message: "Error al actualizar el periodista" };
+  }
+}

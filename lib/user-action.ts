@@ -125,7 +125,7 @@ export async function updateUser(prevState: any, formData: FormData) {
         await existingUser.save();
         revalidatePath('/')
         // You can return the updated user or a success message if needed
-        return { message: 'User updated successfully', user: JSON.parse(JSON.stringify(existingUser)) };
+        return { message: 'Tus datos fueron actualizados', user: JSON.parse(JSON.stringify(existingUser)) };
     } catch (e) {
         console.error(e);
         return { message: 'Failed to update user' };

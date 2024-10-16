@@ -83,23 +83,42 @@ export default function LandingPage() {
           </div>
         </section>
         <section id="testimonials" className="py-20 px-4 md:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Lo que dicen nuestros clientes</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {["Infobae","La Nacion","Neura"].map((i) => (
-              <Card key={i}>
-                <CardHeader>
-                  <CardTitle>Empresa {i}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">
-                    PressConnect ha revolucionado nuestra forma de comunicarnos con la prensa. Es fácil de usar y los resultados son increíbles.
-                  </p>
-                  <p className="font-semibold">Juan Pérez, Director de Comunicación</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+  <h2 className="text-3xl font-bold text-center mb-12">Lo que dicen nuestros clientes</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {[
+      {
+        empresa: "Infobae",
+        texto: "PressConnect nos ha permitido llegar a nuestra audiencia de manera más rápida y eficaz.",
+        nombre: "Ernesto Grinbaun",
+        funcion: "Director de Comunicación",
+      },
+      {
+        empresa: "La Nación",
+        texto: "El sistema es intuitivo y ha mejorado significativamente nuestras relaciones públicas.",
+        nombre: "María Gómez",
+        funcion: "Periodista",
+      },
+      {
+        empresa: "Neura",
+        texto: "Es una herramienta imprescindible para gestionar la comunicación en tiempo real.",
+        nombre: "Carlos Díaz",
+        funcion: "Productor de Medios",
+      },
+    ].map(({ empresa, texto, nombre, funcion }) => (
+      <Card key={empresa}>
+        <CardHeader>
+          <CardTitle>Empresa: {empresa}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground mb-4">{texto}</p>
+          <p className="font-semibold">
+            {nombre}, {funcion}
+          </p>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+</section>
         <section id="pricing" className="py-20 px-4 md:px-6 lg:px-8 bg-muted">
   <h2 className="text-3xl font-bold text-center mb-12">Planes y precios</h2>
   <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
