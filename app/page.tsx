@@ -42,7 +42,9 @@ export default function LandingPage() {
         </section>
 
         <section id="features" className="py-20 px-4 md:px-6 lg:px-8 bg-muted">
-          <h2 className="text-3xl font-bold text-center mb-12">Características principales</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Características principales
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card>
               <CardHeader>
@@ -97,8 +99,7 @@ export default function LandingPage() {
         texto: "El sistema es intuitivo y ha mejorado significativamente nuestras relaciones públicas.",
         nombre: "María Gómez",
         funcion: "Periodista",
-      },
-      {
+      }, {
         empresa: "Neura",
         texto: "Es una herramienta imprescindible para gestionar la comunicación en tiempo real.",
         nombre: "Carlos Díaz",
@@ -198,7 +199,11 @@ export default function LandingPage() {
           <div>
             <h4 className="text-sm font-semibold mb-4">Producto</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-muted-foreground hover:text-primary">Características</a></li>
+              <li className="text-muted-foreground hover:text-primary">
+                <Link href="/caracteristicas">
+                Características
+                </Link>
+              </li>
               <li className="text-muted-foreground hover:text-primary">
                 <Link href="/customer">
                   FAQ
