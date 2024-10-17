@@ -59,7 +59,7 @@ export const ordersColumn: ColumnDef<any>[] = [
       <div className="font-[700] text-[14px] text-[#8A8A8A]">Fecha</div>
     ),
     cell: ({ row }) => {
-      const date = new Date(row.original.createdAt); // Assuming 'createdAt' holds the date
+      const date = new Date(row.original.updatedAt); // Assuming 'createdAt' holds the date
       const formattedDate = date.toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",

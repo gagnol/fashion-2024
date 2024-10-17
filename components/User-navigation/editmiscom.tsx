@@ -25,6 +25,7 @@ interface PressRelease {
   distributionDate?: string;
   email: string;
   image?: string;
+  status:string
 }
 
 export default function Pressedit({ order }: { order: PressRelease }) {
@@ -41,6 +42,7 @@ export default function Pressedit({ order }: { order: PressRelease }) {
   const [distributionDate, setDistributionDate] = useState(order.distributionDate || "");
   const [image, setImage] = useState<string[]>(order.image ? [order.image] : []);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState(order.reach || "");
 
   const handleImageChange = (url: string) => setImage([url]);
   const handleImageRemove = () => setImage([]);
@@ -56,7 +58,7 @@ export default function Pressedit({ order }: { order: PressRelease }) {
     formData.append("location", location);
     formData.append("reach", reach);
     formData.append("distributionDate", distributionDate);
-
+    formData.append("status", status);
     const res = await editComicacion(null, formData);
     toast.success(res.message, { duration: 4000, position: "top-center" });
     setIsSubmitting(false);
@@ -153,7 +155,7 @@ export default function Pressedit({ order }: { order: PressRelease }) {
                   </SelectContent>
                 </Select>
 
-                <Select value={reach} onValueChange={setReach} required>
+                 <Select value={reach} onValueChange={setReach} required>
                   <SelectTrigger>
                     <SelectValue placeholder="Alcance" />
                   </SelectTrigger>
@@ -170,7 +172,17 @@ export default function Pressedit({ order }: { order: PressRelease }) {
                   value={distributionDate}
                   onChange={(e) => setDistributionDate(e.target.value)}
                 />
-
+          <h1>Publicar Comunicado</h1>
+          <Select value={status} onValueChange={setStatus}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Tipo de envio" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="draft">Borrador</SelectItem>
+                    <SelectItem value="scheduled">Programado</SelectItem>
+                    <SelectItem value="sent">Enviar directamente</SelectItem>
+                  </SelectContent>
+                </Select>
                 <div className="flex justify-end">
                   <Button type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Guardando..." : "Guardar Cambios"}

@@ -158,7 +158,7 @@ export async function createComunicador(prevState: any, formData: FormData) {
   }
 }
 
-export async function nuevaComicacion(prevState: any, formData: FormData) {
+export async function nuevaComicacion(p0: null, formData: FormData) {
   const schema = z.object({
     title: z.string().min(1, 'El título es obligatorio'),
     content: z.string().min(1, 'El contenido es obligatorio'),
@@ -166,49 +166,42 @@ export async function nuevaComicacion(prevState: any, formData: FormData) {
     topic: z.enum(['politica', 'economia', 'tecnologia', 'cultura']),
     location: z.enum(['local', 'nacional', 'internacional']),
     reach: z.enum(['pequeno', 'mediano', 'grande']),
-    distributionDate: z
-    .string()
-    .transform((str) => new Date(str))
-    .optional(), // Mark as optional
-    email: z.string().email('Debe ser un correo válido'), // Validate email format
-    image: z.string().optional(), // Optional string field for image
+    distributionDate: z.string().transform((str) => new Date(str)).optional(),
+    email: z.string().email('Debe ser un correo válido'),
+    image: z.string().optional(),
+    status: z.enum(['draft', 'scheduled', 'sent']),
   });
 
   const parse = schema.safeParse({
-    title: formData.get('title') as string,
-    content: formData.get('content') as string,
-    mediaType: formData.get('mediaType') as string,
-    topic: formData.get('topic') as string,
-    location: formData.get('location') as string,
-    reach: formData.get('reach') as string,
-    distributionDate: formData.get('distributionDate') || undefined, // Handle undefined case
-    email: formData.get('email') as string,
-    image: formData.get('image') as string,
+    title: formData.get('title'),
+    content: formData.get('content'),
+    mediaType: formData.get('mediaType'),
+    topic: formData.get('topic'),
+    location: formData.get('location'),
+    reach: formData.get('reach'),
+    distributionDate: formData.get('distributionDate') || undefined,
+    email: formData.get('email'),
+    image: formData.get('image'),
+    status: formData.get('status'),
   });
 
   if (!parse.success) {
-    console.log(parse.error); // Log errors to the console
-    return { message: 'Form data is not valid', errors: parse.error.errors }; // Return error message and details
+    console.log(parse.error);
+    return { message: 'Form data is not valid', errors: parse.error.errors };
   }
 
-  const data = parse.data;
-
   try {
-    // Connect to the database and create the record
     await dbConnect();
-    const comunicado = new PressModel(data);
+    const comunicado = new PressModel(parse.data);
     await comunicado.save();
-
-    // Revalidate the path (optional)
     revalidatePath('/');
-
-    // Return success message
     return { message: 'Comunicado enviado exitosamente' };
   } catch (e) {
-    console.error(e); // Log any error
+    console.error(e);
     return { message: 'Failed to create comunicado' };
   }
 }
+
 
 //editar comunicacion
 export async function editComicacion(p0: null, formData: FormData) {
@@ -226,6 +219,7 @@ export async function editComicacion(p0: null, formData: FormData) {
       .optional(),
     email: z.string().email('Debe ser un correo válido'),
     image: z.string().optional(),
+    status: z.enum(['draft', 'scheduled', 'sent']),
   });
 
   // Log formData for debugging
@@ -243,6 +237,7 @@ export async function editComicacion(p0: null, formData: FormData) {
     distributionDate: formData.get('distributionDate') || undefined,
     email: formData.get('email') as string,
     image: formData.get('image') as string,
+    status: formData.get('status') as string,
   });
 
   // Check for validation errors

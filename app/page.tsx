@@ -89,32 +89,33 @@ export default function LandingPage() {
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {[
       {
-        empresa: "Infobae",
-        texto: "Nexus nos ha permitido llegar a nuestra audiencia de manera más rápida y eficaz.",
-        nombre: "Ernesto Grinbaun",
-        funcion: "Director de Comunicación",
+        empresa: "Entidad Pública",
+        texto: "Gracias a Nexus,hemos optimizado la distribucióndenuestros comunicados.Ahora llegamos directamente a los periodistas adecuados,sin dependerde intermediarios.Es simple,rápido y confiable.¡Una herramienta indispensable para nuestras comunicaciones oficiales!.",
+        nombre: "",
+        funcion: "",
       },
       {
-        empresa: "La Nación",
-        texto: "El sistema es intuitivo y ha mejorado significativamente nuestras relaciones públicas.",
-        nombre: "María Gómez",
-        funcion: "Periodista",
+        empresa: "ONG",
+        texto: "Desde que usamos Nexus, nuestra capacidad de llegar a los medios ha mejorado enormemente.Podemos segmentar nuestros comunicados según el interés de los periodistas y medios,lo que nos ha ayudado a tener una cobertura más precisa y efectiva.",
+        nombre: "",
+        funcion: "",
       }, {
-        empresa: "Neura",
-        texto: "Es una herramienta imprescindible para gestionar la comunicación en tiempo real.",
-        nombre: "Carlos Díaz",
-        funcion: "Productor de Medios",
+        empresa: "Periodista",
+        texto: "Nexus ha cambiado mi forma de trabajar.Ahora recibo solo los comunicados que realmente me interesan,de manera organizada y puntual.Es una fuente confiable para estar al tanto de lo que sucede en los sectores que cubro.",
+        nombre: "",
+        funcion: "",
       },
-    ].map(({ empresa, texto, nombre, funcion }) => (
+    ].map(({ empresa, texto}) => (
       <Card key={empresa}>
         <CardHeader>
           <CardTitle>Empresa: {empresa}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground mb-4">{texto}</p>
-          <p className="font-semibold">
-            {nombre}, {funcion}
+          <p className="border-l-4 border-gray-300 pl-4
+           italic text-base text-muted-foreground mb-4">
+           {texto}
           </p>
+         
         </CardContent>
       </Card>
     ))}
@@ -200,7 +201,7 @@ export default function LandingPage() {
             <h4 className="text-sm font-semibold mb-4">Producto</h4>
             <ul className="space-y-2 text-sm">
               <li className="text-muted-foreground hover:text-primary">
-                <Link href="/caracteristicas">
+                <Link href="/caracter">
                 Características
                 </Link>
               </li>
