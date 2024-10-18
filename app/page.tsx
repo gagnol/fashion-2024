@@ -32,7 +32,11 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Button size="lg">Solicitar una demo <ArrowRight className="ml-2 h-4 w-4" /></Button>
+            <Button size="lg">
+              <Link href="/demo">
+              <span className="flex"> Ver demo <ArrowRight className="ml-2 h-4 w-4" /></span>   
+              </Link>
+              </Button>
             <Button size="lg" variant="outline">
             <Link href="/register" >
               Registrarse gratis

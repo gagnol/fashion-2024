@@ -56,17 +56,19 @@ function SigninTool() {
                         </Popover.Trigger>
                         <Popover.Portal>
                             <Popover.Content className='z-1 bg-white border-2 rounded-md'>
-                                <div className='w-[360px] h-[320px] rounded-lg border-[2px]'>
-                                    <div className="flex p-3 bg-[#EAEDED] max-w-[100%] h-[69px] overflow-x-hidden">
-                                        <div className="text-xs flex flex-col pl-5 pt-2">
-                                            <p className="font-bold text-[18px]">
-                                                {session.user.name}
-                                            </p>
-                                            <p>{session?.user?.email}</p>
-                                        </div>
-                                    </div>
+                                <div className='w-[360px] h-[320px] 
+                                rounded-lg border-[2px]'>
+                                    <div className="flex p-3 bg-[#EAEDED] 
+                                    max-w-[100%] h-[69px] overflow-x-hidden">
+                                <div className="text-xs flex flex-col pl-5 pt-2">
+  <p className="font-bold text-[18px] mb-2">
+    {session.user.name}
+  </p>
+  <p className="mt-1">{session?.user?.email}</p>
+</div>    </div>
                                     <div className='flex bg-white'>
-                                        <div className='flex-1 flex flex-row max-w-[40%] min-w-[40%] mx-4'>
+                                        <div className='flex-1 flex flex-row max-w-[40%] 
+                                        min-w-[40%] mx-4'>
                                             <ul className='m-0 p-0'>
                                                 <h4 className='text-[16px] font-bold py-2'></h4>
                                                 <Link href="/admin/main">
@@ -78,12 +80,15 @@ function SigninTool() {
                                                 </Link>
                                             </ul>
                                         </div>
-                                        <div className='flex-1 flex flex-row max-w-[60%] min-w-[60%] mx-4'>
+                                        <div className='flex-1 flex flex-row max-w-[60%]
+                                         min-w-[60%] mx-4'>
                                             <ul>
-                                                <h4 className='text-[16px] font-bold py-2'>Tu Cuenta</h4>
+                                                <h4 className='text-[16px] font-bold py-2'>
+                                                    Tu Cuenta
+                                                    </h4>
                                                 <li className="my-1">
                                                     <button className='border-2 p-2 rounded-lg' onClick={handleButtonClick}>
-                                                        <Link href="/profile/main">Cuenta</Link>
+                                                        <Link href="/profile/main">Panel de control</Link>
                                                     </button>
                                                 </li>
                                                 <li className="my-1">
