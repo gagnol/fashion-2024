@@ -23,7 +23,7 @@ export default async function SettingsScreen() {
   const users = JSON.parse(JSON.stringify(userDocs));
 
   const periodistaDocs = await PeriodistaModel.findOne({ email: session.user.email });
-  const periodista = JSON.parse(JSON.stringify(periodistaDocs));
+  const periodista = JSON.parse(JSON.stringify(periodistaDocs)); 
  
   return (
     <div className="container max-w-screen-xl mx-auto p-4">

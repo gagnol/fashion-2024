@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export type Slider = {
+export interface Comunicador {
   name: string;
   email: string;
   sector: string;
@@ -8,8 +8,9 @@ export type Slider = {
   specialization: string;
   experience: number;
   location: string;
-  bio: string;
+  bio?: string;
 }
+
 
 const sliderSchema = new mongoose.Schema(
   {

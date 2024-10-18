@@ -1,5 +1,15 @@
 import { Schema, model, models } from 'mongoose';
 
+export interface Periodista {
+  name: string;
+  email: string;
+  topics: string[];
+  mediaName: string;
+  mediaType: 'prensa' | 'television' | 'radio' | 'digital';
+  location: string;
+  bio?: string;
+}
+
 // Define the Periodista schema
 const PeriodistaSchema = new Schema({
   name: { type: String, required: true, minlength: 3 },
