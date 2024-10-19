@@ -186,12 +186,16 @@ export default function LandingPage() {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Únete a miles de profesionales que ya están mejorando su estrategia de comunicación con Nexus.
           </p>
-          <Link href="/profile/main">
+          
           <Button size="lg">
+            <Link href="/signin">
+            <span className="flex">
             Comenzar ahora 
             <ArrowRight className="ml-2 h-4 w-4" />
+            </span>
+            </Link>
           </Button>
-          </Link>
+          
         </section>
       </main>
 
@@ -205,7 +209,7 @@ export default function LandingPage() {
             <h4 className="text-sm font-semibold mb-4">Producto</h4>
             <ul className="space-y-2 text-sm">
               <li className="text-muted-foreground hover:text-primary">
-                <Link href="/caracter">
+                <Link href="#features">
                 Características
                 </Link>
               </li>

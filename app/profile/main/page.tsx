@@ -39,7 +39,7 @@ export default async function ProfileScreen() {
         <Tabmenu />
 
         {noRegistrado ? (
-          <div className="text-center p-6 text-red-600">
+          <div className="text-center p-6 text-amber-500">
             <p>Usted no está todavía registrado en nuestras bases de búsqueda.</p>
           </div>
         ) : (
@@ -70,7 +70,6 @@ export default async function ProfileScreen() {
                 </>
               )}
             </div>
-
             {/* Segunda columna: Biografía */}
             <div className="flex-1 min-w-[250px]">
               <h3 className="text-lg font-semibold mb-4">Biografía</h3>
@@ -78,7 +77,6 @@ export default async function ProfileScreen() {
             </div>
           </div>
         )}
-
         <PressReleaseDirectory orders={orders} />
       </main>
     </div>

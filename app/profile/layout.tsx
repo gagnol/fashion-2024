@@ -153,7 +153,6 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
         </header>
-
         {children}
       </main>
     </section>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { useCollapsibleStore } from '@/lib/usecollapse';
 import { Button } from '@/components/ui/button';
-import { GripHorizontal, LayoutDashboard, User, ShoppingBag, HelpCircle, LogOut, Settings } from 'lucide-react';
+import { GripHorizontal, LayoutDashboard, User, ShoppingBag, HelpCircle, LogOut, Settings, Home } from 'lucide-react';
 
 const menuItems = [
   {
@@ -66,7 +66,7 @@ export default function Sidebar() {
             <span className='sr-only'>Toggle navigation menu</span>
           </Button>
           <Link href='/' className='flex items-center gap-2 font-semibold mx-2'>
-            Volver al Inicio
+            <Home/>
           </Link>
         </div>
         <div className='flex-1'>
