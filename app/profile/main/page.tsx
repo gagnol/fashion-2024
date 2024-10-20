@@ -37,7 +37,6 @@ export default async function ProfileScreen() {
     <div className="bg-[#F6F6F6] p-4 lg:gap-6 lg:p-6 h-full w-full">
       <main className="bg-white w-full h-full rounded-t-[12px] rounded-b-[12px] shadow-lg">
         <Tabmenu />
-
         {noRegistrado ? (
           <div className="text-center p-6 text-indigo-500">
             <p>Usted no está todavía registrado en nuestras bases de búsqueda.</p>
@@ -49,12 +48,8 @@ export default async function ProfileScreen() {
             <p className="text-green-600 font-semibold mb-2">
                 {isPeriodista(periodista) ? "Periodista Registrado" : "Comunicador Registrado"}
               </p>
-
               <h2><strong> {comunicador?.name ?? periodista?.name ?? "No disponible"} </strong></h2>
-                    
             </div>
-           
-           
           </div>
         )}
         <PressReleaseDirectory orders={orders} />

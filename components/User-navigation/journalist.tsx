@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { motion } from "framer-motion";
 import { Search, Filter, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -17,6 +17,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ProfileModal from "./journalistmodal"; 
 
 export default function Dashboard({ product }: any) {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -24,6 +25,7 @@ export default function Dashboard({ product }: any) {
   const [selectedTopic, setSelectedTopic] = useState("");
   const [selectedMediaType, setSelectedMediaType] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedPeriodista, setSelectedPeriodista] = useState(null);
 
   // Filtered products based on search and filters
   const filteredProducts = product.filter((i: any) => {
@@ -41,6 +43,10 @@ export default function Dashboard({ product }: any) {
     setSelectedMediaType("");
     setSelectedLocation("");
     setSearchQuery("");
+  };
+
+  const handleOpenModal = (periodista: any) => {
+    setSelectedPeriodista(periodista);
   };
 
   return (
@@ -157,11 +163,17 @@ export default function Dashboard({ product }: any) {
                       <p>{i.location}</p>
                     </div>
                   </div>
+                  <ProfileModal
+                    isOpen={!!selectedPeriodista}
+                    onClose={() => setSelectedPeriodista(null)}
+                    periodista={selectedPeriodista}
+                  />
+                  <Button onClick={() => handleOpenModal(i)} className="mt-4">Ver Perfil</Button>
                 </CardContent>
               </Card>
             ))
           ) : (
-            <p>No se encontraron resultados.</p>
+            <div>No se encontraron periodistas.</div>
           )}
         </motion.div>
       </div>
