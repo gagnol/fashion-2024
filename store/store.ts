@@ -29,5 +29,6 @@ export const store = configureStore({
       },
     }),
 });
-export let persistor = persistStore(store);
 
+// Solo inicializamos el persist store si estamos en el entorno del cliente
+export let persistor = typeof window !== "undefined" ? persistStore(store) : null;

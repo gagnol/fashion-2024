@@ -1,6 +1,7 @@
 import { Schema, model, models } from 'mongoose';
 
 export interface Periodista {
+  _id: any;
   name: string;
   email: string;
   topics: string[];
@@ -12,6 +13,7 @@ export interface Periodista {
 
 // Define the Periodista schema
 const PeriodistaSchema = new Schema({
+  
   name: { type: String, required: true, minlength: 3 },
   email: { type: String, required: true, unique: true },
   topics: { type: [String], required: true }, // Array of topics

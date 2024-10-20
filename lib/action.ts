@@ -510,3 +510,42 @@ export async function editPeriodista(p0: null, formData: FormData) {
     return { message: "Error al actualizar el periodista" };
   }
 }
+
+
+//delete register
+export async function deleteRegister(p0: null, formData: FormData) {
+  const schema = z.object({
+    _id: z.string().min(1),
+   
+  })
+  const data = schema.parse({
+    _id: formData.get('_id'),
+   
+  })
+
+  try {
+    await dbConnect();
+
+    // Check if the document exists in PeriodistaModel
+    const periodista = await PeriodistaModel.findById(data._id);
+    if (periodista) {
+      await PeriodistaModel.findByIdAndDelete(data._id);
+      console.log(`Periodista borrado: ${data._id}`);
+      return { success: true, message: `Periodista borrado: ${data._id}` };
+    }
+
+    // If not found, check in SliderModel
+    const comunicador = await SliderModel.findById(data._id);
+    if (comunicador) {
+      await SliderModel.findByIdAndDelete(data._id);
+      console.log(`Comunicador borrado: ${data._id}`);
+      return { success: true, message: `Comunicador borrado: ${data._id}` };
+    }
+
+    // If not found in either model
+    return { success: false, message: "Registro no encontrado." };
+  } catch (error) {
+    console.error("Error deleting register:", error);
+    return { success: false, message: "Error al borrar el registro." };
+  }
+}

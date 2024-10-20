@@ -39,42 +39,22 @@ export default async function ProfileScreen() {
         <Tabmenu />
 
         {noRegistrado ? (
-          <div className="text-center p-6 text-amber-500">
+          <div className="text-center p-6 text-indigo-500">
             <p>Usted no está todavía registrado en nuestras bases de búsqueda.</p>
           </div>
         ) : (
           <div className="p-6 flex flex-wrap gap-6">
             {/* Primera columna: Información principal */}
             <div className="flex-1 min-w-[250px]">
-              <h2 className="text-xl font-bold mb-4">Perfil del Usuario</h2>
-
-              <p className="text-green-600 font-semibold mb-2">
+            <p className="text-green-600 font-semibold mb-2">
                 {isPeriodista(periodista) ? "Periodista Registrado" : "Comunicador Registrado"}
               </p>
 
-              <p><strong>Nombre:</strong> {comunicador?.name ?? periodista?.name ?? "No disponible"}</p>
-              <p><strong>Email:</strong> {session.user.email}</p>
-              <p><strong>Ubicación:</strong> {comunicador?.location ?? periodista?.location ?? "No disponible"}</p>
-
-              {isPeriodista(periodista) && (
-                <>
-                  <p><strong>Temas:</strong> {periodista.topics.join(', ')}</p>
-                  <p><strong>Tipo de Medio:</strong> {periodista.mediaType}</p>
-                </>
-              )}
-
-              {isComunicador(comunicador) && (
-                <>
-                  <p><strong>Sector:</strong> {comunicador.sector}</p>
-                  <p><strong>Especialización:</strong> {comunicador.specialization}</p>
-                </>
-              )}
+              <h2><strong> {comunicador?.name ?? periodista?.name ?? "No disponible"} </strong></h2>
+                    
             </div>
-            {/* Segunda columna: Biografía */}
-            <div className="flex-1 min-w-[250px]">
-              <h3 className="text-lg font-semibold mb-4">Biografía</h3>
-              <p>{comunicador?.bio ?? periodista?.bio ?? "Biografía no disponible."}</p>
-            </div>
+           
+           
           </div>
         )}
         <PressReleaseDirectory orders={orders} />

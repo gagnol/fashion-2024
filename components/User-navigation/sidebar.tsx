@@ -63,7 +63,6 @@ export default function Sidebar() {
             }}
           >
             <GripHorizontal className='h-5 w-5 text-[#5865F2]' />
-            <span className='sr-only'>Toggle navigation menu</span>
           </Button>
           <Link href='/' className='flex items-center gap-2 font-semibold mx-2'>
             <Home/>

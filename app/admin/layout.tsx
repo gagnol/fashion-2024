@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import Sidebar from '@/components/Admin-navigation/sidebar';
 import { useCollapsibleStore } from '@/lib/usecollapse';
-import { useEffect, useState } from 'react';
 import { Wand, GripVertical, LayoutDashboard, User2, ShoppingBag, Bell } from 'lucide-react';
 import axios from 'axios';
 
@@ -88,16 +87,15 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
             <h1 className="text-4xl font-semibold">
 				Panel de Administrador
 			</h1>
-            <div className="relative">
-               <Button variant="ghost" size="icon" >
-               <Link href="/admin/mensajes">
+       <div className="relative">
+       <Button variant="ghost" size="icon" >
+        <Link href="/admin/mensajes">
 			   <Bell className="h-6 w-6" />
 			   </Link>
-               </Button>
-            </div>
-          </div>
-        </header>
-
+        </Button>
+        </div>
+       </div>
+     </header>
         {children}
       </main>
     </section>

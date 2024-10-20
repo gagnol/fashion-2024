@@ -8,6 +8,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import PeriodistaModel, { Periodista } from '@/lib/periodista-model';
 import ComunicadorModel, { Comunicador } from '@/lib/slider-model';
+import DeleteButton from '@/components/User-navigation/deleteregister';
 
 
 // Type guards para distinguir tipos de usuarios
@@ -36,6 +37,8 @@ export default async function SettingsScreen() {
   const userDocs = await UserModel.findOne({ email: session.user.email });
   const users = JSON.parse(JSON.stringify(userDocs));
  
+  const deleteId = isPeriodista(periodista) ? periodista._id : isComunicador(comunicador) ? comunicador._id : null;
+
   return (
     <div className="container max-w-screen-xl mx-auto p-4">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -67,8 +70,8 @@ export default async function SettingsScreen() {
           <Card>
           <CardContent>
           {noRegistrado ? (
-          <div className="text-center p-6 text-amber-500">
-            <p>Usted no está todavía registrado en nuestras bases de búsqueda.</p>
+          <div className="text-center p-6 text-indigo-500 ">
+           <p>Usted no está todavía registrado en nuestras bases de búsqueda.</p>
           </div>
         ) : (
           <div className="p-6 flex flex-wrap gap-6">
@@ -97,6 +100,8 @@ export default async function SettingsScreen() {
                   <p><strong>Especialización:</strong> {comunicador.specialization}</p>
                 </>
               )}
+              <h3>Cancelar registro</h3>
+              {deleteId && <DeleteButton _id={deleteId} />}
             </div>
 
             {/* Segunda columna: Biografía */}

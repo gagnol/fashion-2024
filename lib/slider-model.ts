@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 export interface Comunicador {
+  _id: any;
   name: string;
   email: string;
   sector: string;
