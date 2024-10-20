@@ -101,43 +101,8 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
           </Button>
 
           {/* Actions Section */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-            <Link href="/profile/periodistas/new" className="block">
-              <Button
-                disabled
-                size="lg"
-                className="bg-[#666] text-white"
-                onClick={handleClick}
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="animate-spin" /> &nbsp; Loading...
-                  </>
-                ) : (
-                  <>
-                    <User /> &nbsp; Registrate Periodista
-                  </>
-                )}
-              </Button>
-            </Link>
-            <Link href="/profile/responsables/new" className="block">
-              <Button
-                disabled
-                size="lg"
-                className="bg-[#666] text-white"
-                onClick={handleClick}
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="animate-spin" /> &nbsp; Loading...
-                  </>
-                ) : (
-                  <>
-                    <User /> &nbsp; Registrate Comunicador
-                  </>
-                )}
-              </Button>
-            </Link>
+          <div className="flex flex-wrap items-end gap-4 sm:gap-6">
+            
             <Link href="/profile/crear" className="block">
               <Button onClick={handleClick}>
                 {isLoading ? (

@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, Filter, ChevronDown, XCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import ProfileModal from "./comunicationModal";
 import {
   Select,
   SelectContent,
@@ -21,14 +22,15 @@ import {
 export default function CommunicationDashboard({ product }: any) {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado del modal
+  const [selectedComunicador, setSelectedComunicador] = useState<any>(null); // Periodista seleccionado
 
-  // Estados para cada filtro
+  // Estados para los filtros
   const [selectedSector, setSelectedSector] = useState("");
   const [selectedSpecialization, setSelectedSpecialization] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedExperience, setSelectedExperience] = useState("");
 
-  // Filtrar productos en base a los selectores y al término de búsqueda
   const filteredProducts = product.filter((i: any) => {
     const matchesSearchQuery = i.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesSector = selectedSector ? i.sector === selectedSector : true;
@@ -45,13 +47,22 @@ export default function CommunicationDashboard({ product }: any) {
     );
   });
 
-  // Función para resetear filtros
   const clearFilters = () => {
     setSearchQuery("");
     setSelectedSector("");
     setSelectedSpecialization("");
     setSelectedLocation("");
     setSelectedExperience("");
+  };
+
+  const openModal = (journalist: any) => {
+    setSelectedComunicador(journalist);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedComunicador(null);
   };
 
   return (
@@ -62,7 +73,7 @@ export default function CommunicationDashboard({ product }: any) {
         transition={{ duration: 0.5 }}
         className="text-4xl font-bold mb-8 text-center"
       >
-      Búsqueda de Responsables de Comunicación y Prensa
+        Búsqueda de Responsables de Comunicación y Prensa
       </motion.h1>
       <div className="max-w-4xl mx-auto space-y-6">
         <Card>
@@ -73,7 +84,7 @@ export default function CommunicationDashboard({ product }: any) {
                 placeholder="Buscar responsables..."
                 className="flex-grow"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)} // Actualiza searchQuery en cada cambio de input
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Button onClick={() => setIsFiltersOpen(!isFiltersOpen)}>
                 <Filter className="mr-2 h-4 w-4" />
@@ -84,8 +95,6 @@ export default function CommunicationDashboard({ product }: any) {
                   }`}
                 />
               </Button>
-
-              {/* Botón de borrar filtros */}
               <Button
                 variant="ghost"
                 onClick={clearFilters}
@@ -102,7 +111,6 @@ export default function CommunicationDashboard({ product }: any) {
               className="overflow-hidden"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                {/* Sector Selector */}
                 <Select value={selectedSector} onValueChange={setSelectedSector}>
                   <SelectTrigger>
                     <SelectValue placeholder="Sector" />
@@ -114,8 +122,6 @@ export default function CommunicationDashboard({ product }: any) {
                     <SelectItem value="asociacion">Asociación Civil</SelectItem>
                   </SelectContent>
                 </Select>
-
-                {/* Especialización Selector */}
                 <Select value={selectedSpecialization} onValueChange={setSelectedSpecialization}>
                   <SelectTrigger>
                     <SelectValue placeholder="Área de especialización" />
@@ -127,8 +133,6 @@ export default function CommunicationDashboard({ product }: any) {
                     <SelectItem value="rse">Responsabilidad Social</SelectItem>
                   </SelectContent>
                 </Select>
-
-                {/* Ubicación Selector */}
                 <Select value={selectedLocation} onValueChange={setSelectedLocation}>
                   <SelectTrigger>
                     <SelectValue placeholder="Ubicación" />
@@ -139,7 +143,6 @@ export default function CommunicationDashboard({ product }: any) {
                     <SelectItem value="internacional">Internacional</SelectItem>
                   </SelectContent>
                 </Select>
-                {/* Experiencia Selector */}
                 <Select value={selectedExperience} onValueChange={setSelectedExperience}>
                   <SelectTrigger>
                     <SelectValue placeholder="Experiencia" />
@@ -154,7 +157,6 @@ export default function CommunicationDashboard({ product }: any) {
             </motion.div>
           </CardContent>
         </Card>
-
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -165,10 +167,10 @@ export default function CommunicationDashboard({ product }: any) {
             filteredProducts.map((i: any) => (
               <Card key={i._id}>
                 <CardHeader>
-                  <CardTitle>Nombre del Responsable {i.name}</CardTitle>
+                  <CardTitle>{i.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-2 gap-4 text-sm m-2">
                     <div>
                       <p className="font-semibold">Sector:</p>
                       <p>{i.sector}</p>
@@ -186,6 +188,8 @@ export default function CommunicationDashboard({ product }: any) {
                       <p>{i.location}</p>
                     </div>
                   </div>
+
+                  <Button onClick={() => openModal(i)}>Ver detalle</Button>
                 </CardContent>
               </Card>
             ))
@@ -196,6 +200,13 @@ export default function CommunicationDashboard({ product }: any) {
           )}
         </motion.div>
       </div>
+
+      {/* Modal para ver detalle */}
+      <ProfileModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        periodista={selectedComunicador}
+      />
     </div>
   );
 }

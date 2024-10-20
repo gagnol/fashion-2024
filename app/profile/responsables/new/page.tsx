@@ -23,8 +23,9 @@ import toast from "react-hot-toast";
 import { createComunicador } from "@/lib/action";
 
 export default function CommunicationRegistrationForm() {
+  
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   // State to store selected values for 'Select' components
   const [sector, setSector] = useState("");
   const [specialization, setSpecialization] = useState("");
