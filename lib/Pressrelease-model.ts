@@ -11,22 +11,22 @@ const pressReleaseSchema = new mongoose.Schema({
   },
   mediaType: {
     type: String,
-    enum: ['prensa', 'television', 'radio', 'digital'],
+    enum: ['Prensa', 'Televisión', 'Radio', 'Digital'],
     required: true,
   },
   topic: {
     type: String,
-    enum: ['politica', 'economia', 'tecnologia', 'cultura'],
+    enum: ['Política', 'Economía', 'Tecnología', 'Cultura'],
     required: true,
   },
   location: {
     type: String,
-    enum: ['local', 'nacional', 'internacional'],
+    enum: ['Local', 'Nacional', 'Internacional'],
     required: true,
   },
   reach: {
     type: String,
-    enum: ['pequeno', 'mediano', 'grande'],
+    enum: ['Pequeno', 'Mediano', 'Grande'],
     required: true,
   },
   distributionDate: {
@@ -35,8 +35,8 @@ const pressReleaseSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['draft', 'scheduled', 'sent'],
-    default: 'sent',
+    enum: ['draft', 'scheduled', 'Enviado'],
+    default: 'Enviado',
   },
   email: {
     type: String,

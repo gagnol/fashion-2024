@@ -34,7 +34,9 @@ export default function LandingPage() {
           >
             <Button size="lg">
               <Link href="/demo">
-              <span className="flex"> Ver demo <ArrowRight className="ml-2 h-4 w-4" /></span>   
+              <span className="flex"> Ver demo
+                 <ArrowRight className="ml-2 h-4 w-4 mt-[2px]" />
+                 </span>   
               </Link>
               </Button>
             <Button size="lg" variant="outline">
@@ -191,7 +193,7 @@ export default function LandingPage() {
             <Link href="/signin">
             <span className="flex">
             Comenzar ahora 
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-4 w-4 mt-1" />
             </span>
             </Link>
           </Button>

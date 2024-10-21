@@ -157,14 +157,14 @@ export function DataTable<TData, TValue>({
 					<ChevronsRight size={16} />
 				</Button>
 				<span className='flex items-center gap-1 text-[#8A8A8A] text-[14px]'>
-					<div>Page</div>
+					<div>Página</div>
 					<strong>
 						{table.getState().pagination.pageIndex + 1} of{' '}
 						{table.getPageCount().toLocaleString()}
 					</strong>
 				</span>
-				<span className='flex items-center gap-1 text-[#8A8A8A] text-[14px]'>
-					Go to
+				<span className='flex items-center gap-1 text-[#8A8A8A] text-[14px] my-2'>
+					Ir a 
 					<Input
 						type='number'
 						defaultValue={table.getState().pagination.pageIndex + 1}
@@ -181,12 +181,12 @@ export function DataTable<TData, TValue>({
 					onValueChange={handleChange}
 				>
 					<SelectTrigger className='w-[120px]'>
-						<SelectValue placeholder='Page size' />
+						<SelectValue placeholder='Páginas' />
 					</SelectTrigger>
 					<SelectContent className=''>
 						{[5, 10, 20, 30, 40, 50].map((pageSize) => (
 							<SelectItem key={pageSize} value={pageSize.toString()}>
-								Show {pageSize}
+								Ver {pageSize}
 							</SelectItem>
 						))}
 					</SelectContent>

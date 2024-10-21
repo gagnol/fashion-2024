@@ -105,10 +105,10 @@ export default function PressReleaseDashboard() {
                     <SelectValue placeholder="Tipo de medio" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="prensa">Prensa</SelectItem>
-                    <SelectItem value="television">Televisión</SelectItem>
-                    <SelectItem value="radio">Radio</SelectItem>
-                    <SelectItem value="digital">Digital</SelectItem>
+                    <SelectItem value="Prensa">Prensa</SelectItem>
+                    <SelectItem value="Televisión">Televisión</SelectItem>
+                    <SelectItem value="Radio">Radio</SelectItem>
+                    <SelectItem value="Digital">Digital</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -117,10 +117,10 @@ export default function PressReleaseDashboard() {
                     <SelectValue placeholder="Temática" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="politica">Política</SelectItem>
-                    <SelectItem value="economia">Economía</SelectItem>
-                    <SelectItem value="tecnologia">Tecnología</SelectItem>
-                    <SelectItem value="cultura">Cultura</SelectItem>
+                    <SelectItem value="Política">Política</SelectItem>
+                    <SelectItem value="Economía">Economía</SelectItem>
+                    <SelectItem value="Tecnología">Tecnología</SelectItem>
+                    <SelectItem value="Cultura">Cultura</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -129,9 +129,9 @@ export default function PressReleaseDashboard() {
                     <SelectValue placeholder="Ubicación" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="local">Local</SelectItem>
-                    <SelectItem value="nacional">Nacional</SelectItem>
-                    <SelectItem value="internacional">Internacional</SelectItem>
+                    <SelectItem value="Local">Local</SelectItem>
+                    <SelectItem value="Nacional">Nacional</SelectItem>
+                    <SelectItem value="Internacional">Internacional</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -140,9 +140,9 @@ export default function PressReleaseDashboard() {
                     <SelectValue placeholder="Alcance" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="pequeno">Pequeño</SelectItem>
-                    <SelectItem value="mediano">Mediano</SelectItem>
-                    <SelectItem value="grande">Grande</SelectItem>
+                    <SelectItem value="Pequeno">Pequeño</SelectItem>
+                    <SelectItem value="Mediano">Mediano</SelectItem>
+                    <SelectItem value="Grande">Grande</SelectItem>
                   </SelectContent>
                 </Select>
                 <Input

@@ -21,7 +21,7 @@ async function aviso() {
         <li className='pb-5'>Razón Social: Nexus S.L. (en adelante la <span className='text-primary'>Empresa</span> o el <span className='text-primary'>Responsable</span>)</li>
         <li className='pb-5'>C.I.F.: B04056925</li>
         <li className='pb-5'>Dirección: Carretera NACIONAL 340 KM. 535</li>
-        <li className='pb-5'>Email: infoNexus@gmail.com</li>
+        <li className='pb-5'>Email: hola@nexuscomunicados.com</li>
         <li className='pb-5'>Teléfono: 950453316</li>
         <li className='pb-5'>Datos registrales: ES. 12.06814/AL CE ES. 40.16964/AL CE</li>
       </ul>

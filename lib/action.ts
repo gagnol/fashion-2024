@@ -162,10 +162,10 @@ export async function nuevaComicacion(p0: null, formData: FormData) {
   const schema = z.object({
     title: z.string().min(1, 'El título es obligatorio'),
     content: z.string().min(1, 'El contenido es obligatorio'),
-    mediaType: z.enum(['prensa', 'television', 'radio', 'digital']),
-    topic: z.enum(['politica', 'economia', 'tecnologia', 'cultura']),
-    location: z.enum(['local', 'nacional', 'internacional']),
-    reach: z.enum(['pequeno', 'mediano', 'grande']),
+    mediaType: z.enum(['Prensa', 'Televisión', 'Radio', 'Digital']),
+    topic: z.enum(['Política', 'Economía', 'Tecnología', 'Cultura']),
+    location: z.enum(['Local', 'Nacional', 'Internacional']),
+    reach: z.enum(['Pequeno', 'Mediano', 'Grande']),
     distributionDate: z.string().transform((str) => new Date(str)).optional(),
     email: z.string().email('Debe ser un correo válido'),
     image: z.string().optional(),
@@ -209,17 +209,17 @@ export async function editComicacion(p0: null, formData: FormData) {
     _id: z.string().min(1, 'El ID es obligatorio'), // Ensure _id is required
     title: z.string().min(1, 'El título es obligatorio'),
     content: z.string().min(1, 'El contenido es obligatorio'),
-    mediaType: z.enum(['prensa', 'television', 'radio', 'digital']),
-    topic: z.enum(['politica', 'economia', 'tecnologia', 'cultura']),
-    location: z.enum(['local', 'nacional', 'internacional']),
-    reach: z.enum(['pequeno', 'mediano', 'grande']),
+    mediaType: z.enum(['Prensa', 'Televisión', 'Radio', 'Digital']),
+    topic: z.enum(['Política', 'Economía', 'Tecnología', 'Cultura']),
+    location: z.enum(['Local', 'Nacional', 'Internacional']),
+    reach: z.enum(['Pequeno', 'Mediano', 'Grande']),
     distributionDate: z
       .string()
       .transform((str) => (str ? new Date(str) : undefined)) // Handle optional date
       .optional(),
     email: z.string().email('Debe ser un correo válido'),
     image: z.string().optional(),
-    status: z.enum(['draft', 'scheduled', 'sent']),
+    status: z.enum(['draft', 'scheduled', 'Enviado']),
   });
 
   // Log formData for debugging

@@ -33,7 +33,7 @@ export default async function ProfileScreen() {
 
   const noRegistrado = !comunicador && !periodista;
 
-  const ordersDocs = await PressModel.find({ status: "sent" }).sort({ updatedAt: -1 });
+  const ordersDocs = await PressModel.find({ status: "Enviado" }).sort({ updatedAt: -1 });
   const orders = JSON.parse(JSON.stringify(ordersDocs));
 
   return (
@@ -77,8 +77,8 @@ export default async function ProfileScreen() {
             </div>
           </div>
         )}
-        <PressReleaseDirectory orders={orders} />
-      </main>
+           <PressReleaseDirectory orders={orders} />
+         </main>
     </div>
   );
 }
