@@ -21,8 +21,11 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import toast from "react-hot-toast"
 import { createPeriodista } from "@/lib/action"
+import { useRouter } from "next/navigation"
 
 export default function RegistrationForm() {
+const router =useRouter()
+
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   // State to store selected values for 'Select' components
@@ -38,6 +41,9 @@ export default function RegistrationForm() {
     const res = await createPeriodista(null, formData)
     toast.success(res.message, { duration: 4000, position: "top-center" })
     setIsSubmitting(false)
+    setTimeout(() => {
+      router.push("/profile/main");
+    }, 2000);
   }
 
   return (

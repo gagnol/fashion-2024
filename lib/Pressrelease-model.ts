@@ -36,7 +36,7 @@ const pressReleaseSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ['draft', 'scheduled', 'sent'],
-    default: 'draft',
+    default: 'sent',
   },
   email: {
     type: String,

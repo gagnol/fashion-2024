@@ -29,7 +29,6 @@ export default function PressReleaseDashboard() {
   const [distributionDate, setDistributionDate] = useState("");
   const [image, setImage] = useState<string[]>([]); // Store uploaded image URLs
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState("");
 
 
   const handleImageChange = (url: string) => setImage([url]); // Limit to one image
@@ -50,7 +49,7 @@ export default function PressReleaseDashboard() {
     formData.append("location", location);
     formData.append("reach", reach);
     formData.append("distributionDate", distributionDate);
-    formData.append("status",status );
+
     const res = await nuevaComicacion(null, formData);
     toast.success(res.message, { duration: 4000, position: "top-center" });
     setIsSubmitting(false);
@@ -146,22 +145,11 @@ export default function PressReleaseDashboard() {
                     <SelectItem value="grande">Grande</SelectItem>
                   </SelectContent>
                 </Select>
-
                 <Input
                   type="datetime-local"
                   name="distributionDate"
                   onChange={(e: { target: { value: SetStateAction<string>; }; }) => setDistributionDate(e.target.value)}
                 />
-                  <Select onValueChange={(value: SetStateAction<string>) => setStatus(value)} required>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Tipo de envio" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="draft">Borrador</SelectItem>
-                    <SelectItem value="scheduled">Programado</SelectItem>
-                    <SelectItem value="sent">Enviar directamente</SelectItem>
-                  </SelectContent>
-                </Select>
                 <div className="flex justify-end">
                   <Button type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Enviando..." : "Enviar comunicado"}

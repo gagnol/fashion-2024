@@ -189,7 +189,7 @@ export default function CommunicationDashboard({ product }: any) {
                     </div>
                   </div>
 
-                  <Button onClick={() => openModal(i)}>Ver detalle</Button>
+                  <Button onClick={() => openModal(i)}>Ver perfil</Button>
                 </CardContent>
               </Card>
             ))

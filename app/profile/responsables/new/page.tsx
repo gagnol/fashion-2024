@@ -21,10 +21,11 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import toast from "react-hot-toast";
 import { createComunicador } from "@/lib/action";
+import { useRouter } from "next/navigation";
 
 export default function CommunicationRegistrationForm() {
   
-  
+  const router =useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false);
   // State to store selected values for 'Select' components
   const [sector, setSector] = useState("");
@@ -40,6 +41,9 @@ export default function CommunicationRegistrationForm() {
     const res = await createComunicador(null, formData);
     toast.success(res.message, { duration: 4000, position: "top-center" });
     setIsSubmitting(false);
+    setTimeout(() => {
+      router.push("/profile/main");
+    }, 2000);
   };
   return (
     <div className="min-h-screen bg-background p-8">

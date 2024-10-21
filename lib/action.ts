@@ -157,7 +157,7 @@ export async function createComunicador(prevState: any, formData: FormData) {
     return { message: 'Failed to create ' }
   }
 }
-
+//crear comunicacion de prensa
 export async function nuevaComicacion(p0: null, formData: FormData) {
   const schema = z.object({
     title: z.string().min(1, 'El título es obligatorio'),
@@ -169,7 +169,7 @@ export async function nuevaComicacion(p0: null, formData: FormData) {
     distributionDate: z.string().transform((str) => new Date(str)).optional(),
     email: z.string().email('Debe ser un correo válido'),
     image: z.string().optional(),
-    status: z.enum(['draft', 'scheduled', 'sent']),
+    
   });
 
   const parse = schema.safeParse({
@@ -182,7 +182,7 @@ export async function nuevaComicacion(p0: null, formData: FormData) {
     distributionDate: formData.get('distributionDate') || undefined,
     email: formData.get('email'),
     image: formData.get('image'),
-    status: formData.get('status'),
+    
   });
 
   if (!parse.success) {
