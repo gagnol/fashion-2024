@@ -52,7 +52,7 @@
     "recharts": "^2.10.3",
     "redux-persist": "^6.0.0",
     "resend": "^3.2.0",
-    "swr": "^2.2.4",
+    "swr": "^2.2.5",
     "tailwind-merge": "^2.5.3",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",

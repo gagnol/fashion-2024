@@ -74,13 +74,13 @@ export const usersColumn: ColumnDef<any>[] = [
   {
     id: "edit",
     cell: ({ row }) => (
-      <Link href={`/profile/main/comunicados/${row.original._id}`}>
+      <Link href={`/admin/usuarios/${row.original._id}`}>
         <Button variant="ghost" className="text-blue-500 hover:text-blue-700">
           <Edit size={24} />
         </Button>
       </Link>
     ),
-  },
+},
   {
     id: "delete",
     cell: ({ row }) => (

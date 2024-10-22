@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 
 interface UpdateFormProps {
   session: any
+
 }
 
 export default function UpdateForm({ session }: UpdateFormProps) {

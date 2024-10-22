@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Loader2 } from 'lucide-react';
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 export default function Signin() {
     const { data: session, status } = useSession();
@@ -18,7 +19,6 @@ export default function Signin() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
-    // Redirect to profile/main if session exists
     useEffect(() => {
         if (session && status === 'authenticated') {
             router.push('/profile/main');
@@ -27,27 +27,17 @@ export default function Signin() {
 
     const submitHandler = async ({ email, password }: any) => {
         setLoading(true);
-
         try {
-            const result = await signIn('credentials', { 
-                redirect: false, 
-                email, 
-                password 
-            });
+            const result = await signIn('credentials', { redirect: false, email, password });
 
             if (result?.error) {
                 toast.error(result.error);
             } else {
-                // Wait for session to update after sign-in
                 toast.success("Iniciaste sesión exitosamente!");
-                router.push('/profile/main'); // Immediate push after sign-in
+                router.push('/profile/main');
             }
-
         } catch (err: any) {
-            toast.error(err.message || 'An error occurred. Please try again.', {
-                duration: 4000,
-                position: "top-center",
-            });
+            toast.error(err.message || 'Ocurrió un error. Inténtalo nuevamente.', { duration: 4000, position: "top-center" });
         } finally {
             setLoading(false);
         }
@@ -58,10 +48,9 @@ export default function Signin() {
             <div style={{ position: 'relative', zIndex: 1 }}>
                 <div className="w-[350px] h-fit flex-col rounded-[5px] my-5 opacity-75 border border-[#666] px-[26px] py-[20px] bg-white/10 backdrop-blur-lg shadow-xl">
                     <div className='py-2'>
-                        <h1 className="text-2xl text-black bold">
-                            Inicia Sesión
-                        </h1>
+                        <h1 className="text-2xl text-black bold">Inicia Sesión</h1>
                     </div>
+
                     <form onSubmit={handleSubmit(submitHandler)}>
                         <h2 className="font-bold text-black" style={{ margin: "5px" }}>Email</h2>
                         <Input
@@ -75,12 +64,30 @@ export default function Signin() {
                         {errors.email?.type === 'required' && <p className='text-red-600'>Ingresá tu correo electrónico</p>}
                         {errors.email?.type === 'pattern' && <p className='text-red-600'> El formato de correo electrónico no es válido</p>}
 
-                        <div className='flex justify-between'>
+                        <div className='flex justify-between items-center'>
                             <h2 className="font-bold text-black" style={{ margin: "5px" }}>Contraseña</h2>
-                            <h6 className='text-[16px] text-indigo-700 leading-8'>
-                               <Link href="/customer">Olvidaste tu contraseña?</Link>
-                            </h6>
+
+                            {/* Trigger para abrir el Dialog */}
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <Button variant="link" className='text-indigo-700 leading-8 text-[16px]'>
+                                        ¿Olvidaste tu contraseña?
+                                    </Button>
+                                </DialogTrigger>
+
+                                {/* Contenido del Dialog */}
+                                <DialogContent>
+                                    <DialogHeader>
+                                        <DialogTitle>Recuperar contraseña</DialogTitle>
+                                        <DialogDescription>
+                                            Por favor, contacte a <strong>hola@nexuscomunicados.com</strong>.  
+                                            No olvide su nombre completo y la dirección de email con la cual se registró.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                </DialogContent>
+                            </Dialog>
                         </div>
+
                         <Input
                             autoComplete='off'
                             id="password"
@@ -103,13 +110,14 @@ export default function Signin() {
                             )}
                         </Button>
                     </form>
+
                     <br />
                     <Separator />
 
                     <div className='flex justify-between my-5'>
-                        <h4 style={{ margin: "5px" }}>Nuevo cliente?</h4>
+                        <h4 style={{ margin: "5px" }}>¿Nuevo cliente?</h4>
                         <Button size="sm" asChild style={{ margin: "5px" }}>
-                            <Link href="/register">Creá tu cuenta</Link>
+                            <Link href="/register">Crea tu cuenta</Link>
                         </Button>
                     </div>
                 </div>
