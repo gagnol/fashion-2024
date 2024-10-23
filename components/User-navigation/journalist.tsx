@@ -65,6 +65,8 @@ export default function Dashboard({ product }: any) {
             <div className="flex items-center space-x-2">
               <Search className="text-muted-foreground" />
               <Input
+                name="periodista"
+                id="periodista"
                 placeholder="Buscar periodistas..."
                 className="flex-grow"
                 value={searchQuery}

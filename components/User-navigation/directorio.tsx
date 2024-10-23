@@ -138,6 +138,8 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
           <div className="flex items-center space-x-2">
             <Search className="text-muted-foreground" />
             <Input
+              name="Buscar"
+              id="Buscar"
               placeholder="Buscar comunicados..."
               className="flex-grow"
               value={searchQuery}
@@ -147,13 +149,13 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
               <Filter className="mr-2 h-4 w-4" />
               Filtros
               <ChevronDown
-                className={`ml-2 h-4 w-4 transition-transform duration-200 ${
+      className={`ml-2 h-4 w-4 transition-transform duration-200 ${
                   isFiltersOpen ? "rotate-180" : ""
                 }`}
               />
             </Button>
             <Button variant="ghost" onClick={handleClearFilters}>
-              <X className="h-4 w-4" /> Limpiar filtros
+              <X className="h-4 w-4" />Limpiar filtros
             </Button>
           </div>
 

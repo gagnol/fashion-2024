@@ -81,6 +81,8 @@ export default function CommunicationDashboard({ product }: any) {
             <div className="flex items-center space-x-2">
               <Search className="text-muted-foreground" />
               <Input
+                name="responsable"
+                id="responsable"
                 placeholder="Buscar responsables..."
                 className="flex-grow"
                 value={searchQuery}

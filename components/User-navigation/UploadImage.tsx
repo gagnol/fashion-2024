@@ -35,6 +35,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               alt="collection"
               className="object-cover rounded-lg"
               fill
+              priority
             />
           </div>
         ))}

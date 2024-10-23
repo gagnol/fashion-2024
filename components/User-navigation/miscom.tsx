@@ -98,8 +98,7 @@ export const ordersColumn: ColumnDef<any>[] = [
     id: "edit",
     cell: ({ row }) => (
       <Link href={`/profile/main/comunicados/${row.original._id}`}>
-        <Button variant="ghost" className="text-blue-500 hover:text-blue-700">
-          <Edit size={24} />
+        <Button variant="ghost" className="text-blue-500 hover:text-blue-700"><Edit size={24} />
         </Button>
       </Link>
     ),
@@ -112,7 +111,7 @@ export const ordersColumn: ColumnDef<any>[] = [
         className="text-red-500 hover:text-red-700"
         onClick={() => handleDelete(row.original._id)}
       >
-        <Trash size={24} />
+      <Trash size={24} />
       </Button>
     ),
   },
@@ -163,7 +162,6 @@ const Miscomunicaciones: FC<Props> = ({ orders }) => {
       >
         Mis Comunicados
       </motion.h1>
-
       <Card className="mb-6">
         <CardContent className="p-6">
           <div className="flex items-center space-x-2">
@@ -189,7 +187,6 @@ const Miscomunicaciones: FC<Props> = ({ orders }) => {
           </div>
         </CardContent>
       </Card>
-
       <DataTable columns={ordersColumn} data={filteredOrders} />
     </div>
   );

@@ -96,7 +96,7 @@ export default function LandingPage() {
     {[
       {
         empresa: "Entidad Pública",
-        texto: "Gracias a Nexus,hemos optimizado la distribucióndenuestros comunicados.Ahora llegamos directamente a los periodistas adecuados,sin dependerde intermediarios.Es simple,rápido y confiable.¡Una herramienta indispensable para nuestras comunicaciones oficiales!.",
+        texto: "Gracias a Nexus,hemos optimizado la distribución de nuestros comunicados.Ahora llegamos directamente a los periodistas adecuados,sin dependerde intermediarios.Es simple,rápido y confiable.¡Una herramienta indispensable para nuestras comunicaciones oficiales!.",
         nombre: "",
         funcion: "",
       },

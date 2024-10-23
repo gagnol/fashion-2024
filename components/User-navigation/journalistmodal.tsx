@@ -11,9 +11,10 @@ import {
   const ProfileModal = ({ isOpen, onClose, periodista }: any) => {
     return (
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent>
+        <DialogContent aria-describedby="dialog-description">
           <DialogHeader>
             <DialogTitle>Perfil del periodista</DialogTitle>
+            <p id="dialog-description">Contacte con el periodista via Email </p>
           </DialogHeader>
           <Card>
             <CardHeader>

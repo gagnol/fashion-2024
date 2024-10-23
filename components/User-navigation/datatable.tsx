@@ -1,5 +1,4 @@
 'use client'
-
 import {
 	ColumnDef,
 	flexRender,
@@ -73,46 +72,33 @@ export function DataTable<TData, TValue>({
 	return (
 		<div className=''>
 			<Table>
-				<TableHeader
-					className={cn('bg-[#F6F6F6] h-[34px]', headerStyle && headerStyle)}
-				>
-					{table.getHeaderGroups().map((headerGroup) => (
-						<TableRow key={headerGroup.id}>
-							{headerGroup.headers.map((header) => {
-								return (
-									<TableHead key={header.id}>
-										{header.isPlaceholder
-											? null
-											: flexRender(
-													header.column.columnDef.header,
-													header.getContext()
-											  )}
-									</TableHead>
-								)
-							})}
-						</TableRow>
-					))}
-				</TableHeader>
+<TableHeader className={cn('bg-[#F6F6F6] h-[34px]', headerStyle)}>
+  {table.getHeaderGroups().map((headerGroup) => (
+    <TableRow key={headerGroup.id}>
+      {headerGroup.headers.map((header) => (
+        <TableHead key={header.id}>
+          {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+        </TableHead>
+      ))}
+    </TableRow>
+  ))}
+</TableHeader>
 				<TableBody>
 					{table.getRowModel().rows?.length ? (
 						table.getRowModel().rows.map((row) => (
-							<TableRow
-								key={row.id}
-								data-state={row.getIsSelected() && 'selected'}
-								className={cn('h-[63px]', rowStyle && rowStyle)}
-							>
-								{row.getVisibleCells().map((cell) => (
-									<TableCell key={cell.id}>
-										{flexRender(cell.column.columnDef.cell, cell.getContext())}
-									</TableCell>
-								))}
-							</TableRow>
-						))
+	<TableRow key={row.id} className={cn('h-[63px]', rowStyle)}>
+		<>
+	  {row.getVisibleCells().map((cell) => (
+		<TableCell key={cell.id}>
+	  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+		</TableCell>
+		  ))}
+	</>
+  </TableRow>
+	))
 					) : (
 						<TableRow>
-							<TableCell colSpan={columns.length} className='h-24 text-center'>
-								No results.
-							</TableCell>
+							<TableCell colSpan={columns.length} className='h-24 text-center'>No results.	</TableCell>
 						</TableRow>
 					)}
 				</TableBody>
@@ -159,7 +145,7 @@ export function DataTable<TData, TValue>({
 				<span className='flex items-center gap-1 text-[#8A8A8A] text-[14px]'>
 					<div>Página</div>
 					<strong>
-						{table.getState().pagination.pageIndex + 1} of{' '}
+						{table.getState().pagination.pageIndex + 1} de{' '}
 						{table.getPageCount().toLocaleString()}
 					</strong>
 				</span>
@@ -167,6 +153,8 @@ export function DataTable<TData, TValue>({
 					Ir a 
 					<Input
 						type='number'
+						name='ir'
+						id='ir'
 						defaultValue={table.getState().pagination.pageIndex + 1}
 						onChange={(e: { target: { value: any } }) => {
 							const page = e.target.value ? Number(e.target.value) - 1 : 0

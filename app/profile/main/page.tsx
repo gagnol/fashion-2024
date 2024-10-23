@@ -6,7 +6,7 @@ import PressModel from '@/lib/Pressrelease-model';
 import Tabmenu from "@/components/User-navigation/tabmenu";
 import PeriodistaModel, { Periodista } from '@/lib/periodista-model';
 import ComunicadorModel, { Comunicador } from '@/lib/slider-model';
-import { Loader2, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
