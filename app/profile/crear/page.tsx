@@ -1,7 +1,7 @@
 "use client";
 import { SetStateAction, useState } from "react";
 import { motion } from "framer-motion";
-import { Edit } from "lucide-react";
+import { Edit, Save, Send } from "lucide-react"; // Importamos Save y Send
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,47 +17,77 @@ import { nuevaComicacion } from "@/lib/action";
 import { useSession } from "next-auth/react";
 import ImageUpload from "@/components/User-navigation/UploadImage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
+
+const provinciasArgentinas = [
+  "Buenos Aires",
+  "Catamarca",
+  "Chaco",
+  "Chubut",
+  "Córdoba",
+  "Corrientes",
+  "Entre Ríos",
+  "Formosa",
+  "Jujuy",
+  "La Pampa",
+  "La Rioja",
+  "Mendoza",
+  "Misiones",
+  "Neuquén",
+  "Río Negro",
+  "Salta",
+  "San Juan",
+  "San Luis",
+  "Santa Cruz",
+  "Santa Fe",
+  "Santiago del Estero",
+  "Tierra del Fuego",
+  "Tucumán",
+  "Ciudad Autónoma de Buenos Aires" 
+];
+
+
 
 export default function PressReleaseDashboard() {
   const { data: session } = useSession();
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter();
   const [mediaType, setMediaType] = useState("");
   const [topic, setTopic] = useState("");
   const [location, setLocation] = useState("");
   const [reach, setReach] = useState("");
-  const [distributionDate, setDistributionDate] = useState("");
-  const [image, setImage] = useState<string[]>([]); // Store uploaded image URLs
+  const [image, setImage] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-
-  const handleImageChange = (url: string) => setImage([url]); // Limit to one image
+  const handleImageChange = (url: string) => setImage([url]);
   const handleImageRemove = () => setImage([]);
 
   const handleSubmit = async (formData: FormData) => {
     setIsSubmitting(true);
 
-    // Append hidden email and image to formData
+    // Adjunta los campos adicionales al FormData
     formData.append("email", session?.user?.email || "");
     if (image.length > 0) {
-      formData.append("image", image[0]); // Only one image
+      formData.append("image", image[0]);
     }
-
-    // Append Select values
     formData.append("mediaType", mediaType);
     formData.append("topic", topic);
     formData.append("location", location);
     formData.append("reach", reach);
-    formData.append("distributionDate", distributionDate);
 
     const res = await nuevaComicacion(null, formData);
     toast.success(res.message, { duration: 4000, position: "top-center" });
     setIsSubmitting(false);
 
-    // Redirect after 2 seconds
     setTimeout(() => {
       router.push("/profile/main");
     }, 2000);
+  };
+
+  const handleStatusSubmit = async (status: string) => {
+    const form = document.querySelector("form") as HTMLFormElement;
+    const formData = new FormData(form);
+    formData.append("status", status); // Añadimos el estado dinámicamente
+    await handleSubmit(formData);
   };
 
   return (
@@ -81,14 +111,7 @@ export default function PressReleaseDashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <form
-                onSubmit={async (event) => {
-                  event.preventDefault();
-                  const formData = new FormData(event.currentTarget);
-                  await handleSubmit(formData);
-                }}
-                className="space-y-4"
-              >
+              <form className="space-y-4">
                 <div>
                   <h4>Imagen de portada</h4>
                   <ImageUpload
@@ -119,21 +142,27 @@ export default function PressReleaseDashboard() {
                   <SelectContent>
                     <SelectItem value="Política">Política</SelectItem>
                     <SelectItem value="Economía">Economía</SelectItem>
-                    <SelectItem value="Tecnología">Tecnología</SelectItem>
-                    <SelectItem value="Cultura">Cultura</SelectItem>
+                    <SelectItem value="Sociedad">Sociedad</SelectItem>
+                    <SelectItem value="Internacionales">Internacionales</SelectItem>
+                    <SelectItem value="Deportes">Deportes</SelectItem>
+                    <SelectItem value="Espectáculos">Espectáculos</SelectItem>
+                    <SelectItem value="Culturales">Culturales</SelectItem>
+                    <SelectItem value="Eventos">Eventos</SelectItem>
                   </SelectContent>
                 </Select>
-
-                <Select onValueChange={(value: SetStateAction<string>) => setLocation(value)} required>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Ubicación" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Local">Local</SelectItem>
-                    <SelectItem value="Nacional">Nacional</SelectItem>
-                    <SelectItem value="Internacional">Internacional</SelectItem>
-                  </SelectContent>
-                </Select>
+  
+  <Select onValueChange={(value) => setLocation(value)} required>
+  <SelectTrigger>
+    <SelectValue placeholder="Seleccionar provincia" />
+  </SelectTrigger>
+  <SelectContent>
+    {provinciasArgentinas.map((provincia) => (
+      <SelectItem key={provincia} value={provincia}>
+        {provincia}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
 
                 <Select onValueChange={(value: SetStateAction<string>) => setReach(value)} required>
                   <SelectTrigger>
@@ -145,13 +174,22 @@ export default function PressReleaseDashboard() {
                     <SelectItem value="Grande">Grande</SelectItem>
                   </SelectContent>
                 </Select>
-                <Input
-                  type="datetime-local"
-                  name="distributionDate"
-                  onChange={(e: { target: { value: SetStateAction<string>; }; }) => setDistributionDate(e.target.value)}
-                />
-                <div className="flex justify-end">
-                  <Button type="submit" disabled={isSubmitting}>
+
+                <div className="flex justify-end space-x-4">
+                  <Button
+                    type="button"
+                    onClick={() => handleStatusSubmit("Borrador")}
+                    disabled={isSubmitting}
+                  >
+                    <Save className="mr-2 h-4 w-4" />
+                    {isSubmitting ? "Guardando..." : "Guardar como borrador"}
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => handleStatusSubmit("Enviado")}
+                    disabled={isSubmitting}
+                  >
+                    <Send className="mr-2 h-4 w-4" />
                     {isSubmitting ? "Enviando..." : "Enviar comunicado"}
                   </Button>
                 </div>

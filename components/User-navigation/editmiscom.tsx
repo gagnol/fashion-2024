@@ -28,6 +28,43 @@ interface PressRelease {
   status:string
 }
 
+const provinciasArgentinas = [
+  "Buenos Aires",
+  "Catamarca",
+  "Chaco",
+  "Chubut",
+  "Córdoba",
+  "Corrientes",
+  "Entre Ríos",
+  "Formosa",
+  "Jujuy",
+  "La Pampa",
+  "La Rioja",
+  "Mendoza",
+  "Misiones",
+  "Neuquén",
+  "Río Negro",
+  "Salta",
+  "San Juan",
+  "San Luis",
+  "Santa Cruz",
+  "Santa Fe",
+  "Santiago del Estero",
+  "Tierra del Fuego",
+  "Tucumán",
+  "Ciudad Autónoma de Buenos Aires" 
+];
+
+const topics = [
+  "Política",
+  "Economía",
+  "Sociedad",
+  "Internacionales",
+  "Deportes",
+  "Espectáculos",
+  "Culturales",
+  "Eventos",
+];
 export default function Pressedit({ order }: { order: PressRelease }) {
   const { data: session } = useSession();
   const router = useRouter();
@@ -42,7 +79,7 @@ export default function Pressedit({ order }: { order: PressRelease }) {
   const [distributionDate, setDistributionDate] = useState(order.distributionDate || "");
   const [image, setImage] = useState<string[]>(order.image ? [order.image] : []);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState(order.reach || "");
+  const [status, setStatus] = useState(order.status || "");
 
   const handleImageChange = (url: string) => setImage([url]);
   const handleImageRemove = () => setImage([]);
@@ -131,29 +168,32 @@ export default function Pressedit({ order }: { order: PressRelease }) {
                     <SelectItem value="Digital">Digital</SelectItem>
                   </SelectContent>
                 </Select>
+               <Select onValueChange={setTopic} value={topic} required>
+                <SelectTrigger>
+                 <SelectValue placeholder="Tópico" />
+                </SelectTrigger>
+                <SelectContent>
+                  {topics.map((topic) => (
+                    <SelectItem key={topic} value={topic}>
+                      {topic}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
-                <Select value={topic} onValueChange={setTopic} required>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Temática" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Política">Política</SelectItem>
-                    <SelectItem value="Economía">Economía</SelectItem>
-                    <SelectItem value="Tecnología">Tecnología</SelectItem>
-                    <SelectItem value="Cultura">Cultura</SelectItem>
-                  </SelectContent>
-                </Select>
-
-                <Select value={location} onValueChange={setLocation} required>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Ubicación" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Local">Local</SelectItem>
-                    <SelectItem value="Nacional">Nacional</SelectItem>
-                    <SelectItem value="Internacional">Internacional</SelectItem>
-                  </SelectContent>
-                </Select>
+                
+        <Select onValueChange={setLocation} value={location} required>
+        <SelectTrigger>
+          <SelectValue placeholder="Selecciona una provincia" />
+        </SelectTrigger>
+        <SelectContent>
+          {provinciasArgentinas.map((provincia) => (
+            <SelectItem key={provincia} value={provincia}>
+              {provincia}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
                  <Select value={reach} onValueChange={setReach} required>
                   <SelectTrigger>
@@ -172,13 +212,12 @@ export default function Pressedit({ order }: { order: PressRelease }) {
                   value={distributionDate}
                   onChange={(e) => setDistributionDate(e.target.value)}
                 />
-          <h1>Publicar Comunicado</h1>
           <Select value={status} onValueChange={setStatus}>
                   <SelectTrigger>
                     <SelectValue placeholder="Tipo de envio" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="draft">Borrador</SelectItem>
+                    <SelectItem value="Borrador">Borrador</SelectItem>
                     <SelectItem value="scheduled">Programado</SelectItem>
                     <SelectItem value="Enviado">Enviar directamente</SelectItem>
                   </SelectContent>

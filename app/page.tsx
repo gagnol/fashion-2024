@@ -127,50 +127,74 @@ export default function LandingPage() {
     ))}
   </div>
 </section>
-        <section id="pricing" className="py-20 px-4 md:px-6 lg:px-8 bg-muted">
+<section id="pricing" className="py-20 px-4 md:px-6 lg:px-8 bg-muted">
   <h2 className="text-3xl font-bold text-center mb-12">Planes y precios</h2>
   <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-    {['Básico', 'Profesional', 'Empresarial'].map((plan, index) => (
+    {[
+      {
+        name: 'Básico',
+        price: 119000,
+        description: 'Para pequeñas empresas',
+        features: [
+          'Directorio de contactos',
+          'Creación de 2 comunicados al mes',
+          'Distribución segmentada',
+          'Soporte',
+        ],
+      },
+      {
+        name: 'Profesional',
+        price: 249000,
+        description: 'Para empresas en crecimiento',
+        features: [
+          'Directorio de contactos',
+          'Creación de 5 comunicados al mes',
+          'Distribución segmentada',
+          'Análisis de impacto',
+          'Soporte',
+        ],
+      },
+      {
+        name: 'Full',
+        price: 559000,
+        description: 'Para grandes corporaciones',
+        features: [
+          'Directorio de contactos',
+          'Creación de comunicados ilimitados',
+          'Distribución segmentada',
+          'Análisis de impacto',
+          'Soporte prioritario',
+          'API access',
+        ],
+      },
+    ].map(({ name, price, description, features }, index) => (
       <Card
-        key={plan}
+        key={name}
         className={`flex flex-col justify-between h-full ${
           index === 1 ? 'border-primary' : ''
         }`}
       >
         <CardHeader>
-          <CardTitle>{plan}</CardTitle>
-          <CardDescription>
-            {index === 0 && 'Para pequeñas empresas'}
-            {index === 1 && 'Para empresas en crecimiento'}
-            {index === 2 && 'Para grandes corporaciones'}
-          </CardDescription>
+          <CardTitle>{name}</CardTitle>
+          <CardDescription>{description}</CardDescription>
         </CardHeader>
 
         <CardContent className="flex-grow">
           <p className="text-3xl font-bold mb-4">
-            ${(index + 1) * 50}
+            ${price.toLocaleString('es-AR')}
             <span className="text-sm font-normal">/mes</span>
           </p>
           <ul className="space-y-2">
-            {[
-              'Directorio de contactos',
-              'Creación de comunicados',
-              'Distribución segmentada',
-              'Análisis básico',
-              index > 0 && 'Soporte prioritario',
-              index > 1 && 'API access',
-            ]
-              .filter(Boolean)
-              .map((feature, i) => (
-                <li key={i} className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                  {feature}
-                </li>
-              ))}
+            {features.map((feature, i) => (
+              <li key={i} className="flex items-center">
+                <CheckCircle className="h-5 w-5 text-primary mr-2" />
+                {feature}
+              </li>
+            ))}
           </ul>
         </CardContent>
 
-        {/* Button inside the card, aligned at the bottom */}
+        {/* Botón al final de la tarjeta */}
         <div className="mt-auto">
           <Button
             className="w-full"
@@ -183,6 +207,7 @@ export default function LandingPage() {
     ))}
   </div>
 </section>
+
         <section className="py-20 px-4 md:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">¿Listo para empezar?</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">

@@ -22,6 +22,44 @@ interface Props {
   orders: any[]; // Ajustar según el modelo de orden
 }
 
+const provinciasArgentinas = [
+  "Buenos Aires",
+  "Catamarca",
+  "Chaco",
+  "Chubut",
+  "Córdoba",
+  "Corrientes",
+  "Entre Ríos",
+  "Formosa",
+  "Jujuy",
+  "La Pampa",
+  "La Rioja",
+  "Mendoza",
+  "Misiones",
+  "Neuquén",
+  "Río Negro",
+  "Salta",
+  "San Juan",
+  "San Luis",
+  "Santa Cruz",
+  "Santa Fe",
+  "Santiago del Estero",
+  "Tierra del Fuego",
+  "Tucumán",
+  "Ciudad Autónoma de Buenos Aires" 
+];
+
+const topics = [
+  "Política",
+  "Economía",
+  "Sociedad",
+  "Internacionales",
+  "Deportes",
+  "Espectáculos",
+  "Culturales",
+  "Eventos",
+];
+
 // Columnas para DataTable
 export const ordersColumn: ColumnDef<any>[] = [
   {
@@ -59,7 +97,7 @@ export const ordersColumn: ColumnDef<any>[] = [
       <div className="font-[700] text-[14px] text-[#8A8A8A]">Fecha</div>
     ),
     cell: ({ row }) => {
-      const date = new Date(row.original.updatedAt); // Assuming 'createdAt' holds the date
+      const date = new Date(row.original.updatedAt);
       const formattedDate = date.toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
@@ -91,11 +129,13 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState<string | undefined>(undefined);
 
   const handleClearFilters = () => {
     setSearchQuery("");
     setSelectedDateRange("");
     setSelectedLocation("");
+    setSelectedTopic("");
   };
 
   const filteredOrders = useMemo(() => {
@@ -103,8 +143,9 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
     return orders.filter((order) => {
       const matchesSearch =
         order.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        order.topic.toLowerCase().includes(searchQuery.toLowerCase()) ||
         order.location.toLowerCase().includes(searchQuery.toLowerCase());
+
+      const matchesTopic = selectedTopic ? order.topic === selectedTopic : true;
 
       const orderDate = new Date(order.createdAt);
       const matchesDateRange =
@@ -117,9 +158,9 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
         ? order.location === selectedLocation
         : true;
 
-      return matchesSearch && matchesDateRange && matchesLocation;
+      return matchesSearch && matchesDateRange && matchesLocation && matchesTopic;
     });
-  }, [orders, searchQuery, selectedDateRange, selectedLocation]);
+  }, [orders, searchQuery, selectedDateRange, selectedLocation, selectedTopic]);
 
   return (
     <div className="px-7">
@@ -149,7 +190,7 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
               <Filter className="mr-2 h-4 w-4" />
               Filtros
               <ChevronDown
-      className={`ml-2 h-4 w-4 transition-transform duration-200 ${
+                className={`ml-2 h-4 w-4 transition-transform duration-200 ${
                   isFiltersOpen ? "rotate-180" : ""
                 }`}
               />
@@ -167,10 +208,7 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
             className="overflow-hidden"
           >
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-              <Select
-                onValueChange={(value) => setSelectedDateRange(value)}
-                value={selectedDateRange}
-              >
+              <Select onValueChange={setSelectedDateRange} value={selectedDateRange}>
                 <SelectTrigger>
                   <SelectValue placeholder="Fecha" />
                 </SelectTrigger>
@@ -181,17 +219,30 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
                 </SelectContent>
               </Select>
 
-              <Select
-                onValueChange={(value) => setSelectedLocation(value)}
-                value={selectedLocation}
-              >
+    <Select onValueChange={setSelectedLocation} value={selectedLocation}>
+        <SelectTrigger>
+          <SelectValue placeholder="Selecciona una provincia" />
+        </SelectTrigger>
+        <SelectContent>
+          {provinciasArgentinas.map((provincia) => (
+            <SelectItem key={provincia} value={provincia}>
+              {provincia}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+
+
+              <Select onValueChange={setSelectedTopic} value={selectedTopic}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Ubicación" />
+                  <SelectValue placeholder="Tópico" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="local">Local</SelectItem>
-                  <SelectItem value="nacional">Nacional</SelectItem>
-                  <SelectItem value="internacional">Internacional</SelectItem>
+                  {topics.map((topic) => (
+                    <SelectItem key={topic} value={topic}>
+                      {topic}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -200,10 +251,7 @@ const SupplierNeeds: FC<Props> = ({ orders }) => {
       </Card>
 
       {/* Tabla de datos */}
-      <DataTable
-        columns={ordersColumn}
-        data={filteredOrders}
-      />
+      <DataTable columns={ordersColumn} data={filteredOrders} />
     </div>
   );
 };
